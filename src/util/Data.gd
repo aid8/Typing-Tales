@@ -24,12 +24,17 @@ var dialogues = {
 		#Dialogue 2
 		{
 			"character" : "Sam",
-			"dialogue" : "Hi, I am sam!",
+			"dialogue" : "Hi, I am Sam!",
 		},
 		#Dialogue 3
 		{
 			"character" : "Paps",
-			"dialogue" : "Yo, I am paps!",
+			"dialogue" : "Yo, I am Paps!",
+		},
+		#Dialogue 4
+		{
+			"character" : "Narrator",
+			"dialogue" : "Baby baby you're my sun and moon",
 		},
 	],
 }
