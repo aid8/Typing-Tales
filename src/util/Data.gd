@@ -35,6 +35,31 @@ var dialogues = {
 		{
 			"character" : "Narrator",
 			"dialogue" : "Baby baby you're my sun and moon",
+			"show_selection" : [
+				["Yes, you are my sun", "Scene 1_Choice1"],
+				["No, you are my moon", "Scene 1_Choice2"],
+			],
+		},
+	],
+	
+	"Scene 1_Choice1" : [
+		{
+			"character" : "Narrator",
+			"dialogue" : "Wrong choice, dead end.",
+		},
+	],
+	
+	"Scene 1_Choice2" : [
+		{
+			"character" : "Narrator",
+			"dialogue" : "Good choice, still dead end.",
 		},
 	],
 }
+
+var quests = [
+	{
+		"Type" : "Daily",
+		"Desc" : "Type 5 words"
+	}
+]

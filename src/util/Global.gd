@@ -8,6 +8,12 @@ const save_path = "user://save.dat"
 var user_data = {
 	"Music" : 100,
 	"Sfx" : 100,
+	"Coins" : 0,
+	"WPM" : 0.0,
+	"Accuracy" : 0.0,
+	"WordMastery" : {},
+	"LetterMastery" : {},
+	"Items" : [],
 }
 
 #=========Functions==========#
