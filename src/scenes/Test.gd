@@ -6,7 +6,7 @@ const red : Color = Color("#FF0000")
 const green : Color = Color("#90EE90")
 
 var current_scene : String = "Scene 1"
-var current_scene_index: int = 3
+var current_scene_index: int = 0
 var current_letter_index : int = 0
 var wrong_letter_length : int = 0
 var current_dialogue : String = ""
@@ -14,22 +14,57 @@ var typing_target : String = "dialogue" #dialogue or choice
 var choosing_selection : bool = false
 var chosen_selection : Node2D
 var	choice_selections : Array = []
+var character_dict : Dictionary = {}
 
 #==========Onready Variables==========#
-onready var ui : Node2D = $UI
+onready var ui : CanvasLayer = $UI
+onready var characters : Node2D = $Characters
 onready var character_name : RichTextLabel = $UI/CharacterName
 onready var dialogue : RichTextLabel = $UI/Dialogue
 onready var type_box :RichTextLabel = $UI/TypeBox
-onready var choice_selection_position = $UI/ChoiceSelectionPosition
+onready var choice_selection_position : Position2D = $UI/ChoiceSelectionPosition
+onready var character_positions : Dictionary = {
+	"LEFT" : $Characters/CharacterLeftPosition,
+	"MIDDLE" : $Characters/CharacterMidPosition,
+	"RIGHT" : $Characters/CharacterRightPosition,
+}
 
+#==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
+onready var character = preload("res://src/objects/Character.tscn")
 
 #==========Functions==========#
 func _ready() -> void:
 	get_current_dialogue()
 
+#Adds a character sprite on the screen
+func add_character(name : String, outfit : String, expression : String, char_position: String):
+	var c = character.instance()
+	c.initialize(name, outfit, expression)
+	c.position = character_positions[char_position].position
+	characters.add_child(c)
+	character_dict[name] = c
+	
+#Deletes the character instance with provided name
+func remove_character(name : String):
+	character_dict[name].queue_free()
+	character_dict.erase(name)
+
+#Shows/Hides the character depending on passed boolean (hidden)
+func toggle_character(name : String, hidden : bool):
+	character_dict[name].toggle_character(hidden)
+
+#Changes the outfit/expression of the character, if parameter is blank, it will be ignored
+func modify_character(name : String, outfit : String = "", expression : String = "", char_position : String = ""):
+	if outfit != "":
+		character_dict[name].change_outfit(outfit)
+	if expression != "":
+		character_dict[name].change_expression(expression)
+	if char_position != "":
+		character_dict[name].position = character_positions[char_position]
+
 #Incharge of displaying selections
-func show_selection(selections) -> void:
+func show_selection(selections : Array) -> void:
 	choosing_selection = true
 	for i in range (0, selections.size()):
 		var cs = choice_selection.instance()
@@ -41,7 +76,7 @@ func show_selection(selections) -> void:
 		cs.set_choice_text(selections[i][0])
 
 #Incharge of editing, updating TypeBox
-func update_typebox(type, letter = '') -> void:
+func update_typebox(type : String, letter : String = '') -> void:
 	if type == "delete":
 		var s = type_box.text
 		if s.length() > 0:
@@ -57,13 +92,34 @@ func update_typebox(type, letter = '') -> void:
 
 #Gets and sets the current dialogue and and calls show_colored_dialogue()
 func get_current_dialogue() -> void:
+	var dialogue_data = Data.dialogues[current_scene][current_scene_index]
+	
 	#Show current character
-	character_name.text = Data.dialogues[current_scene][current_scene_index].character
+	character_name.text = dialogue_data.character
+	if not character_dict.has(dialogue_data.character) and Data.characters.has(dialogue_data.character):
+		add_character(dialogue_data.character, dialogue_data.outfit, dialogue_data.expression, dialogue_data.position)
+	else:
+		if dialogue_data.has("outfit"):
+			modify_character(dialogue_data.character, dialogue_data.outfit)
+		if dialogue_data.has("expression"):
+			modify_character(dialogue_data.character, "", dialogue_data.expression)
+		if dialogue_data.has("position"):
+			modify_character(dialogue_data.character, "", "", dialogue_data.position)
+		if dialogue_data.has("show_character"):
+			toggle_character(dialogue_data.show_character, false)
+		if dialogue_data.has("hide_character"):
+			toggle_character(dialogue_data.show_character, true)
+		if dialogue_data.has("show_characters"):
+			for c in character_dict:
+				toggle_character(c, false)
+		if dialogue_data.has("hide_characters"):
+			for c in character_dict:
+				toggle_character(c, true)
 	
 	#Show current dialogue
-	current_dialogue = Data.dialogues[current_scene][current_scene_index].dialogue
+	current_dialogue = dialogue_data.dialogue
 	show_colored_dialogue(dialogue)
-
+	
 #Gets the next dialouge and calls get_current_dialogue
 func set_next_dialogue() -> void:
 	current_scene_index += 1
@@ -74,7 +130,7 @@ func set_next_dialogue() -> void:
 	update_typebox("reset")
 
 #Sets neccesary variables to be ready for the next scene
-func set_next_scene(scene_name) -> void:
+func set_next_scene(scene_name : String) -> void:
 	current_scene = scene_name
 	current_scene_index = 0
 	current_letter_index = 0

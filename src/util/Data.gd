@@ -2,34 +2,46 @@ extends Node
 
 var characters = {
 	#Character 1
-	"Aid" : {
-		"ImagePath" : "", 
+	"Adrian" : {
+		"ImagePath" : "",
 	},
 	#Character 2
-	"Sam" : {
+	"Felix" : {
 		"ImagePath" : "", 
 	},
-	#Character 3
-	"Paps" : {
-		"ImagePath" : "", 
-	},
+}
+
+var expressions = {
+	"frown" : 0,
+	"frown_blush" : 1,
+	"open" : 2,
+	"open_blush" : 3,
+	"smile" : 4,
+	"smile_blush" : 5,
 }
 
 var dialogues = {
 	"Scene 1" : [
 		#Dialogue 1
-		{	"character" : "Aid",
-			"dialogue" : "Hello there! I am Aid",
+		{	"character" : "Adrian",
+			"outfit" : "Summer",
+			"expression" : "open_blush",
+			"dialogue" : "Why are you even taking my presents?",
+			"position" : "LEFT",
 		},
 		#Dialogue 2
 		{
-			"character" : "Sam",
-			"dialogue" : "Hi, I am Sam!",
+			"character" : "Felix",
+			"outfit" : "Casual",
+			"expression" : "frown",
+			"dialogue" : "What was I supposed to do when they gave it to me thinking I was you?",
+			"position" : "RIGHT",
 		},
 		#Dialogue 3
 		{
-			"character" : "Paps",
-			"dialogue" : "Yo, I am Paps!",
+			"character" : "Adrian",
+			"expression" : "open",
+			"dialogue" : "Are you not going to grow your hair back out again?",
 		},
 		#Dialogue 4
 		{
@@ -39,6 +51,7 @@ var dialogues = {
 				["Yes, you are my sun", "Scene 1_Choice1"],
 				["No, you are my moon", "Scene 1_Choice2"],
 			],
+			"hide_characters" : "true",
 		},
 	],
 	
