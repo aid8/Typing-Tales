@@ -11,7 +11,7 @@ var next_scene_name : String
 func _ready():
 	pass # Replace with function body.
 
-func set_choice_text(text):
+func set_choice_text(text) -> void:
 	choice_text.text = text
 	
 #set_background()
