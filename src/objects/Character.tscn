@@ -28,22 +28,22 @@
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 14 ), ExtResource( 24 ), ExtResource( 22 ) ],
 "loop": true,
 "name": "Adrian_Casual",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 10 ) ],
+"frames": [ ExtResource( 15 ), ExtResource( 19 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 25 ) ],
 "loop": true,
 "name": "Adrian_Summer",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 23 ), ExtResource( 14 ), ExtResource( 24 ), ExtResource( 22 ) ],
+"frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
 "loop": true,
 "name": "Felix_Casual",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 15 ), ExtResource( 19 ), ExtResource( 16 ), ExtResource( 18 ), ExtResource( 17 ), ExtResource( 25 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 4 ), ExtResource( 1 ), ExtResource( 5 ), ExtResource( 9 ), ExtResource( 10 ) ],
 "loop": true,
 "name": "Felix_Summer",
 "speed": 5.0
@@ -56,5 +56,5 @@ script = ExtResource( 13 )
 position = Vector2( -82, -425 )
 scale = Vector2( 0.3, 0.3 )
 frames = SubResource( 1 )
-animation = "Adrian_Casual"
+animation = "Felix_Summer"
 centered = false
