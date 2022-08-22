@@ -11,6 +11,14 @@ var characters = {
 	},
 }
 
+var backgrounds = {
+	"dorm_livingroom_day" : {
+		"Animation" : "Livingroom",
+		"Frame" : 0,
+		"Location" : "Xenomium Academy, Male student Dormitory",
+	}
+}
+
 var expressions = {
 	"frown" : 0,
 	"frown_blush" : 1,
@@ -26,6 +34,7 @@ var dialogues = {
 		{	"character" : "Adrian",
 			"outfit" : "Summer",
 			"expression" : "open_blush",
+			"location" : "dorm_livingroom_day",
 			"dialogue" : "Why are you even taking my presents?",
 			"position" : "LEFT",
 		},
