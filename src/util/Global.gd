@@ -1,22 +1,16 @@
 extends Node
 
 #==========Constant Variables==========#
-const save_path = "user://save.dat"
+const save_path : String = "user://save.dat"
 
 #=========Other Variables==========#
 #This is being used in save_data and load_data function
-var user_data = {
-	"Music" : 100,
-	"Sfx" : 100,
-	"Coins" : 0,
-	"WPM" : 0.0,
-	"Accuracy" : 0.0,
-	"WordMastery" : {},
-	"LetterMastery" : {},
-	"Items" : [],
-	"SavedProgress" : {},
-}
+var user_data : Dictionary = {}
+
 #=========Functions==========#
+func _ready():
+	set_default_user_data()
+
 #Insert here the scenes you want to add and to switch
 func switch_scene(scene) -> void:
 	pass
@@ -57,10 +51,10 @@ func set_default_user_data() -> void:
 		"Coins" : 0,
 		"WPM" : 0.0,
 		"Accuracy" : 0.0,
-		"WordMastery" : {},
-		"LetterMastery" : {},
+		"WordMastery" : {}, #"word" : {"total_accuracy" : x, "count" : x}
+		"LetterMastery" : {}, #"letter" : x -> total count of words typed
 		"Items" : [],
-		"SavedProgress" : [],
+		"SavedProgress" : {},
 	}
 
 func add_user_data_story_progress(scene : String, scene_index : int, characters : Array, location : String):
@@ -69,11 +63,42 @@ func add_user_data_story_progress(scene : String, scene_index : int, characters 
 	user_data["SavedProgress"]["characters"] = characters
 	user_data["SavedProgress"]["location"] = location
 
-func add_word_mastery(word : String) -> void:
+func add_word_mastery(word : String, accuracy : float, check_word_if_valid : bool = false) -> void:
+	word = format_word(word)
+	#Check if word is in word database
 	if !user_data["WordMastery"].has(word):
-		user_data["WordMastery"][word] = 1
+		user_data["WordMastery"][word] = {"total_accuracy" : accuracy, "count" : 1}
 	else:
-		user_data["WordMastery"][word] += 1
+		user_data["WordMastery"][word].total_accuracy += accuracy
+		user_data["WordMastery"][word].count += 1
+	#print(user_data["WordMastery"])
+
+#if empty dict is returned, word cannot be found
+func get_word_mastery(word : String) -> Dictionary:
+	var dict = {}
+	var word_mastery = user_data["WordMastery"]
+	if word_mastery.has(word):
+		var count = word_mastery[word]["count"]
+		dict["count"] = count
+		dict["accuracy"] = word_mastery[word]["total_accuracy"] / float(count)
+	return dict
+
+func add_letter_mastery(letter : String) -> void:
+	#Dont include unnecessary letters
+	if Data.unnecessary_characters.has(letter):
+		return
+	letter = letter.to_lower()
+	if !user_data["LetterMastery"].has(letter):
+		user_data["LetterMastery"][letter] = 1
+	else:
+		user_data["LetterMastery"][letter] += 1
+
+#Removes unnecessary letters in the word (e.g punctuations) and set all to lowercase
+func format_word(word : String) -> String:
+	for c in Data.unnecessary_characters:
+		word = word.replace(c,"")
+	word = word.to_lower()
+	return word
 
 func check_first_time() -> bool:
 	var file = File.new()

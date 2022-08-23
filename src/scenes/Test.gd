@@ -17,6 +17,7 @@ func cancelled():
 const white : Color = Color("#FFFFFF")
 const red : Color = Color("#FF0000")
 const green : Color = Color("#90EE90")
+const yellow : Color = Color("#8B8000")
 
 var current_scene : String = "Scene 1"
 var current_scene_index: int = 0
@@ -29,6 +30,10 @@ var choosing_selection : bool = false
 var chosen_selection : Node2D = null
 var	choice_selections : Array = []
 var character_dict : Dictionary = {}
+var typed_word_accuracy : Dictionary = {}
+var current_word_index : int = 0
+var mastered_word_indices : Dictionary = {} #{start : length}
+var mastered_words : Dictionary = {} #{word : true}
 #var new_progress : bool = true#if false, this will load the saved progress instead of a new one
 
 #==========Onready Variables==========#
@@ -38,6 +43,7 @@ onready var backgrounds : AnimatedSprite = $Backgrounds
 onready var character_name : RichTextLabel = $UI/CharacterName
 onready var dialogue : RichTextLabel = $UI/Dialogue
 onready var type_box :RichTextLabel = $UI/TypeBox
+onready var type_box_background : ColorRect = $UI/TypeBoxBackground
 onready var choice_selection_position : Position2D = $UI/ChoiceSelectionPosition
 onready var character_positions : Dictionary = {
 	"LEFT" : $Characters/CharacterLeftPosition,
@@ -51,7 +57,7 @@ onready var character = preload("res://src/objects/Character.tscn")
 
 #==========Functions==========#
 func _ready() -> void:
-	#STILL TESTING HERE
+	#TESTING
 	if not Global.check_first_time():
 		ui.hide()
 		testbox.connect("modal_closed", self, "cancelled")
@@ -139,25 +145,73 @@ func show_selection(selections : Array) -> void:
 		cs.set_choice_text(selections[i][0])
 
 #Incharge of editing, updating TypeBox
-#Also adds word mastery (for now it adds the word inside the dict) update this
+#Also adds word mastery
 func update_typebox(type : String, letter : String = '') -> void:
 	if type == "delete":
 		var s = type_box.text
 		if s.length() > 0:
 			s.erase(s.length() - 1, 1)
 			type_box.text = s
+			current_word_index -= 1
+			check_word_mastery("force_wrong")
 	elif type == "add":
 		if letter == " " and wrong_letter_length == 0 and current_dialogue[current_letter_index] == " ":
-			Global.add_word_mastery(type_box.text)
+			check_word_mastery("add")
 			type_box.text = ""
+			check_word_mastery("reset")
 		else:
 			type_box.text += letter
+			check_word_mastery("check")
+			current_word_index += 1
 	elif type == "reset":
 		type_box.text = ""
+		check_word_mastery("reset")
+
+#checks if the letters typed are correct, once wrong or backspaced it will be incorrect
+#has also the ability to check the accuracy and add it to user data if type is "add"
+func check_word_mastery(type : String):
+	if type == "check":
+		if typed_word_accuracy.has(current_word_index) and not typed_word_accuracy[current_word_index]:
+			return
+		if type_box.text[current_word_index] != current_dialogue[current_letter_index]:
+			typed_word_accuracy[current_word_index] = false
+		else:
+			typed_word_accuracy[current_word_index] = true
+	elif type == "force_wrong":
+		typed_word_accuracy[current_word_index] = false
+	elif type == "force_correct":
+		typed_word_accuracy[current_word_index] = true
+	elif type == "add":
+		if typed_word_accuracy.size() <= 0:
+			return
+		var word_accuracy : float = typed_word_accuracy.values().count(true) / float(typed_word_accuracy.size())
+		Global.add_word_mastery(type_box.text, word_accuracy)
+	elif type == "reset":
+		current_word_index = 0
+		typed_word_accuracy = {}
 
 #Gets and sets the current dialogue and and calls show_colored_dialogue()
 func get_current_dialogue() -> void:
 	var dialogue_data = Data.dialogues[current_scene][current_scene_index]
+	
+	#Iterate through the dialogue and get all mastered words with index and length
+	var word : String = ""
+	var tmp : String = dialogue_data.dialogue + " "
+	var starting_tmp : int = 0
+	for i in range(0, tmp.length()):
+		if tmp[i] != " ":
+			word += tmp[i]
+		else:
+			#Check if word is mastered
+			var formatted_word = Global.format_word(word)
+			var mastery = Global.get_word_mastery(formatted_word)
+			if mastery.size() > 0:
+				if mastery.accuracy >= Data.word_mastery_accuracy_bound and mastery.count >= Data.word_mastery_count_bound:
+					mastered_word_indices[starting_tmp] = word.length()
+					mastered_words[formatted_word] = true
+			word = ""
+			starting_tmp = i
+	print(mastered_word_indices)
 	#Show background
 	if dialogue_data.has("location"):
 		current_location = dialogue_data.location
@@ -192,6 +246,8 @@ func get_current_dialogue() -> void:
 #Gets the next dialouge and calls get_current_dialogue
 func set_next_dialogue() -> void:
 	current_scene_index += 1
+	mastered_word_indices.clear()
+	mastered_words.clear()
 	if(current_scene_index >= Data.dialogues[current_scene].size()):
 		print("Scene is finished")
 		return
@@ -205,23 +261,34 @@ func set_next_scene(scene_name : String) -> void:
 	current_letter_index = 0
 	wrong_letter_length = 0
 	typing_target = "dialogue"
+	mastered_word_indices.clear()
+	typed_word_accuracy.clear()
+	mastered_words.clear()
+	current_word_index = 0
 	#Remove choice selections
 	for selection in choice_selections:
 		selection.queue_free()
 	choice_selections = []
 	update_typebox("reset")
+	print("cleared")
 	get_current_dialogue()
 
 #Shows the dialogue on the display with color
 func show_colored_dialogue(textbox : RichTextLabel) -> void:
-	var green_text = "[color=#" + green.to_html(false) + "]" + current_dialogue.substr(0, current_letter_index) + "[/color]"
-	var red_text
+	var green_text = "[color=#" + green.to_html(false) + "]" + add_paragraph_strikethrough(mastered_words, current_dialogue.substr(0, current_letter_index)) + "[/color]"
+	var red_text = ""
 	if wrong_letter_length > 0:
-		red_text = "[color=#" + red.to_html(false) + "]" + current_dialogue.substr(current_letter_index, wrong_letter_length) + "[/color]"
-	else:
-		red_text = ""
-	var white_text = "[color=#" + white.to_html(false) + "]" + current_dialogue.substr(current_letter_index + wrong_letter_length, current_dialogue.length()) + "[/color]"
+		red_text = "[color=#" + red.to_html(false) + "]" + add_paragraph_strikethrough(mastered_words, current_dialogue.substr(current_letter_index, wrong_letter_length)) + "[/color]"
+	var white_text = "[color=#" + white.to_html(false) + "]" + add_paragraph_strikethrough(mastered_words, current_dialogue.substr(current_letter_index + wrong_letter_length, current_dialogue.length())) + "[/color]"
 	textbox.parse_bbcode(green_text + red_text + white_text)
+
+func add_paragraph_strikethrough(words : Dictionary, paragraph : String) -> String:
+	for word in words:
+		paragraph = paragraph.replace(word, add_strikethrough(word))
+	return paragraph
+
+func add_strikethrough(word : String) -> String:
+	return "[s]" + word + "[/s]"
 
 func _unhandled_input(event : InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
@@ -255,17 +322,32 @@ func _unhandled_input(event : InputEvent) -> void:
 			else:
 				wrong_letter_length -= 1
 		else:
-			update_typebox("add", key_typed)
+			if typed_event.unicode != 0:
+				update_typebox("add", key_typed)
+				#Add letter mastery
+				Global.add_letter_mastery(key_typed)
 		
 		#Update Dialogue
 		if key_typed == character_to_type and wrong_letter_length <= 0:
 			wrong_letter_length = 0
-			current_letter_index += 1
-			if current_letter_index == current_dialogue.length():
+			
+			#If mastered word is encountered, skip
+			while mastered_word_indices.has(current_letter_index):
+				current_letter_index += mastered_word_indices[current_letter_index] + 1
+				if current_letter_index > current_dialogue.length():
+					current_letter_index = current_dialogue.length()
+				
+			if not mastered_word_indices.has(current_letter_index):
+				current_letter_index += 1
+			
+			if current_letter_index >= current_dialogue.length():
 				#Call show_colored_dialouge again to color the last letter
 				if typing_target == "dialogue":
 					show_colored_dialogue(dialogue)
 					
+				#Call word mastery to include last word
+				check_word_mastery("add")
+				
 				#If the dialogue has choices, switch typing target to choice
 				current_letter_index = 0
 				if Data.dialogues[current_scene][current_scene_index].has("show_selection") and typing_target == "dialogue":
@@ -280,7 +362,7 @@ func _unhandled_input(event : InputEvent) -> void:
 			#Space should also be included as wrong letter
 			if typed_event.unicode != 0 or typed_event.scancode == 32:
 				wrong_letter_length += 1
-				
+		
 		if typing_target == "dialogue":
 			show_colored_dialogue(dialogue)
 		elif typing_target == "choice":
@@ -293,6 +375,7 @@ func _on_SaveButton_pressed():
 
 func _on_LoadButton_pressed():
 	#Just restart scene for now
+	#TESTING
 	get_tree().reload_current_scene()
 
 func _on_ClearButton_pressed():
