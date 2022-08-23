@@ -28,6 +28,13 @@ var expressions = {
 	"smile_blush" : 5,
 }
 
+#Add more if there are characters that should not be included
+var unnecessary_characters =  [".",",",":","?"," "]
+
+#Words that have (word_mastery_accuracy_bound) 80% mastery that is typed more than or equal to (word_mastery_cound_bound)1 times will be ignored in story mode
+var word_mastery_accuracy_bound = 0.80
+var word_mastery_count_bound = 1
+
 var dialogues = {
 	"Scene 1" : [
 		#Dialogue 1
@@ -50,7 +57,7 @@ var dialogues = {
 		{
 			"character" : "Adrian",
 			"expression" : "open",
-			"dialogue" : "Are you not going to grow your hair back out again?",
+			"dialogue" : "yeah is yeah what what is",
 		},
 		#Dialogue 4
 		{
