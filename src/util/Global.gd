@@ -52,7 +52,7 @@ func set_default_user_data() -> void:
 		"WPM" : 0.0,
 		"Accuracy" : 0.0,
 		"WordMastery" : {}, #"word" : {"total_accuracy" : x, "count" : x}
-		"LetterMastery" : {}, #"letter" : x -> total count of words typed
+		"LetterMastery" : {}, #"letter" : {"wrong_count" : x, "correct_count" : x}
 		"Items" : [],
 		"SavedProgress" : {},
 	}
@@ -83,15 +83,19 @@ func get_word_mastery(word : String) -> Dictionary:
 		dict["accuracy"] = word_mastery[word]["total_accuracy"] / float(count)
 	return dict
 
-func add_letter_mastery(letter : String) -> void:
+func add_letter_mastery(letter : String, correct : bool) -> void:
 	#Dont include unnecessary letters
 	if Data.unnecessary_characters.has(letter):
 		return
 	letter = letter.to_lower()
 	if !user_data["LetterMastery"].has(letter):
-		user_data["LetterMastery"][letter] = 1
+		user_data["LetterMastery"][letter] = {"wrong_count" : 0, "correct_count" : 0}
+	
+	if correct:
+		user_data["LetterMastery"][letter].correct_count += 1
 	else:
-		user_data["LetterMastery"][letter] += 1
+		user_data["LetterMastery"][letter].wrong_count += 1
+	#print(user_data["LetterMastery"])
 
 #Removes unnecessary letters in the word (e.g punctuations) and set all to lowercase
 func format_word(word : String) -> String:

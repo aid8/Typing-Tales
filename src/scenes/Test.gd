@@ -34,6 +34,8 @@ var typed_word_accuracy : Dictionary = {}
 var current_word_index : int = 0
 var mastered_word_indices : Dictionary = {} #{start : length}
 var mastered_words : Dictionary = {} #{word : true}
+var has_choice_timer : bool = false
+var ignore_typing : bool = false
 #var new_progress : bool = true#if false, this will load the saved progress instead of a new one
 
 #==========Onready Variables==========#
@@ -50,6 +52,9 @@ onready var character_positions : Dictionary = {
 	"MIDDLE" : $Characters/CharacterMidPosition,
 	"RIGHT" : $Characters/CharacterRightPosition,
 }
+onready var choice_timer : Timer = $ChoiceTimer
+onready var timer_pop_up : AcceptDialog = $UI/TimerPopUp
+onready var timer_label : Label = $UI/TimerLabel
 
 #==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
@@ -66,6 +71,10 @@ func _ready() -> void:
 		testbox.popup()
 		return
 	get_current_dialogue()
+
+func _process(delta) -> void:
+	if has_choice_timer:
+		timer_label.text = String(choice_timer.time_left)
 
 #Loads necessary characters, location and scene
 func load_saved_progress():
@@ -144,6 +153,17 @@ func show_selection(selections : Array) -> void:
 		ui.add_child(cs)
 		cs.set_choice_text(selections[i][0])
 
+#Incharge of selection ttimer
+func set_selection_timer(type : String, time : float = 0) -> void:
+	if type == "start":
+		choice_timer.start(time)
+		timer_label.show()
+		has_choice_timer = true
+	elif type == "stop":
+		choice_timer.stop()
+		timer_label.hide()
+		has_choice_timer = false
+
 #Incharge of editing, updating TypeBox
 #Also adds word mastery
 func update_typebox(type : String, letter : String = '') -> void:
@@ -186,6 +206,10 @@ func check_word_mastery(type : String):
 			return
 		var word_accuracy : float = typed_word_accuracy.values().count(true) / float(typed_word_accuracy.size())
 		Global.add_word_mastery(type_box.text, word_accuracy)
+		#Add letter mastery
+		for i in range(type_box.text.length()):
+			Global.add_letter_mastery(type_box.text[i], typed_word_accuracy[i])
+		
 	elif type == "reset":
 		current_word_index = 0
 		typed_word_accuracy = {}
@@ -211,7 +235,7 @@ func get_current_dialogue() -> void:
 					mastered_words[formatted_word] = true
 			word = ""
 			starting_tmp = i
-	print(mastered_word_indices)
+			
 	#Show background
 	if dialogue_data.has("location"):
 		current_location = dialogue_data.location
@@ -238,6 +262,14 @@ func get_current_dialogue() -> void:
 		if dialogue_data.has("hide_characters"):
 			for c in character_dict:
 				toggle_character(c, true)
+	
+	#Check if words should be skipped
+	var has_mastered_words = false
+	while mastered_word_indices.has(current_letter_index):
+		current_letter_index += mastered_word_indices[current_letter_index] + int(current_letter_index != 0)
+		has_mastered_words = true
+	if has_mastered_words:
+		current_letter_index += 1
 	
 	#Show current dialogue
 	current_dialogue = dialogue_data.dialogue
@@ -269,8 +301,11 @@ func set_next_scene(scene_name : String) -> void:
 	for selection in choice_selections:
 		selection.queue_free()
 	choice_selections = []
+	ignore_typing = false
+	has_choice_timer = false
+	chosen_selection = null
+	choosing_selection = false
 	update_typebox("reset")
-	print("cleared")
 	get_current_dialogue()
 
 #Shows the dialogue on the display with color
@@ -283,14 +318,26 @@ func show_colored_dialogue(textbox : RichTextLabel) -> void:
 	textbox.parse_bbcode(green_text + red_text + white_text)
 
 func add_paragraph_strikethrough(words : Dictionary, paragraph : String) -> String:
+	if typing_target == "choice":
+		return paragraph
 	for word in words:
-		paragraph = paragraph.replace(word, add_strikethrough(word))
+		var index = paragraph.findn(word, 0)
+		#REVIEW THIS, did not use replacen since capitalization is removed
+		while index > -1:
+			var orig_word = paragraph.substr(index, word.length())
+			paragraph.erase(index, word.length())
+			paragraph = paragraph.insert(index, add_strikethrough(orig_word))
+			index = paragraph.findn(word, index+word.length()+2)
+		#paragraph = paragraph.replacen(word, add_strikethrough(word))
 	return paragraph
 
 func add_strikethrough(word : String) -> String:
 	return "[s]" + word + "[/s]"
 
 func _unhandled_input(event : InputEvent) -> void:
+	if ignore_typing:
+		return
+	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
@@ -323,21 +370,24 @@ func _unhandled_input(event : InputEvent) -> void:
 				wrong_letter_length -= 1
 		else:
 			if typed_event.unicode != 0:
-				update_typebox("add", key_typed)
-				#Add letter mastery
-				Global.add_letter_mastery(key_typed)
+				if current_letter_index > current_dialogue.length():
+					current_letter_index = current_dialogue.length()
+					key_typed = character_to_type
+					wrong_letter_length = 0
+				else:
+					update_typebox("add", key_typed)
 		
 		#Update Dialogue
 		if key_typed == character_to_type and wrong_letter_length <= 0:
 			wrong_letter_length = 0
 			
 			#If mastered word is encountered, skip
-			while mastered_word_indices.has(current_letter_index):
+			while mastered_word_indices.has(current_letter_index) and typing_target != "choice":
 				current_letter_index += mastered_word_indices[current_letter_index] + 1
 				if current_letter_index > current_dialogue.length():
 					current_letter_index = current_dialogue.length()
 				
-			if not mastered_word_indices.has(current_letter_index):
+			if not mastered_word_indices.has(current_letter_index) or typing_target == "choice":
 				current_letter_index += 1
 			
 			if current_letter_index >= current_dialogue.length():
@@ -352,9 +402,13 @@ func _unhandled_input(event : InputEvent) -> void:
 				current_letter_index = 0
 				if Data.dialogues[current_scene][current_scene_index].has("show_selection") and typing_target == "dialogue":
 					show_selection(Data.dialogues[current_scene][current_scene_index].show_selection)
+					if Data.dialogues[current_scene][current_scene_index].has("show_selection_timer"):
+						set_selection_timer("start", Data.dialogues[current_scene][current_scene_index].show_selection_timer)
 					typing_target = "choice"
 					update_typebox("reset")
 				elif typing_target == "choice":
+					if has_choice_timer:
+						set_selection_timer("stop")
 					set_next_scene(chosen_selection.next_scene_name)
 				elif typing_target == "dialogue":
 					set_next_dialogue()
@@ -382,3 +436,25 @@ func _on_ClearButton_pressed():
 	#Delete data and Reload current scene
 	Global.delete_user_data()
 	get_tree().reload_current_scene()
+
+func _on_ChoiceTimer_timeout():
+	timer_pop_up.show()
+	ignore_typing = true
+	set_selection_timer("stop")
+	
+func _on_TimerPopUp_confirmed():
+	ignore_typing = false
+	choosing_selection = false
+	typing_target = "dialogue"
+	current_letter_index = 0
+	wrong_letter_length = 0
+	mastered_word_indices.clear()
+	typed_word_accuracy.clear()
+	mastered_words.clear()
+	current_word_index = 0
+	for selection in choice_selections:
+		selection.queue_free()
+	choice_selections = []
+	chosen_selection = null
+	update_typebox("reset")
+	get_current_dialogue()

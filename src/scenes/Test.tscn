@@ -102,6 +102,22 @@ margin_right = 977.0
 margin_bottom = 586.0
 text = "CLEAR"
 
+[node name="TimerPopUp" type="AcceptDialog" parent="UI"]
+margin_left = 382.0
+margin_top = 257.0
+margin_right = 639.0
+margin_bottom = 354.0
+dialog_text = "You are slow! Type faster!"
+
+[node name="TimerLabel" type="Label" parent="UI"]
+visible = false
+margin_left = 456.0
+margin_top = 502.0
+margin_right = 589.0
+margin_bottom = 525.0
+text = "test"
+align = 1
+
 [node name="TestBox" type="ConfirmationDialog" parent="."]
 margin_left = 358.0
 margin_top = 259.0
@@ -110,7 +126,11 @@ margin_bottom = 370.0
 dialog_text = "Save File found! Do you want to load it?"
 dialog_autowrap = true
 
+[node name="ChoiceTimer" type="Timer" parent="."]
+
 [connection signal="pressed" from="UI/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="UI/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="UI/ClearButton" to="." method="_on_ClearButton_pressed"]
+[connection signal="confirmed" from="UI/TimerPopUp" to="." method="_on_TimerPopUp_confirmed"]
 [connection signal="confirmed" from="TestBox" to="." method="_on_TestBox_confirmed"]
+[connection signal="timeout" from="ChoiceTimer" to="." method="_on_ChoiceTimer_timeout"]
