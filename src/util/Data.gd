@@ -50,7 +50,8 @@ var dialogues = {
 			"character" : "Felix",
 			"outfit" : "Casual",
 			"expression" : "frown",
-			"dialogue" : "What was I supposed to do when they gave it to me thinking I was you?",
+			#"dialogue" : "What was I supposed to do when they gave it to me thinking I was you?",
+			"dialogue" : "Why are you?",
 			"position" : "RIGHT",
 		},
 		#Dialogue 3
@@ -67,7 +68,8 @@ var dialogues = {
 				["Yes, you are my sun", "Scene 1_Choice1"],
 				["No, you are my moon", "Scene 1_Choice2"],
 			],
-			"hide_characters" : "true",
+			"show_selection_timer" : 10,
+			"hide_characters" : true,
 		},
 	],
 	
