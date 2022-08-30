@@ -9,6 +9,7 @@ var is_hidden : bool
 
 #==========Onready Variables==========#
 onready var anim : AnimatedSprite = $Anim
+onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 #=========Functions==========#
 func _ready():
@@ -27,7 +28,7 @@ func update_character() -> void:
 	anim.animation = character_name + "_" + current_outfit
 	anim.frame = Data.expressions[current_expression]
 	toggle_character(is_hidden)
-
+	
 func change_outfit(outfit : String) -> void:
 	current_outfit = outfit
 	update_character()
@@ -36,9 +37,17 @@ func change_expression(expression : String) -> void:
 	current_expression = expression
 	update_character()
 
+func play_animation(anim : String, backwards : bool = false) -> void:
+	if backwards:
+		animation_player.play_backwards(anim)
+	else:
+		animation_player.play(anim)
+
 func toggle_character(hidden : bool) -> void:
 	is_hidden = hidden
 	if hidden:
-		self.hide()
+		#self.hide()
+		play_animation("Fade", true)
 	else:
-		self.show()
+		#self.show()
+		play_animation("Fade")
