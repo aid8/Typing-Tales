@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Felix_Casual_Open_Blush.png-1dd1e7789fbac85c71d4ac5ac1a97cf4.stex"
+path="res://.import/Adrian_casual_frown.png-55270e46bf698b92389d64fb1370ffd7.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/felix/Casual/Felix_Casual_Open_Blush.png"
-dest_files=[ "res://.import/Felix_Casual_Open_Blush.png-1dd1e7789fbac85c71d4ac5ac1a97cf4.stex" ]
+source_file="res://assets/characters/adrian-felix/Casual/Adrian_casual_frown.png"
+dest_files=[ "res://.import/Adrian_casual_frown.png-55270e46bf698b92389d64fb1370ffd7.stex" ]
 
 [params]
 

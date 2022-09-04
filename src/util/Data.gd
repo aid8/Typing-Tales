@@ -96,6 +96,7 @@ var dialogues = {
 			"expression" : "Open_blush", 
 			"dialogue" : "Why are you even taking my presents?",
 			"position" : "LEFT",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -104,18 +105,21 @@ var dialogues = {
 			"expression" : "Frown",
 			"dialogue" : "What was I supposed to do when they gave it to me thinking I was you?",
 			"position" : "RIGHT",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{
 			"character" : "Adrian",
 			"expression" : "Open",
 			"dialogue" : "Are you not going to grow your hair back out again?",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 
 		{
 			"character" : "Felix",
 			"expression" : "Frown_blush",
 			"dialogue" : "...it’s hot",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -172,6 +176,7 @@ var dialogues = {
 		{
 			"character" : "Adrian",
 			"dialogue" : "No one will be able to tell us apart now, not even our parents",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -184,6 +189,7 @@ var dialogues = {
 			"character" : "Felix",
 			"expression" : "Smile",
 			"dialogue" : "What does the length of my hair have to do with it?",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -196,6 +202,7 @@ var dialogues = {
 			"character" : "Felix",
 			"expression" : "Open",
 			"dialogue" : "As long as we are the Princes of Berg, they will not care who we really are.",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -208,12 +215,14 @@ var dialogues = {
 			"character" : "Felix",
 			"expression" : "Open_blush",
 			"dialogue" : "Why are you so free when I'm so busy? Don't you have a class?",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{
 			"character" : "Adrian",
 			"expression" : "Frown",
 			"dialogue" : "What do you mean you're free?",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -231,6 +240,7 @@ var dialogues = {
 			"character" : "Adrian",
 			"expression" : "Frown_blush",
 			"dialogue" : "That's why I told you to take the required courses beforehand. Aren't you busy right now because you skipped classes and played hard?",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -286,7 +296,7 @@ var dialogues = {
 
 		{
 			"character" : "Felix",
-			"outfit" : "Casual",
+			"outfit" : "Summer",
 			"expression" : "Open",
 			"dialogue" : "Lucy Keenan.",
 			"position" : "MIDDLE",
@@ -307,7 +317,7 @@ var dialogues = {
 
 		{
 			"character" : "Lucy",
-			"outfit" : "Casual",
+			"outfit" : "Summer",
 			"forced_name" : "Narrator",
 			"expression" : "Open",
 			"dialogue" : "Lucy Keenan’s eyes widened...",
@@ -343,6 +353,7 @@ var dialogues = {
 			"character" : "Narrator",
 			"dialogue" : "Felix laughed quietly to himself. She must be wondering whether the Berg in front of her is Adrian Berg or Felix Berg. Felix gently raised the corners of his lips and smiled softly. It was the smile that Adrian often wore.",
 			"skip_dialogue" : true,
+			"hide_character" : ["Lucy"],
 		},
 
 		{
@@ -356,6 +367,7 @@ var dialogues = {
 			#Lucy Keenan approaching Felix with a small and clear voice, stopped walking.
 			"dialogue" : "Adrian sunbaenim, there's a meeting in the student council room later",
 			"expression" : "Open_blush",
+			"show_character" : ["Lucy"],
 		},
 
 		{
@@ -387,7 +399,7 @@ var dialogues = {
 
 		{
 			"character" : "Felix",
-			"outfit" : "Casual",
+			"outfit" : "Summer",
 			"dialogue" : "This is pissing me off.",
 			"expression" : "Frown",
 			"position" : "MIDDLE",
@@ -433,7 +445,7 @@ var dialogues = {
 			"show_more_characters" : [
 				{
 					"character" : "Adrian",
-					"outfit" : "Casual",
+					"outfit" : "Summer",
 					"expression" : "Smile",
 					"position" : "RIGHT",
 				},
@@ -463,6 +475,7 @@ var dialogues = {
 			#Felix straightening his tie
 			"dialogue" : "I can't help it. Just wait until my father leaves.",
 			"expression" : "Frown",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -527,7 +540,7 @@ var dialogues = {
 			"character" : "Adrian",
 			"dialogue" : "Hey, don't play around.",
 			"expression" : "Frown",
-			"character_animation" : [{"character" : "Adrian", "anim" : "Shake"}]
+			"character_animation" : [{"character" : "Adrian", "anim" : "Shake"}],
 		},
 
 		{
@@ -540,6 +553,7 @@ var dialogues = {
 			"character" : "Adrian",
 			"dialogue" : "I'm sorry, Lucy. I've been busy with the student council, so it's like I've been putting a huge burden on you. I am the head of the library.",
 			"expression" : "Open",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 		
 		{
@@ -558,6 +572,7 @@ var dialogues = {
 			"character" : "Adrian",
 			"dialogue" : "Okay, thank you. I look forward to your kind cooperation.",
 			"expression" : "Smile",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -589,6 +604,7 @@ var dialogues = {
 			"character" : "Felix",
 			"dialogue" : "What exactly is her name?",
 			"expression" : "Frown", 
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -608,6 +624,7 @@ var dialogues = {
 			"character" : "Adrian",
 			"dialogue" : "Hey, you can't be... Don't do that. Lucy is...",
 			"expression" : "Frown",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
 		},
 
 		{
@@ -620,6 +637,7 @@ var dialogues = {
 			"character" : "Felix",
 			"dialogue" : "No. You don't have to tell me I was just curious.",
 			"expression" : "Frown_blush",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
 		},
 
 		{

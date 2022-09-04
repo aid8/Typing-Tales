@@ -93,7 +93,6 @@ current = true
 [node name="Backgrounds" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.666, 0.666 )
 frames = SubResource( 1 )
-animation = "School"
 centered = false
 
 [node name="Characters" type="Node2D" parent="."]

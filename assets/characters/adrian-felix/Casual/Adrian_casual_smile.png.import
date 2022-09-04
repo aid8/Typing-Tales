@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Adrian_Summeruni_frown_blush.png-5c077ec1cbd736ca100f111cb120f6c6.stex"
+path="res://.import/Adrian_casual_smile.png-d9cea740bfc64a2c7bd507e4fc14a9cd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/adrian/Summer/Adrian_Summeruni_frown_blush.png"
-dest_files=[ "res://.import/Adrian_Summeruni_frown_blush.png-5c077ec1cbd736ca100f111cb120f6c6.stex" ]
+source_file="res://assets/characters/adrian-felix/Casual/Adrian_casual_smile.png"
+dest_files=[ "res://.import/Adrian_casual_smile.png-d9cea740bfc64a2c7bd507e4fc14a9cd.stex" ]
 
 [params]
 

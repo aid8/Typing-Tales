@@ -28,6 +28,8 @@ const red : Color = Color("#FF0000")
 const green : Color = Color("#90EE90")
 const yellow : Color = Color("#FFFF80")
 const light_blue : Color = Color("#ADD8E6")
+const light_gray : Color = Color("#D3D3D3")
+const light_orange : Color = Color("#FFD580")
 
 var current_scene : String = "Chapter 1"
 var current_scene_index: int = 0
@@ -222,6 +224,8 @@ func set_selection_timer(type : String, time : float = 0) -> void:
 #Incharge of editing, updating TypeBox
 #Also adds word mastery
 func update_typebox(type : String, letter : String = '') -> void:
+	if skip_dialogue or ignore_typing:
+		return
 	if type == "delete":
 		var s = type_box.text
 		if s.length() > 0:
@@ -437,7 +441,7 @@ func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
 #Shows the dialogue on the display with color and alignment
 func show_colored_dialogue(textbox : RichTextLabel, alignment : String = "") -> void:
 	if skip_dialogue:
-		textbox.parse_bbcode(current_dialogue)
+		textbox.parse_bbcode("[color=#" + light_orange.to_html(false) + "]" + current_dialogue + "[/color]")
 		return
 		
 	var green_text = format_color_paragraph(mastered_words, current_dialogue.substr(0, current_letter_index), green)
@@ -466,7 +470,16 @@ func format_color_paragraph(words : Dictionary, paragraph : String, color : Colo
 	
 	for word in words:
 		var index = paragraph.findn(word, 0)
-		while index > -1:
+		while index > -1 and index < paragraph.length():
+			if index + word.length() < paragraph.length():
+				if not Data.unnecessary_characters.has(paragraph[index + word.length()]):
+					index += 1
+					continue
+			if index - 1 > 0:
+				if not Data.unnecessary_characters.has(paragraph[index-1]):
+					index += 1
+					continue
+			
 			var orig_word = paragraph.substr(index, word.length())
 			paragraph.erase(index, word.length())
 			if color == green:
@@ -505,6 +518,7 @@ func _unhandled_input(event : InputEvent) -> void:
 				return
 		
 		var character_to_type = current_dialogue.substr(current_letter_index, 1)
+		
 		#Update Typebox
 		if Input.is_action_pressed("ui_backspace"):
 			update_typebox("delete")
@@ -527,10 +541,11 @@ func _unhandled_input(event : InputEvent) -> void:
 					update_typebox("add", key_typed)
 		
 		#TESTING
-		if skip_dialogue or (debug_mode and typed_event.scancode == 16777233):
+		if (skip_dialogue and typed_event.scancode == 32) or (debug_mode and typed_event.scancode == 16777233):
 			current_letter_index = current_dialogue.length()
 			key_typed = character_to_type
 			wrong_letter_length = 0
+			total_time = 0
 		
 		#Update Dialogue
 		if key_typed == character_to_type and wrong_letter_length <= 0:
