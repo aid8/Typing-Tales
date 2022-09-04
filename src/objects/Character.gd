@@ -14,6 +14,7 @@ onready var animation_player : AnimationPlayer = $AnimationPlayer
 #=========Functions==========#
 func _ready():
 	update_character()
+	toggle_character(is_hidden, true)
 
 #Must be called before adding this to the scene
 func initialize(name : String, outfit : String, expression : String, position : String, hidden : bool = false) -> void:
@@ -27,7 +28,7 @@ func initialize(name : String, outfit : String, expression : String, position : 
 func update_character() -> void:
 	anim.animation = character_name + "_" + current_outfit
 	anim.frame = Data.expressions[current_expression]
-	toggle_character(is_hidden)
+	#toggle_character(is_hidden)
 	
 func change_outfit(outfit : String) -> void:
 	current_outfit = outfit
@@ -43,7 +44,15 @@ func play_animation(anim : String, backwards : bool = false) -> void:
 	else:
 		animation_player.play(anim)
 
-func toggle_character(hidden : bool) -> void:
+func remove_character() -> void:
+	play_animation("Fade", true)
+	yield(animation_player, "animation_finished")
+	queue_free()
+
+func toggle_character(hidden : bool, forced : bool = false) -> void:
+	if hidden == is_hidden and not forced:
+		return
+	
 	is_hidden = hidden
 	if hidden:
 		#self.hide()

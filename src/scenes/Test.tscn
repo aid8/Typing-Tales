@@ -1,24 +1,32 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
-[ext_resource path="res://assets/backgrounds/Livingroom_Day.png" type="Texture" id=2]
-[ext_resource path="res://assets/backgrounds/Classroom_Day.png" type="Texture" id=3]
+[ext_resource path="res://assets/backgrounds/Home/Livingroom_Day.png" type="Texture" id=2]
+[ext_resource path="res://assets/backgrounds/School/Classroom_Day.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/BarlowCondensed-SemiBold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/BarlowCondensed-SemiBoldItalic.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://assets/fonts/BarlowCondensed-BlackItalic.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://assets/ui/textbox.png" type="Texture" id=7]
 [ext_resource path="res://assets/ui/namebox.png" type="Texture" id=8]
+[ext_resource path="res://assets/backgrounds/Outside/Old_EncoreTitle.png" type="Texture" id=9]
+[ext_resource path="res://assets/backgrounds/School/Old_School.png" type="Texture" id=10]
+[ext_resource path="res://assets/backgrounds/School/School_Hallway_Day.png" type="Texture" id=11]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 3 ) ],
-"loop": true,
-"name": "Classroom",
-"speed": 5.0
-}, {
 "frames": [ ExtResource( 2 ) ],
 "loop": true,
-"name": "Livingroom",
+"name": "Home",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ) ],
+"loop": true,
+"name": "Outside",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"loop": true,
+"name": "School",
 "speed": 5.0
 }, {
 "frames": [  ],
@@ -85,6 +93,7 @@ current = true
 [node name="Backgrounds" type="AnimatedSprite" parent="."]
 scale = Vector2( 0.666, 0.666 )
 frames = SubResource( 1 )
+animation = "School"
 centered = false
 
 [node name="Characters" type="Node2D" parent="."]
@@ -104,42 +113,45 @@ position = Vector2( 924, 722 )
 position = Vector2( 640, 214 )
 
 [node name="NameboxBackground" type="Sprite" parent="UI"]
-position = Vector2( 371, 487 )
+position = Vector2( 351, 482 )
 texture = ExtResource( 8 )
 
 [node name="TypeBoxBackground" type="Sprite" parent="UI"]
-position = Vector2( 907, 487 )
+position = Vector2( 931, 482 )
 scale = Vector2( -1, 1 )
 texture = ExtResource( 8 )
 
 [node name="TextboxBackground" type="AnimatedSprite" parent="UI"]
-position = Vector2( 640, 597 )
+position = Vector2( 640, 596 )
+scale = Vector2( 1.1, 1.1 )
 frames = SubResource( 7 )
 
 [node name="CharacterName" type="RichTextLabel" parent="UI"]
-margin_left = 330.0
-margin_top = 465.0
-margin_right = 556.0
-margin_bottom = 504.0
+margin_left = 310.0
+margin_top = 460.0
+margin_right = 536.0
+margin_bottom = 499.0
 custom_fonts/normal_font = SubResource( 4 )
 text = "Name"
 scroll_active = false
 
 [node name="Dialogue" type="RichTextLabel" parent="UI"]
-margin_left = 291.0
-margin_top = 551.0
-margin_right = 984.0
+margin_left = 259.0
+margin_top = 540.0
+margin_right = 1036.0
 margin_bottom = 637.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Dialogue"
+meta_underlined = false
+tab_size = 3
 text = "Dialogue"
 
 [node name="TypeBox" type="RichTextLabel" parent="UI"]
 margin_left = 674.0
-margin_top = 466.0
+margin_top = 461.0
 margin_right = 956.0
-margin_bottom = 510.0
+margin_bottom = 505.0
 custom_fonts/normal_font = SubResource( 3 )
 bbcode_enabled = true
 
