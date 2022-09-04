@@ -6,6 +6,7 @@ onready var background : AnimatedSprite = $Background
 
 #==========Variables==========#
 var next_scene_name : String
+var next_scene_index : int
 
 #==========Functions==========#
 func _ready():

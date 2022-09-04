@@ -11,7 +11,7 @@ func _on_TestBox_confirmed():
 	ui.show()
 
 func _on_TestBtn_pressed():
-	set_next_scene("Scene 1")
+	get_tree().reload_current_scene()
 
 func _on_ClearButton_pressed():
 	#Delete data and Reload current scene
@@ -29,7 +29,7 @@ const green : Color = Color("#90EE90")
 const yellow : Color = Color("#FFFF80")
 const light_blue : Color = Color("#ADD8E6")
 
-var current_scene : String = "Scene 1"
+var current_scene : String = "Chapter 1"
 var current_scene_index: int = 0
 var current_letter_index : int = 0
 var current_location : String = ""
@@ -50,6 +50,7 @@ var current_wpm : float = 0
 var total_time : float = 0
 var tracing_wpm : bool = false
 var skipped_characters_length : int = 0 #for accurate wpm computation, skipped characters should be taken note of
+var skip_dialogue : bool = false
 #Scene animation variables
 var shake_strength : float = 0.0
 var shake_decay : float = 0.0
@@ -161,7 +162,7 @@ func remove_character(name : String):
 #Deletes all character
 func remove_characters():
 	for c in character_dict.values():
-		c.queue_free()
+		c.remove_character()
 	character_dict = {}
 
 #Shows/Hides the character depending on passed boolean (hidden)
@@ -197,6 +198,7 @@ func show_selection(selections : Array) -> void:
 	for i in range (0, selections.size()):
 		var cs = choice_selection.instance()
 		cs.next_scene_name = selections[i][1]
+		cs.next_scene_index = selections[i][2]
 		cs.position = choice_selection_position.position
 		cs.position.y += (50 * i)
 		choice_selections.append(cs)
@@ -298,7 +300,18 @@ func get_current_dialogue() -> void:
 			word = ""
 			starting_tmp = i
 	
-	#Show background and change tint
+	#Remove character
+	if dialogue_data.has("remove_character"):
+		for c in dialogue_data.remove_character:
+			remove_character(c)
+	if dialogue_data.has("remove_all_characters"):
+		remove_characters()
+	
+	#Check dialogue options
+	if dialogue_data.has("skip_dialogue"):
+		skip_dialogue = true
+	else:
+		skip_dialogue = false
 	if dialogue_data.has("location"):
 		current_location = dialogue_data.location
 		change_background(current_location)
@@ -306,7 +319,11 @@ func get_current_dialogue() -> void:
 		change_background("", dialogue_data.location_tint)
 	
 	#Show current character
-	character_name.text = dialogue_data.character
+	if dialogue_data.has("forced_name"):
+		character_name.text = dialogue_data.forced_name
+	else:
+		character_name.text = dialogue_data.character
+	
 	if not character_dict.has(dialogue_data.character) and Data.characters.has(dialogue_data.character):
 		add_character(dialogue_data.character, dialogue_data.outfit, dialogue_data.expression, dialogue_data.position)
 	else:
@@ -317,20 +334,33 @@ func get_current_dialogue() -> void:
 		if dialogue_data.has("position"):
 			modify_character(dialogue_data.character, "", "", dialogue_data.position)
 		if dialogue_data.has("show_character"):
-			toggle_character(dialogue_data.show_character, false)
-		if dialogue_data.has("hide_character"):
-			toggle_character(dialogue_data.show_character, true)
-		if dialogue_data.has("show_characters"):
+			for c in dialogue_data.show_character:
+				toggle_character(c, false)
+		if dialogue_data.has("show_all_characters"):
 			for c in character_dict:
 				toggle_character(c, false)
-		if dialogue_data.has("hide_characters"):
+		if dialogue_data.has("hide_character"):
+			for c in dialogue_data.hide_character:
+				toggle_character(c, true)
+		if dialogue_data.has("hide_all_characters"):
 			for c in character_dict:
 				toggle_character(c, true)
 	
+	#show other chracters
+	if dialogue_data.has("show_more_characters"):
+		for c in dialogue_data.show_more_characters:
+			if not character_dict.has(c.character) and Data.characters.has(c.character):
+				add_character(c.character, c.outfit, c.expression, c.position)
+			else:
+				modify_character(c.character, c.outfit, c.expression, c.position)
+				
+	
 	#add character animation
-	if character_dict.has(dialogue_data.character) and dialogue_data.has("character_animation"):
-		character_dict[dialogue_data.character].play_animation(dialogue_data.character_animation)
-		
+	if dialogue_data.has("character_animation"):
+		for c in dialogue_data.character_animation:
+			if character_dict.has(c.character):
+				character_dict[c.character].play_animation(c.anim)
+	
 	#Check if words should be skipped
 	var has_mastered_words = false
 	while mastered_word_indices.has(current_letter_index):
@@ -382,9 +412,9 @@ func add_history_text(type : String, name : String, dialogue : String) -> void:
 	history_text.parse_bbcode(history_text_storage)
 
 #Sets neccesary variables to be ready for the next scene
-func set_next_scene(scene_name : String) -> void:
+func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
 	current_scene = scene_name
-	current_scene_index = 0
+	current_scene_index = scene_index
 	current_letter_index = 0
 	wrong_letter_length = 0
 	typing_target = "dialogue"
@@ -406,6 +436,10 @@ func set_next_scene(scene_name : String) -> void:
 
 #Shows the dialogue on the display with color and alignment
 func show_colored_dialogue(textbox : RichTextLabel, alignment : String = "") -> void:
+	if skip_dialogue:
+		textbox.parse_bbcode(current_dialogue)
+		return
+		
 	var green_text = format_color_paragraph(mastered_words, current_dialogue.substr(0, current_letter_index), green)
 	var red_text = ""
 	if wrong_letter_length > 0:
@@ -493,9 +527,10 @@ func _unhandled_input(event : InputEvent) -> void:
 					update_typebox("add", key_typed)
 		
 		#TESTING
-		if debug_mode and typed_event.scancode == 16777233:
+		if skip_dialogue or (debug_mode and typed_event.scancode == 16777233):
 			current_letter_index = current_dialogue.length()
 			key_typed = character_to_type
+			wrong_letter_length = 0
 		
 		#Update Dialogue
 		if key_typed == character_to_type and wrong_letter_length <= 0:
@@ -533,7 +568,7 @@ func _unhandled_input(event : InputEvent) -> void:
 						set_selection_timer("stop")
 					add_history_text(typing_target, character_name.text, current_dialogue)
 					Global.add_finished_scenes(current_scene)
-					set_next_scene(chosen_selection.next_scene_name)
+					set_next_scene(chosen_selection.next_scene_name, chosen_selection.next_scene_index)
 				elif typing_target == "dialogue":
 					add_history_text(typing_target, character_name.text, current_dialogue)
 					set_next_dialogue()
