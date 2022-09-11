@@ -506,6 +506,7 @@ tracks/3/keys = {
 }
 
 [node name="SceneTransition" type="CanvasLayer"]
+pause_mode = 2
 layer = 2
 follow_viewport_enable = true
 script = ExtResource( 1 )

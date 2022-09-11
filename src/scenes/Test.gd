@@ -1,4 +1,8 @@
 extends Node2D
+#==========TODO==========#
+#Starting Chapter Anim
+#Stats Menu fade
+#Add to Global current stats after finishing chapter
 
 #==========Testing Stuffs==========#
 onready var testbox = $TestBox
@@ -53,6 +57,8 @@ var total_time : float = 0
 var tracing_wpm : bool = false
 var skipped_characters_length : int = 0 #for accurate wpm computation, skipped characters should be taken note of
 var skip_dialogue : bool = false
+var total_wpm : Array = [0, 0] #[total_wpm, count]
+var total_accuracy : Array = [0, 0] #[correct_count, wrong_count]
 #Scene animation variables
 var shake_strength : float = 0.0
 var shake_decay : float = 0.0
@@ -82,6 +88,7 @@ onready var timer_label : Label = $UI/TimerNode/TimerLabel
 onready var wpm_label : Label = $UI/WPMLabel
 onready var history_menu : Node2D = $UI/HistoryMenu
 onready var history_text : RichTextLabel = $UI/HistoryMenu/HistoryText
+onready var stats_menu : Node2D = $UI/StatsMenu
 
 #==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
@@ -89,6 +96,7 @@ onready var character = preload("res://src/objects/Character.tscn")
 
 #==========Functions==========#
 func _ready() -> void:
+	rand.randomize()
 	#TESTING
 	if not Global.check_first_time():
 		ui.hide()
@@ -156,20 +164,15 @@ func add_character(name : String, outfit : String, expression : String, char_pos
 	characters.add_child(c)
 	character_dict[name] = c
 	
-#Deletes the character instance with provided name
-func remove_character(name : String):
-	character_dict[name].queue_free()
-	character_dict.erase(name)
-
 #Deletes all character
-func remove_characters():
+func remove_characters(has_fade : bool = true):
 	for c in character_dict.values():
-		c.remove_character()
+		c.remove_character(has_fade)
 	character_dict = {}
 
 #Shows/Hides the character depending on passed boolean (hidden)
-func toggle_character(name : String, hidden : bool):
-	character_dict[name].toggle_character(hidden)
+func toggle_character(name : String, hidden : bool, instant : bool = false):
+	character_dict[name].toggle_character(hidden, false, instant)
 
 #Changes the outfit/expression of the character, if parameter is blank, it will be ignored
 func modify_character(name : String, outfit : String = "", expression : String = "", char_position : String = ""):
@@ -265,10 +268,14 @@ func check_word_mastery(type : String):
 		if typed_word_accuracy.size() <= 0:
 			return
 		var word_accuracy : float = typed_word_accuracy.values().count(true) / float(typed_word_accuracy.size())
-		Global.add_word_mastery(type_box.text, word_accuracy)
 		#Add letter mastery
 		for i in range(type_box.text.length()):
 			Global.add_letter_mastery(type_box.text[i], typed_word_accuracy[i])
+			if not Data.unnecessary_characters.has(type_box.text[i]):
+				if typed_word_accuracy[i]:
+					total_accuracy[0] += 1
+				else:
+					total_accuracy[1] += 1
 		
 	elif type == "reset":
 		current_word_index = 0
@@ -277,14 +284,22 @@ func check_word_mastery(type : String):
 #Gets and sets the current dialogue and and calls show_colored_dialogue()
 func get_current_dialogue() -> void:
 	var dialogue_data = Data.dialogues[current_scene][current_scene_index]
+	var has_transition = false
 	
 	#If dialogue has transition, do that first then wait for it to emit a signal
 	if dialogue_data.has("transition"):
+		has_transition = true
 		SceneTransition.add_transition(dialogue_data.transition)
 		ignore_typing = true
 		yield(SceneTransition, "transition_finished")
 		ignore_typing = false
 	
+	#If dialouge has goto_chapter, do this and return
+	if dialogue_data.has("goto_chapter"):
+		var chap_data = dialogue_data.goto_chapter
+		set_next_scene(chap_data[0], chap_data[1])
+		return
+		
 	#Iterate through the dialogue and get all mastered words with index and length
 	var word : String = ""
 	var tmp : String = dialogue_data.dialogue + " "
@@ -297,7 +312,7 @@ func get_current_dialogue() -> void:
 			var formatted_word = Global.format_word(word)
 			var mastery = Global.get_word_mastery(formatted_word)
 			if mastery.size() > 0:
-				if mastery.accuracy >= Data.word_mastery_accuracy_bound and mastery.count >= Data.word_mastery_count_bound:
+				if mastery.accuracy >= Data.WORD_MASTERY_ACCURACY_BOUND and mastery.count >= Data.word_mastery_count_bound:
 					mastered_word_indices[starting_tmp] = word.length()
 					mastered_words[formatted_word] = true
 					skipped_characters_length += word.length()
@@ -307,9 +322,9 @@ func get_current_dialogue() -> void:
 	#Remove character
 	if dialogue_data.has("remove_character"):
 		for c in dialogue_data.remove_character:
-			remove_character(c)
+			c.remove_character(!has_transition)
 	if dialogue_data.has("remove_all_characters"):
-		remove_characters()
+		remove_characters(!has_transition)
 	
 	#Check dialogue options
 	if dialogue_data.has("skip_dialogue"):
@@ -339,16 +354,16 @@ func get_current_dialogue() -> void:
 			modify_character(dialogue_data.character, "", "", dialogue_data.position)
 		if dialogue_data.has("show_character"):
 			for c in dialogue_data.show_character:
-				toggle_character(c, false)
+				toggle_character(c, false, has_transition)
 		if dialogue_data.has("show_all_characters"):
 			for c in character_dict:
-				toggle_character(c, false)
+				toggle_character(c, false, has_transition)
 		if dialogue_data.has("hide_character"):
 			for c in dialogue_data.hide_character:
-				toggle_character(c, true)
+				toggle_character(c, true, has_transition)
 		if dialogue_data.has("hide_all_characters"):
 			for c in character_dict:
-				toggle_character(c, true)
+				toggle_character(c, true, has_transition)
 	
 	#show other chracters
 	if dialogue_data.has("show_more_characters"):
@@ -386,8 +401,8 @@ func set_next_dialogue() -> void:
 	current_scene_index += 1
 	mastered_word_indices.clear()
 	mastered_words.clear()
-	if(current_scene_index >= Data.dialogues[current_scene].size()):
-		print("Scene is finished")
+	if(current_scene_index >= Data.dialogues[current_scene].size() - 1):
+		show_stats_menu()
 		Global.add_finished_scenes(current_scene)
 		return
 	get_current_dialogue()
@@ -397,6 +412,8 @@ func set_next_dialogue() -> void:
 func register_wpm() -> void:
 	if total_time > 0:
 		current_wpm = (current_dialogue.length() - skipped_characters_length) * 60 / (5 * total_time)
+		total_wpm[0] += current_wpm
+		total_wpm[1] += 1
 		Global.add_overall_wpm(current_wpm)
 		wpm_label.text = "WPM : " + String(floor(current_wpm))
 	else:
@@ -421,6 +438,9 @@ func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
 	current_scene_index = scene_index
 	current_letter_index = 0
 	wrong_letter_length = 0
+	total_wpm = [0, 0]
+	total_accuracy = [0, 0]
+	total_time = 0
 	typing_target = "dialogue"
 	mastered_word_indices.clear()
 	typed_word_accuracy.clear()
@@ -434,6 +454,7 @@ func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
 	has_choice_timer = false
 	chosen_selection = null
 	choosing_selection = false
+	remove_characters(false)
 	character_dict.clear()
 	update_typebox("reset")
 	get_current_dialogue()
@@ -500,9 +521,18 @@ func _unhandled_input(event : InputEvent) -> void:
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
-		#trace wpm
-		tracing_wpm = true
 		
+		#start tracing wpm (RECHECK)
+		if typed_event.unicode != 0:
+			tracing_wpm = true
+			
+		if stats_menu.visible:
+			if typed_event.scancode == 32:
+				get_current_dialogue()
+				update_typebox("reset")
+				stats_menu.hide()
+			return
+			
 		#Focus on finding the choice selection if choosing selection is true
 		if choosing_selection:
 			var has_chosen_selection = false
@@ -539,7 +569,7 @@ func _unhandled_input(event : InputEvent) -> void:
 					wrong_letter_length = 0
 				else:
 					update_typebox("add", key_typed)
-		
+			
 		#TESTING
 		if (skip_dialogue and typed_event.scancode == 32) or (debug_mode and typed_event.scancode == 16777233):
 			current_letter_index = current_dialogue.length()
@@ -568,6 +598,7 @@ func _unhandled_input(event : InputEvent) -> void:
 				#Call word mastery to include last word and register WPM
 				check_word_mastery("add")
 				register_wpm()
+				update_typebox("reset")
 				
 				#If the dialogue has choices, switch typing target to choice
 				current_letter_index = 0
@@ -597,6 +628,37 @@ func _unhandled_input(event : InputEvent) -> void:
 		elif typing_target == "choice":
 			if chosen_selection != null:
 				show_colored_dialogue(chosen_selection.choice_text, "center")
+
+func show_stats_menu():
+	var title_label = stats_menu.get_node("TitleLabel")
+	var cur_stats_label = stats_menu.get_node("CurrentStatsLabel")
+	var overall_stats_label = stats_menu.get_node("OverallStatsLabel")
+	var letter_diff_label = stats_menu.get_node("LetterDifficultyLabel")
+	
+	var cur_wpm = 0
+	var cur_accuracy = 0
+	if total_wpm[1] > 0:
+		cur_wpm = total_wpm[0] / float(total_wpm[1])
+	if total_accuracy[0] + total_accuracy[1] > 0:
+		cur_accuracy = total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1])
+	var overall_stats = Global.get_user_stats()
+	
+	title_label.text = current_scene + " - DONE"
+	cur_stats_label.text = "Current WPM: " + String(cur_wpm) + "\nCurrent Accuracy: " + String(cur_accuracy * 100)
+	overall_stats_label.text = "Overall WPM: " + String(overall_stats["WPM"]) + "\nOverall Accuracy: " + String(overall_stats["Accuracy"] * 100)
+	letter_diff_label.text = "Letters that should be practiced: "
+	
+	var diff_letters = overall_stats["Difficult_Letters"]
+	print(diff_letters,"?")
+	if diff_letters.size() <= 0:
+		letter_diff_label.text += "None"
+	else:
+		for i in range(0, diff_letters.size() - 1):
+			letter_diff_label.text += String(diff_letters[i])
+			if i < diff_letters.size() - 2:
+				letter_diff_label.text += ", "
+	print(Global.user_data)
+	stats_menu.show()
 
 #==========Connected Functions==========#
 func _on_SaveButton_pressed():

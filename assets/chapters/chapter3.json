@@ -1,0 +1,12 @@
+{
+    "Chapter 3" : [
+        {
+			"character" : "Narrator",
+			"dialogue" : "Ongoing",
+		},
+
+        {
+            "goto_chapter" : ["Chapter 1", 0],
+        },
+    ]
+}
