@@ -44,18 +44,23 @@ func play_animation(anim : String, backwards : bool = false) -> void:
 	else:
 		animation_player.play(anim)
 
-func remove_character() -> void:
-	play_animation("Fade", true)
-	yield(animation_player, "animation_finished")
+func remove_character(has_fade : bool = true) -> void:
+	if has_fade:
+		play_animation("Fade", true)
+		yield(animation_player, "animation_finished")
 	queue_free()
 
-func toggle_character(hidden : bool, forced : bool = false) -> void:
+func toggle_character(hidden : bool, forced : bool = false, instant : bool = false) -> void:
 	if hidden == is_hidden and not forced:
 		return
 	
 	is_hidden = hidden
+	if instant:
+		animation_player.playback_speed = 64
+	else:
+		animation_player.playback_speed = 1
+		
 	if hidden:
-		#self.hide()
 		play_animation("Fade", true)
 	else:
 		#self.show()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/Home/Livingroom_Day.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/backgrounds/Outside/Old_EncoreTitle.png" type="Texture" id=9]
 [ext_resource path="res://assets/backgrounds/School/Old_School.png" type="Texture" id=10]
 [ext_resource path="res://assets/backgrounds/School/School_Hallway_Day.png" type="Texture" id=11]
+[ext_resource path="res://assets/backgrounds/School/Library.jpg" type="Texture" id=12]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -24,7 +25,7 @@ animations = [ {
 "name": "Outside",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 10 ), ExtResource( 11 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "School",
 "speed": 5.0
@@ -67,6 +68,26 @@ size = 26
 outline_size = 2
 outline_color = Color( 0.270588, 0.47451, 0.54902, 1 )
 font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 20
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 18
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 18
+font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=9]
 size = 35
@@ -226,6 +247,67 @@ margin_right = 185.0
 margin_bottom = 705.0
 custom_fonts/font = SubResource( 5 )
 text = "WPM : -"
+
+[node name="StatsMenu" type="Node2D" parent="UI"]
+visible = false
+
+[node name="Background" type="ColorRect" parent="UI/StatsMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.6 )
+
+[node name="TitleLabel" type="Label" parent="UI/StatsMenu"]
+margin_left = 485.0
+margin_top = 157.0
+margin_right = 802.0
+margin_bottom = 196.0
+custom_fonts/font = SubResource( 11 )
+text = "CHAPTER 1 - DONE"
+align = 1
+valign = 1
+
+[node name="CurrentStatsLabel" type="Label" parent="UI/StatsMenu"]
+margin_left = 371.0
+margin_top = 242.0
+margin_right = 588.0
+margin_bottom = 319.0
+custom_fonts/font = SubResource( 12 )
+text = "Current WPM:
+Current Accuracy:"
+align = 1
+valign = 1
+
+[node name="OverallStatsLabel" type="Label" parent="UI/StatsMenu"]
+margin_left = 661.0
+margin_top = 241.0
+margin_right = 902.0
+margin_bottom = 318.0
+custom_fonts/font = SubResource( 13 )
+text = "Overall WPM:
+Overall Accuracy:"
+align = 1
+valign = 1
+
+[node name="LetterDifficultyLabel" type="Label" parent="UI/StatsMenu"]
+margin_left = 465.0
+margin_top = 368.0
+margin_right = 833.0
+margin_bottom = 445.0
+custom_fonts/font = SubResource( 14 )
+text = "Letters that should be practiced: "
+align = 1
+valign = 1
+autowrap = true
+
+[node name="InfoLabel" type="Label" parent="UI/StatsMenu"]
+margin_left = 527.0
+margin_top = 490.0
+margin_right = 771.0
+margin_bottom = 567.0
+custom_fonts/font = SubResource( 15 )
+text = "Press space to continue..."
+align = 1
+valign = 1
 
 [node name="HistoryMenu" type="Node2D" parent="UI"]
 visible = false

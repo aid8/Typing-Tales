@@ -6,6 +6,7 @@ const save_path : String = "user://save.dat"
 #=========Other Variables==========#
 #This is being used in save_data and load_data function
 var user_data : Dictionary = {}
+var current_menu : Node2D
 
 #=========Functions==========#
 func _ready():
@@ -50,9 +51,16 @@ func set_default_user_data() -> void:
 		"Sfx" : 100,
 		"Coins" : 0,
 		"WPM" : {"total_wpm": 0.0, "count" : 0},
-		"Accuracy" : 0.0,
+		"Accuracy" : {"correct_count": 0.0, "wrong_count" : 0},
 		"WordMastery" : {}, #"word" : {"total_accuracy" : x, "count" : x}
 		"LetterMastery" : {}, #"letter" : {"wrong_count" : x, "correct_count" : x}
+		#TESTING
+		#"LetterMastery":{
+		#	"a" : {"wrong_count" : 1, "correct_count" : 9},
+		#	"b" : {"wrong_count" : 7, "correct_count" : 3},
+		#	"c" : {"wrong_count" : 7, "correct_count" : 3},
+		#	"z" : {"wrong_count" : 2, "correct_count" : 8},
+		#},
 		"Items" : [],
 		"SavedProgress" : {},
 		"FinishedScenes" : {},
@@ -91,6 +99,16 @@ func get_word_mastery(word : String) -> Dictionary:
 		dict["accuracy"] = word_mastery[word]["total_accuracy"] / float(count)
 	return dict
 
+#returns a string of letters which the user has difficulty with percentage parameter
+func get_difficulty_letters(percentage : float) -> Array:
+	var letters = []
+	var letter_mastery = user_data["LetterMastery"]
+	for i in letter_mastery:
+		var l = letter_mastery[i]
+		if (l.wrong_count / float(l.wrong_count + l.correct_count)) > percentage:
+			letters.append(i)
+	return letters
+
 func add_letter_mastery(letter : String, correct : bool) -> void:
 	#Dont include unnecessary letters
 	if Data.unnecessary_characters.has(letter):
@@ -101,8 +119,10 @@ func add_letter_mastery(letter : String, correct : bool) -> void:
 	
 	if correct:
 		user_data["LetterMastery"][letter].correct_count += 1
+		user_data["Accuracy"].correct_count += 1
 	else:
 		user_data["LetterMastery"][letter].wrong_count += 1
+		user_data["Accuracy"].wrong_count += 1
 	#print(user_data["LetterMastery"])
 
 func add_overall_wpm(wpm : float):
@@ -115,6 +135,39 @@ func format_word(word : String) -> String:
 		word = word.replace(c,"")
 	word = word.to_lower()
 	return word
+
+#checks if word has unneccessary characters
+func check_if_word_is_valid(word : String) -> bool:
+	for c in Data.unnecessary_characters:
+		if c in word:
+			return false
+	return true
+
+func get_user_stats() -> Dictionary:
+	var dict = {}
+	#ADD WPM
+	if user_data["WPM"].count > 0:
+		dict["WPM"] = user_data["WPM"].total_wpm / float(user_data["WPM"].count)
+	else:
+		dict["WPM"] = 0
+	
+	#ADD ACCURACY
+	if user_data["Accuracy"].correct_count + user_data["Accuracy"].wrong_count > 0:
+		dict["Accuracy"] = user_data["Accuracy"].correct_count / float(user_data["Accuracy"].correct_count + user_data["Accuracy"].wrong_count)
+	else:
+		dict["Accuracy"] = 0
+		
+	#ADD LETTER DIFFICULTIES
+	var difficult_letters = []
+	for l in user_data["LetterMastery"]:
+		var accuracy = user_data["LetterMastery"][l].correct_count / float (user_data["LetterMastery"][l].correct_count + user_data["LetterMastery"][l].wrong_count)
+		print(l, "-", accuracy)
+		if accuracy < Data.LETTER_MASTERY_ACCURACY_BOUND:
+			difficult_letters.append(l)
+	dict["Difficult_Letters"] = difficult_letters
+	
+	#ADD INDIVIDUAL LETTER STATS
+	return dict
 
 func check_first_time() -> bool:
 	var file = File.new()
