@@ -2,7 +2,7 @@
 
 [ext_resource path="res://src/scenes/challenges_menu/ChallengeMenu1.gd" type="Script" id=1]
 [ext_resource path="res://src/objects/challengemenu1/Platform.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/characters/adrian-felix/Casual/Adrian_casual_frown.png" type="Texture" id=3]
+[ext_resource path="res://assets/characters/amy/Casual/Sumi_Casual_Frown.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 20, 20 )
