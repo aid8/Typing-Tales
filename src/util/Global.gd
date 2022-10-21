@@ -47,6 +47,7 @@ func delete_user_data() -> void:
 
 func set_default_user_data() -> void:
 	user_data = {
+		"Name" : "Uta",
 		"Music" : 100,
 		"Sfx" : 100,
 		"Coins" : 0,

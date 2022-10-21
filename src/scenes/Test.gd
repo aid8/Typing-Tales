@@ -35,12 +35,14 @@ const light_blue : Color = Color("#ADD8E6")
 const light_gray : Color = Color("#D3D3D3")
 const light_orange : Color = Color("#FFD580")
 
-var current_scene : String = "Chapter 1"
+var current_scene : String = "Test" #"Chapter 1"
 var current_scene_index: int = 0
 var current_letter_index : int = 0
 var current_location : String = ""
 var wrong_letter_length : int = 0
 var current_dialogue : String = ""
+var current_dialogue_remark : String = ""
+var dialogue_space : bool = false
 var typing_target : String = "dialogue" #dialogue or choice
 var choosing_selection : bool = false
 var chosen_selection : Node2D = null
@@ -59,6 +61,8 @@ var skipped_characters_length : int = 0 #for accurate wpm computation, skipped c
 var skip_dialogue : bool = false
 var total_wpm : Array = [0, 0] #[total_wpm, count]
 var total_accuracy : Array = [0, 0] #[correct_count, wrong_count]
+var chapter_play_time : float = 0
+
 #Scene animation variables
 var shake_strength : float = 0.0
 var shake_decay : float = 0.0
@@ -117,6 +121,10 @@ func _process(delta : float) -> void:
 	if tracing_wpm:
 		total_time += delta
 	handle_scene_animation(delta)
+	
+	#RECHECK/TESTING
+	if not stats_menu.visible:
+		chapter_play_time += delta
 
 func handle_scene_animation(delta : float) -> void:
 	#shake anim
@@ -237,6 +245,8 @@ func update_typebox(type : String, letter : String = '') -> void:
 			current_word_index -= 1
 			check_word_mastery("force_wrong")
 	elif type == "add":
+		if current_letter_index >= current_dialogue.length():
+			return
 		if letter == " " and wrong_letter_length == 0 and current_dialogue[current_letter_index] == " ":
 			check_word_mastery("add")
 			type_box.text = ""
@@ -276,6 +286,8 @@ func check_word_mastery(type : String):
 					total_accuracy[0] += 1
 				else:
 					total_accuracy[1] += 1
+		#Add word mastery
+		Global.add_word_mastery(type_box.text, word_accuracy)
 		
 	elif type == "reset":
 		current_word_index = 0
@@ -311,8 +323,9 @@ func get_current_dialogue() -> void:
 			#Check if word is mastered
 			var formatted_word = Global.format_word(word)
 			var mastery = Global.get_word_mastery(formatted_word)
+			print(formatted_word, mastery)
 			if mastery.size() > 0:
-				if mastery.accuracy >= Data.WORD_MASTERY_ACCURACY_BOUND and mastery.count >= Data.word_mastery_count_bound:
+				if mastery.accuracy >= Data.WORD_MASTERY_ACCURACY_BOUND and mastery.count >= Data.WORD_MASTERY_COUNT_BOUND:
 					mastered_word_indices[starting_tmp] = word.length()
 					mastered_words[formatted_word] = true
 					skipped_characters_length += word.length()
@@ -388,6 +401,12 @@ func get_current_dialogue() -> void:
 	if has_mastered_words:
 		current_letter_index += 1
 	
+	#dialogue remark
+	if dialogue_data.has("dialogue_remark"):
+		current_dialogue_remark = dialogue_data.dialogue_remark
+	else:
+		current_dialogue_remark = ""
+	
 	#Show current dialogue
 	current_dialogue = dialogue_data.dialogue
 	show_colored_dialogue(dialogue)
@@ -461,6 +480,9 @@ func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
 
 #Shows the dialogue on the display with color and alignment
 func show_colored_dialogue(textbox : RichTextLabel, alignment : String = "") -> void:
+	#Replace current_dialogue [name]
+	current_dialogue = current_dialogue.replacen("[name]", Global.user_data["Name"])
+	
 	if skip_dialogue:
 		textbox.parse_bbcode("[color=#" + light_orange.to_html(false) + "]" + current_dialogue + "[/color]")
 		return
@@ -477,7 +499,11 @@ func show_colored_dialogue(textbox : RichTextLabel, alignment : String = "") -> 
 		alignment_start_tag = "[" + alignment + "]"
 		alignment_close_tag = "[/" + alignment + "]"
 	
-	textbox.parse_bbcode(alignment_start_tag + green_text + red_text + white_text + alignment_close_tag)
+	var remark = ""
+	if current_dialogue_remark != "":
+		remark = " [color=#" + light_blue.to_html(false) + "]" + current_dialogue_remark + "[/color]"
+	
+	textbox.parse_bbcode(alignment_start_tag + "\"" + green_text + red_text + white_text + "\"" + alignment_close_tag + remark)
 
 #Gets the words that should be ignored and adds a yellow color and striketrough
 func format_color_paragraph(words : Dictionary, paragraph : String, color : Color) -> String:
@@ -549,6 +575,11 @@ func _unhandled_input(event : InputEvent) -> void:
 		
 		var character_to_type = current_dialogue.substr(current_letter_index, 1)
 		
+		if typed_event.scancode == 32:
+			dialogue_space = true
+		else:
+			dialogue_space = false
+		
 		#Update Typebox
 		if Input.is_action_pressed("ui_backspace"):
 			update_typebox("delete")
@@ -576,6 +607,16 @@ func _unhandled_input(event : InputEvent) -> void:
 			key_typed = character_to_type
 			wrong_letter_length = 0
 			total_time = 0
+			typed_event.scancode = 32
+		
+		#RECHECK THIS (SPACE AFTER DIALOGUE), TESTING?
+		if current_letter_index == current_dialogue.length()-1 and (key_typed == character_to_type and wrong_letter_length <= 0):
+			#key_typed = character_to_type
+			#wrong_letter_length = 0
+			register_wpm()
+		elif current_letter_index >= current_dialogue.length():
+			key_typed = character_to_type
+			wrong_letter_length = 0
 		
 		#Update Dialogue
 		if key_typed == character_to_type and wrong_letter_length <= 0:
@@ -590,15 +631,18 @@ func _unhandled_input(event : InputEvent) -> void:
 			if not mastered_word_indices.has(current_letter_index) or typing_target == "choice":
 				current_letter_index += 1
 			
-			if current_letter_index >= current_dialogue.length():
+			if current_letter_index >= current_dialogue.length() and typed_event.scancode == 32:
 				#Call show_colored_dialouge again to color the last letter
 				if typing_target == "dialogue":
 					show_colored_dialogue(dialogue)
 					
 				#Call word mastery to include last word and register WPM
 				check_word_mastery("add")
-				register_wpm()
+				#register_wpm()
 				update_typebox("reset")
+				
+				#wpm box reset
+				wpm_label.text = "WPM : -"
 				
 				#If the dialogue has choices, switch typing target to choice
 				current_letter_index = 0
@@ -633,6 +677,7 @@ func show_stats_menu():
 	var title_label = stats_menu.get_node("TitleLabel")
 	var cur_stats_label = stats_menu.get_node("CurrentStatsLabel")
 	var overall_stats_label = stats_menu.get_node("OverallStatsLabel")
+	var time_spent_label = stats_menu.get_node("TimeSpentLabel")
 	var letter_diff_label = stats_menu.get_node("LetterDifficultyLabel")
 	
 	var cur_wpm = 0
@@ -646,7 +691,11 @@ func show_stats_menu():
 	title_label.text = current_scene + " - DONE"
 	cur_stats_label.text = "Current WPM: " + String(cur_wpm) + "\nCurrent Accuracy: " + String(cur_accuracy * 100)
 	overall_stats_label.text = "Overall WPM: " + String(overall_stats["WPM"]) + "\nOverall Accuracy: " + String(overall_stats["Accuracy"] * 100)
-	letter_diff_label.text = "Letters that should be practiced: "
+	time_spent_label.text = "Time Spent: " + String(chapter_play_time / 60) + " minutes"
+	letter_diff_label.text = "Keys that should be practiced: "
+	
+	#Reset time spent/RECHECK/TESTING
+	chapter_play_time = 0
 	
 	var diff_letters = overall_stats["Difficult_Letters"]
 	print(diff_letters,"?")

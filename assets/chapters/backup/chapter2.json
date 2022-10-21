@@ -1,0 +1,576 @@
+{
+	"Chapter 2" : [
+		{
+			"character" : "Narrator",
+			"location" : "School_entrance",
+			"dialogue" : "But the same thing happened a few more times. After the swordsmanship class, when Felix and Adrian came out of the training center with towels on their heads, Lucy, who hesitated and approached them, correctly identified Adrian.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "It also happened during a heavy rain, and both Adrian and Felix were wearing raincoats with hoods that covered their heads.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy Keenan was able to tell the Berg twins apart based on something other than hair length.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"outfit" : "Summer",
+			"dialogue" : "Hey, Alec. Do I have any moles on my ears?",
+			"expression" : "Frown",
+			"position" : "LEFT",
+		},
+
+		{
+			"character" : "Alec",
+			"outfit" : "Summer",
+			"dialogue" : "Mole?",
+			"expression" : "Frown_blush",
+			"position" : "RIGHT",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Alec, puzzled at Felix’s outrageous question, willingly checks his ears.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Alec",
+			"dialogue" : "You don’t have any.",
+			"expression" : "Open",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Then, this time, Felix bowed, showing Alec the top of his head.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Alec",
+			"dialogue" : "Hey, what are you doing?",
+			"expression" : "Frown_blush",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Ignoring his bewildered friend, Felix pulled Adrian, who was sitting next to him.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "Look at the location of Adrian's hair whorl and mine. What do you think? Is it different?",
+			"expression" : "Frown",
+			"show_more_characters" : [
+				{
+					"character" : "Adrian",
+					"outfit" : "Summer",
+					"expression" : "Smile",
+					"position" : "MIDDLE",
+				},
+			],
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Alec",
+			"dialogue" : "It's the same.",
+			"expression" : "Open",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "No way. Even the hair whorl's position is the same. Felix looked at his twin brother. This bastard might actually be my doppelganger. It's neither a mole nor a hair whorl. If so, there can only be one explanation",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "...Maybe I'm a little more handsome than Adrian, right?",
+			"expression" : "Open_blush",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Alec was astonished as he looked at Felix, who asked with a face that was far too serious to be a joke.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Alec",
+			"dialogue" : "You two look the same, as if you're looking at the mirror!",
+			"expression" : "Open_blush",
+		},
+
+		{
+			"character" : "Narrator",
+			"transition" : "Curtain",
+			"location" : "School_sunrise",
+			"dialogue" : "Eventually, the semester came to an end without being able to answer any question about Lucy Keenan. The academy was on summer vacation, and Felix, upon his return to the duke's residence, vowed to himself that he would no longer be concerned with frivolous matters.",
+			"skip_dialogue" : true,
+			"remove_all_characters" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"transition" : "Curtain",
+			"location" : "Dorm_livingroom_day",
+			"dialogue" : "He definitely made a resolution. But he kept thinking about it. He kept wondering. What's the difference between us in her eyes?",
+			"show_more_characters" : [
+				{
+					"character" : "Felix",
+					"outfit" : "Casual",
+					"expression" : "Smile",
+					"position" : "MIDDLE",
+				},
+			],
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "It seemed that this useless worry would end only when he found out the difference between himself and Adrian that only Lucy Keenan could see. So, Felix cut his long blond hair the night before leaving the duke’s residence and returned to the academy.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "He stood in front of the mirror and examined himself; he looked remarkably similar to his twin brother. At this level, even Lucy Keenan would have a hard time telling them apart.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"transition" : "Curtain",
+			"location" : "School_classroom1-a_day",
+			"dialogue" : "It had been a week since the semester began. Felix, who had cut off his hair with enthusiasm, was slightly regretting his hasty choice. When Adrian complained, he just joked around and laughed, but now he was starting to get annoyed by people's misunderstandings.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Student 1",
+			"dialogue" : "Adrian!",
+		},
+
+		{
+			"character" : "Felix",
+			"outfit" : "Summer",
+			"dialogue" : "I am Felix.",
+			"expression" : "Frown",
+			"show_character" : ["Felix"],
+		},
+
+		{
+			"character" : "Student 2",
+			"dialogue" : "Adrian-kun!",
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "This is Felix.",
+		},
+
+		{
+			"character" : "Student 3",
+			"dialogue" : "Adrian? No, is it Felix? ...Adrian, right?",
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "It's Felix!",
+			"character_animation" : [{"character" : "Felix", "anim" : "Shake"}],
+		},
+
+		{
+			"character" : "Narrator",
+			"transition" : "Curtain",
+			"location" : "School_hallway",
+			"dialogue" : "Felix, who gave up after being mistaken for an unknown number of times, walked down the hallway avoiding people. He was sick of explaining that he wasn't Adrian.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "As he turned around the corner, he encountered a person walking by with the same face and the same expression as him.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "Adrian.",
+			"expression" : "Frown",
+			"position" : "LEFT",
+			"show_character" : ["Felix"],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "The younger brother that people had been looking for. He also didn't look as good as Felix.",
+			"skip_dialogue" : true,
+			"hide_characters" : true,
+		},
+
+		{
+			"character" : "Adrian",
+			"outfit" : "Summer",
+			"dialogue" : "Hey Felix.",
+			"expression" : "Frown",
+			"position" : "RIGHT",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Before he had a chance to say anything. Felix quickly raised his hands and took a surrender position. He already knew enough of what his brother wanted to say.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "I'll grow out my hair. And I won't cut it again.",
+			"expression" : "Frown",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Adrian",
+			"dialogue" : "That's the wisest thing you've said all year.",
+			"expression" : "Open",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Adrian leaned against the wall, a helpless smile on his face. There was a dark shadow on his handsome face. The graduating class, the student council president, the library manager. His younger brother, who juggled a slew of responsibilities, looked exhausted in Felix’s eyes.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "Are you okay?",
+			"show_character" : ["Felix"],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "At Felix’s question, Adrian slowly raised his head. He smiled when he saw his brother’s worried face. .",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Adrian",
+			"dialogue" : "Of course. I just didn't get enough sleep.",
+			"expression" : "Frown",
+			"show_character" : ["Adrian"],
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "You foolish kid. If it’s hard, just be honest with me.",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
+		},
+		
+		{
+			"character" : "Narrator",
+			"dialogue" : "Adrian had a long-standing habit of pretending to be fine even when things were difficult, hiding and struggling alone. Felix felt sorry for his younger brother and was frustrated at the same time.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "Can I help you with anything? What is this?",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Felix snatched the paper Adrian was holding. The titles of books were neatly arranged over two pages.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "This is a list of books to be brought in this semester. I have to take it to the library.",
+			"expression" : "Open",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "The operation of the Xenomium Academy library was managed with the librarian, Mrs. Erin, from the library department. With that, Felix's eyes lit up at a thought that suddenly popped into his head.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "I'll take care of this. Why don't you go into an empty classroom and take a nap for a moment?",
+			"expression" : "Smile",
+			"character_animation" : [{"character" : "Felix", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Not noticing that his twin brother was planning something, Adrian smiled and nodded his head.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Adrian",
+			"dialogue" : "Thanks.",
+			"expression" : "Smile",
+			"character_animation" : [{"character" : "Adrian", "anim" : "QuickUpDown"}],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Adrian immediately left the hallway in search of an empty classroom. Felix also took a step towards the library.",
+			"hide_all_characters" : true,
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "This will be the last. He thought with a firm determination on his face. He decided to face Lucy Keenan one last time. When she ran into Felix on campus a few days ago, she ran away in a hurry, as if she recognized him.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "But for a brief moment, she had mistaken him for Adrian. So, if his acting is perfect, he might be able to fool Lucy Keenan.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"transition" : "Curtain",
+			"location" : "School_library",
+			"dialogue" : "When Felix arrived at the library, he stood in front of the hallway mirror and fixed his appearance. He looked like a creepy version of Adrian with his shirt neatly buttoned all the way up, he was fed up for a moment.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Felix entered the library, loudly clearing his throat. Mrs. Erin, the librarian, was nowhere to be seen. A female student was busy pulling out books near the bookshelf and stacking them on the floor one by one.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "It was Lucy Keenan. Felix approached cautiously, but she was so preoccupied with her work that she didn't notice him at all. The hem of her school uniform skirt was covered in white dust as she knelt down and pulled out a book from the bottom of her bookshelf. Felix cleared his throat once more and smiled as he spoke to her.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : "Hi.",
+			"expression" : "Smile",
+			"show_character" : ["Felix"],
+			"position" : "LEFT",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy glanced back when she heard his voice from behind her, but soon returned her attention back to the bookshelf.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"outfit" : "Summer",
+			"dialogue" : "Oh, sunbae. I can't do anything about sunbeam is absolutely no room for.",
+			"expression" : "Closed_frown_blush",
+			"position" : "RIGHT",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "She said without even looking at Felix’s face. She looked extremely busy, working hard in front of the bookshelf.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy pulled out the last book on the bookshelf and placed it on top of the pile of books that had already been stacked high. As the pillar of books shook dangerously, she hurriedly corrected the center.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "Phew! If I knew this would happen, I should have asked the school to have more bookshelves. Even if I write a request now, it won;t come in right away.",
+			"expression" : "Frown",
+			"position" : "MIDDLE",
+			"show_character" : ["Lucy"],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Felix's eyes widened as he saw Lucy pouring out her words as she spoke softly. It was the first time he had seen her talk so much.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy snatched the paper from Felix’s grasp. Then she went down the list with her finger.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "It is a book list?. Volume 40... ... I'm going to have to throw out this old book. It was so old that a few pieces were torn ...? Why is this coming in again? There's no one borrowing it.",
+			"expression" : "Closed_frown_blush",
+			"show_character" : ["Lucy"],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "The sight of her pouting her lips as if dissatisfied seemed strange to Felix. He had never imagined that she could make so many different expressions. This is because she always ran away with a stiff expression on her face whenever she faced him.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy, after checking the lists, placed the papers on the bookshelf.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "First of all, we'd better move these books to the library.",
+			"expression" : "Closed_frown_blush",
+			"show_character" : ["Lucy"],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy said and lifted the pile of books closest to her and approached Felix. Then she carefully handed them over to his arms, as if she was hugging a baby. Felix was about to accept the books when Lucy said,",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "Oh, but come to think of it. Sunbae, you have a lot of things to do, right?",
+			"expression" : "Open_blush",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy who stood close with a pile of books in between them, smelled of fresh grass mixed with the scent of bitter herbs.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "I will take care of this. I'll move it together with Colin, it'll be over in no time.",
+			"expression" : "Closed_smile_blush",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy smiled and took the books away again.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Felix's body stiffened and he stood still. Lucy tilted her head and looked at him.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "Sunbae, are you sick...",
+			"expression" : "Open",
+			"show_character" : ["Lucy"],
+		},
+		
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy stopped talking mid-sentence. Her eyes widened and her lips slowly opened.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "Ah...",
+			"expression" : "Open_blush",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "As if she realized something, Lucy's complexion quickly turned pale. *thump*. The books she was holding fell to the floor.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Lucy",
+			"dialogue" : "I, I'm sorry! I thought it was Adrian-sunbae...",
+			"expression" : "Open_blush",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Lucy exclaimed.",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Felix",
+			"dialogue" : " Ah, I...",
+			"expression" : "Open_blush",
+			"show_character" : ["Felix"],
+			"position" : "MIDDLE",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : " Felix tried to say it was okay",
+			"skip_dialogue" : true,
+			"hide_all_characters" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "At that time, Lucy, who was stepping back, touched the books she had piled high, and the top collapsed. Lucy, now frustrated, hurriedly knelt down in front of him and began to organize her books.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "For a moment, Felix walked over to her side and tried to help, but then stopped. Lucy's expression, as if she had seen a ghost. flashed through his mind as soon as she realized he was not Adrian.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "She didn't seem to want his help. Eventually, Felix turned around and left the library. He walked down the hallway as quickly as he could, nervously running his fingers through his hair.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Why are you so uncomfortable? He couldn't understand Lucy Keenan, who laughed and chatted with Adrian, but stiffened as if she had encountered a monster when she faced him.",
+			"skip_dialogue" : true,
+		},
+		
+		{
+			"transition" : "Curtain",
+			"goto_chapter" : ["Chapter 3", 0],
+		},
+	],
+}
