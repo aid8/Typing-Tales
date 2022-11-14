@@ -164,7 +164,7 @@ script = ExtResource( 13 )
 position = Vector2( -102, -531 )
 scale = Vector2( 0.375, 0.375 )
 frames = SubResource( 1 )
-animation = "Laurie_Casual"
+animation = "Meg_Casual"
 centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

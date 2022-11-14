@@ -14,7 +14,23 @@ func _ready():
 
 #Insert here the scenes you want to add and to switch
 func switch_scene(scene) -> void:
-	pass
+	var scene_path
+	match scene:	
+		"StoryMode":
+			scene_path = "Test"
+		"MainMenu":
+			scene_path = "MainMenu"
+		"Challenge1":
+			scene_path = "challenges_menu/ChallengeMenu1"
+		"Challenge2":
+			scene_path = "challenges_menu/ChallengeMenu2"
+		"Challenge3":
+			scene_path = "challenges_menu/ChallengeMenu3"
+		"Challenge4":
+			scene_path = "challenges_menu/ChallengeMenu4"
+		"Challenge5":
+			scene_path = "challenges_menu/ChallengeMenu5"
+	SceneTransition.switch_scene("res://src/scenes/" + scene_path + ".tscn");
 
 func save_user_data() -> void:
 	var file = File.new()
@@ -66,6 +82,9 @@ func set_default_user_data() -> void:
 		"SavedProgress" : {},
 		"FinishedScenes" : {},
 	}
+
+func change_name(name : String) -> void:
+	user_data["Name"] = name
 
 func add_finished_scenes(scene : String) -> void:
 	user_data["FinishedScenes"][scene] = true

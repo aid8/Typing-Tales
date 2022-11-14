@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/objects/challengemenu3/Tile.gd" type="Script" id=1]
+
+[node name="Tile" type="Node2D"]
+script = ExtResource( 1 )
+tile_red = Color( 0.768627, 0.419608, 0.419608, 1 )
+tile_blue = Color( 0.105882, 0.4, 0.611765, 1 )
+tile_green = Color( 0.376471, 0.654902, 0.376471, 1 )
+tile_gray = Color( 0.309804, 0.309804, 0.309804, 1 )
+tile_start_highlight = Color( 0, 0, 0, 0.313726 )
+tile_end_highlight = Color( 1, 1, 1, 0.243137 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 125.0
+margin_bottom = 125.0
+color = Color( 0.105882, 0.4, 0.611765, 1 )
+
+[node name="Highlight" type="ColorRect" parent="."]
+visible = false
+margin_right = 125.0
+margin_bottom = 125.0
+color = Color( 1, 1, 1, 0.431373 )
+
+[node name="TileText" type="RichTextLabel" parent="."]
+margin_left = 1.0
+margin_top = 56.0
+margin_right = 126.0
+margin_bottom = 74.0
+text = "123456789012345"
+
+[node name="RefreshTileTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="RefreshTileTimer" to="." method="_on_Timer_timeout"]
