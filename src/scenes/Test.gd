@@ -1,8 +1,10 @@
 extends Node2D
 #==========TODO==========#
+#Store Challenge menu stats
 #Starting Chapter Anim
 #Stats Menu fade
 #Add to Global current stats after finishing chapter
+#Recheck add_finished_scenes (after branching)
 
 #==========Testing Stuffs==========#
 onready var testbox = $TestBox
@@ -35,7 +37,7 @@ const light_blue : Color = Color("#ADD8E6")
 const light_gray : Color = Color("#D3D3D3")
 const light_orange : Color = Color("#FFD580")
 
-var current_scene : String = "Test" #"Chapter 1"
+var current_scene : String = "Chapter 1" #"Test"
 var current_scene_index: int = 0
 var current_letter_index : int = 0
 var current_location : String = ""
@@ -90,9 +92,12 @@ onready var timer_pop_up : AcceptDialog = $UI/TimerPopUp
 onready var timer_node : Node2D = $UI/TimerNode
 onready var timer_label : Label = $UI/TimerNode/TimerLabel
 onready var wpm_label : Label = $UI/WPMLabel
+onready var space_label : Label = $UI/SpaceLabel
 onready var history_menu : Node2D = $UI/HistoryMenu
 onready var history_text : RichTextLabel = $UI/HistoryMenu/HistoryText
 onready var stats_menu : Node2D = $UI/StatsMenu
+onready var name_menu : Node2D = $UI/NameMenu
+onready var name_edit : LineEdit = $UI/NameMenu/NameEdit
 
 #==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
@@ -109,6 +114,7 @@ func _ready() -> void:
 		testbox.get_cancel().connect("pressed", self, "cancelled")
 		testbox.popup()
 		return
+	name_menu.show() #get name for the first time
 	get_current_dialogue()
 	history_text.set_scroll_follow(true)
 	SceneTransition.connect("transition_finished", self, "on_scene_transition_finished")
@@ -208,6 +214,7 @@ func apply_scene_animation(values : Dictionary) -> void:
 #Incharge of displaying selections
 func show_selection(selections : Array) -> void:
 	choosing_selection = true
+	skip_dialogue = false
 	for i in range (0, selections.size()):
 		var cs = choice_selection.instance()
 		cs.next_scene_name = selections[i][1]
@@ -342,6 +349,7 @@ func get_current_dialogue() -> void:
 	#Check dialogue options
 	if dialogue_data.has("skip_dialogue"):
 		skip_dialogue = true
+		toggle_space_label(true)
 	else:
 		skip_dialogue = false
 	if dialogue_data.has("location"):
@@ -441,6 +449,12 @@ func register_wpm() -> void:
 	total_time = 0
 	skipped_characters_length = 0
 
+func toggle_space_label(b : bool) -> void:
+	if b:
+		space_label.show()
+	else:
+		space_label.hide()
+
 #adds history text
 func add_history_text(type : String, name : String, dialogue : String) -> void:
 	var text : String = ""
@@ -482,9 +496,13 @@ func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
 func show_colored_dialogue(textbox : RichTextLabel, alignment : String = "") -> void:
 	#Replace current_dialogue [name]
 	current_dialogue = current_dialogue.replacen("[name]", Global.user_data["Name"])
+	current_dialogue_remark = current_dialogue_remark.replacen("[name]", Global.user_data["Name"])
 	
 	if skip_dialogue:
-		textbox.parse_bbcode("[color=#" + light_orange.to_html(false) + "]" + current_dialogue + "[/color]")
+		var remark = ""
+		if current_dialogue_remark != "":
+			remark = " [color=#" + light_blue.to_html(false) + "]" + current_dialogue_remark + "[/color]"
+		textbox.parse_bbcode("[color=#" + light_orange.to_html(false) + "]" + current_dialogue + "[/color]" + remark)
 		return
 		
 	var green_text = format_color_paragraph(mastered_words, current_dialogue.substr(0, current_letter_index), green)
@@ -563,7 +581,7 @@ func _unhandled_input(event : InputEvent) -> void:
 		if choosing_selection:
 			var has_chosen_selection = false
 			for selection in choice_selections:
-				var selection_text = selection.choice_text.text
+				var selection_text = selection.choice_label_text
 				if selection_text.substr(0, 1) == key_typed:
 					chosen_selection = selection
 					chosen_selection.set_background("active")
@@ -614,9 +632,13 @@ func _unhandled_input(event : InputEvent) -> void:
 			#key_typed = character_to_type
 			#wrong_letter_length = 0
 			register_wpm()
+			toggle_space_label(true)
+			if has_choice_timer:
+				set_selection_timer("stop")
 		elif current_letter_index >= current_dialogue.length():
 			key_typed = character_to_type
 			wrong_letter_length = 0
+			toggle_space_label(false)
 		
 		#Update Dialogue
 		if key_typed == character_to_type and wrong_letter_length <= 0:
@@ -658,7 +680,25 @@ func _unhandled_input(event : InputEvent) -> void:
 						set_selection_timer("stop")
 					add_history_text(typing_target, character_name.text, current_dialogue)
 					Global.add_finished_scenes(current_scene)
-					set_next_scene(chosen_selection.next_scene_name, chosen_selection.next_scene_index)
+					
+					#If same scene, do not reset, change index only and run ncessessary functions
+					if chosen_selection.next_scene_name == current_scene:
+						current_scene_index = chosen_selection.next_scene_index
+						update_typebox("reset")
+						typing_target = "dialogue"
+						get_current_dialogue()
+						#Remove choice selections
+						for selection in choice_selections:
+							selection.queue_free()
+						choice_selections = []
+						ignore_typing = false
+						has_choice_timer = false
+						chosen_selection = null
+						choosing_selection = false
+						
+					else:
+						set_next_scene(chosen_selection.next_scene_name, chosen_selection.next_scene_index)
+						
 				elif typing_target == "dialogue":
 					add_history_text(typing_target, character_name.text, current_dialogue)
 					set_next_dialogue()
@@ -671,6 +711,7 @@ func _unhandled_input(event : InputEvent) -> void:
 			show_colored_dialogue(dialogue)
 		elif typing_target == "choice":
 			if chosen_selection != null:
+				current_dialogue_remark = ""
 				show_colored_dialogue(chosen_selection.choice_text, "center")
 
 func show_stats_menu():
@@ -748,3 +789,11 @@ func _on_HistoryButton_pressed():
 
 func _on_HideHistoryButton_pressed():
 	history_menu.hide()
+
+func _on_NameChangeButton_pressed():
+	Global.change_name(name_edit.text)
+	name_menu.hide()
+
+#Testing
+func _on_TestButton2_pressed():
+	Global.switch_scene("MainMenu")

@@ -1,7 +1,7 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=44 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
-[ext_resource path="res://assets/backgrounds/Home/Livingroom_Day.png" type="Texture" id=2]
+[ext_resource path="res://assets/backgrounds/Home/fireplace2.png" type="Texture" id=2]
 [ext_resource path="res://assets/backgrounds/School/Classroom_Day.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/BarlowCondensed-SemiBold.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://assets/fonts/BarlowCondensed-SemiBoldItalic.ttf" type="DynamicFontData" id=5]
@@ -12,15 +12,34 @@
 [ext_resource path="res://assets/backgrounds/School/Old_School.png" type="Texture" id=10]
 [ext_resource path="res://assets/backgrounds/School/School_Hallway_Day.png" type="Texture" id=11]
 [ext_resource path="res://assets/backgrounds/School/Library.jpg" type="Texture" id=12]
+[ext_resource path="res://assets/backgrounds/Home/fireplace.png" type="Texture" id=13]
+[ext_resource path="res://assets/backgrounds/Home/attic.png" type="Texture" id=14]
+[ext_resource path="res://assets/backgrounds/Home/bedroom.png" type="Texture" id=15]
+[ext_resource path="res://assets/backgrounds/Home/garretstairs1.png" type="Texture" id=16]
+[ext_resource path="res://assets/backgrounds/Home/garretstairs.png" type="Texture" id=17]
+[ext_resource path="res://assets/backgrounds/Home/kitchen.png" type="Texture" id=18]
+[ext_resource path="res://assets/backgrounds/Home/lauriehome.png" type="Texture" id=19]
+[ext_resource path="res://assets/backgrounds/Home/grandpalaurencestudyroom.png" type="Texture" id=20]
+[ext_resource path="res://assets/backgrounds/Home/hometooutside.png" type="Texture" id=21]
+[ext_resource path="res://assets/backgrounds/Home/laurencelivingroom.png" type="Texture" id=22]
+[ext_resource path="res://assets/backgrounds/Outside/Old_Street.png" type="Texture" id=23]
+[ext_resource path="res://assets/backgrounds/Outside/Old_FestivalC.png" type="Texture" id=24]
+[ext_resource path="res://assets/backgrounds/Home/dining_room.png" type="Texture" id=25]
+[ext_resource path="res://assets/backgrounds/Outside/slum.jpg" type="Texture" id=26]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 2 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 21 ), ExtResource( 18 ), ExtResource( 25 ) ],
 "loop": true,
 "name": "Home",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 22 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "LaurenceHome",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 9 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ) ],
 "loop": true,
 "name": "Outside",
 "speed": 5.0
@@ -46,11 +65,13 @@ animations = [ {
 
 [sub_resource type="DynamicFont" id=4]
 size = 35
+outline_size = 2
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 30
+size = 29
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -67,6 +88,13 @@ font_data = ExtResource( 4 )
 size = 26
 outline_size = 2
 outline_color = Color( 0.270588, 0.47451, 0.54902, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 18
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+use_filter = true
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=11]
@@ -103,6 +131,12 @@ font_data = ExtResource( 4 )
 size = 30
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=17]
+size = 30
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
 
 [node name="Test" type="Node2D"]
 script = ExtResource( 1 )
@@ -151,16 +185,16 @@ frames = SubResource( 7 )
 margin_left = 310.0
 margin_top = 460.0
 margin_right = 536.0
-margin_bottom = 499.0
+margin_bottom = 507.0
 custom_fonts/normal_font = SubResource( 4 )
 text = "Name"
 scroll_active = false
 
 [node name="Dialogue" type="RichTextLabel" parent="UI"]
 margin_left = 259.0
-margin_top = 540.0
+margin_top = 538.0
 margin_right = 1036.0
-margin_bottom = 637.0
+margin_bottom = 648.0
 custom_fonts/normal_font = SubResource( 2 )
 bbcode_enabled = true
 bbcode_text = "Dialogue"
@@ -234,6 +268,13 @@ focus_mode = 0
 enabled_focus_mode = 0
 text = "GO TO START"
 
+[node name="TestButton2" type="Button" parent="UI"]
+margin_left = 1160.0
+margin_top = 93.0
+margin_right = 1257.0
+margin_bottom = 122.0
+text = "MAIN MENU"
+
 [node name="TimerPopUp" type="AcceptDialog" parent="UI"]
 margin_left = 520.0
 margin_top = 341.0
@@ -248,6 +289,17 @@ margin_right = 185.0
 margin_bottom = 705.0
 custom_fonts/font = SubResource( 5 )
 text = "WPM : -"
+
+[node name="SpaceLabel" type="Label" parent="UI"]
+visible = false
+margin_left = 1014.0
+margin_top = 673.0
+margin_right = 1262.0
+margin_bottom = 705.0
+custom_fonts/font = SubResource( 16 )
+text = "Press Space to Continue  . . ."
+align = 2
+valign = 1
 
 [node name="StatsMenu" type="Node2D" parent="UI"]
 visible = false
@@ -380,6 +432,42 @@ text = "10"
 align = 1
 valign = 1
 
+[node name="NameMenu" type="Node2D" parent="UI"]
+visible = false
+
+[node name="Background" type="ColorRect" parent="UI/NameMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.6 )
+
+[node name="TitleLabel" type="Label" parent="UI/NameMenu"]
+margin_left = 483.0
+margin_top = 310.0
+margin_right = 800.0
+margin_bottom = 349.0
+custom_fonts/font = SubResource( 11 )
+text = "WHAT IS YOUR NAME?"
+align = 1
+valign = 1
+
+[node name="NameEdit" type="LineEdit" parent="UI/NameMenu"]
+margin_left = 521.0
+margin_top = 367.0
+margin_right = 764.0
+margin_bottom = 413.0
+custom_fonts/font = SubResource( 17 )
+text = "Jo"
+align = 1
+max_length = 10
+caret_blink = true
+
+[node name="NameChangeButton" type="Button" parent="UI/NameMenu"]
+margin_left = 594.0
+margin_top = 438.0
+margin_right = 688.0
+margin_bottom = 471.0
+text = "CONTINUE"
+
 [node name="TestBox" type="ConfirmationDialog" parent="."]
 margin_left = 495.0
 margin_top = 316.0
@@ -395,7 +483,9 @@ dialog_autowrap = true
 [connection signal="pressed" from="UI/LoadButton" to="." method="_on_LoadButton_pressed"]
 [connection signal="pressed" from="UI/ClearButton" to="." method="_on_ClearButton_pressed"]
 [connection signal="pressed" from="UI/TestBtn" to="." method="_on_TestBtn_pressed"]
+[connection signal="pressed" from="UI/TestButton2" to="." method="_on_TestButton2_pressed"]
 [connection signal="confirmed" from="UI/TimerPopUp" to="." method="_on_TimerPopUp_confirmed"]
 [connection signal="pressed" from="UI/HistoryMenu/HideHistoryButton" to="." method="_on_HideHistoryButton_pressed"]
+[connection signal="pressed" from="UI/NameMenu/NameChangeButton" to="." method="_on_NameChangeButton_pressed"]
 [connection signal="confirmed" from="TestBox" to="." method="_on_TestBox_confirmed"]
 [connection signal="timeout" from="ChoiceTimer" to="." method="_on_ChoiceTimer_timeout"]

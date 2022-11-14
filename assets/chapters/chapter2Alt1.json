@@ -1,0 +1,102 @@
+{
+	"Chapter 2 Alt 1" : [
+		{
+			"character" : "You",
+			"location" : "",
+			"dialogue" : "But we haven't had any breakfast yet!",
+			"dialogue_remark" : "you exclaimed with a growling tummy.",
+			"skip_dialogue" : true,
+		},
+	   
+		{
+	        "character" : "Beth",
+	        "outfit" : "Casual",
+	        "expression" : "Frown",
+	        "position" : "LEFT",
+	        "dialogue" : "Oh, how cruel can you be?",
+	        "dialogue_remark" : "Beth asked in disbelief.",
+	    },
+
+	    {
+	        "character" : "Amy",
+	        "outfit" : "Casual",
+	        "expression" : "Frown",
+	        "position" : "MIDDLE",
+	        "dialogue" : "Sometimes, [name] is too much,",
+	        "dialogue_remark" : "Amy added.",
+	    },
+
+	    {
+			"character" : "Narrator",
+			"dialogue" : "Meg was already standing up, unsure what to do for this might lead to an unnecessary fight.",
+			"show_more_characters" : [
+	            {
+	                "character" : "Meg",
+	                "outfit" : "Casual",
+	                "expression" : "Open",
+	                "position" : "RIGHT",
+	            },
+	        ],
+			"skip_dialogue" : true,
+		},
+
+	    {
+			"character" : "Mrs. March",
+			"dialogue" : "You're better than this,",
+	        "dialogue_remark" : "Mrs. March said, dissatisfied with her daughter's response.",
+		},
+
+	    {
+			"character" : "Mrs. March",
+			"dialogue" : "This isn't what your father wanted you ladies to turn up to be.",
+		},
+
+	    {
+			"character" : "Beth",
+			"dialogue" : "I thought you wanted to try being a little woman, [name]. At this point, you are not simply boyish, but madly selfish,",
+	        "dialogue_remark" : "Beth cried.",
+		},
+
+	    {
+			"character" : "Mrs. March",
+			"dialogue" : "Tell us you didn't mean it, my dear! A poor family over there are cold and starving,",
+	        "dialogue_remark" : "Mrs. March attempted to let [name] explain herself.",
+		},
+
+	    {
+			"character" : "Narrator",
+			"dialogue" : "[name] was too stunned and shaken to speak. She looked down and away from them. 'How could it be my immediate response to some people in need of help?",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Similar thoughts ran through her mind-questioning her morals and dignity.",
+			"skip_dialogue" : true,
+		},
+
+	    {
+			"character" : "You",
+			"dialogue" : "I know. But maybe it's me! I'm the problem, it's me,",
+	        "dialogue_remark" : "you replied, almost into tears.",
+		},
+
+	    {
+			"character" : "Narrator",
+			"dialogue" : "Without hearing anymore of their responses, [name] immediately staggered and ran outside the house ashamed of herself.",
+			"skip_dialogue" : true,
+		},
+
+	    {
+			"character" : "Narrator",
+			"dialogue" : "The rest were ready to follow, and the finding [name] began. It was still early, but the street was already busy. Cars and people aplenty. Not even a minute after,",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "crashing sounds were heard just on the other corner. When the family arrived, people already began crowding the accident and a mixture of shock and loud cries echoed.",
+			"skip_dialogue" : true,
+		},
+	],
+}
