@@ -25,6 +25,7 @@ A senior thesis project to help users enhance their typing skills
 #### Outside:
 - Festival
 - Convenience_Store_Outside
+- Convenience_Store_Inside
 - Ball
 - Slums
 - Street_Day
