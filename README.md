@@ -33,3 +33,5 @@ A senior thesis project to help users enhance their typing skills
 - Street_Night
 - Street_Rain
 - Street_Stars
+- Frozen_Lake
+- Theme_Park_Day
