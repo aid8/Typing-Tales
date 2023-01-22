@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/Home/fireplace2.png" type="Texture" id=2]
@@ -26,6 +26,24 @@
 [ext_resource path="res://assets/backgrounds/Outside/Old_FestivalC.png" type="Texture" id=24]
 [ext_resource path="res://assets/backgrounds/Home/dining_room.png" type="Texture" id=25]
 [ext_resource path="res://assets/backgrounds/Outside/slum.jpg" type="Texture" id=26]
+[ext_resource path="res://assets/fonts/BubbleRainbow-VGdn0.ttf" type="DynamicFontData" id=27]
+[ext_resource path="res://assets/tutorial/Tutorial0004.png" type="Texture" id=28]
+[ext_resource path="res://assets/tutorial/Tutorial0005.png" type="Texture" id=29]
+[ext_resource path="res://assets/tutorial/Tutorial0002.png" type="Texture" id=30]
+[ext_resource path="res://assets/tutorial/Tutorial0003.png" type="Texture" id=31]
+[ext_resource path="res://assets/tutorial/Tutorial0001.png" type="Texture" id=32]
+[ext_resource path="res://assets/tutorial/Tutorial0006.png" type="Texture" id=33]
+[ext_resource path="res://assets/tutorial/Tutorial0007.png" type="Texture" id=34]
+[ext_resource path="res://assets/backgrounds/Outside/Street/Street_Summer_Stars.png" type="Texture" id=35]
+[ext_resource path="res://assets/backgrounds/Outside/Piano_Room.jpg" type="Texture" id=36]
+[ext_resource path="res://assets/backgrounds/Outside/Street/Street_Summer_Evening.png" type="Texture" id=37]
+[ext_resource path="res://assets/backgrounds/Outside/Street/Street_Summer_Rain.png" type="Texture" id=38]
+[ext_resource path="res://assets/backgrounds/Outside/Street/Street_Summer_Night.png" type="Texture" id=39]
+[ext_resource path="res://assets/backgrounds/Outside/Street/Street_Summer_Day.png" type="Texture" id=40]
+[ext_resource path="res://assets/backgrounds/Outside/Convenience_Store_Inside.jpg" type="Texture" id=41]
+[ext_resource path="res://assets/backgrounds/Outside/Ballroom.jpg" type="Texture" id=42]
+[ext_resource path="res://assets/backgrounds/Outside/Frozen_Lake.jpg" type="Texture" id=43]
+[ext_resource path="res://assets/backgrounds/Outside/Theme_Park_Day.png" type="Texture" id=44]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -39,12 +57,12 @@ animations = [ {
 "name": "LaurenceHome",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 40 ), ExtResource( 37 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 35 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
 "loop": true,
 "name": "Outside",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 3 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 36 ) ],
 "loop": true,
 "name": "School",
 "speed": 5.0
@@ -98,23 +116,33 @@ use_filter = true
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=11]
-size = 32
+size = 45
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=12]
-size = 20
+size = 25
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=13]
-size = 20
+size = 25
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=14]
-size = 18
+size = 22
+outline_size = 2
+outline_color = Color( 0.305882, 0.490196, 0.266667, 1 )
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=15]
-size = 18
+size = 20
+outline_size = 2
+outline_color = Color( 0.00392157, 0.00392157, 0.00392157, 1 )
 font_data = ExtResource( 5 )
 
 [sub_resource type="DynamicFont" id=9]
@@ -137,6 +165,31 @@ size = 30
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=18]
+size = 50
+outline_size = 2
+outline_color = Color( 0.376471, 0.329412, 0.380392, 1 )
+font_data = ExtResource( 27 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 4 )
+
+[sub_resource type="DynamicFont" id=20]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
+
+[sub_resource type="SpriteFrames" id=21]
+animations = [ {
+"frames": [ ExtResource( 32 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="Test" type="Node2D"]
 script = ExtResource( 1 )
@@ -251,6 +304,7 @@ align = 1
 valign = 1
 
 [node name="ClearButton" type="Button" parent="UI"]
+visible = false
 margin_left = 1159.0
 margin_top = 56.0
 margin_right = 1255.0
@@ -260,6 +314,7 @@ enabled_focus_mode = 0
 text = "CLEAR"
 
 [node name="TestBtn" type="Button" parent="UI"]
+visible = false
 margin_left = 1159.0
 margin_top = 21.0
 margin_right = 1256.0
@@ -269,6 +324,7 @@ enabled_focus_mode = 0
 text = "GO TO START"
 
 [node name="TestButton2" type="Button" parent="UI"]
+visible = false
 margin_left = 1160.0
 margin_top = 93.0
 margin_right = 1257.0
@@ -281,6 +337,14 @@ margin_top = 341.0
 margin_right = 777.0
 margin_bottom = 438.0
 dialog_text = "You are slow! Type faster!"
+
+[node name="SaveConfirmationPopUp" type="ConfirmationDialog" parent="UI"]
+margin_left = 536.0
+margin_top = 312.0
+margin_right = 768.0
+margin_bottom = 384.0
+window_title = "Are you sure about that?"
+dialog_text = "This will overwrite the saved file!"
 
 [node name="WPMLabel" type="Label" parent="UI"]
 margin_left = 30.0
@@ -310,17 +374,17 @@ margin_bottom = 720.0
 color = Color( 0, 0, 0, 0.6 )
 
 [node name="TitleLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 484.0
-margin_top = 161.0
-margin_right = 801.0
-margin_bottom = 200.0
+margin_left = 2.0
+margin_top = 138.0
+margin_right = 1278.0
+margin_bottom = 192.0
 custom_fonts/font = SubResource( 11 )
 text = "CHAPTER 1 - DONE"
 align = 1
 valign = 1
 
 [node name="CurrentStatsLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 371.0
+margin_left = 303.0
 margin_top = 242.0
 margin_right = 588.0
 margin_bottom = 319.0
@@ -331,10 +395,10 @@ align = 1
 valign = 1
 
 [node name="OverallStatsLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 661.0
-margin_top = 241.0
-margin_right = 902.0
-margin_bottom = 318.0
+margin_left = 729.0
+margin_top = 240.0
+margin_right = 994.0
+margin_bottom = 317.0
 custom_fonts/font = SubResource( 13 )
 text = "Overall WPM:
 Overall Accuracy:"
@@ -342,20 +406,19 @@ align = 1
 valign = 1
 
 [node name="TimeSpentLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 487.0
-margin_top = 350.0
-margin_right = 793.0
-margin_bottom = 383.0
+margin_left = 5.0
+margin_top = 371.0
+margin_right = 1276.0
+margin_bottom = 404.0
 custom_fonts/font = SubResource( 13 )
 text = "Time Spent:"
 align = 1
 valign = 1
 
 [node name="LetterDifficultyLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 465.0
-margin_top = 377.0
-margin_right = 833.0
-margin_bottom = 454.0
+margin_top = 398.0
+margin_right = 1270.0
+margin_bottom = 475.0
 custom_fonts/font = SubResource( 14 )
 text = "Keys that should be practiced: "
 align = 1
@@ -363,10 +426,10 @@ valign = 1
 autowrap = true
 
 [node name="InfoLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 527.0
-margin_top = 490.0
-margin_right = 771.0
-margin_bottom = 567.0
+margin_left = 518.0
+margin_top = 586.0
+margin_right = 762.0
+margin_bottom = 663.0
 custom_fonts/font = SubResource( 15 )
 text = "Press space to continue..."
 align = 1
@@ -397,16 +460,15 @@ custom_fonts/normal_font = SubResource( 10 )
 bbcode_enabled = true
 
 [node name="HideHistoryButton" type="TextureButton" parent="UI/HistoryMenu"]
-margin_left = 1126.0
-margin_top = 668.0
-margin_right = 1180.0
-margin_bottom = 701.0
+margin_left = 1080.0
+margin_top = 672.0
+margin_right = 1134.0
+margin_bottom = 705.0
 
 [node name="Label" type="Label" parent="UI/HistoryMenu/HideHistoryButton"]
-margin_left = 1.0
-margin_top = 1.0
-margin_right = 54.0
-margin_bottom = 33.0
+margin_left = 4.0
+margin_right = 57.0
+margin_bottom = 32.0
 custom_fonts/font = SubResource( 8 )
 text = "EXIT"
 align = 1
@@ -440,11 +502,17 @@ margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 0.6 )
 
+[node name="TextBG" type="ColorRect" parent="UI/NameMenu"]
+margin_top = 272.0
+margin_right = 1280.0
+margin_bottom = 344.0
+color = Color( 0, 0, 0, 0.603922 )
+
 [node name="TitleLabel" type="Label" parent="UI/NameMenu"]
-margin_left = 483.0
-margin_top = 310.0
-margin_right = 800.0
-margin_bottom = 349.0
+margin_left = 472.0
+margin_top = 280.0
+margin_right = 822.0
+margin_bottom = 334.0
 custom_fonts/font = SubResource( 11 )
 text = "WHAT IS YOUR NAME?"
 align = 1
@@ -461,12 +529,373 @@ align = 1
 max_length = 10
 caret_blink = true
 
-[node name="NameChangeButton" type="Button" parent="UI/NameMenu"]
-margin_left = 594.0
-margin_top = 438.0
+[node name="NameChangeButton" type="TextureButton" parent="UI/NameMenu"]
+margin_left = 592.0
+margin_top = 440.0
 margin_right = 688.0
-margin_bottom = 471.0
-text = "CONTINUE"
+margin_bottom = 473.0
+
+[node name="Label" type="Label" parent="UI/NameMenu/NameChangeButton"]
+margin_left = 9.0
+margin_right = 89.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 8 )
+text = "CONFIRM"
+align = 1
+valign = 1
+
+[node name="IntroMenu" type="Node2D" parent="UI"]
+visible = false
+
+[node name="Tween" type="Tween" parent="UI/IntroMenu"]
+
+[node name="Background" type="ColorRect" parent="UI/IntroMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="IntroLabel" type="Label" parent="UI/IntroMenu"]
+margin_left = 3.0
+margin_top = 280.0
+margin_right = 1281.0
+margin_bottom = 429.0
+custom_fonts/font = SubResource( 18 )
+text = "CHAPTER 1: 
+A LITTLE NITEMARE"
+align = 1
+valign = 1
+
+[node name="SaveAndLoadMenu" type="Node2D" parent="UI"]
+visible = false
+
+[node name="Background" type="ColorRect" parent="UI/SaveAndLoadMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.6 )
+
+[node name="TextBG" type="ColorRect" parent="UI/SaveAndLoadMenu"]
+margin_top = 70.0
+margin_right = 1280.0
+margin_bottom = 142.0
+color = Color( 0, 0, 0, 0.603922 )
+
+[node name="TitleLabel" type="Label" parent="UI/SaveAndLoadMenu"]
+margin_left = 1.0
+margin_top = 77.0
+margin_right = 1279.0
+margin_bottom = 131.0
+custom_fonts/font = SubResource( 11 )
+text = "SAVE MENU"
+align = 1
+valign = 1
+
+[node name="Slot1" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 160.0
+margin_top = 173.0
+margin_right = 366.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "Test"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot1"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot2" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 416.0
+margin_top = 173.0
+margin_right = 622.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot2"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot3" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 672.0
+margin_top = 173.0
+margin_right = 878.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot3"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot4" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 928.0
+margin_top = 173.0
+margin_right = 1134.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot4"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot5" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 160.0
+margin_top = 408.0
+margin_right = 366.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot5"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot6" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 416.0
+margin_top = 408.0
+margin_right = 622.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot6"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot7" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 672.0
+margin_top = 408.0
+margin_right = 878.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot7"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot8" type="Button" parent="UI/SaveAndLoadMenu"]
+margin_left = 928.0
+margin_top = 408.0
+margin_right = 1134.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="UI/SaveAndLoadMenu/Slot8"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="HideSalmMenu" type="TextureButton" parent="UI/SaveAndLoadMenu"]
+margin_left = 1080.0
+margin_top = 672.0
+margin_right = 1134.0
+margin_bottom = 705.0
+
+[node name="Label" type="Label" parent="UI/SaveAndLoadMenu/HideSalmMenu"]
+margin_left = 4.0
+margin_right = 57.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 8 )
+text = "EXIT"
+align = 1
+valign = 1
+
+[node name="TutorialMenu" type="Node2D" parent="UI"]
+visible = false
+
+[node name="TutorialImages" type="AnimatedSprite" parent="UI/TutorialMenu"]
+scale = Vector2( 0.667, 0.667 )
+frames = SubResource( 21 )
+centered = false
+
+[node name="TextBG" type="ColorRect" parent="UI/TutorialMenu"]
+margin_top = 80.0
+margin_right = 1280.0
+margin_bottom = 152.0
+color = Color( 0, 0, 0, 0.603922 )
+
+[node name="TitleLabel" type="Label" parent="UI/TutorialMenu"]
+margin_top = 88.0
+margin_right = 1278.0
+margin_bottom = 142.0
+custom_fonts/font = SubResource( 11 )
+text = "TUTORIAL (1/7)"
+align = 1
+valign = 1
+
+[node name="TutorialNextBtn" type="TextureButton" parent="UI/TutorialMenu"]
+margin_left = 1008.0
+margin_top = 672.0
+margin_right = 1062.0
+margin_bottom = 705.0
+
+[node name="Label" type="Label" parent="UI/TutorialMenu/TutorialNextBtn"]
+margin_right = 53.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 8 )
+text = "NEXT"
+align = 1
+valign = 1
+
+[node name="TutorialPrevBtn" type="TextureButton" parent="UI/TutorialMenu"]
+visible = false
+margin_left = 224.0
+margin_top = 672.0
+margin_right = 278.0
+margin_bottom = 705.0
+
+[node name="Label" type="Label" parent="UI/TutorialMenu/TutorialPrevBtn"]
+margin_right = 53.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 8 )
+text = "PREV"
+align = 1
+valign = 1
+
+[node name="PauseMenu" type="Node2D" parent="UI"]
+pause_mode = 2
+visible = false
+
+[node name="Background" type="ColorRect" parent="UI/PauseMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.6 )
+
+[node name="TextBG" type="ColorRect" parent="UI/PauseMenu"]
+margin_top = 112.0
+margin_right = 1280.0
+margin_bottom = 184.0
+color = Color( 0, 0, 0, 0.603922 )
+
+[node name="TitleLabel" type="Label" parent="UI/PauseMenu"]
+margin_left = 1.0
+margin_top = 119.0
+margin_right = 1279.0
+margin_bottom = 173.0
+custom_fonts/font = SubResource( 11 )
+text = "PAUSED"
+align = 1
+valign = 1
+
+[node name="PauseResumeBtn" type="TextureButton" parent="UI/PauseMenu"]
+margin_left = 992.0
+margin_top = 672.0
+margin_right = 1064.0
+margin_bottom = 705.0
+
+[node name="Label" type="Label" parent="UI/PauseMenu/PauseResumeBtn"]
+margin_right = 71.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 8 )
+text = "RESUME"
+align = 1
+valign = 1
+
+[node name="MainMenuBtn" type="TextureButton" parent="UI/PauseMenu"]
+margin_left = 224.0
+margin_top = 672.0
+margin_right = 328.0
+margin_bottom = 705.0
+
+[node name="Label" type="Label" parent="UI/PauseMenu/MainMenuBtn"]
+margin_right = 71.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 8 )
+text = "MAIN MENU"
+align = 1
+valign = 1
+
+[node name="BGMLabel" type="Label" parent="UI/PauseMenu"]
+margin_left = 386.0
+margin_top = 250.0
+margin_right = 574.0
+margin_bottom = 290.0
+custom_fonts/font = SubResource( 12 )
+text = "BACKGROUND MUSIC:"
+align = 2
+valign = 1
+
+[node name="BGMSlide" type="HSlider" parent="UI/PauseMenu"]
+margin_left = 597.0
+margin_top = 261.0
+margin_right = 845.0
+margin_bottom = 277.0
+rect_scale = Vector2( 1.25, 1.25 )
+ticks_on_borders = true
+
+[node name="SFXLabel" type="Label" parent="UI/PauseMenu"]
+margin_left = 386.0
+margin_top = 296.0
+margin_right = 573.0
+margin_bottom = 336.0
+custom_fonts/font = SubResource( 12 )
+text = "SOUND EFFECTS:"
+align = 2
+valign = 1
+
+[node name="SFXSlide" type="HSlider" parent="UI/PauseMenu"]
+margin_left = 597.0
+margin_top = 309.0
+margin_right = 845.0
+margin_bottom = 325.0
+rect_scale = Vector2( 1.25, 1.25 )
+ticks_on_borders = true
 
 [node name="TestBox" type="ConfirmationDialog" parent="."]
 margin_left = 495.0
@@ -478,6 +907,12 @@ dialog_autowrap = true
 
 [node name="ChoiceTimer" type="Timer" parent="."]
 
+[node name="TestingTimer" type="Timer" parent="."]
+
+[node name="IdleTimer" type="Timer" parent="."]
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [connection signal="pressed" from="UI/HistoryButton" to="." method="_on_HistoryButton_pressed"]
 [connection signal="pressed" from="UI/SaveButton" to="." method="_on_SaveButton_pressed"]
 [connection signal="pressed" from="UI/LoadButton" to="." method="_on_LoadButton_pressed"]
@@ -485,7 +920,15 @@ dialog_autowrap = true
 [connection signal="pressed" from="UI/TestBtn" to="." method="_on_TestBtn_pressed"]
 [connection signal="pressed" from="UI/TestButton2" to="." method="_on_TestButton2_pressed"]
 [connection signal="confirmed" from="UI/TimerPopUp" to="." method="_on_TimerPopUp_confirmed"]
+[connection signal="confirmed" from="UI/SaveConfirmationPopUp" to="." method="_on_SaveConfirmationPopUp_confirmed"]
 [connection signal="pressed" from="UI/HistoryMenu/HideHistoryButton" to="." method="_on_HideHistoryButton_pressed"]
 [connection signal="pressed" from="UI/NameMenu/NameChangeButton" to="." method="_on_NameChangeButton_pressed"]
+[connection signal="pressed" from="UI/SaveAndLoadMenu/HideSalmMenu" to="." method="_on_HideSalmMenu_pressed"]
+[connection signal="pressed" from="UI/TutorialMenu/TutorialNextBtn" to="." method="_on_TutorialNextBtn_pressed"]
+[connection signal="pressed" from="UI/TutorialMenu/TutorialPrevBtn" to="." method="_on_TutorialPrevBtn_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/PauseResumeBtn" to="." method="_on_PauseResumeBtn_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/MainMenuBtn" to="." method="_on_MainMenuBtn_pressed"]
 [connection signal="confirmed" from="TestBox" to="." method="_on_TestBox_confirmed"]
 [connection signal="timeout" from="ChoiceTimer" to="." method="_on_ChoiceTimer_timeout"]
+[connection signal="timeout" from="TestingTimer" to="." method="_on_TestingTimer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]

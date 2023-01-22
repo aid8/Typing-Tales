@@ -1,11 +1,23 @@
 extends Node
 
-const MAX_CHAPTERS = 3
-const ALTERNATIVE_CHAPTERS = [0, 1]
+const MAX_CHAPTERS = 8
+const ALTERNATIVE_CHAPTERS = [0, 1, 1, 1, 1, 1, 0, 0]
 const LETTER_MASTERY_ACCURACY_BOUND = 0.90
 #Words that have (word_mastery_accuracy_bound) 94% mastery that is typed more than or equal to (word_mastery_cound_bound) 100 times will be ignored in story mode
 const WORD_MASTERY_ACCURACY_BOUND = 0.80 #0.94
-const WORD_MASTERY_COUNT_BOUND = 10 #100
+const WORD_MASTERY_COUNT_BOUND = 1 #100
+
+const HTTP_HEADERS = ["Content-Type: application/x-www-form-urlencoded"]
+const PRE_TEST_URLFORM = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd1lLAvOQfVKT2sXNDv0maaK9TGTXrLehlv1hLRMzq0yG0TIA/formResponse"
+const PRE_TEST_ENTRY_CODES = {
+	"name" : "entry.1677198908" ,
+	"date" : "entry.1636518983",
+	"wpm" : "entry.783576330",
+	"accuracy" : "entry.2103345753", 
+}
+
+const TOTAL_COLLECTION_TIME = 600
+const IDLE_TIME = 8
 
 var characters = {
 	#Character 1
@@ -45,13 +57,11 @@ var backgrounds = {
 		"Location" : "Home, Bedroom",
 	},
 	
-	
 	"Home_Fireplace1" : {
 		"Animation" : "Home",
 		"Frame" : 3,
 		"Location" : "Home, Fireplace 2",
 	},
-	
 	
 	"Home_Garret_Stairs1":{
 		"Animation" : "Home",
@@ -126,6 +136,12 @@ var backgrounds = {
 		"Location" : "School Library",
 	},
 	
+	"School_Piano_Room" : {
+		"Animation" : "School",
+		"Frame" : 4,
+		"Location" : "School Piano Room",
+	},
+	
 	#OUTSIDE
 	"School_sunrise" : {
 		"Animation" : "Outside",
@@ -145,17 +161,64 @@ var backgrounds = {
 		"Location" : "Convenience Store Outside",
 	},
 	
-	#Fix this
+	"Convenience_Store_Inside" : {
+		"Animation" : "Outside",
+		"Frame" : 9,
+		"Location" : "Convenience Store Inside",
+	},
+	
 	"Ball" : {
 		"Animation" : "Outside",
-		"Frame" : 1,
-		"Location" : "Outside Ball",
+		"Frame" : 10,
+		"Location" : "Ballroom",
 	},
 	
 	"Slums" : {
 		"Animation" : "Outside",
 		"Frame" : 3,
-		"Location" : "Slums Outside",
+		"Location" : "Slums",
+	},
+	
+	"Street_Day" : {
+		"Animation" : "Outside",
+		"Frame" : 4,
+		"Location" : "Streets",
+	},
+	
+	"Street_Evening" : {
+		"Animation" : "Outside",
+		"Frame" : 5,
+		"Location" : "Streets",
+	},
+	
+	"Street_Night" : {
+		"Animation" : "Outside",
+		"Frame" : 6,
+		"Location" : "Streets",
+	},
+	
+	"Street_Rain" : {
+		"Animation" : "Outside",
+		"Frame" : 7,
+		"Location" : "Streets",
+	},
+	
+	"Street_Stars" : {
+		"Animation" : "Outside",
+		"Frame" : 8,
+		"Location" : "Streets",
+	},
+	
+	"Frozen_Lake" : {
+		"Animation" : "Outside",
+		"Frame" : 11,
+		"Location" : "Lake",
+	},
+	
+	"Theme_Park_Day" : {
+		"Animation" : "Outside",
+		"Frame" : 12,
+		"Location" : "Theme Park",
 	},
 }
 
@@ -172,6 +235,23 @@ var expressions = {
 	"Closed_open_blush" : 9,
 	"Closed_smile" : 10,
 	"Closed_smile_blush" : 11,
+}
+
+var chapter_details = {
+	"Chapter 1" : {
+		"Title" : "CHAPTER 1: \n",
+		"Subtitle" : "PLAYING PILGRIMS",
+	},
+	
+	"Chapter 2" : {
+		"Title" : "Chapter 2: \n",
+		"Subtitle" : "A Merry Christmas",
+	},
+	
+	"Chapter 3" : {
+		"Title" : "Chapter 3: \n",
+		"Subtitle" : "The Laurence Boy",
+	},
 }
 
 #Add more if there are characters that should not be included

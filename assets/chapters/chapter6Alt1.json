@@ -1,0 +1,154 @@
+{
+    "Chapter 6 Alt 1" : [
+        {
+            "character" : "Narrator",
+            "location" : "Piano_Room",
+            "transition" : "DiamondTilesCover",
+            "dialogue" : "Beth was so excited to play the piano but [name] rush to the piano before Beth could sit down.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Beth",
+            "outfit" : "Casual",
+            "expression" : "Smile_blush",
+            "position" : "MIDDLE",
+            "dialogue" : "Hey now, you don't know how to play the piano, let me experience it",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "How would I learn to play the piano if I don't attempt now.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Beth being considerate let [name] play the piano before herself. You started to press the keys one at a time and started to press multiple keys simultaneously.",
+            "show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Being inept with playing the piano you produce one of the most horrid sounds. Beth, being displeased with the unpleasant sound, kindly asked [name] to step away from the piano.",
+            "show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Beth",
+            "outfit" : "Casual",
+            "expression" : "Frown_blush",
+            "position" : "MIDDLE",
+            "dialogue" : "[name] I think that's enough of a practice for now, could you let me play the piano now?",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Oh what's the big deal, I'm having fun, that's what matters.",
+        },
+
+        {
+            "character" : "Beth",
+            "outfit" : "Casual",
+            "expression" : "Frown",
+            "position" : "MIDDLE",
+            "dialogue" : "But you're just pressing keys with no rhythm or harmony and it sounds horrendous.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Beth tried to gently help [name] get off from the piano but [name] started to throw a fit.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I don't want to.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "You and Beth quarreled in front of the piano and accidentally broke some keys in the midst of it, Grandpa Laurence heard the incident and rushed into the scene.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Grandpa Laurence saw the piano her late granddaughter used to play, it's damaged now. Grandpa Laurence lost his temper and shouted",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Grandpa Laurence",
+            "dialogue" : "Get out, now!",
+        },
+
+        {
+            "character" : "Beth",
+            "outfit" : "Casual",
+            "expression" : "Frown_blush",
+            "position" : "MIDDLE",
+            "dialogue" : "It's [name]'s fa-",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Before Beth could finish, Grandpa Laurence shouted again.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Grandpa Laurence",
+            "dialogue" : "Get out now! Both of you!",
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Street_Day",
+            "transition" : "DiamondTilesCover",
+            "dialogue" : "You and Beth went out of Laurence's residence.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Beth",
+            "outfit" : "Casual",
+            "expression" : "Frown",
+            "position" : "MIDDLE",
+            "dialogue" : "Why did you have to throw a tantrum there.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I just wanted to experience playing the piano for the first time.",
+        },
+
+        {
+            "character" : "Beth",
+            "outfit" : "Casual",
+            "expression" : "Frown_blush",
+            "position" : "MIDDLE",
+            "dialogue" : "I already let you play for a bit until I can't handle the horrid sound and you didn't have to throw a tantrum there, you damaged their piano, what are we going to do now?",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I... I'm sorry, I didn't mean to.",
+        },
+    ],
+}

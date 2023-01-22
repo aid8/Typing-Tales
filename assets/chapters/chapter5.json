@@ -1,0 +1,1212 @@
+{
+    "Chapter 5" : [
+		{
+			"character" : "Meg",
+			"location" : "Home_Fireplace1",
+            "transition" : "Curtain",
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "LEFT",
+                },
+            ],
+			"dialogue" : "What in the world are you going to do now, [name]?",
+            "dialogue_remark" : "Meg asked one snowy afternoon, as her sister came tramping through the hall, in rubber boots, old sack, and hood, with a broom in one hand and a shovel in the other.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Going out for exercise,",
+            "dialogue_remark" : "You answered with a mischievous twinkle in your eyes.",
+		},
+
+        {
+			"character" : "Meg",
+			"dialogue" : "I should think two long walks this morning would have been enough! It's cold and dull out, and I advise you to stay warm and dry by the fire, as I do,",
+            "dialogue_remark" : "Meg said with a shiver.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Never take advice! Can't keep still all day, and not being a pussycat, I don't like to doze by the fire. I like adventures, and I'm going to find some.",
+		},
+
+        {
+            "character" : "Narrator",
+            "location" : "Garden",
+            "transition" : "Curtain",
+            "dialogue" : "Meg went back to toast her feet and read Ivanhoe, and [name] began to dig paths with great energy. The snow was light, and with her broom she soon swept a path all round the garden,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "for Beth to walk in when the sun came out and the invalid dolls needed air.",
+            "skip_dialogue" : true,
+            "hide_character" : ["Meg"],
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Street",
+            "transition" : "Curtain",
+            "dialogue" : "Now, the garden separated the Marches' house from that of Mr. Laurence. Both stood in a suburb of the city, which was still countrylike, with groves and lawns, large gardens, and quiet streets.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : " A low hedge parted the two estates. On one side was an old, brown house, looking rather bare and shabby, robbed of the vines that in summer covered its walls and the flowers, which then surrounded it.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "On the other side was a stately stone mansion, plainly betokening every sort of comfort and luxury, from the big coach house and well-kept grounds to the conservatory ",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and the glimpses of lovely things one caught between the rich curtains. Yet it seemed a lonely, lifeless sort of house, for no children frolicked on the lawn, no motherly face ever smiled at the windows,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : " and few people went in and out, except the old gentleman and his grandson. To [name]'s lively fancy, this fine house seemed a kind of enchanted palace, full of splendors and delights which no one enjoyed.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "She had long wanted to behold these hidden glories, and to know the Laurence boy, who looked as if he would like to be known, if he only knew how to begin. Since the party, she had been more eager than ever,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and had planned many ways of making friends with him, but he had not been seen lately, and [name] began to think he had gone away, when she one day spied a brown face at an upper window,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "looking wistfully down into their garden, where Beth and Amy were snow-balling one another.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "That boy is suffering for society and fun,",
+            "dialogue_remark" : "you said to yourself.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "His grandpa does not know what's good for him, and keeps him shut up all alone. He needs a party of jolly boys to play with, or somebody young and lively. I've a great mind to go over and tell the old gentleman so!",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The idea amused [name], who liked to do daring things and was always scandalizing Meg by her queer performances. The plan of 'going over' was not forgotten.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "And when the snowy afternoon came, [name] resolved to try what could be done. She saw Mr. Lawrence drive off, and then sallied out to dig her way down to the hedge, where she paused and took a survey.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "All quiet, curtains down at the lower windows, servants out of sight, and nothing human visible but a curly black head leaning on a thin hand at the upper window.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "There he is,",
+            "dialogue_remark" : "you thought,",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Poor boy! All alone and sick this dismal day. It's a shame! I'll toss up a snowball and make him look out, and then say a kind word to him.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Up went a handful of soft snow, and the head turned at once, showing a face which lost its listless look in a minute, as the big eyes brightened and the mouth began to smile.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] nodded and laughed, and flourished her broom as she called out...",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "How do you do? Are you sick?",
+		},
+
+        {
+            "character" : "Narrator",
+            "location" : "Laurie's_Room",
+            "transition" : "Curtain",
+            "dialogue" : "Laurie opened the window, and croaked out as hoarsely as a raven...",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
+			"dialogue" : "Better, thank you. I've had a bad cold, and been shut up a week.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "I'm sorry. What do you amuse yourself with?",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "Nothing. It's dull as tombs up here.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Don't you read?",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Frown",
+			"dialogue" : "Not much. They won't let me.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Can't somebody read to you?",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "Grandpa does sometimes, but my books don't interest him, and I hate to ask Brooke all the time.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Have someone come and see you then.",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "There isn't anyone I'd like to see. Boys make such a row, and my head is weak.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Isn't there some nice girl who'd read and amuse you? Girls are quiet and like to play nurse.",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "Don't know any.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "You know us,",
+            "dialogue_remark" : "You began, then laughed and stopped.",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "So I do! Will you come, please?",
+            "dialogue_remark" : "cried Laurie.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "I'm not quiet and nice, but I'll come, if Mother will let me. I'll go ask her. Shut the window, like a good boy, and wait till I come.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "With that, [name] shouldered her broom and marched into the house, wondering what they would all say to her. Laurie was in a flutter of excitement at the idea of having company,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and flew about to get ready, for as Mrs. March said, he was 'a little gentleman', and did honor to the coming guest by brushing his curly pate, putting on a fresh color, and trying to tidy up the room which in spite",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "of half a dozen servants, was anything but neat. Presently there came a loud ring, than a decided voice, asking for 'Mr. Laurie', and a surprised-looking servant came running up to announce a young lady.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "location" : "Lawrence_Livingroom",
+            "transition" : "Curtain",
+			"dialogue" : "All right, show her up, it's Miss [name],",
+            "dialogue_remark" : "Laurie said, going to the door of his little parlor to meet [name], who appeared, looking rosy and quite at her ease, with a covered dish in one hand and Beth's three kittens in the other.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Here I am, bag and baggage,",
+            "dialogue_remark" : "you said briskly.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Mother sent her love, and was glad if I could do anything for you. Meg wanted me to bring some of her blanc mange, she makes it very nicely, and Beth thought her cats would be comforting.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "I knew you'd laugh at them, but I couldn't refuse, she was so anxious to do something.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "It so happened that Beth's funny loan was just the thing, for in laughing over the kits, Laurie forgot his bashfulness, and grew sociable at once.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Smile_blush",
+			"dialogue" : "That looks too pretty to eat,",
+            "dialogue_remark" : "he said, smiling with pleasure,",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "as you uncovered the dish, and showed the blanc mange, surrounded by a garland of green leaves, and the scarlet flowers of Amy's pet geranium.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "It isn't anything, only they all felt kindly and wanted to show it. Tell the girl to put it away for your tea. It's so simple you can eat it, and being soft,",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "it will slip down without hurting your sore throat. What a cozy room this is!",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "It might be if it was kept nice, but the maids are lazy, and I don't know how to make them mind. It worries me though",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "I'll right it up in two minutes, for it only needs to have the hearth brushed, so-and the things made straight on the mantelpiece, so-and the books put here,",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "and the bottles there, and your sofa turned from the light, and the pillows plumped up a bit. Now then, you're fixed.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "And so he was, for, as she laughed and talked, [name] had whisked things into place and given quite a different air to the room. Laurie watched her in respectful silence,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and when she beckoned him to his sofa, he sat down with a sigh of satisfaction, saying gratefully...",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Smile",
+			"dialogue" : "How kind you are! Yes, that's what it wanted. Now please take the big chair and let me do something to amuse my company. ",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "No, I came to amuse you. Shall I read aloud?",
+            "dialogue_remark" : "and you looked affectionately toward some inviting books near by.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open_blush",
+			"dialogue" : "Thank you! I've read all those, and if you don't mind, I'd rather talk,",
+            "dialogue_remark" : "Laurie answered.",
+		},
+
+        {
+			"character" : "You",
+            "outfit" : "Casual",
+			"dialogue" : "Not a bit. I'll talk all day if you'll only set me going. Beth says I never know when to stop.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "Is Beth the rosy one, who stays at home good deal and sometimes goes out with a little basket?",
+            "dialogue_remark" : "Laurie asked with interest.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Yes, that's Beth. She's my girl, and a regular good one she is, too.",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "The pretty one is Meg, and the curly-haired one is Amy, I believe?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "How did you find that out?",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Laurie colored up, but answered frankly,",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Smile_blush",
+			"dialogue" : "Why, you see I often hear you calling to one another, and when I'm alone up here, I can't help looking over at your house, you always seem to be having such good times.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open_blush",
+			"dialogue" : "I beg your pardon for being so rude, but sometimes you forget to put down the curtain at the window where the flowers are. And when the lamps are lighted,",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "it's like looking at a picture to see the fire, and you all around the table with your mother.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "Her face is right opposite, and it looks so sweet behind the flowers, I can't help watching it. I haven't got any mother, you know.",
+            "dialogue_remark" : "And Laurie poked the fire to hide a little twitching of the lips that he could not control.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The solitary, hungry look in his eyes went straight to [name]'s warm heart. You had been so simply taught that there was no nonsense in your head, and at fifteen you were as innocent and frank as any child.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Laurie was sick and lonely, and feeling how rich she was in home and happiness, she gladly tried to share it with him. Her face was very friendly and her sharp voice unusually gentle as she said...",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "We'll never draw that curtain any more, and I give you leave to look as much as you like. I just wish, though, instead of peeping, you'd come over and see us.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Mother is so splendid, she'd do you heaps of good, and Beth would sing to you if I begged her to, and Amy would dance.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Meg and I would make you laugh over our funny stage properties, and we'd have jolly times. Wouldn't your grandpa let you?",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Smile",
+			"dialogue" : "I think he would, if your mother asked him. He's very kind, though he does not look so, and he lets me do what I like, pretty much, only he's afraid I might be a bother to strangers,",
+            "dialogue_remark" : "Laurie began, brightening more and more.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "We are not strangers, we are neighbors, and you needn't think you'd be a bother. We want to know you, and I've been trying to do it this ever so long.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "We haven't been here a great while, you know, but we have got acquainted with all our neighbors but you.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Frown",
+			"dialogue" : "You see, Grandpa lives among his books, and doesn't mind much what happens outside. Mr. Brooke, my tutor, doesn't stay here, you know, and I have no one to go about with me, so I just stop at home and get on as I can.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "That's bad. You ought to make an effort and go visiting everywhere you are asked, then you'll have plenty of friends, and pleasant places to go to. Never mind being bashful. It won't last long if you keep going.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Laurie turned red again, but wasn't offended at being accused of bashfulness, for there was so much good will in [name] it was impossible not to take her blunt speeches as kindly as they were meant.",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Open_blush",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "Do you like your school?",
+            "dialogue_remark" : "Laurie asked, changing the subject,",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "after a little pause, during which he stared at the fire and [name] looked about her, well pleased.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "Don't go to school, I'm a businessman-girl, I mean. I go to wait on my great-aunt, and a dear, cross old soul she is too,",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Laurie opened his mouth to ask another question, but remembering just in time that it wasn't manners to make too many inquiries into people's affairs, he shut it again, and looked uncomfortable.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] liked his good breeding, and didn't mind having a laugh at Aunt March, so you gave him a lively description of the fidgety old lady, her fat poodle, the parrot that talked Spanish, and the library where she reveled.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Laurie enjoyed that immensely, and when she told about the prim old gentleman who came once to woo Aunt March, and in the middle of a fine speech,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "how Poll had tweaked his wig off to his great dismay, the boy lay back and laughed till the tears ran down his cheeks, and a maid popped her head in to see what was the matter.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open_blush",
+			"dialogue" : "Oh! That does me no end of good. Tell on, please,",
+            "dialogue_remark" : "he said, taking his face out of the sofa cushion, red and shining with merriment.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Much elated with her success, [name] did 'tell on', all about their plays and plans, their hopes and fears for Father, and the most interesting events of the little world in which the sisters lived.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Then they got to talking about books, and to [name]'s delight, you found that Laurie loved them as well as you did, and had read even more than yourself.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "If you like them so much, come down and see ours. Grandfather is out, so you needn't be afraid,",
+            "dialogue_remark" : "Laurie said, getting up.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "I'm not afraid of anything,",
+            "dialogue_remark" : "you returned, with a toss of the head.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Smile",
+			"dialogue" : "I don't believe you are!",
+            "dialogue_remark" : "Laurie exclaimed,",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "looking at her with much admiration, though he privately thought she would have good reason to be a trifle afraid of the old gentleman, if she met him in some of his moods.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The atmosphere of the whole house being summerlike, Laurie led the way from room to room, letting [name] stop to examine whatever struck your fancy.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Studyroom",
+            "transition" : "Curtain",
+            "dialogue" : "And so, at last they came to the library, where you clapped your hands and pranced, as you always did when especially delighted.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "It was lined with books, and there were pictures and statues, and distracting little cabinets full of coins and curiosities, and Sleepy Hollow chairs,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and queer tables, and bronzes, and best of all, a great open fireplace with quaint tiles all round it.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "What richness!",
+            "dialogue_remark" : "You sighed, sinking into the depth of a velour chair and gazing about her with an air of intense satisfaction",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Theodore Laurence, you ought to be the happiest boy in the world,",
+            "dialogue_remark" : "you added impressively.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Frown",
+			"dialogue" : "A fellow can't live on books,",
+            "dialogue_remark" : "Laurie said, shaking his head as he perched on a table opposite.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Before he could more, a bell rang, and [name] flew up, exclaiming with alarm,",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "Mercy me! It's your grandpa!",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Smile",
+			"dialogue" : "Well, what if it is? You are not afraid of anything, you know,",
+            "dialogue_remark" : "Laurie returned, looking wicked.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "I think I am a little bit afraid of him, but I don't know why I should be. Marmee said I might come, and I don't think you're any the worse for it,",
+            "dialogue_remark" : "you said, composing herself, though she kept her eyes on the door.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "I'm a great deal better for it, and ever so much obliged. I'm only afraid you are very tired of talking to me. It was so pleasant, I couldn't bear to stop,",
+            "dialogue_remark" : "Laurie said gratefully.",
+		},
+
+        {
+			"character" : "Maid",
+			"dialogue" : "The doctor to see you, sir,",
+            "dialogue_remark" : "and the maid beckoned as she spoke.",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "Would you mind if I left you for a minute? I suppose I must see him,",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Don't mind me. I'm happy as a cricket here,",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Laurie went away, and his guest amused herself in her own way. She was standing before a fine portrait of the old gentleman when the door opened again, and without turning, she said decidedly,",
+            "hide_character" : ["Laurie"],
+            "show_selection" : [
+                ["I'm sure now that I shouldn't be afraid of him, for he's got kind eyes, though his mouth is grim, and he looks as if he had a tremendous will of his own. He isn't as handsome as my grandfather, but I like him.", "Chapter 5", ],
+                ["Scary, Laurie's grandpops looks intimidating and unapproachable, I better avoid bumping into him to avoid any awkward situations.", "Chapter 5 Alt", 0],
+            ],
+            "show_selection_timer" : 15,
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "I'm sure now that I shouldn't be afraid of him, for he's got kind eyes, though his mouth is grim, and he looks as if he had a tremendous will of his own. He isn't as handsome as my grandfather, but I like him.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Thank you, ma'am,",
+            "dialogue_remark" : "said a gruff voice behind her, and there, to her great dismay, stood old Mr. Laurence.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Poor [name] blushed till she couldn't blush any redder, and her heart began to beat uncomfortably fast as she thought what she had said. For a minute a wild desire to run away possessed her,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "but that was cowardly, and the girls would laugh at her, so she resolved to stay and get out of the scrape as she could.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "A second look showed her that the living eyes, under the bushy eyebrows, were kinder even than the painted ones, and there was a sly twinkle in them,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "which lessened her fear a good deal. The gruff voice was gruffer than ever, as the old gentleman said abruptly, after the dreadful pause,",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "So you're not afraid of me, hey?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Not much, sir.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "And you don't think me as handsome as your grandfather?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Not quite, sir.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "And I've got a tremendous will, have I?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "I only said I thought so.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "But you like me in spite of it?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Yes, I do, sir.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "That answer pleased the old gentleman. He gave a short laugh,shook hands with her, and, putting his finger under her chin, turned up her face, examined it gravely, and let it go, saying with a nod,",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "You've got your grandfather's spirit, if you haven't his face. He was a fine man, my dear, but what is better, he was a brave and an honest one, and I was proud to be his friend.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Thank you, sir,",
+            "dialogue_remark" : "And [name] was quite comfortable after that, for it suited her exactly.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "What have you been doing to this boy of mine, hey?",
+            "dialogue_remark" : "was the next question, sharply put.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Only trying to be neighborly, sir.",
+            "dialogue_remark" : "And [name] told how her visit came about.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "You think he needs cheering up a bit, do you?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Yes, sir, he seems a little lonely, and young folks would do him good perhaps. We are only girls, but we should be glad to help if we could, for we don't forget the splendid Christmas present you sent us,",
+            "dialogue_remark" : "you said eagerly.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Tut, tut, tut! That was the boy's affair. How is the poor woman?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Doing nicely, sir.",
+            "dialogue_remark" : "And off went [name], talking very fast, as she told all about the Hummels, in whom her mother had interested richer friends than they were.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Just her father's way of doing good. I shall come and see your mother some fine day. Tell her so. There's the tea bell, we have it early on the boy's account. Come down and go on being neighborly.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "If you'd like to have me, sir.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Shouldn't ask you, if I didn't.",
+            "dialogue_remark" : "And Mr. Laurence offered her his arm with old-fashioned courtesy.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "What would Meg say to this?",
+            "dialogue_remark" : "You thought, as you was marched away, while your eyes danced with fun as you imagined yourself telling the story at home.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Hey! Why, what the dickens has come to the fellow?",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "said the old gentleman, as Laurie came running downstairs and brought up with a start of surprise at the astounding sight of [name] arm in arm with his redoubtable grandfather.",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open_blush",
+			"dialogue" : "I didn't know you'd come, sir,",
+            "dialogue_remark" : "he began, as you gave him a triumphant little glance.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "That's evident, by the way you racket downstairs. Come to your tea, sir, and behave like a gentleman.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "And having pulled the boy's hair by way of a caress, Mr. Laurence walked on, while Laurie went through a series of comic evolutions behind their backs, which nearly produced an explosion of laughter from [name].",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The old gentleman did not say much as he drank his four cups of tea, but he watched the young people, who soon chatted away like old friends, and the change in his grandson did not escape him.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "There was color, light, and life in the boy's face now, vivacity in his manner, and genuine merriment in his laugh.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "She's right, the lad is lonely. I'll see what these little girls can do for him,",
+            "dialogue_remark" : "Mr. Laurence thought, as he looked and listened.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "He liked [name], for her odd, blunt ways suited him, and she seemed to understand the boy almost as well as if she had been one herself.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "If the Laurences had been what [name] called 'prim and poky', she would not have got on at all, for such people always made her shy and awkward. But finding them free and easy, she was so herself, and made a good impression.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : " When they rose she proposed to go, but Laurie said he had something more to show her, and took her away to the conservatory, which had been lighted for her benefit.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Outside_Terrace",
+            "transition" : "Curtain",
+            "dialogue" : " It seemed quite fairylike to [name], as she went up and down the walks, enjoying the blooming walls on either side, the soft light, the damp sweet air,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and the wonderful vines and trees that hung about her, while her new friend cut the finest flowers till his hands were full.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : " Then he tied them up, saying, with the happy look [name] liked to see,",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Please give these to your mother, and tell her I like the medicine she sent me very much.",
+		},
+
+        {
+            "character" : "Narrator",
+            "location" : "Piano_Room",
+            "transition" : "Curtain",
+            "dialogue" : "They found Mr. Laurence standing before the fire in the great drawing room, but [name]'s attention was entirely absorbed by a grand piano, which stood open.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "Do you play?",
+            "dialogue_remark" : "you asked, turning to Laurie with a respectful expression.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "Sometimes,",
+            "dialogue_remark" : "he answered modestly.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Please do now. I want to hear it, so I can tell Beth.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open_blush",
+			"dialogue" : "Won't you first?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Don't know how. Too stupid to learn, but I love music dearly.",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "So Laurie played and [name] listened, with her nose luxuriously buried in heliotrope and tea roses. Her respect and regard for the 'Laurence' boy increased very much, for he played remarkably well and didn't put on any airs. ",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "She wished Beth could hear him, but she did not say so, only praised him till he was quite abashed, and hisgrandfather came to his rescue.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "That will do, that will do, young lady. Too many sugarplums are not good for him. His music isn't bad, but I hope he will do as well in more important things.",
+		},
+
+        {
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Going? well, I'm much obliged to you, and I hope you'll come again. My respects to your mother. Good night, Doctor [name].",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "He shook hands kindly, but looked as if something did not please him. When they got into the hall, [name] asked Laurie if you had said something amiss. He shook his head.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "Laurie",
+            "expression" : "Frown",
+			"dialogue" : "No, it was me. He doesn't like to hear me play.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Why not?",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open",
+			"dialogue" : "I'll tell you some day. John is going home with you, as I can't.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "No need of that. I am not a young lady, and it's only a step. Take care of yourself, won't you?",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Open_blush",
+			"dialogue" : "Yes, but you will come again, I hope?",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "If you promise to come and see us after you are well.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Smile",
+			"dialogue" : "I will.",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "Good night, Laurie!",
+		},
+
+        {
+			"character" : "Laurie",
+			"dialogue" : "Good night, [name], good night!",
+		},
+
+        {
+            "character" : "Narrator",
+            "location" : "livingroom",
+            "transition" : "Curtain",
+            "dialogue" : "When all the afternoon's adventures had been told, the family felt inclined to go visiting in a body, for each found something very attractive in the big house on the other side of the hedge.",
+            "skip_dialogue" : true,
+            "hide_character" : ["Laurie"],
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Mrs. March wanted to talk of her father with the old man who had not forgotten him, Meg longed to walk in the conservatory, Beth sighed for the grand piano, and Amy was eager to see the fine pictures and statues.",
+            "skip_dialogue" : true,
+        },
+
+        {
+			"character" : "You",
+			"dialogue" : "Mother, why didn't Mr. Laurence like to have Laurie play?",
+            "dialogue_remark" : "You asked, who was of an inquiring disposition.",
+		},
+
+        {
+			"character" : "Mrs. March",
+			"dialogue" : "I am not sure, but I think it was because his son, Laurie's father, married an Italian lady, a musician, which displeased the old man, who is very proud.",
+		},
+
+        {
+			"character" : "Mrs. March",
+			"dialogue" : "The lady was good and lovely and accomplished, but he did not like her, and never saw his son after he married.",
+		},
+
+        {
+			"character" : "Mrs. March",
+			"dialogue" : "They both died when Laurie was a little child, and then his grandfather took him home. I fancy the boy, who was born in Italy, is not very strong,",
+		},
+
+        {
+			"character" : "Mrs. March",
+			"dialogue" : "and the old man is afraid of losing him, which makes him so careful. Laurie comes naturally by his love of music, for he is like his mother,",
+		},
+
+        {
+			"character" : "Mrs. March",
+			"dialogue" : "  and I dare say his grandfather fears that he may want to be a musician. At any rate, his skill reminds him of the woman he did not like, and so he 'glowered' as [name] said.",
+		},
+
+        {
+            "character" : "Meg",
+           "show_more_characters" : [
+                {
+                "character" : "Meg",
+                "outfit" : "Casual",
+                "expression" : "Open_blush",
+                "position" : "LEFT",
+                },
+            ],
+           "dialogue" : "Dear me, how romantic!",
+           "dialogue_remark" : "Meg exclaimed.",
+        },
+       
+       {
+        "character" : "You",
+        "dialogue" : "How silly! Let him be a musician if he wants to, and not plague his life out sending him to college, when he hates to go",
+       },
+
+       {
+        "character" : "Meg",
+        "expression" : "Frown",
+        "dialogue" : "That's why he has such handsome black eyes and pretty manners, I suppose. Italians are always nice,",
+        "dialogue_remark" : "Meg said, who was a little sentimental.",
+       },
+
+       {
+        "character" : "You",
+        "dialogue" : "What do you know about his eyes and his manners? You never spoke to him, hardly,",
+        "dialogue_remark" : "you cried, who was not sentimental.",
+       },
+
+       {
+        "character" : "Meg",
+        "expression" : "Open",
+        "dialogue" : "I saw him at the party, and what you tell shows that he knows how to behave. That was a nice little speech about the medicine Mother sent him.",
+       },
+
+       {
+        "character" : "You",
+        "dialogue" : "He meant the blanc mange, I suppose.",
+       },
+
+       {
+        "character" : "Mrs. March",
+        "dialogue" : "How stupid you are, child! He meant you, of course.",
+       },
+
+       {
+        "character" : "You",
+        "dialogue" : "Did he?",
+        "dialogue_remark" : "And [name] opened your eyes as if it had never occurred to you before.",
+       },
+
+       {
+        "character" : "Meg",
+        "dialogue" : "I never saw such a girl! You don't know a compliment when you get it,",
+        "dialogue_remark" : "Meg said, with the air of a young lady who knew all about the matter.",
+       },
+
+       {
+        "character" : "You",
+        "dialogue" : "I think they are great nonsense, and I'll thank you not to be silly and spoil my fun. Laurie's a nice boy and I like him, and I won't have any sentimental stuff about compliments and such rubbish.",
+       },
+
+       {
+        "character" : "You",
+        "dialogue" : "We'll all be good to him because he hasn't got any mother, and he may come over and see us, mayn't he, Marmee?",
+       },
+
+       {
+        "character" : "Mrs. March",
+        "dialogue" : "Yes, [name], your little friend is very welcome, and I hope Meg will remember that children should be children as long as they can.",
+       },
+
+       {
+        "character" : "Amy",
+        "show_more_characters" : [
+            {
+                "character" : "Amy",
+                "outfit" : "Casual",
+                "expression" : "Open",
+                "position" : "MIDDLE",
+            },
+        ],
+        "dialogue" : "I don't call myself a child, and I'm not in my teens yet, What do you say, Beth?",
+        "dialogue_remark" : "Amy observed.",
+       },
+
+       {
+        "character" : "Beth",
+        "show_more_characters" : [
+            {
+                "character" : "Beth",
+                "outfit" : "Casual",
+                "expression" : "Open",
+                "position" : "RIGHT",
+            },
+        ],
+        "dialogue" : "I was thinking about our 'Pilgrim's Progress',",
+        "dialogue_remark" : "Beth answered, who had not heard a word.",
+       },
+
+       {
+        "character" : "Beth",
+        "dialogue" : "How we got out of the Slough and through the Wicket Gate by resolving to be good, and up the steep hill by trying, and that maybe the house over there, full of splendid things, is going to be our Palace Beautiful.",
+       },
+
+       {
+        "character" : "You",
+        "dialogue" : "We have got to get by the lions first,",
+        "dialogue_remark" : "you said, as if you rather liked the prospect.",
+       },
+    ],
+}

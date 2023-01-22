@@ -232,7 +232,7 @@
 			"character" : "Narrator",
 			"dialogue" : "They were all unusually hungry, having waited nearly an hour, and for a minute no one spoke, only a minute, for [name] exclaimed impetuously,",
 			"show_selection" : [
-				["I'm so glad you came before we began!", "Chapter 2", 32],
+				["I'm so glad you came before we began!", "Chapter 2", -1],
 				["But we haven't had any breakfast yet!", "Chapter 2 Alt 1", 0],
 			],
 			"show_selection_timer" : 15,

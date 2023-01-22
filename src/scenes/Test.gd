@@ -1,10 +1,12 @@
 extends Node2D
 #==========TODO==========#
 #Store Challenge menu stats
-#Starting Chapter Anim
 #Stats Menu fade
 #Add to Global current stats after finishing chapter
 #Recheck add_finished_scenes (after branching)
+
+#==========NOTES==========#
+#Codes that have #TESTING should be rechecked when testing is done (ready to deploy)
 
 #==========Testing Stuffs==========#
 onready var testbox = $TestBox
@@ -12,7 +14,7 @@ var debug_mode = true
 
 func _on_TestBox_confirmed():
 	Global.load_user_data()
-	load_saved_progress()
+	#load_saved_progress()
 	get_current_dialogue()
 	ui.show()
 
@@ -64,6 +66,11 @@ var skip_dialogue : bool = false
 var total_wpm : Array = [0, 0] #[total_wpm, count]
 var total_accuracy : Array = [0, 0] #[correct_count, wrong_count]
 var chapter_play_time : float = 0
+var save_slot_index : int = 0
+var tutorial_index : int = 0
+var current_date : String = ""
+var current_session_time : int = 0
+var is_pre_test : bool = false
 
 #Scene animation variables
 var shake_strength : float = 0.0
@@ -88,6 +95,8 @@ onready var character_positions : Dictionary = {
 	"RIGHT" : $Characters/CharacterRightPosition,
 }
 onready var choice_timer : Timer = $ChoiceTimer
+onready var testing_timer : Timer = $TestingTimer
+onready var idle_timer : Timer = $IdleTimer
 onready var timer_pop_up : AcceptDialog = $UI/TimerPopUp
 onready var timer_node : Node2D = $UI/TimerNode
 onready var timer_label : Label = $UI/TimerNode/TimerLabel
@@ -98,6 +107,17 @@ onready var history_text : RichTextLabel = $UI/HistoryMenu/HistoryText
 onready var stats_menu : Node2D = $UI/StatsMenu
 onready var name_menu : Node2D = $UI/NameMenu
 onready var name_edit : LineEdit = $UI/NameMenu/NameEdit
+onready var intro_menu : Node2D = $UI/IntroMenu
+onready var intro_label : Label = $UI/IntroMenu/IntroLabel
+onready var save_and_load_menu : Node2D = $UI/SaveAndLoadMenu
+onready var salm_slots : Array = [$UI/SaveAndLoadMenu/Slot1, $UI/SaveAndLoadMenu/Slot2, $UI/SaveAndLoadMenu/Slot3, $UI/SaveAndLoadMenu/Slot4, $UI/SaveAndLoadMenu/Slot5, $UI/SaveAndLoadMenu/Slot6, $UI/SaveAndLoadMenu/Slot7, $UI/SaveAndLoadMenu/Slot8]
+onready var salm_title_label : Label = $UI/SaveAndLoadMenu/TitleLabel
+onready var save_confirmation_popup : ConfirmationDialog = $UI/SaveConfirmationPopUp
+onready var tutorial_menu : Node2D = $UI/TutorialMenu
+onready var tutorial_images : AnimatedSprite = $UI/TutorialMenu/TutorialImages
+onready var tutorial_title_label : Label = $UI/TutorialMenu/TitleLabel
+onready var pause_menu : Node2D = $UI/PauseMenu
+onready var http_request : HTTPRequest = $HTTPRequest
 
 #==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
@@ -107,17 +127,40 @@ onready var character = preload("res://src/objects/Character.tscn")
 func _ready() -> void:
 	rand.randomize()
 	#TESTING
-	if not Global.check_first_time():
-		ui.hide()
-		testbox.connect("modal_closed", self, "cancelled")
-		testbox.get_close_button().connect("pressed", self, "cancelled")
-		testbox.get_cancel().connect("pressed", self, "cancelled")
-		testbox.popup()
-		return
-	name_menu.show() #get name for the first time
+	# if not Global.check_first_time():
+	#	ui.hide()
+	#	testbox.connect("modal_closed", self, "cancelled")
+	#	testbox.get_close_button().connect("pressed", self, "cancelled")
+	#	testbox.get_cancel().connect("pressed", self, "cancelled")
+	#	testbox.popup()
+	#	return
+	
+	#TESTING
+	if Global.check_first_time():
+		name_menu.show() #get name for the first time
+		tutorial_menu.show()
+	
+	#Setup tracing of data for research (only for 1st, 6th and 7th day)
+	#TESTING
+	current_date = Time.get_date_string_from_system(true)
+	if !Global.user_data["SavedDataResearch"].has(current_date):
+		Global.setup_pretest_variables(current_date)
+		var cur_size = Global.user_data["SavedDataResearch"].size() 
+		if cur_size == 1 || cur_size == 6 || cur_size == 7:
+			is_pre_test = true
+			#testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
+			#testing_timer.one_shot = true
+			#testing_timer.start()
+			idle_timer.wait_time = Data.IDLE_TIME
+			idle_timer.start()
+		
 	get_current_dialogue()
 	history_text.set_scroll_follow(true)
 	SceneTransition.connect("transition_finished", self, "on_scene_transition_finished")
+	
+	#Connect buttons in save and load menu
+	for i in range(0, 8):
+		salm_slots[i].connect("pressed", self, "_on_save_or_load_progress", [i])
 
 func _process(delta : float) -> void:
 	#In charge of choice timer
@@ -127,6 +170,7 @@ func _process(delta : float) -> void:
 	if tracing_wpm:
 		total_time += delta
 	handle_scene_animation(delta)
+	handle_variable_tracing(delta)
 	
 	#RECHECK/TESTING
 	if not stats_menu.visible:
@@ -142,21 +186,28 @@ func handle_scene_animation(delta : float) -> void:
 			camera.offset = Vector2.ZERO
 			shake_strength = 0
 
+func handle_variable_tracing(delta : float) -> void:
+	current_session_time += delta
+
 #Loads necessary characters, location and scene
-func load_saved_progress():
-	var data = Global.user_data["SavedProgress"]
-	current_scene = data.scene
-	current_scene_index = data.scene_index
+func load_saved_progress(index):
+	SceneTransition.add_transition("DiamondTilesCover")
+	yield(SceneTransition, "transition_finished")
+	
+	var data = Global.user_data["SavedProgress"][index]
+	set_next_scene(data.scene, data.scene_index, false)
 	for c in data.characters:
 		add_character(c.name, c.outfit, c.expression, c.position)
 		if c.is_hidden:
 			toggle_character(c.name, true)
 	current_location = data.location
 	change_background(current_location, data.location_tint)
+	get_current_dialogue(false)
+	save_and_load_menu.hide()
 
 #Creates a character array and puts all info about the characters present
 #Then also saves scene info
-func save_progress():
+func save_progress(index : int):
 	var char_array : Array = []
 	for c in character_dict.values():
 		var char_info : Dictionary = {}
@@ -166,9 +217,10 @@ func save_progress():
 		char_info["position"] = c.current_position
 		char_info["is_hidden"] = c.is_hidden
 		char_array.append(char_info)
-	Global.add_user_data_story_progress(current_scene, current_scene_index, char_array, current_location, "#" + backgrounds.self_modulate.to_html(false))
+	Global.add_user_data_story_progress(current_scene, current_scene_index, char_array, current_location, "#" + backgrounds.self_modulate.to_html(false), Time.get_datetime_string_from_system(), backgrounds.frames.get_frame(backgrounds.animation, backgrounds.frame).resource_path, index)
 	Global.save_user_data()
 	print("Progress is saved!")
+	show_save_and_load_menu("save")
 
 #Adds a character sprite on the screen
 func add_character(name : String, outfit : String, expression : String, char_position: String):
@@ -219,6 +271,11 @@ func show_selection(selections : Array) -> void:
 		var cs = choice_selection.instance()
 		cs.next_scene_name = selections[i][1]
 		cs.next_scene_index = selections[i][2]
+		
+		# -1 indicates next dialogue
+		if cs.next_scene_index == -1:
+			cs.next_scene_index = current_scene_index+1
+		
 		cs.position = choice_selection_position.position
 		cs.position.y += (50 * i)
 		choice_selections.append(cs)
@@ -301,17 +358,21 @@ func check_word_mastery(type : String):
 		typed_word_accuracy = {}
 
 #Gets and sets the current dialogue and and calls show_colored_dialogue()
-func get_current_dialogue() -> void:
+func get_current_dialogue(include_transition : bool = true) -> void:
 	var dialogue_data = Data.dialogues[current_scene][current_scene_index]
 	var has_transition = false
 	
 	#If dialogue has transition, do that first then wait for it to emit a signal
-	if dialogue_data.has("transition"):
+	if dialogue_data.has("transition") and include_transition:
 		has_transition = true
 		SceneTransition.add_transition(dialogue_data.transition)
 		ignore_typing = true
 		yield(SceneTransition, "transition_finished")
 		ignore_typing = false
+	
+	#Show intro menu in start of new chapter
+	if current_scene_index == 0:
+		show_intro_menu(1)
 	
 	#If dialouge has goto_chapter, do this and return
 	if dialogue_data.has("goto_chapter"):
@@ -456,17 +517,19 @@ func toggle_space_label(b : bool) -> void:
 		space_label.hide()
 
 #adds history text
-func add_history_text(type : String, name : String, dialogue : String) -> void:
+func add_history_text(type : String, name : String, dialogue : String, remark : String = "") -> void:
 	var text : String = ""
 	if type == "dialogue":
-		text = "[color=#" + light_blue.to_html(false) + "]" + name + ":  [/color]" + dialogue + "\n"
+		text = "[color=#" + light_blue.to_html(false) + "]" + name + ":  [/color]" + dialogue
 	else:
-		text = "[color=#" + yellow.to_html(false) + "]" + dialogue + "[/color]\n"
-	history_text_storage += text
+		text = "[color=#" + yellow.to_html(false) + "]" + dialogue + "[/color]"
+	if remark != "":
+		text += " [color=#" +  light_orange.to_html(false) + "]" + remark + "[/color]"
+	history_text_storage += text + "\n"
 	history_text.parse_bbcode(history_text_storage)
 
 #Sets neccesary variables to be ready for the next scene
-func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
+func set_next_scene(scene_name : String, scene_index : int = 0, ready_dialogue : bool = true) -> void:
 	current_scene = scene_name
 	current_scene_index = scene_index
 	current_letter_index = 0
@@ -490,7 +553,8 @@ func set_next_scene(scene_name : String, scene_index : int = 0) -> void:
 	remove_characters(false)
 	character_dict.clear()
 	update_typebox("reset")
-	get_current_dialogue()
+	if ready_dialogue:
+		get_current_dialogue(true)
 
 #Shows the dialogue on the display with color and alignment
 func show_colored_dialogue(textbox : RichTextLabel, alignment : String = "") -> void:
@@ -552,17 +616,27 @@ func format_color_paragraph(words : Dictionary, paragraph : String, color : Colo
 			paragraph = paragraph.insert(index, color_end_tag + add_strikethrough_and_color(orig_word, color_strikethrough) + color_start_tag)
 			index = paragraph.findn(word, index + word.length() + 2 + color_end_tag.length() + color_start_tag.length())
 		#paragraph = paragraph.replacen(word, add_strikethrough(word))
-	paragraph += "[/color]"
+	paragraph += color_end_tag
 	return paragraph
 
 func add_strikethrough_and_color(word : String, color : Color) -> String:
 	return "[color=#" + color.to_html(false) + "][s]" + word + "[/s][/color]"
 
 func _unhandled_input(event : InputEvent) -> void:
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().paused = true
+		pause_menu.show()
+	
 	if ignore_typing:
 		return
 	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
+		#Reset idle timer and continue testing timer
+		if is_pre_test:
+			idle_timer.stop()
+			idle_timer.start(Data.IDLE_TIME)
+			testing_timer.paused = false
+		
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
 		
@@ -627,6 +701,14 @@ func _unhandled_input(event : InputEvent) -> void:
 			total_time = 0
 			typed_event.scancode = 32
 		
+		if (debug_mode and typed_event.scancode == 16777232):
+			current_letter_index = current_dialogue.length()
+			key_typed = character_to_type
+			wrong_letter_length = 0
+			total_time = 0
+			current_scene_index = Data.dialogues[current_scene].size()-2
+			typed_event.scancode = 16777232
+		
 		#RECHECK THIS (SPACE AFTER DIALOGUE), TESTING?
 		if current_letter_index == current_dialogue.length()-1 and (key_typed == character_to_type and wrong_letter_length <= 0):
 			#key_typed = character_to_type
@@ -672,7 +754,7 @@ func _unhandled_input(event : InputEvent) -> void:
 					show_selection(Data.dialogues[current_scene][current_scene_index].show_selection)
 					if Data.dialogues[current_scene][current_scene_index].has("show_selection_timer"):
 						set_selection_timer("start", Data.dialogues[current_scene][current_scene_index].show_selection_timer)
-					add_history_text(typing_target, character_name.text, current_dialogue)
+					add_history_text(typing_target, character_name.text, current_dialogue, current_dialogue_remark)
 					typing_target = "choice"
 					update_typebox("reset")
 				elif typing_target == "choice":
@@ -700,7 +782,7 @@ func _unhandled_input(event : InputEvent) -> void:
 						set_next_scene(chosen_selection.next_scene_name, chosen_selection.next_scene_index)
 						
 				elif typing_target == "dialogue":
-					add_history_text(typing_target, character_name.text, current_dialogue)
+					add_history_text(typing_target, character_name.text, current_dialogue, current_dialogue_remark)
 					set_next_dialogue()
 		else:
 			#Space should also be included as wrong letter
@@ -750,14 +832,88 @@ func show_stats_menu():
 	print(Global.user_data)
 	stats_menu.show()
 
+func show_intro_menu(starting_delay:float = 0):
+	#TESTING
+	return
+	intro_menu.modulate.a = 1
+	intro_menu.show()
+	var tween = intro_menu.get_node("Tween")
+	intro_label.text = Data.chapter_details[current_scene].Title + Data.chapter_details[current_scene].Subtitle
+	intro_label.percent_visible = 0
+	tween.interpolate_property(intro_label, "percent_visible", 0.0, 1.0, 2.0, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	if starting_delay > 0:
+		tween.playback_speed = 0
+		yield(get_tree().create_timer(starting_delay), "timeout")
+	tween.playback_speed = 1.0
+	yield(tween,"tween_completed")
+	yield(get_tree().create_timer(2.0), "timeout")
+	tween.interpolate_property(intro_menu, "modulate:a", intro_menu.modulate.a, 0.0, 0.75, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	tween.start()
+	yield(tween,"tween_completed")
+	intro_menu.hide()
+
+func show_save_and_load_menu(type : String) -> void:
+	if type == "save":
+		salm_title_label.text = "SAVE MENU"
+		
+	elif type == "load":
+		salm_title_label.text = "LOAD MENU"
+	
+	for i in range(0, 8):
+		if Global.user_data["SavedProgress"][i].size() <= 0:
+			salm_slots[i].text = "EMPTY"
+			salm_slots[i].get_node("Text").text = ""
+		else:
+			if Global.user_data["SavedProgress"][i].has("image_path"):
+				salm_slots[i].icon = load(Global.user_data["SavedProgress"][i]["image_path"])
+			salm_slots[i].text = ""
+			salm_slots[i].get_node("Text").text = Global.user_data["SavedProgress"][i]["scene"] + ": " + Global.user_data["SavedProgress"][i]["save_date"]
+	save_and_load_menu.show()
+
+func navigate_tutorial_menu(next : bool = true) -> void:
+	var cur_frame = tutorial_images.frame
+	var max_frame = tutorial_images.frames.get_frame_count("default")
+	
+	if next:
+		if cur_frame+1 < max_frame:
+			cur_frame += 1
+		else:
+			#Finish
+			tutorial_menu.hide()
+			
+		if cur_frame+1 == max_frame:
+			tutorial_menu.get_node("TutorialNextBtn/Label").text = "FINISH"
+				
+		if cur_frame == 1:
+			tutorial_menu.get_node("TutorialPrevBtn").show()
+	else:
+		if cur_frame > 0:
+			cur_frame -= 1
+		if cur_frame == 0:
+			tutorial_menu.get_node("TutorialPrevBtn").hide()
+		tutorial_menu.get_node("TutorialNextBtn/Label").text = "NEXT"
+		
+	tutorial_images.frame = cur_frame
+	tutorial_title_label.text = "TUTORIAL (" + String(cur_frame + 1) + "/" + String(max_frame) + ")" 
+
 #==========Connected Functions==========#
+func _on_save_or_load_progress(index):
+	if salm_title_label.text == "SAVE MENU":
+		if Global.user_data["SavedProgress"][index].has("save_date"):
+			save_slot_index = index
+			save_confirmation_popup.popup()
+			return
+		save_progress(index)
+	else:
+		load_saved_progress(index)
+		get_current_dialogue()
+
 func _on_SaveButton_pressed():
-	save_progress()
+	show_save_and_load_menu("save")
 
 func _on_LoadButton_pressed():
-	#Just restart scene for now
-	#TESTING
-	get_tree().reload_current_scene()
+	show_save_and_load_menu("load")
 
 func _on_ChoiceTimer_timeout():
 	timer_pop_up.show()
@@ -794,6 +950,55 @@ func _on_NameChangeButton_pressed():
 	Global.change_name(name_edit.text)
 	name_menu.hide()
 
-#Testing
 func _on_TestButton2_pressed():
+	if !is_pre_test:
+		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+	Global.user_data["TotalTimeSpent"][0] += current_session_time
+	Global.switch_scene("MainMenu")
+
+func _on_HideSalmMenu_pressed():
+	save_and_load_menu.hide()
+
+func _on_SaveConfirmationPopUp_confirmed():
+	save_progress(save_slot_index)
+
+func _on_TutorialNextBtn_pressed():
+	navigate_tutorial_menu()
+
+func _on_TutorialPrevBtn_pressed():
+	navigate_tutorial_menu(false)
+
+func _on_TestingTimer_timeout():
+	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
+	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
+	#Save this locally
+	Global.save_pretest_variables(current_date, wpm_res, accuracy_res, 600)
+	#Send to google forms
+	Global.send_data("PRE_TEST", Global.user_data.Name, current_date, wpm_res, accuracy_res)
+	#var http = HTTPClient.new()
+	#var data = {
+	#	"entry.1677198908" : Global.user_data.Name, 
+	#	"entry.1636518983" : current_date,
+	#	"entry.783576330" : wpm_res,
+	#	"entry.2103345753" : accuracy_res, 
+	#}
+	#var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
+	#data = http.query_string_from_dict(data)
+	#var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
+	print("10 mins minimum is sent to server")
+
+func _on_IdleTimer_timeout():
+	testing_timer.paused = true
+	idle_timer.stop()
+	print("User is idle")
+
+func _on_PauseResumeBtn_pressed():
+	pause_menu.hide()
+	get_tree().paused = false
+
+func _on_MainMenuBtn_pressed():
+	get_tree().paused = false
+	if !is_pre_test:
+		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")
