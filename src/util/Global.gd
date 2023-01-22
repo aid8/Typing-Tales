@@ -1,4 +1,6 @@
 extends Node
+#==========TODO==========#
+# Add more datas to save
 
 #==========Constant Variables==========#
 const save_path : String = "user://save.dat"
@@ -8,13 +10,38 @@ const save_path : String = "user://save.dat"
 var user_data : Dictionary = {}
 var current_menu : Node2D
 
+onready var http_request : HTTPRequest
+
 #=========Functions==========#
 func _ready():
-	set_default_user_data()
+	#Add http request
+	http_request = HTTPRequest.new()
+	add_child(http_request)
+	
+	if check_first_time():
+		set_default_user_data()
+	else:
+		load_user_data()
 
 #Insert here the scenes you want to add and to switch
 func switch_scene(scene) -> void:
-	pass
+	var scene_path
+	match scene:	
+		"StoryMode":
+			scene_path = "Test"
+		"MainMenu":
+			scene_path = "MainMenu"
+		"Challenge1":
+			scene_path = "challenges_menu/ChallengeMenu1"
+		"Challenge2":
+			scene_path = "challenges_menu/ChallengeMenu2"
+		"Challenge3":
+			scene_path = "challenges_menu/ChallengeMenu3"
+		"Challenge4":
+			scene_path = "challenges_menu/ChallengeMenu4"
+		"Challenge5":
+			scene_path = "challenges_menu/ChallengeMenu5"
+	SceneTransition.switch_scene("res://src/scenes/" + scene_path + ".tscn");
 
 func save_user_data() -> void:
 	var file = File.new()
@@ -63,9 +90,14 @@ func set_default_user_data() -> void:
 		#	"z" : {"wrong_count" : 2, "correct_count" : 8},
 		#},
 		"Items" : [],
-		"SavedProgress" : {},
+		"SavedProgress" : [{}, {}, {}, {}, {}, {}, {}, {}],
 		"FinishedScenes" : {},
+		"SavedDataResearch" : {}, #1st-7th day data collection
+		"TotalTimeSpent" : [0, 0], #[Story mode, Challenge mode]
 	}
+
+func change_name(name : String) -> void:
+	user_data["Name"] = name
 
 func add_finished_scenes(scene : String) -> void:
 	user_data["FinishedScenes"][scene] = true
@@ -73,12 +105,14 @@ func add_finished_scenes(scene : String) -> void:
 func check_if_scene_is_finished(scene : String)-> bool:
 	return user_data["FinishedScenes"].has(scene)
 
-func add_user_data_story_progress(scene : String, scene_index : int, characters : Array, location : String, location_tint : String) -> void:
-	user_data["SavedProgress"]["scene"] = scene
-	user_data["SavedProgress"]["scene_index"] = scene_index
-	user_data["SavedProgress"]["characters"] = characters
-	user_data["SavedProgress"]["location"] = location
-	user_data["SavedProgress"]["location_tint"] = location_tint
+func add_user_data_story_progress(scene : String, scene_index : int, characters : Array, location : String, location_tint : String, save_date : String, image_path : String, index: int) -> void:
+	user_data["SavedProgress"][index]["scene"] = scene
+	user_data["SavedProgress"][index]["scene_index"] = scene_index
+	user_data["SavedProgress"][index]["characters"] = characters
+	user_data["SavedProgress"][index]["location"] = location
+	user_data["SavedProgress"][index]["location_tint"] = location_tint
+	user_data["SavedProgress"][index]["save_date"] = save_date
+	user_data["SavedProgress"][index]["image_path"] = image_path
 
 func add_word_mastery(word : String, accuracy : float, check_word_if_valid : bool = false) -> void:
 	word = format_word(word)
@@ -169,6 +203,34 @@ func get_user_stats() -> Dictionary:
 	
 	#ADD INDIVIDUAL LETTER STATS
 	return dict
+
+func setup_pretest_variables(date : String) -> void:
+	user_data["SavedDataResearch"][date] = {}
+	user_data["SavedDataResearch"][date]["WPM"] = 0.0
+	user_data["SavedDataResearch"][date]["Accuracy"] = 0.0
+	user_data["SavedDataResearch"][date]["time"] = 0.0
+
+func save_pretest_variables(date : String, wpm : float, accuracy : float, time : float) -> void:
+	user_data["SavedDataResearch"][date]["WPM"] = wpm
+	user_data["SavedDataResearch"][date]["Accuracy"] = accuracy
+	user_data["SavedDataResearch"][date]["time"] = time
+
+func send_data(type : String, name : String, date : String, wpm : float, accuracy : float) -> void:
+	var http = HTTPClient.new()
+	
+	if type == "PRE_TEST":
+		var data = {
+			Data.PRE_TEST_ENTRY_CODES["name"] : name, 
+			Data.PRE_TEST_ENTRY_CODES["date"] : date,
+			Data.PRE_TEST_ENTRY_CODES["wpm"] : wpm,
+			Data.PRE_TEST_ENTRY_CODES["accuracy"] : accuracy, 
+		}
+		var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
+		data = http.query_string_from_dict(data)
+		var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
+	elif type == "POST_TEST":
+		#Add post test here
+		pass
 
 func check_first_time() -> bool:
 	var file = File.new()

@@ -1,0 +1,111 @@
+{
+    "Chapter 4 Alt 1" : [
+        {
+            "character" : "You",
+            "location" : "home",
+            "transition" : "HorizontalBars",
+            "dialogue" : "Your crushed airs is contagious, I would appreciate it if you would tone it done from here on out.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Meg snapped as she didn't took [name]'s remark lightly and interpreted it as Meg always lashing out.",
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "Oh I'm sorry, life hasn't always been rainbows and butterflies so pardon me for dampening the mood.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I didn't mean it like that, I was only suggesting that we should be optimistic rather than pessimistic.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Meg continued to fume,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Meg",
+            "expression" : "Frown_blush",
+            "dialogue" : "Oh no, I totally agree with me dampening the mood, pardon me for being realistic rather than living on a fairy tale.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] is trying her best to diffuse the situation that she gotten herself into,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "There's already enough negativity in the world Meg, let's not complicate this any further, I beg you.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Beth and Amy woke up from all the ruckus.",
+            "show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "LEFT",
+                },
+
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "RIGHT",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "Why don't you keep wishing, better yet, why don't you ask Santa to remove negativity in this world, oh that's right, he's not real.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy heard Meg lashing out and suddenly cried in outburst.",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown_blush",
+                    "position" : "RIGHT",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Meg, having witnessed Beth and Amy listening to her tantrum, decided to walk out of the door and leave.",
+            "hide_character" : ["Meg"],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Beth would follow Meg outside to talk and calm her down while [name] comfort Amy.",
+            "hide_character" : ["Beth"],
+            "skip_dialogue" : true,
+        },
+    ],
+}

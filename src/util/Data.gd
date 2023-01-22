@@ -1,10 +1,23 @@
 extends Node
 
-const MAX_CHAPTERS = 1
+const MAX_CHAPTERS = 8
+const ALTERNATIVE_CHAPTERS = [0, 1, 1, 1, 1, 1, 0, 0]
 const LETTER_MASTERY_ACCURACY_BOUND = 0.90
 #Words that have (word_mastery_accuracy_bound) 94% mastery that is typed more than or equal to (word_mastery_cound_bound) 100 times will be ignored in story mode
 const WORD_MASTERY_ACCURACY_BOUND = 0.80 #0.94
 const WORD_MASTERY_COUNT_BOUND = 1 #100
+
+const HTTP_HEADERS = ["Content-Type: application/x-www-form-urlencoded"]
+const PRE_TEST_URLFORM = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd1lLAvOQfVKT2sXNDv0maaK9TGTXrLehlv1hLRMzq0yG0TIA/formResponse"
+const PRE_TEST_ENTRY_CODES = {
+	"name" : "entry.1677198908" ,
+	"date" : "entry.1636518983",
+	"wpm" : "entry.783576330",
+	"accuracy" : "entry.2103345753", 
+}
+
+const TOTAL_COLLECTION_TIME = 600
+const IDLE_TIME = 8
 
 var characters = {
 	#Character 1
@@ -25,40 +38,187 @@ var characters = {
 }
 
 var backgrounds = {
-	"Dorm_livingroom_day" : {
+	#HOME
+	"Home_Fireplace" : {
 		"Animation" : "Home",
 		"Frame" : 0,
-		"Location" : "Xenomium Academy, Male student Dormitory",
+		"Location" : "Home, Fireplace",
 	},
 	
-	"School_classroom1-a_day" : {
+	"Home_Attic" : {
+		"Animation" : "Home",
+		"Frame" : 1,
+		"Location" : "Home, Attic",
+	},
+	
+	"Home_Bedroom" : {
+		"Animation" : "Home",
+		"Frame" : 2,
+		"Location" : "Home, Bedroom",
+	},
+	
+	"Home_Fireplace1" : {
+		"Animation" : "Home",
+		"Frame" : 3,
+		"Location" : "Home, Fireplace 2",
+	},
+	
+	"Home_Garret_Stairs1":{
+		"Animation" : "Home",
+		"Frame" : 4,
+		"Location" : "Home, Garret Stairs1",
+	},
+	
+	"Home_Garret_Stairs":{
+		"Animation" : "Home",
+		"Frame" : 5,
+		"Location" : "Home, Garret Stairs",
+	},
+	
+	"Home_Outside":{
+		"Animation" : "Home",
+		"Frame" : 6,
+		"Location" : "Home, Outside",
+	},
+	
+	"Home_Kitchen":{
+		"Animation" : "Home",
+		"Frame" : 7,
+		"Location" : "Home, Kitchen",
+	},
+	
+	"Home_DiningRoom":{
+		"Animation" : "Home",
+		"Frame" : 8,
+		"Location" : "Home, Dining Room",
+	},
+	
+	"Laurence_Home":{
+		"Animation" : "LaurenceHome",
+		"Frame" : 0,
+		"Location" : "Laurence Home, Living Room",
+	},
+	
+	"Laurence_Home_Living_Room":{
+		"Animation" : "LaurenceHome",
+		"Frame" : 1,
+		"Location" : "Laurence Home, Living Room",
+	},
+	
+	"Laurence_Home_Study_Room":{
+		"Animation" : "LaurenceHome",
+		"Frame" : 2,
+		"Location" : "Laurence Home, Grandpa Study Room",
+	},
+	
+	#SCHOOL
+	"School_Classroom1" : {
 		"Animation" : "School",
 		"Frame" : 0,
-		"Location" : "Xenomium Academy, Classroom 1-A",
+		"Location" : "School_Classroom1",
 	},
 	
-	"School_entrance" : {
+	"School_Entrance" : {
 		"Animation" : "School",
 		"Frame" : 1,
-		"Location" : "Xenomium Academy, Entrance",
+		"Location" : "School Entrance",
 	},
 	
-	"School_hallway" : {
+	"School_Hallway" : {
 		"Animation" : "School",
 		"Frame" : 2,
-		"Location" : "Xenomium Academy, Hallway",
+		"Location" : "School Hallway",
 	},
 	
 	"School_library" : {
 		"Animation" : "School",
 		"Frame" : 3,
-		"Location" : "Xenomium Academy, Library",
+		"Location" : "School Library",
 	},
 	
+	"School_Piano_Room" : {
+		"Animation" : "School",
+		"Frame" : 4,
+		"Location" : "School Piano Room",
+	},
+	
+	#OUTSIDE
 	"School_sunrise" : {
 		"Animation" : "Outside",
 		"Frame" : 0,
-		"Location" : "Xenomium Academy",
+		"Location" : "School Outside",
+	},
+	
+	"Festival" : {
+		"Animation" : "Outside",
+		"Frame" : 1,
+		"Location" : "Outside Festival",
+	},
+	
+	"Convenience_Store_Outside" : {
+		"Animation" : "Outside",
+		"Frame" : 2,
+		"Location" : "Convenience Store Outside",
+	},
+	
+	"Convenience_Store_Inside" : {
+		"Animation" : "Outside",
+		"Frame" : 9,
+		"Location" : "Convenience Store Inside",
+	},
+	
+	"Ball" : {
+		"Animation" : "Outside",
+		"Frame" : 10,
+		"Location" : "Ballroom",
+	},
+	
+	"Slums" : {
+		"Animation" : "Outside",
+		"Frame" : 3,
+		"Location" : "Slums",
+	},
+	
+	"Street_Day" : {
+		"Animation" : "Outside",
+		"Frame" : 4,
+		"Location" : "Streets",
+	},
+	
+	"Street_Evening" : {
+		"Animation" : "Outside",
+		"Frame" : 5,
+		"Location" : "Streets",
+	},
+	
+	"Street_Night" : {
+		"Animation" : "Outside",
+		"Frame" : 6,
+		"Location" : "Streets",
+	},
+	
+	"Street_Rain" : {
+		"Animation" : "Outside",
+		"Frame" : 7,
+		"Location" : "Streets",
+	},
+	
+	"Street_Stars" : {
+		"Animation" : "Outside",
+		"Frame" : 8,
+		"Location" : "Streets",
+	},
+	
+	"Frozen_Lake" : {
+		"Animation" : "Outside",
+		"Frame" : 11,
+		"Location" : "Lake",
+	},
+	
+	"Theme_Park_Day" : {
+		"Animation" : "Outside",
+		"Frame" : 12,
+		"Location" : "Theme Park",
 	},
 }
 
@@ -77,6 +237,23 @@ var expressions = {
 	"Closed_smile_blush" : 11,
 }
 
+var chapter_details = {
+	"Chapter 1" : {
+		"Title" : "CHAPTER 1: \n",
+		"Subtitle" : "PLAYING PILGRIMS",
+	},
+	
+	"Chapter 2" : {
+		"Title" : "Chapter 2: \n",
+		"Subtitle" : "A Merry Christmas",
+	},
+	
+	"Chapter 3" : {
+		"Title" : "Chapter 3: \n",
+		"Subtitle" : "The Laurence Boy",
+	},
+}
+
 #Add more if there are characters that should not be included
 var unnecessary_characters =  [".",",",":","?"," ","-"]
 
@@ -88,6 +265,18 @@ var dialogues = {
 		#Maski dai na ang remove_character/remove_all_characters, pag nag lag saka ko gamiton
 		#Note, na reset ni kada chapter so kaipuhan mo ulit specify si starting outfit, position, etc
 		#Mayong duplicate keys digdi, show once lang dapat ang keys yan nang character, location, etc.
+		{
+			"character" : "Narrator",
+			"dialogue" : "What do you want?",
+			"skip_dialogue" : true,
+			"show_selection" : [
+				["I'm so glad you came before we began!", "Chapter 2", 33],
+				["But we haven't had any breakfast yet!", "Chapter 2 Alt 1", 0],
+			],
+			"show_selection_timer" : 10,
+			"dialogue_remark" : "sighed Meg.",
+		},
+		
 		{
 			"character" : "Meg", #Always important
 			"location" : "", #Important sa starting dialouge kang chapter
@@ -105,6 +294,11 @@ var dialogues = {
 			#"position" : "LEFT", #no need kung dai man ma change
 			#"expression" : "Open", #no need kung dai man ma change
 			"dialogue" : "I am Meg!",
+			"show_selection" : [
+				["I'm so glad you came before we began!", "Chapter 2", 33],
+				["But we haven’t had any breakfast yet!", "Chapter 2 Alt 1", 0],
+			],
+			"show_selection_timer" : 10,
 		},
 		
 		#Since bago man ini, kaipuhan man yan important
@@ -171,6 +365,26 @@ var dialogues = {
 		},
 		
 		{
+			"character" : "Narrator",
+			"dialogue" : "This is Beth and Amy",
+			"show_more_characters" : [
+				{
+					"character" : "Beth",
+					"outfit" : "Casual",
+					"expression" : "Open_blush",
+					"position" : "LEFT",
+				},
+				{
+					"character" : "Amy",
+					"outfit" : "Casual",
+					"expression" : "Frown",
+					"position" : "RIGHT",
+				},
+			],
+			"skip_dialogue" : true,
+		},
+		
+		{
 			"character" : "Amy",
 			"dialogue" : "Wait!",
 			"hide_character" : ["Laurie"],
@@ -213,3 +427,13 @@ func load_chapters():
 		var chap_name = res.keys()[0]
 		dialogues[chap_name] = res[chap_name] 
 		file.close()
+	
+	for i in range(1, ALTERNATIVE_CHAPTERS.size() + 1):
+		for j in range(1, ALTERNATIVE_CHAPTERS[i-1] + 1):
+			var file = File.new()
+			file.open("res://assets/chapters/chapter" + String(i) + "Alt" + String(j) + ".json", file.READ)
+			var text = file.get_as_text()
+			var res = JSON.parse(text).result
+			var chap_name = res.keys()[0]
+			dialogues[chap_name] = res[chap_name] 
+			file.close()

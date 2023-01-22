@@ -61,3 +61,4 @@ func get_bbcode_end_color_tag() -> String:
 func _on_Platform_body_entered(body):
 	if body.type == "FallingObject":
 		body.queue_free()
+		Global.current_menu.subtract_lives()

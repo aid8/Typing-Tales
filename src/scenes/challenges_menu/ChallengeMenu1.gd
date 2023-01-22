@@ -1,7 +1,6 @@
 extends Node2D
 #==========TODO==========#
 #POLISH
-#ADD COUNTDOWN
 
 #==========Variables==========#
 var platform_index : int
@@ -12,6 +11,7 @@ var next_target_platform_index : int = -1
 var gameover : bool = false
 var total_score : int = 0
 var cur_score : int = 0
+var lives : int = 5 #new
 
 var wpm : Array = [0, 0] #[overall, count]
 var accuracy : Array = [0, 0] #[total_letters, correct_count]
@@ -33,6 +33,7 @@ onready var player : Area2D = $Player
 onready var falling_speed_timer : Timer = $FallingSpeedTimer
 onready var spawn_speed_timer : Timer = $SpawnSpeedTimer
 onready var gameover_menu : CanvasLayer = $GameOverMenu
+onready var lives_label : Label = $LivesLabel
 
 #==========Preload Variables==========#
 onready var falling_object = preload("res://src/objects/challengemenu1/FallingObject.tscn")
@@ -49,6 +50,7 @@ func _ready():
 	platform_index = rand.randi_range(0, 2)
 	switch_player_platform(1)
 	spawn_falling_object()
+	lives_label.text = "Lives: " + String(lives)
 
 func _process(delta : float) -> void:
 	if tracing_wpm:
@@ -109,14 +111,14 @@ func _unhandled_input(event : InputEvent) -> void:
 			var next_character = prompt.substr(current_letter_index, 1)
 			#print(next_character, "-", key_typed)
 			if key_typed == next_character and typed_event.unicode != 0:
-				cur_score += 10
+				#cur_score += 10
 				current_letter_index += 1
 				target_platform.set_next_character(current_letter_index)
 				if current_letter_index == prompt.length():
 					#Add and reset score
-					add_score_animation(target_platform.get_node("Position2D").global_position, cur_score)
-					total_score += cur_score
-					cur_score = 0
+					#add_score_animation(target_platform.get_node("Position2D").global_position, cur_score)
+					#total_score += cur_score
+					#cur_score = 0
 					
 					#get accuracy
 					for b in cur_accuracy:
@@ -131,9 +133,9 @@ func _unhandled_input(event : InputEvent) -> void:
 					target_platform = null
 			else:
 				cur_accuracy[current_letter_index-1] = false
-				cur_score -= 2
-				if cur_score <= 0:
-					cur_score = 0
+				#cur_score -= 2
+				#if cur_score <= 0:
+				#	cur_score = 0
 			
 		#print (typed_event.scancode)
 		if typed_event.scancode == 16777231:
@@ -158,14 +160,24 @@ func show_gameover_menu() -> void:
 		total_wpm = (wpm[0]/float(wpm[1]))
 	gameover_menu.get_node("StatsLabel").text = "Score: " + String(total_score) + "\nTotal Accuracy: " + String(total_accuracy) + "\nTotal WPM: " + String(total_wpm)
 	gameover_menu.show()
-	
-#==========Connected Functions==========#
-func _on_Player_body_entered(body):
-	if body.type == "FallingObject":
+
+func subtract_lives()-> void:
+	lives -= 1
+	lives_label.text = "Lives: " + String(lives)
+	if lives <= 0:
 		get_tree().paused = true
 		gameover = true
 		show_gameover_menu()
 		print("GAME OVER")
+
+#==========Connected Functions==========#
+func _on_Player_body_entered(body):
+	if body.type == "FallingObject":
+		#cur and total score?
+		cur_score = fall_speed
+		add_score_animation(player.position, cur_score)
+		total_score += cur_score
+		body.queue_free()
 
 func _on_FallingSpeedTimer_timeout():
 	fall_speed += additional_fall_speed
@@ -180,4 +192,8 @@ func _on_RestartButton_pressed():
 	SceneTransition.switch_scene(String(get_tree().current_scene.filename), "Curtain")
 
 func _on_MainMenuButton_pressed():
-	pass # Replace with function body.
+	Global.switch_scene("MainMenu")
+
+#Testing
+func _on_TestButton_pressed():
+	Global.switch_scene("MainMenu")

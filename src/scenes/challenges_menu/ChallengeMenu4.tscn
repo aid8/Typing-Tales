@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/scenes/challenges_menu/ChallengeMenu4.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 80, 10 )
+
+[node name="ChallengeMenu4" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TestButton" type="Button" parent="UI"]
+margin_left = 1165.0
+margin_top = 22.0
+margin_right = 1256.0
+margin_bottom = 42.0
+text = "MAIN MENU"
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+margin_left = 24.0
+margin_top = 20.0
+margin_right = 111.0
+margin_bottom = 34.0
+text = "Score:"
+
+[node name="Stage" type="Node2D" parent="."]
+position = Vector2( 646, 189 )
+
+[node name="ColorRect" type="ColorRect" parent="Stage"]
+margin_left = -127.0
+margin_top = 6.0
+margin_right = -87.0
+margin_bottom = 377.0
+
+[node name="ColorRect2" type="ColorRect" parent="Stage"]
+margin_left = 92.0
+margin_top = 6.0
+margin_right = 132.0
+margin_bottom = 377.0
+
+[node name="ColorRect3" type="ColorRect" parent="Stage"]
+margin_left = -87.0
+margin_top = 338.0
+margin_right = 92.0
+margin_bottom = 377.0
+
+[node name="StageBottom" type="Area2D" parent="Stage"]
+position = Vector2( 7, 348 )
+
+[node name="Collision" type="CollisionShape2D" parent="Stage/StageBottom"]
+shape = SubResource( 1 )
+
+[node name="SpawnBrickPosition" type="Position2D" parent="Stage"]
+position = Vector2( 0, 2 )
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="UI/TestButton" to="." method="_on_TestButton_pressed"]
+[connection signal="body_entered" from="Stage/StageBottom" to="." method="_on_StageBottom_body_entered"]
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]

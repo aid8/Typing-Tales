@@ -1,0 +1,200 @@
+{
+	"Chapter 3 Alt 1" : [
+		{
+			"character" : "Laurie",
+			"location" : "Ball",
+			"transition" : "Curtain",
+			"outfit" : "Winter",
+			"expression" : "Open",
+			"position" : "MIDDLE",
+			"dialogue" : "Yes, you shan't disturb me as I'm not in the mood for company at the moment.",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "[name] feeling mischievous, put your hands over his shoulder and said,",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "Why? What's bothering you?",
+		},
+
+		{
+			"character" : "Narrator",
+			"show_more_characters" : [
+				{
+					"character" : "Laurie",
+					"outfit" : "Winter",
+					"expression" : "Frown",
+					"position" : "MIDDLE",
+				},
+			],
+			"dialogue" : "Laurie frown and gently shove [name] which caused you to collapse in the floor and Laurie said.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Laurie",
+			"dialogue" : "Please don't creep up to me, we barely know each other.",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "Dear me, can't you take a joke? Fine, stay here all by yourself,",
+			"dialogue_remark" : "you said as you stood up and stormed your way out.",
+			"hide_character" : ["Laurie"],
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "You join Meg back in the hall and continue to mingle, people would approach both Meg and [name] to ask for a dance with them.",
+			"show_more_characters" : [
+				{
+					"character" : "Meg",
+					"outfit" : "Winter",
+					"expression" : "Open",
+					"position" : "MIDDLE",
+				},
+			],
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Male 1",
+			"dialogue" : "May I have the honor m'lady?",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "sure sure, you can.",
+		},
+
+		{
+			"character" : "Meg",
+			"expression" : "Frown",
+			"dialogue" : "that's not very lady-like, please behave yourself",
+			"dialogue_remark" : "Meg whispered to [name] .",
+		},
+
+		{
+			"character" : "Male 2",
+			"dialogue" : "May I have the honor m'lady?",
+			"dialogue_remark" : "a person asked Meg",
+		},
+
+		{
+			"character" : "Meg",
+			"expression" : "Open_blush",
+			"dialogue" : "Oh my, it's a pleasure.",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Both [name] and Meg danced their heart out until their stamina has been depleted and as the ball was reaching its 11th hour, [name] and Meg quietly waited for Hannah to pick both of them up,",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "and the journey back home was peaceful as both Meg and [name] was exhausted.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Narrator",
+			"location" : "home",
+			"transition" : "Curtain",
+			"dialogue" : "As soon as you both got home, both Beth and Amy welcomed you with a",
+			"show_more_characters" : [
+				{
+					"character" : "Meg",
+					"outfit" : "Winter",
+					"expression" : "Open",
+					"position" : "LEFT",
+				},
+
+				{
+					"character" : "Beth",
+					"outfit" : "Casual",
+					"expression" : "Open",
+					"position" : "MIDDLE",
+				},
+
+				{
+					"character" : "Amy",
+					"outfit" : "Casual",
+					"expression" : "Open",
+					"position" : "RIGHT",
+				},
+			],
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Beth and Amy",
+			"dialogue" : "Tell us about the party, tell us about the party!",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "You then proceed to tell your experience at the ball with the lavish designs and dresses. ",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "It was a hectic and exhausting night, people would interact with us and ask for a dance.",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "lastly, you recall your encounter with Laurie and talk about how unapproachable he is.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "I was hoping to get a rest from the mingling in a quiet hall, instead I came across a rude mate who can't take a joke.",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "I highly discourage you from interacting with him less you want to be push to the ground.",
+		},
+
+		{
+			"character" : "Meg",
+			"expression" : "Open",
+			"dialogue" : "Are you sure your joke wasn't offensive nor provoking?",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "I only put my arm on his shoulder and asked what's bothering him.",
+		},
+
+		{
+			"character" : "Beth",
+			"expression" : "Frown",
+			"dialogue" : "We should refrain from interacting with him then.",
+		},
+
+		{
+			"character" : "Amy",
+			"dialogue" : "But we're neighbors.",
+		},
+
+		{
+			"character" : "Beth",
+			"expression" : "Frown_blush",
+			"dialogue" : "We haven't really interacted with Laurie before, and we're not yet fully acquainted with him.",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "That settles it.",
+		},
+	],
+}

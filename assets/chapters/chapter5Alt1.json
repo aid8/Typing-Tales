@@ -1,0 +1,114 @@
+{
+	"Chapter 5 Alt 1" : [
+		{
+			"character" : "You",
+			"location" : "Lawrence_Livingroom",
+			"dialogue" : "Scary, Laurie's grandpops looks intimidating and unapproachable, I better avoid bumping into him to avoid any awkward situations.",
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Am I now, young lady,",
+			"dialogue_remark" : "said by a grumpy voice behind her.",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "You started to sweat and slowly turn your head behind you and see the intimidating person in the portrait.",
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "Yieek! Uh... uhm...",
+			"dialogue_remark" : "you screeched at the top of your lungs.",
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "That was loud and inelegant.",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "How did you get behind me?",
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Well this is my house, don't I have the right to wander around, don't I?",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "I'm sorry, I didn't mean it like that sir. ",
+			"dialogue_remark" : "You replied as your face glows red from being flustered and embarrassed.",
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Anyway, may I ask why you're here dear?",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "Oh, I was trying to nurse Laurie because he's sick.",
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Aren't you being a little bit presumptuous dear? A nurse requires medical knowledge to heal a patient to the best of their abilities.",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "Aren't you being too harsh towards me?",
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "The same could be on your depiction of me.",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "It was only my first impression of you sir.",
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "Enough bickering, I think it's time for you to head home young lady.",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "Fine, I didn't want to stay any longer anyways.",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Laurie witnessed the last bit of his grandpop's and [name]'s argument and watched as [name] walk out the door.",
+			"show_more_characters" : [
+				{
+					"character" : "Laurie",
+					"outfit" : "Casual",
+					"expression" : "Frown",
+					"position" : "MIDDLE",
+				},
+			],
+			"skip_dialogue" : true,
+		},
+
+		{
+			"character" : "Grandpa Laurence",
+			"dialogue" : "I disapprove of your \"little friend\", I expect better from you Laurie.",
+		},
+
+		{
+			"character" : "Narrator",
+			"dialogue" : "Grandpa Laurice went back to his room.",
+			"hide_character" : ["Laurie"],
+			"skip_dialogue" : true,
+		},
+	],
+}
