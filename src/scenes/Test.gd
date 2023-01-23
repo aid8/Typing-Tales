@@ -39,7 +39,7 @@ const light_blue : Color = Color("#ADD8E6")
 const light_gray : Color = Color("#D3D3D3")
 const light_orange : Color = Color("#FFD580")
 
-var current_scene : String = "Chapter 1" #"Test"
+var current_scene : String = "Chapter 3" #"Test"
 var current_scene_index: int = 0
 var current_letter_index : int = 0
 var current_location : String = ""
