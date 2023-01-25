@@ -2,7 +2,7 @@
     "Chapter 4" : [
         {
             "character" : "Meg",
-            "location" : "fireplace2",
+            "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
             "outfit" : "Casual",
             "expression" : "Frown",
@@ -163,7 +163,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "kitchen",
+            "location" : "Home_Kitchen",
             "transition" : "HorizontalBars",
             "dialogue" : "There was a momentary lull, broken by Hannah, who stalked in, laid two hot turnovers on the table, and stalked out again. These turnovers were an institution,",
             "skip_dialogue" : true,
@@ -194,7 +194,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "street",
+            "location" : "Street_Day",
             "dialogue" : "They always looked back before turning the corner, for their mother was always at the window to nod and smile, and wave her hand to them.",
             "show_more_characters" : [
                 {
@@ -261,7 +261,7 @@
             "dialogue" : "How ridiculous you are, [name]!",
             "dialouge_remark" : "But Meg laughed at the nonsense and felt better in spite of herself.",
             "show_selection" : [
-                ["Lucky for you I am, for if I put on crushed airs and tried to be dismal, as you do, we should be in a nice state. Thank goodness, I can always find something funny to keep me up. Don't croak any more, but come home jolly, there's a dear.", "Chapter 4", ],
+                ["Lucky for you I am, for if I put on crushed airs and tried to be dismal, as you do, we should be in a nice state. Thank goodness, I can always find something funny to keep me up. Don't croak any more, but come home jolly, there's a dear.", "Chapter 4", -1],
                 ["Your crushed airs is contagious, I would appreciate it if you would tone it done from here on out.", "Chapter 4 Alt", 0],
             ],
             "show_selection_timer" : 15,
@@ -300,9 +300,10 @@
 
         {
             "character" : "Narrator",
-            "location" : "livingroom",
+            "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
             "dialogue" : "Margaret found a place as nursery governess and felt rich withher small salary. As she said, she was 'fond of luxury', and her chief trouble was poverty.",
+            "show_character" : ["Meg"],
             "show_more_characters" : [
                 {
                     "character" : "Meg",

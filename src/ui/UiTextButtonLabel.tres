@@ -1,0 +1,9 @@
+[gd_resource type="DynamicFont" load_steps=2 format=2]
+
+[ext_resource path="res://assets/fonts/BarlowCondensed-SemiBold.ttf" type="DynamicFontData" id=1]
+
+[resource]
+size = 26
+outline_size = 2
+outline_color = Color( 0.49372, 0.438269, 0.927246, 1 )
+font_data = ExtResource( 1 )

@@ -39,7 +39,7 @@ const light_blue : Color = Color("#ADD8E6")
 const light_gray : Color = Color("#D3D3D3")
 const light_orange : Color = Color("#FFD580")
 
-var current_scene : String = "Chapter 3" #"Test"
+var current_scene : String = "Chapter 1" #"Test"
 var current_scene_index: int = 0
 var current_letter_index : int = 0
 var current_location : String = ""
@@ -812,10 +812,10 @@ func show_stats_menu():
 	var overall_stats = Global.get_user_stats()
 	
 	title_label.text = current_scene + " - DONE"
-	cur_stats_label.text = "Current WPM: " + String(cur_wpm) + "\nCurrent Accuracy: " + String(cur_accuracy * 100)
-	overall_stats_label.text = "Overall WPM: " + String(overall_stats["WPM"]) + "\nOverall Accuracy: " + String(overall_stats["Accuracy"] * 100)
-	time_spent_label.text = "Time Spent: " + String(chapter_play_time / 60) + " minutes"
-	letter_diff_label.text = "Keys that should be practiced: "
+	cur_stats_label.text = "CURRENT WPM: " + String(cur_wpm) + "\nCURRENT ACCURACY: " + String(stepify(cur_accuracy * 100, 0.01))
+	overall_stats_label.text = "OVERALL WPM: " + String(overall_stats["WPM"]) + "\nOVERALL ACCURACY: " + String(stepify(overall_stats["Accuracy"] * 100, 0.01))
+	time_spent_label.text = "TIME SPENT: " + String(stepify(chapter_play_time / 60, 0.01)) + " MINS"
+	letter_diff_label.text = "KEYS THAT SHOULD BE PRACTICIED: "
 	
 	#Reset time spent/RECHECK/TESTING
 	chapter_play_time = 0
@@ -823,7 +823,7 @@ func show_stats_menu():
 	var diff_letters = overall_stats["Difficult_Letters"]
 	print(diff_letters,"?")
 	if diff_letters.size() <= 0:
-		letter_diff_label.text += "None"
+		letter_diff_label.text += "NONE"
 	else:
 		for i in range(0, diff_letters.size() - 1):
 			letter_diff_label.text += String(diff_letters[i])
