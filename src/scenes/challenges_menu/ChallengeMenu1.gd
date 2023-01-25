@@ -1,8 +1,12 @@
 extends Node2D
 #==========TODO==========#
+#Add session time
 #POLISH
 
 #==========Variables==========#
+const MAX_ENLARGEMENT : int = 5
+const ENLARGEMENT_ADDITION : float = 1.2
+
 var platform_index : int
 var target_platform : Area2D = null
 var current_letter_index : int = -1
@@ -25,6 +29,8 @@ var fall_speed_time_diff : float = 10
 var spawn_timer : float = 2.0
 var subtract_spawn_time : float = 0.1
 var spawn_time_diff : float = 10
+var heart_uis : Array = []
+var cur_enlargement : int = 0
 
 #==========Onready Variables==========#
 onready var rand : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -33,11 +39,15 @@ onready var player : Area2D = $Player
 onready var falling_speed_timer : Timer = $FallingSpeedTimer
 onready var spawn_speed_timer : Timer = $SpawnSpeedTimer
 onready var gameover_menu : CanvasLayer = $GameOverMenu
+onready var game_ui : CanvasLayer = $GameUI
 onready var lives_label : Label = $LivesLabel
+onready var heart_ui_position : Position2D = $GameUI/HeartUIPosition
+onready var pause_menu : Node2D = $GameUI/PauseMenu
 
 #==========Preload Variables==========#
 onready var falling_object = preload("res://src/objects/challengemenu1/FallingObject.tscn")
 onready var score_animation = preload("res://src/objects/ScoreAnimation.tscn")
+onready var heart_ui = preload("res://src/objects/challengemenu1/HeartUI.tscn")
 
 #==========Functions==========#
 func _ready():
@@ -50,7 +60,15 @@ func _ready():
 	platform_index = rand.randi_range(0, 2)
 	switch_player_platform(1)
 	spawn_falling_object()
+	
+	#Initialize ui
 	lives_label.text = "Lives: " + String(lives)
+	for i in range(0, lives):
+		var h = heart_ui.instance()
+		heart_uis.append(h)
+		h.position = heart_ui_position.position
+		h.position.x += i * 45
+		game_ui.add_child(h)
 
 func _process(delta : float) -> void:
 	if tracing_wpm:
@@ -73,7 +91,7 @@ func spawn_falling_object() -> void:
 	platform_index = rand.randi_range(0, 2)
 	
 	if !gameover:
-		yield(get_tree().create_timer(spawn_timer), "timeout")
+		yield(get_tree().create_timer(spawn_timer, false), "timeout")
 		spawn_falling_object()
 
 func switch_player_platform(index : int) -> void:
@@ -89,6 +107,10 @@ func get_platform_words() -> Array:
 	return [platforms[0].text, platforms[1].text, platforms[2].text]
 
 func _unhandled_input(event : InputEvent) -> void:
+	if Input.is_action_pressed("ui_cancel"):
+		get_tree().paused = true
+		pause_menu.show()
+		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
@@ -158,26 +180,43 @@ func show_gameover_menu() -> void:
 		total_accuracy = (accuracy[1] / float(accuracy[0])) * 100
 	if wpm[1] > 0:
 		total_wpm = (wpm[0]/float(wpm[1]))
-	gameover_menu.get_node("StatsLabel").text = "Score: " + String(total_score) + "\nTotal Accuracy: " + String(total_accuracy) + "\nTotal WPM: " + String(total_wpm)
+	gameover_menu.get_node("StatsLabel").text = "SCORE: " + String(total_score) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1))
 	gameover_menu.show()
 
 func subtract_lives()-> void:
+	heart_uis[lives-1].frame = 1
 	lives -= 1
 	lives_label.text = "Lives: " + String(lives)
+	resize_player(false)
 	if lives <= 0:
 		get_tree().paused = true
 		gameover = true
 		show_gameover_menu()
 		print("GAME OVER")
 
+func resize_player(enlarge : bool) -> void:
+	if enlarge:
+		if cur_enlargement >= MAX_ENLARGEMENT:
+			return
+		cur_enlargement += 1
+		player.scale *= ENLARGEMENT_ADDITION
+	else:
+		if cur_enlargement <= 0:
+			return
+		cur_enlargement -= 1
+		player.scale /= ENLARGEMENT_ADDITION
+
 #==========Connected Functions==========#
 func _on_Player_body_entered(body):
 	if body.type == "FallingObject":
 		#cur and total score?
 		cur_score = fall_speed
-		add_score_animation(player.position, cur_score)
+		var edited_pos = player.position
+		edited_pos.y -= 50
+		add_score_animation(edited_pos, cur_score)
 		total_score += cur_score
 		body.queue_free()
+		resize_player(true)
 
 func _on_FallingSpeedTimer_timeout():
 	fall_speed += additional_fall_speed
@@ -192,8 +231,19 @@ func _on_RestartButton_pressed():
 	SceneTransition.switch_scene(String(get_tree().current_scene.filename), "Curtain")
 
 func _on_MainMenuButton_pressed():
+	get_tree().paused = false
+	#TODO: Add current session time here
 	Global.switch_scene("MainMenu")
 
 #Testing
 func _on_TestButton_pressed():
+	Global.switch_scene("MainMenu")
+
+func _on_PauseResumeBtn_pressed():
+	pause_menu.hide()
+	get_tree().paused = false
+
+func _on_MainMenuBtn_pressed():
+	get_tree().paused = false
+	#TODO: Add current session time here
 	Global.switch_scene("MainMenu")

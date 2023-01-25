@@ -220,6 +220,12 @@ var backgrounds = {
 		"Frame" : 12,
 		"Location" : "Theme Park",
 	},
+	
+	"Outdoor_Terrace" : {
+		"Animation" : "Outside",
+		"Frame" : 13,
+		"Location" : "Outdoor Terrace",
+	},
 }
 
 var expressions = {

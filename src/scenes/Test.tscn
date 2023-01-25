@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=70 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/Home/fireplace2.png" type="Texture" id=2]
@@ -44,6 +44,11 @@
 [ext_resource path="res://assets/backgrounds/Outside/Ballroom.jpg" type="Texture" id=42]
 [ext_resource path="res://assets/backgrounds/Outside/Frozen_Lake.jpg" type="Texture" id=43]
 [ext_resource path="res://assets/backgrounds/Outside/Theme_Park_Day.png" type="Texture" id=44]
+[ext_resource path="res://assets/backgrounds/Outside/Outside_Terrace.png" type="Texture" id=45]
+[ext_resource path="res://src/ui/UiTextButtonLabel.tres" type="DynamicFont" id=46]
+[ext_resource path="res://assets/ui/statsmenubg2.png" type="Texture" id=47]
+[ext_resource path="res://assets/ui/TitleBanner.png" type="Texture" id=48]
+[ext_resource path="res://assets/ui/chapternewbg.png" type="Texture" id=49]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -57,7 +62,7 @@ animations = [ {
 "name": "LaurenceHome",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 9 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 40 ), ExtResource( 37 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 35 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 24 ), ExtResource( 23 ), ExtResource( 26 ), ExtResource( 40 ), ExtResource( 37 ), ExtResource( 39 ), ExtResource( 38 ), ExtResource( 35 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ) ],
 "loop": true,
 "name": "Outside",
 "speed": 5.0
@@ -96,12 +101,6 @@ font_data = ExtResource( 4 )
 size = 31
 font_data = ExtResource( 5 )
 
-[sub_resource type="DynamicFont" id=8]
-size = 26
-outline_size = 2
-outline_color = Color( 0.49372, 0.438269, 0.927246, 1 )
-font_data = ExtResource( 4 )
-
 [sub_resource type="DynamicFont" id=5]
 size = 26
 outline_size = 2
@@ -117,27 +116,26 @@ font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 45
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
+outline_color = Color( 0.243137, 0.27451, 0.313726, 1 )
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=12]
-size = 25
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
+size = 24
+outline_size = 3
+outline_color = Color( 0.188235, 0.219608, 0.262745, 1 )
+font_data = ExtResource( 27 )
 
 [sub_resource type="DynamicFont" id=13]
-size = 25
-outline_size = 2
-outline_color = Color( 0, 0, 0, 1 )
-font_data = ExtResource( 4 )
+size = 24
+outline_size = 3
+outline_color = Color( 0.188235, 0.219608, 0.262745, 1 )
+font_data = ExtResource( 27 )
 
 [sub_resource type="DynamicFont" id=14]
 size = 22
-outline_size = 2
-outline_color = Color( 0.305882, 0.490196, 0.266667, 1 )
-font_data = ExtResource( 4 )
+outline_size = 3
+outline_color = Color( 0.227451, 0.513726, 0.164706, 1 )
+font_data = ExtResource( 27 )
 
 [sub_resource type="DynamicFont" id=15]
 size = 20
@@ -166,12 +164,6 @@ outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 4 )
 
-[sub_resource type="DynamicFont" id=18]
-size = 50
-outline_size = 2
-outline_color = Color( 0.376471, 0.329412, 0.380392, 1 )
-font_data = ExtResource( 27 )
-
 [sub_resource type="DynamicFont" id=19]
 size = 30
 outline_size = 2
@@ -190,6 +182,12 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="DynamicFont" id=18]
+size = 45
+outline_size = 5
+outline_color = Color( 0.243137, 0.27451, 0.313726, 1 )
+font_data = ExtResource( 27 )
 
 [node name="Test" type="Node2D"]
 script = ExtResource( 1 )
@@ -272,7 +270,7 @@ margin_bottom = 706.0
 [node name="Label" type="Label" parent="UI/HistoryButton"]
 margin_right = 78.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "HISTORY"
 
 [node name="SaveButton" type="TextureButton" parent="UI"]
@@ -284,7 +282,7 @@ margin_bottom = 706.0
 [node name="Label" type="Label" parent="UI/SaveButton"]
 margin_right = 53.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "SAVE"
 align = 1
 valign = 1
@@ -298,7 +296,7 @@ margin_bottom = 706.0
 [node name="Label" type="Label" parent="UI/LoadButton"]
 margin_right = 53.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "LOAD"
 align = 1
 valign = 1
@@ -373,63 +371,70 @@ margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 0.6 )
 
+[node name="TitleBanner" type="Sprite" parent="UI/StatsMenu"]
+position = Vector2( 640, 144 )
+scale = Vector2( 5.75, 5.75 )
+texture = ExtResource( 48 )
+
+[node name="Statsmenubg" type="Sprite" parent="UI/StatsMenu"]
+position = Vector2( 640, 400 )
+scale = Vector2( 7.16667, 7.16667 )
+texture = ExtResource( 47 )
+
 [node name="TitleLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 2.0
-margin_top = 138.0
-margin_right = 1278.0
-margin_bottom = 192.0
+margin_top = 112.0
+margin_right = 1276.0
+margin_bottom = 166.0
+custom_colors/font_color = Color( 0.188235, 0.219608, 0.262745, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "CHAPTER 1 - DONE"
 align = 1
 valign = 1
 
 [node name="CurrentStatsLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 303.0
-margin_top = 242.0
-margin_right = 588.0
-margin_bottom = 319.0
+margin_left = 336.0
+margin_top = 280.0
+margin_right = 568.0
+margin_bottom = 357.0
 custom_fonts/font = SubResource( 12 )
-text = "Current WPM:
-Current Accuracy:"
-align = 1
+text = "CURRENT WPM: 999
+CURRENT ACCURACY: 99"
 valign = 1
 
 [node name="OverallStatsLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 729.0
-margin_top = 240.0
-margin_right = 994.0
-margin_bottom = 317.0
+margin_left = 336.0
+margin_top = 368.0
+margin_right = 560.0
+margin_bottom = 445.0
 custom_fonts/font = SubResource( 13 )
-text = "Overall WPM:
-Overall Accuracy:"
-align = 1
+text = "OVERALL WPM: 99
+OVERALL ACCURACY: 99"
 valign = 1
 
 [node name="TimeSpentLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 5.0
-margin_top = 371.0
-margin_right = 1276.0
-margin_bottom = 404.0
+margin_left = 336.0
+margin_top = 464.0
+margin_right = 547.0
+margin_bottom = 500.0
 custom_fonts/font = SubResource( 13 )
-text = "Time Spent:"
-align = 1
+text = "TIME SPENT:"
 valign = 1
 
 [node name="LetterDifficultyLabel" type="Label" parent="UI/StatsMenu"]
-margin_top = 398.0
-margin_right = 1270.0
-margin_bottom = 475.0
+margin_left = 720.0
+margin_top = 280.0
+margin_right = 952.0
+margin_bottom = 520.0
 custom_fonts/font = SubResource( 14 )
-text = "Keys that should be practiced: "
+text = "KEYS THAT SHOULD BE PRACTICED:"
 align = 1
-valign = 1
 autowrap = true
 
 [node name="InfoLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 518.0
-margin_top = 586.0
-margin_right = 762.0
-margin_bottom = 663.0
+margin_left = 512.0
+margin_top = 568.0
+margin_right = 756.0
+margin_bottom = 645.0
 custom_fonts/font = SubResource( 15 )
 text = "Press space to continue..."
 align = 1
@@ -469,7 +474,7 @@ margin_bottom = 705.0
 margin_left = 4.0
 margin_right = 57.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "EXIT"
 align = 1
 valign = 1
@@ -502,17 +507,17 @@ margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 0.6 )
 
-[node name="TextBG" type="ColorRect" parent="UI/NameMenu"]
-margin_top = 272.0
-margin_right = 1280.0
-margin_bottom = 344.0
-color = Color( 0, 0, 0, 0.603922 )
+[node name="TitleBanner" type="Sprite" parent="UI/NameMenu"]
+position = Vector2( 645, 302 )
+scale = Vector2( 5.75, 5.75 )
+texture = ExtResource( 48 )
 
 [node name="TitleLabel" type="Label" parent="UI/NameMenu"]
-margin_left = 472.0
-margin_top = 280.0
-margin_right = 822.0
-margin_bottom = 334.0
+margin_left = 469.0
+margin_top = 270.0
+margin_right = 819.0
+margin_bottom = 324.0
+custom_colors/font_color = Color( 0.188235, 0.219608, 0.262745, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "WHAT IS YOUR NAME?"
 align = 1
@@ -539,29 +544,8 @@ margin_bottom = 473.0
 margin_left = 9.0
 margin_right = 89.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "CONFIRM"
-align = 1
-valign = 1
-
-[node name="IntroMenu" type="Node2D" parent="UI"]
-visible = false
-
-[node name="Tween" type="Tween" parent="UI/IntroMenu"]
-
-[node name="Background" type="ColorRect" parent="UI/IntroMenu"]
-margin_right = 1280.0
-margin_bottom = 720.0
-color = Color( 0, 0, 0, 1 )
-
-[node name="IntroLabel" type="Label" parent="UI/IntroMenu"]
-margin_left = 3.0
-margin_top = 280.0
-margin_right = 1281.0
-margin_bottom = 429.0
-custom_fonts/font = SubResource( 18 )
-text = "CHAPTER 1: 
-A LITTLE NITEMARE"
 align = 1
 valign = 1
 
@@ -573,17 +557,16 @@ margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 0.6 )
 
-[node name="TextBG" type="ColorRect" parent="UI/SaveAndLoadMenu"]
-margin_top = 70.0
-margin_right = 1280.0
-margin_bottom = 142.0
-color = Color( 0, 0, 0, 0.603922 )
+[node name="TitleBanner" type="Sprite" parent="UI/SaveAndLoadMenu"]
+position = Vector2( 640, 104 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 48 )
 
 [node name="TitleLabel" type="Label" parent="UI/SaveAndLoadMenu"]
-margin_left = 1.0
-margin_top = 77.0
-margin_right = 1279.0
-margin_bottom = 131.0
+margin_top = 72.0
+margin_right = 1280.0
+margin_bottom = 126.0
+custom_colors/font_color = Color( 0.298039, 0.270588, 0.282353, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "SAVE MENU"
 align = 1
@@ -751,7 +734,7 @@ margin_bottom = 705.0
 margin_left = 4.0
 margin_right = 57.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "EXIT"
 align = 1
 valign = 1
@@ -764,16 +747,16 @@ scale = Vector2( 0.667, 0.667 )
 frames = SubResource( 21 )
 centered = false
 
-[node name="TextBG" type="ColorRect" parent="UI/TutorialMenu"]
-margin_top = 80.0
-margin_right = 1280.0
-margin_bottom = 152.0
-color = Color( 0, 0, 0, 0.603922 )
+[node name="TitleBanner" type="Sprite" parent="UI/TutorialMenu"]
+position = Vector2( 640, 120 )
+scale = Vector2( 5.5, 5.5 )
+texture = ExtResource( 48 )
 
 [node name="TitleLabel" type="Label" parent="UI/TutorialMenu"]
 margin_top = 88.0
 margin_right = 1278.0
 margin_bottom = 142.0
+custom_colors/font_color = Color( 0.188235, 0.219608, 0.262745, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "TUTORIAL (1/7)"
 align = 1
@@ -788,7 +771,7 @@ margin_bottom = 705.0
 [node name="Label" type="Label" parent="UI/TutorialMenu/TutorialNextBtn"]
 margin_right = 53.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "NEXT"
 align = 1
 valign = 1
@@ -803,7 +786,7 @@ margin_bottom = 705.0
 [node name="Label" type="Label" parent="UI/TutorialMenu/TutorialPrevBtn"]
 margin_right = 53.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "PREV"
 align = 1
 valign = 1
@@ -817,17 +800,21 @@ margin_right = 1280.0
 margin_bottom = 720.0
 color = Color( 0, 0, 0, 0.6 )
 
-[node name="TextBG" type="ColorRect" parent="UI/PauseMenu"]
-margin_top = 112.0
-margin_right = 1280.0
-margin_bottom = 184.0
-color = Color( 0, 0, 0, 0.603922 )
+[node name="TitleBanner" type="Sprite" parent="UI/PauseMenu"]
+position = Vector2( 640, 134 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 48 )
+
+[node name="Statsmenubg" type="Sprite" parent="UI/PauseMenu"]
+position = Vector2( 640, 376 )
+scale = Vector2( 6.66667, 6.66667 )
+texture = ExtResource( 47 )
 
 [node name="TitleLabel" type="Label" parent="UI/PauseMenu"]
-margin_left = 1.0
-margin_top = 119.0
-margin_right = 1279.0
-margin_bottom = 173.0
+margin_top = 102.0
+margin_right = 1278.0
+margin_bottom = 156.0
+custom_colors/font_color = Color( 0.243137, 0.27451, 0.313726, 1 )
 custom_fonts/font = SubResource( 11 )
 text = "PAUSED"
 align = 1
@@ -842,7 +829,7 @@ margin_bottom = 705.0
 [node name="Label" type="Label" parent="UI/PauseMenu/PauseResumeBtn"]
 margin_right = 71.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "RESUME"
 align = 1
 valign = 1
@@ -856,46 +843,74 @@ margin_bottom = 705.0
 [node name="Label" type="Label" parent="UI/PauseMenu/MainMenuBtn"]
 margin_right = 71.0
 margin_bottom = 32.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = ExtResource( 46 )
 text = "MAIN MENU"
 align = 1
 valign = 1
 
 [node name="BGMLabel" type="Label" parent="UI/PauseMenu"]
-margin_left = 386.0
-margin_top = 250.0
-margin_right = 574.0
-margin_bottom = 290.0
+margin_left = 368.0
+margin_top = 256.0
+margin_right = 565.0
+margin_bottom = 296.0
 custom_fonts/font = SubResource( 12 )
 text = "BACKGROUND MUSIC:"
 align = 2
 valign = 1
 
 [node name="BGMSlide" type="HSlider" parent="UI/PauseMenu"]
-margin_left = 597.0
-margin_top = 261.0
-margin_right = 845.0
-margin_bottom = 277.0
+margin_left = 712.0
+margin_top = 264.0
+margin_right = 885.0
+margin_bottom = 280.0
 rect_scale = Vector2( 1.25, 1.25 )
 ticks_on_borders = true
 
 [node name="SFXLabel" type="Label" parent="UI/PauseMenu"]
-margin_left = 386.0
-margin_top = 296.0
-margin_right = 573.0
-margin_bottom = 336.0
+margin_left = 376.75
+margin_top = 312.0
+margin_right = 563.75
+margin_bottom = 352.0
 custom_fonts/font = SubResource( 12 )
 text = "SOUND EFFECTS:"
 align = 2
 valign = 1
 
 [node name="SFXSlide" type="HSlider" parent="UI/PauseMenu"]
-margin_left = 597.0
-margin_top = 309.0
-margin_right = 845.0
-margin_bottom = 325.0
+margin_left = 712.0
+margin_top = 320.0
+margin_right = 885.0
+margin_bottom = 336.0
 rect_scale = Vector2( 1.25, 1.25 )
 ticks_on_borders = true
+
+[node name="IntroMenu" type="Node2D" parent="UI"]
+visible = false
+
+[node name="Tween" type="Tween" parent="UI/IntroMenu"]
+
+[node name="Background" type="ColorRect" parent="UI/IntroMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="Chapternewbg" type="Sprite" parent="UI/IntroMenu"]
+position = Vector2( 632, 360 )
+rotation = -1.56934
+scale = Vector2( 8.06092, 8.06092 )
+texture = ExtResource( 49 )
+
+[node name="IntroLabel" type="Label" parent="UI/IntroMenu"]
+margin_left = 3.0
+margin_top = 280.0
+margin_right = 1281.0
+margin_bottom = 429.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "CHAPTER 1: 
+A LITTLE NITEMARE"
+align = 1
+valign = 1
 
 [node name="TestBox" type="ConfirmationDialog" parent="."]
 margin_left = 495.0
