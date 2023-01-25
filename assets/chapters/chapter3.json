@@ -46,7 +46,7 @@
 
         {
             "character" : "Meg",
-            "dialogue" : "Mrs. Gardiner would be happy to see Miss March and Miss Josephine at a little dance on New Year's Eve.' Marmee is willing we should go, now what shall we wear?",
+            "dialogue" : "Mrs. Gardiner would be happy to see Miss March and Miss [name] at a little dance on New Year's Eve.' Marmee is willing we should go, now what shall we wear?",
         },
 
         {
@@ -427,12 +427,22 @@
         {
             "character" : "You",
             "dialogue" : "Shan't I disturb you?",
+            "show_selection" : [
+                ["Not a bit. I only came here", "Chapter 3", -1],
+                ["Yes, you shan't disturb me,", "Chapter 3 Alt 1", 0],
+            ],
+            "show_selection_timer" : 15,
         },
 
         {
             "character" : "Laurie",
             "expression" : "Open",
-            "dialogue" : "Not a bit. I only came here because I don't know many people and felt rather strange at first, you know.",
+            "dialogue" : "Not a bit. I only came here",
+        },
+
+        {
+            "character" : "Laurie",
+            "dialogue" : "because I don't know many people and felt rather strange at first, you know.",
         },
 
         {
@@ -514,7 +524,7 @@
 
         {
             "character" : "You",
-            "dialogue" : "I hate my name, too, so sentimental! I wish every one would say Jo instead of Josephine. How did you make the boys stop calling you Dora?",
+            "dialogue" : "I hate my name, too, so sentimental! I wish every one would say [name] instead of [name]. How did you make the boys stop calling you Dora?",
         },
 
         {
@@ -861,7 +871,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "So Meg reclined, with rubbers well hidden, and Jo went blundering away to the dining room, which she found after going into a china closet,",
+            "dialogue" : "So Meg reclined, with rubbers well hidden, and [name] went blundering away to the dining room, which she found after going into a china closet,",
             "skip_dialogue" : true,
         },
 
@@ -990,7 +1000,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "That settled it, and telling him of Meg's mishap, Jo gratefully accepted and rushed up to bring down the rest of the party. Hannah hated rain as much as a cat does so she made no trouble,",
+            "dialogue" : "That settled it, and telling him of Meg's mishap, [name] gratefully accepted and rushed up to bring down the rest of the party. Hannah hated rain as much as a cat does so she made no trouble,",
             "skip_dialogue" : true,
         },
 
@@ -1003,6 +1013,7 @@
         {
             "character" : "Narrator",
             "dialogue" : "Laurie went on the box so Meg could keep her foot up, and the girls talked over their party in freedom.",
+            "hide_character" : ["Laurie"],
             "skip_dialogue" : true,
         },
 
@@ -1047,27 +1058,38 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
+            "location" : "Home_Outside", 
+            "transition" : "HorizontalBars",
             "dialogue" : "You told her adventures, and by the time she had finished they were at home. With many thanks, they said good night and crept in, hoping to disturb no one,",
             "skip_dialogue" : true,
-            "hide_character" : ["Laurie"],
         },
 
         {
             "character" : "Narrator",
-           "dialogue" : "but the instant their door creaked, two little nightcaps bobbed up, and two sleepy but eager voices cried out...",
-           "skip_dialogue" : true,
-           "show_character" : ["Beth", "Amy"],
+            "dialogue" : "but the instant their door creaked, two little nightcaps bobbed up, and two sleepy but eager voices cried out...",
+            "skip_dialogue" : true,
+            "show_character" : ["Beth", "Amy"],
        },
 
         {
-            "character" : "Amy and Beth",
+            "character" : "Beth and Amy",
             "dialogue" : "Tell about the party! Tell about the party!",
         },
 
         {
             "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "HorizontalBars",
             "dialogue" : "With what Meg called 'a great want of manners' [name] had saved somebonbons for the little girls, and they soon subsided, after hearing the most thrilling events of the evening.",
+            "show_more_characters" : [
+				{
+					"character" : "Meg",
+					"outfit" : "Casual",
+					"expression" : "Open",
+					"position" : "LEFT",
+				},
+			],
             "skip_dialogue" : true,
         },
 
@@ -1080,7 +1102,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "as Jo bound up her foot with arnica and brushed her hair.",
+            "dialogue" : "as [name] bound up her foot with arnica and brushed her hair.",
             "skip_dialogue" : true,
         },
 

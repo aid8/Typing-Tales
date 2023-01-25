@@ -7,7 +7,13 @@
 			"outfit" : "Winter",
 			"expression" : "Open",
 			"position" : "MIDDLE",
-			"dialogue" : "Yes, you shan't disturb me as I'm not in the mood for company at the moment.",
+			"dialogue" : "Yes, you shan't disturb me,",
+		},
+
+		{
+			"character" : "Laurie",
+			"expression" : "Frown_blush",
+			"dialogue" : "as I'm not in the mood for company at the moment.",
 		},
 
 		{
@@ -37,6 +43,7 @@
 
 		{
 			"character" : "Laurie",
+			"expression" : "Frown_blush",
 			"dialogue" : "Please don't creep up to me, we barely know each other.",
 		},
 
@@ -104,7 +111,7 @@
 
 		{
 			"character" : "Narrator",
-			"location" : "home",
+			"location" : "Home_Outside",
 			"transition" : "Curtain",
 			"dialogue" : "As soon as you both got home, both Beth and Amy welcomed you with a",
 			"show_more_characters" : [
@@ -135,11 +142,23 @@
 		{
 			"character" : "Beth and Amy",
 			"dialogue" : "Tell us about the party, tell us about the party!",
+			"hide_character" : ["Meg"],
 		},
 
 		{
 			"character" : "Narrator",
+			"location" : "Home_Fireplace1",
+			"transition" : "Curtain",
 			"dialogue" : "You then proceed to tell your experience at the ball with the lavish designs and dresses. ",
+			"show_character" : ["Meg"],
+			"show_more_characters" : [
+				{
+					"character" : "Meg",
+					"outfit" : "Casual",
+					"expression" : "Open",
+					"position" : "LEFT",
+				},
+			],
 			"skip_dialogue" : true,
 		},
 
