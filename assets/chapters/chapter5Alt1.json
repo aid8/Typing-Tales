@@ -2,8 +2,13 @@
 	"Chapter 5 Alt 1" : [
 		{
 			"character" : "You",
-			"location" : "Lawrence_Livingroom",
-			"dialogue" : "Scary, Laurie's grandpops looks intimidating and unapproachable, I better avoid bumping into him to avoid any awkward situations.",
+			"location" : "Laurence_Home_Living_Room",
+			"dialogue" : "Scary, Laurie's grandpops looks intimidating",
+		},
+
+		{
+			"character" : "You",
+			"dialogue" : "and unapproachable, I better avoid bumping into him to avoid any awkward situations.",
 		},
 
 		{

@@ -4,14 +4,9 @@
 			"character" : "Meg",
 			"location" : "Home_Fireplace1",
             "transition" : "Curtain",
-            "show_more_characters" : [
-                {
-                    "character" : "Meg",
-                    "outfit" : "Casual",
-                    "expression" : "Open",
-                    "position" : "LEFT",
-                },
-            ],
+            "outfit" : "Casual",
+            "expression" : "Open",
+            "position" : "LEFT",
 			"dialogue" : "What in the world are you going to do now, [name]?",
             "dialogue_remark" : "Meg asked one snowy afternoon, as her sister came tramping through the hall, in rubber boots, old sack, and hood, with a broom in one hand and a shovel in the other.",
 		},
@@ -35,7 +30,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Garden",
+            "location" : "Outdoor_Terrace",
             "transition" : "Curtain",
             "dialogue" : "Meg went back to toast her feet and read Ivanhoe, and [name] began to dig paths with great energy. The snow was light, and with her broom she soon swept a path all round the garden,",
             "skip_dialogue" : true,
@@ -50,7 +45,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Street",
+            "location" : "Street_Day",
             "transition" : "Curtain",
             "dialogue" : "Now, the garden separated the Marches' house from that of Mr. Laurence. Both stood in a suburb of the city, which was still countrylike, with groves and lawns, large gardens, and quiet streets.",
             "skip_dialogue" : true,
@@ -157,7 +152,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Laurie's_Room",
+            "location" : "Laurence_Home_Living_Room",
             "transition" : "Curtain",
             "dialogue" : "Laurie opened the window, and croaked out as hoarsely as a raven...",
             "skip_dialogue" : true,
@@ -165,14 +160,9 @@
 
         {
 			"character" : "Laurie",
-            "show_more_characters" : [
-                {
-                    "character" : "Laurie",
-                    "outfit" : "Casual",
-                    "expression" : "Open",
-                    "position" : "MIDDLE",
-                },
-            ],
+            "outfit" : "Casual",
+            "expression" : "Open",
+            "position" : "MIDDLE",
 			"dialogue" : "Better, thank you. I've had a bad cold, and been shut up a week.",
 		},
 
@@ -236,6 +226,7 @@
 
         {
 			"character" : "Laurie",
+            "expression" : "Open_blush",
 			"dialogue" : "So I do! Will you come, please?",
             "dialogue_remark" : "cried Laurie.",
 		},
@@ -248,6 +239,14 @@
         {
             "character" : "Narrator",
             "dialogue" : "With that, [name] shouldered her broom and marched into the house, wondering what they would all say to her. Laurie was in a flutter of excitement at the idea of having company,",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "MIDDLE",
+                },
+            ],
             "skip_dialogue" : true,
         },
 
@@ -260,12 +259,20 @@
         {
             "character" : "Narrator",
             "dialogue" : "of half a dozen servants, was anything but neat. Presently there came a loud ring, than a decided voice, asking for 'Mr. Laurie', and a surprised-looking servant came running up to announce a young lady.",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
             "skip_dialogue" : true,
         },
 
         {
 			"character" : "Laurie",
-            "location" : "Lawrence_Livingroom",
+            "location" : "Laurence_Home",
             "transition" : "Curtain",
 			"dialogue" : "All right, show her up, it's Miss [name],",
             "dialogue_remark" : "Laurie said, going to the door of his little parlor to meet [name], who appeared, looking rosy and quite at her ease, with a covered dish in one hand and Beth's three kittens in the other.",
@@ -279,6 +286,8 @@
 
         {
 			"character" : "You",
+            "location" : "Laurence_Home_Living_Room",
+            "transition" : "Curtain",
 			"dialogue" : "Mother sent her love, and was glad if I could do anything for you. Meg wanted me to bring some of her blanc mange, she makes it very nicely, and Beth thought her cats would be comforting.",
 		},
 
@@ -365,7 +374,6 @@
 
         {
 			"character" : "You",
-            "outfit" : "Casual",
 			"dialogue" : "Not a bit. I'll talk all day if you'll only set me going. Beth says I never know when to stop.",
 		},
 
@@ -585,7 +593,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Studyroom",
+            "location" : "Laurence_Home_Study_Room",
             "transition" : "Curtain",
             "dialogue" : "And so, at last they came to the library, where you clapped your hands and pranced, as you always did when especially delighted.",
             "skip_dialogue" : true,
@@ -674,8 +682,8 @@
             "dialogue" : "Laurie went away, and his guest amused herself in her own way. She was standing before a fine portrait of the old gentleman when the door opened again, and without turning, she said decidedly,",
             "hide_character" : ["Laurie"],
             "show_selection" : [
-                ["I'm sure now that I shouldn't be afraid of him, for he's got kind eyes, though his mouth is grim, and he looks as if he had a tremendous will of his own. He isn't as handsome as my grandfather, but I like him.", "Chapter 5", ],
-                ["Scary, Laurie's grandpops looks intimidating and unapproachable, I better avoid bumping into him to avoid any awkward situations.", "Chapter 5 Alt", 0],
+                ["I'm sure now that I shouldn't be afraid of him,", "Chapter 5", -1],
+                ["Scary, Laurie's grandpops looks intimidating", "Chapter 5 Alt 1", 0],
             ],
             "show_selection_timer" : 15,
             "skip_dialogue" : true,
@@ -683,7 +691,12 @@
 
         {
 			"character" : "You",
-			"dialogue" : "I'm sure now that I shouldn't be afraid of him, for he's got kind eyes, though his mouth is grim, and he looks as if he had a tremendous will of his own. He isn't as handsome as my grandfather, but I like him.",
+			"dialogue" : "I'm sure now that I shouldn't be afraid of him,",
+		},
+
+        {
+			"character" : "You",
+			"dialogue" : "for he's got kind eyes, though his mouth is grim, and he looks as if he had a tremendous will of his own. He isn't as handsome as my grandfather, but I like him.",
 		},
 
         {
@@ -837,6 +850,7 @@
         {
             "character" : "Narrator",
             "dialogue" : "said the old gentleman, as Laurie came running downstairs and brought up with a start of surprise at the astounding sight of [name] arm in arm with his redoubtable grandfather.",
+            "show_character" : ["Laurie"],
             "show_more_characters" : [
                 {
                     "character" : "Laurie",
@@ -892,19 +906,19 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "If the Laurences had been what [name] called 'prim and poky', she would not have got on at all, for such people always made her shy and awkward. But finding them free and easy, she was so herself, and made a good impression.",
+            "dialogue" : "If the Laurences had been what [name] called 'prim and poky', she would not have got on at all, for such people always made her shy and awkward. But finding them free and easy, she was so herself,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : " When they rose she proposed to go, but Laurie said he had something more to show her, and took her away to the conservatory, which had been lighted for her benefit.",
+            "dialogue" : "and made a good impression. When they rose she proposed to go, but Laurie said he had something more to show her, and took her away to the conservatory, which had been lighted for her benefit.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "location" : "Outside_Terrace",
+            "location" : "Outdoor_Terrace",
             "transition" : "Curtain",
             "dialogue" : " It seemed quite fairylike to [name], as she went up and down the walks, enjoying the blooming walls on either side, the soft light, the damp sweet air,",
             "skip_dialogue" : true,
@@ -937,7 +951,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Piano_Room",
+            "location" : "Laurence_Home",
             "transition" : "Curtain",
             "dialogue" : "They found Mr. Laurence standing before the fire in the great drawing room, but [name]'s attention was entirely absorbed by a grand piano, which stood open.",
             "skip_dialogue" : true,
@@ -974,13 +988,13 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "So Laurie played and [name] listened, with her nose luxuriously buried in heliotrope and tea roses. Her respect and regard for the 'Laurence' boy increased very much, for he played remarkably well and didn't put on any airs. ",
+            "dialogue" : "So Laurie played and [name] listened, with her nose luxuriously buried in heliotrope and tea roses. Her respect and regard for the 'Laurence' boy increased very much,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "She wished Beth could hear him, but she did not say so, only praised him till he was quite abashed, and hisgrandfather came to his rescue.",
+            "dialogue" : "for he played remarkably well and didn't put on any airs. She wished Beth could hear him, but she did not say so, only praised him till he was quite abashed, and hisgrandfather came to his rescue.",
             "skip_dialogue" : true,
         },
 
@@ -1051,7 +1065,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "livingroom",
+            "location" : "Home_Fireplace1",
             "transition" : "Curtain",
             "dialogue" : "When all the afternoon's adventures had been told, the family felt inclined to go visiting in a body, for each found something very attractive in the big house on the other side of the hedge.",
             "skip_dialogue" : true,
@@ -1097,7 +1111,8 @@
 
         {
             "character" : "Meg",
-           "show_more_characters" : [
+            "show_character" : ["Meg"],
+            "show_more_characters" : [
                 {
                 "character" : "Meg",
                 "outfit" : "Casual",
@@ -1105,8 +1120,8 @@
                 "position" : "LEFT",
                 },
             ],
-           "dialogue" : "Dear me, how romantic!",
-           "dialogue_remark" : "Meg exclaimed.",
+            "dialogue" : "Dear me, how romantic!",
+            "dialogue_remark" : "Meg exclaimed.",
         },
        
        {
@@ -1172,28 +1187,18 @@
 
        {
         "character" : "Amy",
-        "show_more_characters" : [
-            {
-                "character" : "Amy",
-                "outfit" : "Casual",
-                "expression" : "Open",
-                "position" : "MIDDLE",
-            },
-        ],
+        "outfit" : "Casual",
+        "expression" : "Open",
+        "position" : "MIDDLE",
         "dialogue" : "I don't call myself a child, and I'm not in my teens yet, What do you say, Beth?",
         "dialogue_remark" : "Amy observed.",
        },
 
        {
         "character" : "Beth",
-        "show_more_characters" : [
-            {
-                "character" : "Beth",
-                "outfit" : "Casual",
-                "expression" : "Open",
-                "position" : "RIGHT",
-            },
-        ],
+        "outfit" : "Casual",
+        "expression" : "Open",
+        "position" : "RIGHT",
         "dialogue" : "I was thinking about our 'Pilgrim's Progress',",
         "dialogue_remark" : "Beth answered, who had not heard a word.",
        },

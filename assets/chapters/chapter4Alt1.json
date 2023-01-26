@@ -2,9 +2,14 @@
     "Chapter 4 Alt 1" : [
         {
             "character" : "You",
-            "location" : "home",
+            "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
-            "dialogue" : "Your crushed airs is contagious, I would appreciate it if you would tone it done from here on out.",
+            "dialogue" : "Your crushed airs is contagious and depressing, ",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I would appreciate it if you would tone it down from here on out.",
         },
 
         {
@@ -96,6 +101,8 @@
 
         {
             "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "HorizontalBars",
             "dialogue" : "Meg, having witnessed Beth and Amy listening to her tantrum, decided to walk out of the door and leave.",
             "hide_character" : ["Meg"],
             "skip_dialogue" : true,

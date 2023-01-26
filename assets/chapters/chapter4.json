@@ -163,7 +163,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Home_Kitchen",
+            "location" : "Home_DiningRoom",
             "transition" : "HorizontalBars",
             "dialogue" : "There was a momentary lull, broken by Hannah, who stalked in, laid two hot turnovers on the table, and stalked out again. These turnovers were an institution,",
             "skip_dialogue" : true,
@@ -195,6 +195,7 @@
         {
             "character" : "Narrator",
             "location" : "Street_Day",
+            "transition" : "HorizontalBars",
             "dialogue" : "They always looked back before turning the corner, for their mother was always at the window to nod and smile, and wave her hand to them.",
             "show_more_characters" : [
                 {
@@ -204,8 +205,7 @@
                     "position" : "LEFT",
                 },
             ],
-            "hide_character" : ["Beth"],
-            "hide_character" : ["Amy"],
+            "hide_character" : ["Beth", "Amy"],
             "skip_dialogue" : true,
         },
 
@@ -261,15 +261,20 @@
             "dialogue" : "How ridiculous you are, [name]!",
             "dialouge_remark" : "But Meg laughed at the nonsense and felt better in spite of herself.",
             "show_selection" : [
-                ["Lucky for you I am, for if I put on crushed airs and tried to be dismal, as you do, we should be in a nice state. Thank goodness, I can always find something funny to keep me up. Don't croak any more, but come home jolly, there's a dear.", "Chapter 4", -1],
-                ["Your crushed airs is contagious, I would appreciate it if you would tone it done from here on out.", "Chapter 4 Alt", 0],
+                ["Lucky for you I am, for if I put on crushed airs", "Chapter 4", -1],
+                ["Your crushed airs is contagious and depressing,", "Chapter 4 Alt 1", 0],
             ],
             "show_selection_timer" : 15,
         },
 
         {
             "character" : "You",
-            "dialogue" : "Lucky for you I am, for if I put on crushed airs and tried to be dismal, as you do, we should be in a nice state. Thank goodness, I can always find something funny to keep me up. Don't croak any more, but come home jolly, there's a dear.",
+            "dialogue" : "Lucky for you I am, for if I put on crushed airs",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "and tried to be dismal, as you do, we should be in a nice state. Thank goodness, I can always find something funny to keep me up. Don't croak any more, but come home jolly, there's a dear.",
         },
 
         {
@@ -281,7 +286,6 @@
         {
             "character" : "Narrator",
             "dialogue" : "and each trying to be cheerful in spite of wintry weather, hard work, and the unsatisfied desires of pleasure-loving youth.",
-            "hide_character" : ["Meg"],
             "skip_dialogue" : true,
             
         },
@@ -295,6 +299,7 @@
         {
             "character" : "Narrator",
             "dialogue" : "Believing that they could not begin too early to cultivate energy, industry, and independence, their parents consented, and both fell to work with the hearty good will which in spite of all obstacles is sure to succeed at last.",
+            "hide_character" : ["Meg"],
             "skip_dialogue" : true,
         },
 
@@ -407,7 +412,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Studyroom",
+            "location" : "School_library",
             "transition" : "HorizontalBars",
             "dialogue" : "I suspect that the real attraction was a large library of fine books, which was left to dust and spiders since Uncle March died. [name] remembered the kind old gentleman,",
             "skip_dialogue" : true,
@@ -487,9 +492,10 @@
 
         {
             "character" : "Narrator",
-            "location" : "classroomday",
+            "location" : "School_Classroom1",
             "transition" : "HorizontalBars",
             "dialogue" : "Beth was too bashful to go to school. It had been tried, but she suffered so much that it was given up, and she did her lessons at home with her father.",
+            "show_character" : ["Beth"],
             "show_more_characters" : [
                 {
                     "character" : "Beth",
@@ -503,7 +509,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "livingroom",
+            "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
             "dialogue" : "Even when he went away, and her mother was called to devote her skill and energy to Soldiers' Aid Societies, Beth went faithfully on by herself and did the best she could.",
             "skip_dialogue" : true,
@@ -511,7 +517,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "kitchen",
+            "location" : "Home_Kitchen",
             "transition" : "HorizontalBars",
             "dialogue" : "She was a housewifely little creature, and helped Hannah keep home neat and comfortable for the workers, never thinking of any reward but to be loved.",
             "skip_dialogue" : true,
@@ -525,7 +531,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "attic",
+            "location" : "Home_Attic",
             "transition" : "HorizontalBars",
             "dialogue" : "There were six dolls to be taken up and dressed every morning, for Beth was a child still and loved her pets as well as ever. Not one whole or handsome one among them,",
             "show_more_characters" : [
@@ -596,7 +602,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Piano_Room",
+            "location" : "School_Piano_Room",
             "transition" : "HorizontalBars",
             "dialogue" : "Beth had her troubles as well as the others, and not being an angel but a very human little girl, she often 'wept a little weep' as [name] said, because she couldn't take music lessons and have a fine piano.",
             "show_more_characters" : [
@@ -672,9 +678,10 @@
 
         {
             "character" : "Narrator",
-            "location" : "Fireplace2",
+            "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
-            "dialogue" : "If anybody had asked Amy what the greatest trial of her life was, she would have answered at once, \"My nose.\" When she was a baby, [name] had accidently dropped her into the coal hod, and Amy insisted that the fall had ruined her nose forever.",
+            "dialogue" : "If anybody had asked Amy what the greatest trial of her life was, she would have answered at once, \"My nose.\" When she was a baby,",
+            "show_character" : ["Amy"],
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -683,6 +690,13 @@
                     "position" : "MIDDLE",
                 },
             ],
+            "skip_dialogue" : true,
+            
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] had accidently dropped her into the coal hod, and Amy insisted that the fall had ruined her nose forever.",
             "skip_dialogue" : true,
             
         },
@@ -715,7 +729,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Classroom_Day",
+            "location" : "School_Classroom1",
             "transition" : "HorizontalBars",
             "dialogue" : "Her teachers complained that instead of doing her sums she covered her slate with animals, the blank pages of her atlas were used to copy maps on, and caricatures of the most ludicrous description came fluttering out of all her books at unlucky moments.",
             "show_more_characters" : [
@@ -792,8 +806,10 @@
 
         {
             "character" : "Beth",
-            "location" : "fireplace2",
+            "location" : "Home_Fireplace1",
+            "transition" : "HorizontalBars",
             "dialogue" : "My only comfort, is that Mother doesn't take tucks in my dresses whenever I'm naughty, as Maria Parks's mother does. My dear, it's really dreadful, for sometimes she is so bad her frock is up to her knees,",
+            "show_character" : ["Beth"],
             "show_more_characters" : [
                 {
                     "character" : "Beth",
@@ -830,396 +846,403 @@
             "skip_dialogue" : true,
         },
 
-    {
-        "character" : "Meg",
-        "show_more_characters" : [
-            {
-                "character" : "Meg",
-                "outfit" : "Casual",
-                "expression" : "Open",
-                "position" : "LEFT",
-            },
-        ],
-        "dialogue" : "Has anybody got anything to tell? It's been such a dismal day I'm really dying for some amusement,",
-        "dialogue_remark" : "Meg said, as they sat sewing together that evening",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "I had a queer time with Aunt today, and, as I got the best of it, I'll tell you about it,",
-        "dialogue_remark" : "You began, who dearly loved to tell stories.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "I was reading that everlasting Belsham, and droning away as I always do, for Aunt soon drops off, and then I take out some nice book, and read like fury till she wakes up.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "I actually made myself sleepy, and before she began to nod, I gave such a gape that she asked me what I meant by opening my mouth wide enough to take the whole book in at once.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "I wish I could, and be done with it,",
-        "dialogue_remark" : "I said, trying not to be saucy.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "Then she gave me a long lecture on my sins, and told me to sit and think them over while she just 'lost' herself for a moment.  She never finds herself very soon,",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "so the minute her cap began to bob like a top-heavy dahlia, I whipped the Vicar of Wakefield out of my pocket, and read away, with one eye on him and one on Aunt.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "I'd just got to where they all tumbled into the water when I forgot and laughed out loud. Aunt woke up and, being more good-natured after her nap,",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "told me to read a bit and show what frivolous work I preferred to the worthy and instructive Belsham. I did my very best, and she liked it, though she only said...",
-    },
-
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "I don't understand what it's all about. Go back and begin it, child.'",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "Back I went, and made the Primroses as interesting as ever I could. Once I was wicked enough to stop in a thrilling place, and say meekly, 'I'm afraid it tires you, ma'am. Shan't I stop now?",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "She caught up her knitting, which had dropped out of her hands, gave me a sharp look through her specs, and said, in her short way, 'Finish the chapter, and don't be impertinent, miss'.",
-    },
-
-    {
-        "character" : "Meg",
-        "dialogue" : "Did she own she liked it?",
-        "dialogue_remark" : "Meg asked.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "Oh, bless you, no! But she let old Belsham rest, and when I ran back after my gloves this afternoon, there she was, so hard at the Vicar that she didn't hear me laugh as I danced a jig in the hall because of the good time coming.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "What a pleasant life she might have if only she chose! I don't envy her much, in spite of her money, for after all rich people have about as many worries as poor ones, I think,",
-        "dialogue_remark" : "You added.",
-    },
-
-    {
-        "character" : "Meg",
-        "dialogue" : "That reminds me,",
-        "dialogue_remark" : "Meg said.",
-    },
-
-    {
-        "character" : "Meg",
-        "dialogue" : "that I've got something to tell. It isn't funny, like [name]'s story, but I thought about it a good deal as I came home. At the Kings' today I found everybody in a flurry,",
-    },
-
-    {
-        "character" : "Meg",
-        "dialogue" : "and one of the children said that her oldest brother had done something dreadful, and Papa had sent him away.",
-    },
-
-    {
-        "character" : "Meg",
-        "dialogue" : "I heard Mrs. King crying and Mr. King talking very loud, and Grace and Ellen turned away their faces when they passed me, so I shouldn't see how red and swollen their eyes were.",
-    },
-
-    {
-        "character" : "Meg",
-        "dialogue" : "I didn't ask any questions, of course, but I felt so sorry for them and was rather glad I hadn't any wild brothers to do wicked things and disgrace the family.",
-    },
-
-    {
-        "character" : "Amy",
-        "dialogue" : "I think being disgraced in school is a great deal tryinger than anything bad boys can do,",
-        "dialogue_remark" : "Amy said, shaking her head, as if her experience of life had been a deep one.",
-        "show_more_characters" : [
-            {
-                "character" : "Amy",
-                "outfit" : "Casual",
-                "expression" : "Frown",
-                "position" : "MIDDLE",
-            },
-        ],
-    },
-
-    {
-        "character" : "Amy",
-        "dialogue" : "Susie Perkins came to school today with a lovely red carnelian ring. I wanted it dreadfully, and wished I was her with all my might.",
-    },
-
-    {
-        "character" : "Amy",
-        "dialogue" : "Well, she drew a picture of Mr. Davis, with a monstrous nose and a hump, and the words, 'Young ladies, my eye is upon you!' coming out of his mouth in a balloon thing.",
-    },
-
-    {
-        "character" : "Amy",
-        "expression" : "Smile",
-        "dialogue" : "We were laughing over it when all of a sudden his eye was on us, and he ordered Susie to bring up her slate. She was parrylized with fright, but she went, and oh, what do you think he did?",
-    },
-
-    {
-        "character" : "Amy",
-        "expression" : "Frown",
-        "dialogue" : "He took her by the ear-the ear! Just fancy how horrid!-and led her to the recitation platform, and made her stand there half an hour, holding the slate so everyone could see.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "Didn't the girls laugh at the picture?",
-        "dialogue_remark" : "You asked, who relished the scrape.",
-    },
-
-    {
-        "character" : "Amy",
-        "expression" : "Open",
-        "dialogue" : "Laugh? Not one! They sat still as mice, and Susie cried quarts, I know she did. I didn't envy her then, for I felt that millions of carnelian rings wouldn't have made me happy after that.",
-    },
-
-    {
-        "character" : "Amy",
-        "dialogue" : "I never, never should have got over such a agonizing mortification.",
-    },
-
-    {
-        "character" : "Narrator",
-        "dialogue" : "And Amy went on with her work, in the proud consciousness of virtue and the successful utterance of two long words in a breath.",
-        "skip_dialogue" : true,
-    },
-
         {
-            "character" : "Beth",
-            "expression" : "Open",
-            "dialogue" : "I saw something I liked this morning, and I meant to tell it at dinner, but I forgot,",
-            "dialouge_remark" : "Beth said, putting [name]'s topsy-turvy basket in order as she talked.",
+            "character" : "Meg",
+            "show_character" : ["Meg"],
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "LEFT",
+                },
+            ],
+            "dialogue" : "Has anybody got anything to tell? It's been such a dismal day I'm really dying for some amusement,",
+            "dialogue_remark" : "Meg said, as they sat sewing together that evening",
         },
 
         {
-            "character" : "Beth",
-            "dialogue" : "When I went to get some oysters for Hannah, Mr. Laurence was in the fish shop, but he didn't see me, for I kept behind the fish barrel, and he was busy with Mr. Cutter the fishman.",
+            "character" : "You",
+            "dialogue" : "I had a queer time with Aunt today, and, as I got the best of it, I'll tell you about it,",
+            "dialogue_remark" : "You began, who dearly loved to tell stories.",
         },
 
         {
-            "character" : "Beth",
-            "dialogue" : "A poor woman came in with a pail and a mop, and asked Mr. Cutter if he would let her do some scrubbing for a bit of fish, because she hadn't any dinner for her children, and had been disappointed of a day's work.",
+            "character" : "You",
+            "dialogue" : "I was reading that everlasting Belsham, and droning away as I always do, for Aunt soon drops off, and then I take out some nice book, and read like fury till she wakes up.",
         },
 
         {
-            "character" : "Beth",
-            "dialogue" : "Mr. Cutter was in a hurry and said 'No', rather crossly, so she was going away, looking hungry and sorry, when Mr. Laurence hooked up a big fish with the crooked end of his cane and held it out to her.",
+            "character" : "You",
+            "dialogue" : "I actually made myself sleepy, and before she began to nod, I gave such a gape that she asked me what I meant by opening my mouth wide enough to take the whole book in at once.",
         },
 
         {
-            "character" : "Beth",
-            "dialogue" : "She was so glad and surprised she took it right into her arms, and thanked him over and over.",
+            "character" : "You",
+            "dialogue" : "I wish I could, and be done with it,",
+            "dialogue_remark" : "I said, trying not to be saucy.",
         },
 
         {
-            "character" : "Beth",
-            "dialogue" : "He told her to 'go along and cook it', and she hurried off, so happy! Wasn't it good of him? Oh, she did look so funny, hugging the big, slippery fish, and hoping Mr. Laurence's bed in heaven would be 'aisy'.",
+            "character" : "You",
+            "dialogue" : "Then she gave me a long lecture on my sins, and told me to sit and think them over while she just 'lost' herself for a moment.  She never finds herself very soon,",
         },
 
         {
-            "character" : "Narrator",
-            "dialogue" : "When they had laughed at Beth's story, they asked their mother for one, and after a moments thought, she soberly,",
+            "character" : "You",
+            "dialogue" : "so the minute her cap began to bob like a top-heavy dahlia, I whipped the Vicar of Wakefield out of my pocket, and read away, with one eye on him and one on Aunt.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I'd just got to where they all tumbled into the water when I forgot and laughed out loud. Aunt woke up and, being more good-natured after her nap,",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "told me to read a bit and show what frivolous work I preferred to the worthy and instructive Belsham. I did my very best, and she liked it, though she only said...",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "I don't understand what it's all about. Go back and begin it, child.'",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Back I went, and made the Primroses as interesting as ever I could. Once I was wicked enough to stop in a thrilling place, and say meekly, 'I'm afraid it tires you, ma'am. Shan't I stop now?",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "She caught up her knitting, which had dropped out of her hands, gave me a sharp look through her specs, and said, in her short way, 'Finish the chapter, and don't be impertinent, miss'.",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "Did she own she liked it?",
+            "dialogue_remark" : "Meg asked.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Oh, bless you, no! But she let old Belsham rest, and when I ran back after my gloves this afternoon, there she was, so hard at the Vicar that she didn't hear me laugh as I danced a jig in the hall because of the good time coming.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "What a pleasant life she might have if only she chose! I don't envy her much, in spite of her money, for after all rich people have about as many worries as poor ones, I think,",
+            "dialogue_remark" : "You added.",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "That reminds me,",
+            "dialogue_remark" : "Meg said.",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "that I've got something to tell. It isn't funny, like [name]'s story, but I thought about it a good deal as I came home. At the Kings' today I found everybody in a flurry,",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "and one of the children said that her oldest brother had done something dreadful, and Papa had sent him away.",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "I heard Mrs. King crying and Mr. King talking very loud, and Grace and Ellen turned away their faces when they passed me, so I shouldn't see how red and swollen their eyes were.",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "I didn't ask any questions, of course, but I felt so sorry for them and was rather glad I hadn't any wild brothers to do wicked things and disgrace the family.",
+        },
+
+        {
+            "character" : "Amy",
+            "dialogue" : "I think being disgraced in school is a great deal tryinger than anything bad boys can do,",
+            "dialogue_remark" : "Amy said, shaking her head, as if her experience of life had been a deep one.",
+            "show_character" : ["Amy"],
             "show_more_characters" : [
                 {
                     "character" : "Amy",
                     "outfit" : "Casual",
-                    "expression" : "Smile",
+                    "expression" : "Frown",
+                    "position" : "MIDDLE",
+                },
+            ],
+        },
+
+        {
+            "character" : "Amy",
+            "dialogue" : "Susie Perkins came to school today with a lovely red carnelian ring. I wanted it dreadfully, and wished I was her with all my might.",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown_blush",
+            "dialogue" : "Well, she drew a picture of Mr. Davis, with a monstrous nose and a hump, and the words, 'Young ladies, my eye is upon you!' coming out of his mouth in a balloon thing.",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Smile",
+            "dialogue" : "We were laughing over it when all of a sudden his eye was on us, and he ordered Susie to bring up her slate. She was parrylized with fright, but she went, and oh, what do you think he did?",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "He took her by the ear-the ear! Just fancy how horrid!-and led her to the recitation platform, and made her stand there half an hour, holding the slate so everyone could see.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Didn't the girls laugh at the picture?",
+            "dialogue_remark" : "You asked, who relished the scrape.",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Open",
+            "dialogue" : "Laugh? Not one! They sat still as mice, and Susie cried quarts, I know she did. I didn't envy her then, for I felt that millions of carnelian rings wouldn't have made me happy after that.",
+        },
+
+        {
+            "character" : "Amy",
+            "dialogue" : "I never, never should have got over such a agonizing mortification.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "And Amy went on with her work, in the proud consciousness of virtue and the successful utterance of two long words in a breath.",
+            "skip_dialogue" : true,
+        },
+
+            {
+                "character" : "Beth",
+                "expression" : "Open",
+                "dialogue" : "I saw something I liked this morning, and I meant to tell it at dinner, but I forgot,",
+                "dialouge_remark" : "Beth said, putting [name]'s topsy-turvy basket in order as she talked.",
+            },
+
+            {
+                "character" : "Beth",
+                "dialogue" : "When I went to get some oysters for Hannah, Mr. Laurence was in the fish shop, but he didn't see me, for I kept behind the fish barrel, and he was busy with Mr. Cutter the fishman.",
+            },
+
+            {
+                "character" : "Beth",
+                "dialogue" : "A poor woman came in with a pail and a mop, and asked Mr. Cutter if he would let her do some scrubbing for a bit of fish, because she hadn't any dinner for her children, and had been disappointed of a day's work.",
+            },
+
+            {
+                "character" : "Beth",
+                "dialogue" : "Mr. Cutter was in a hurry and said 'No', rather crossly, so she was going away, looking hungry and sorry, when Mr. Laurence hooked up a big fish with the crooked end of his cane and held it out to her.",
+            },
+
+            {
+                "character" : "Beth",
+                "dialogue" : "She was so glad and surprised she took it right into her arms, and thanked him over and over.",
+            },
+
+            {
+                "character" : "Beth",
+                "dialogue" : "He told her to 'go along and cook it', and she hurried off, so happy! Wasn't it good of him? Oh, she did look so funny, hugging the big, slippery fish, and hoping Mr. Laurence's bed in heaven would be 'aisy'.",
+            },
+
+            {
+                "character" : "Narrator",
+                "dialogue" : "When they had laughed at Beth's story, they asked their mother for one, and after a moments thought, she soberly,",
+                "show_more_characters" : [
+                    {
+                        "character" : "Amy",
+                        "outfit" : "Casual",
+                        "expression" : "Smile",
+                        "position" : "MIDDLE",
+                    },
+                    {
+                        "character" : "Meg",
+                        "outfit" : "Casual",
+                        "expression" : "Smile",
+                        "position" : "LEFT",
+                    },
+                ],
+                "skip_dialogue" : true,
+            },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "As I sat cutting out blue flannel jackets today at the rooms, I felt very anxious about Father, and thought how lonely and helpless we should be, if anything happened to him. It was not a wise thing to do, but I kept on worrying till an old man came in with an order for some clothes.",
+            "show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "RIGHT",
+                },
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
                     "position" : "MIDDLE",
                 },
                 {
                     "character" : "Meg",
                     "outfit" : "Casual",
-                    "expression" : "Smile",
+                    "expression" : "Open",
                     "position" : "LEFT",
                 },
             ],
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "He sat down near me, and I began to talk to him, for he looked poor and tired and anxious.",
+            "hide_character" : ["Beth", "Amy", "Meg"],
+        },
+
+        {
+            "character" : "Mrs. March",
+            "location" : "Convenience_Store_Inside",
+            "transition" : "HorizontalBars",
+            "dialogue" : "Have you sons in the army?  I asked, for the note he brought was not to me.",
+        },
+
+        {
+            "character" : "Veteran Father",
+            "dialogue" : "Yes, ma'am. I had four, but two were killed, one is a prisoner, and I'm going to the other, who is very sick in a Washington hospital.' he answered quietly.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "You have done a great deal for your country, sir,' I said, feeling respect now, instead of pity.",
+        },
+
+        {
+            "character" : "Veteran Father",
+            "dialogue" : "Not a mite more than I ought, ma'am. I'd go myself, if I was any use. As I ain't, I give my boys, and give 'em free.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "He spoke so cheerfully, looked so sincere, and seemed so glad to give his all, that I was ashamed of myself. I'd given one man and thought it too much, while he gave four without grudging them.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "location" : "Home_Fireplace1",
+            "transition" : "HorizontalBars",
+            "dialogue" : "I had all my girls to comfort me at home, and his last son was waiting, miles away, to say good-by to him, perhaps! I felt so rich, so happy thinking of my blessings,",
+            "show_character" : ["Meg", "Amy", "Beth"],
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "that I made him a nice bundle, gave him some money, and thanked him heartily for the lesson he had taught me.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Tell another story, Mother, one with a moral to it, like this. I like to think about them afterward, if they are real and not too preachy,",
+            "dialogue_remark" : "You said, after a minute's silence.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Mrs. March smiled and began at once, for she had told stories to this little audience for many years, and knew how to please them.",
             "skip_dialogue" : true,
         },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "As I sat cutting out blue flannel jackets today at the rooms, I felt very anxious about Father, and thought how lonely and helpless we should be, if anything happened to him. It was not a wise thing to do, but I kept on worrying till an old man came in with an order for some clothes.",
-        "show_more_characters" : [
-            {
-                "character" : "Beth",
-                "outfit" : "Casual",
-                "expression" : "Open",
-                "position" : "RIGHT",
-            },
-            {
-                "character" : "Amy",
-                "outfit" : "Casual",
-                "expression" : "Open",
-                "position" : "MIDDLE",
-            },
-            {
-                "character" : "Meg",
-                "outfit" : "Casual",
-                "expression" : "Open",
-                "position" : "LEFT",
-            },
-        ],
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Once upon a time, there were four girls, who had enough to eat and drink and wear, a good many comforts and pleasures, kind friends and parents who loved them dearly, and yet they were not contented.",
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "He sat down near me, and I began to talk to him, for he looked poor and tired and anxious.",
-    },
+        {
+            "character" : "Narrator",
+            "dialogue" : "Here the listeners stole sly looks at one another, and began to sew diligently.",
+            "skip_dialogue" : true,
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "Have you sons in the army?  I asked, for the note he brought was not to me.",
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "These girls were anxious to be good and made many excellent resolutions, but they did not keep them very well, and were constantly saying,",
+        },
 
-    {
-        "character" : "Veteran Father",
-        "location" : "Store",
-        "dialogue" : "Yes, ma'am. I had four, but two were killed, one is a prisoner, and I'm going to the other, who is very sick in a Washington hospital.' he answered quietly.",
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "'If only we had this,' or 'If we could only do that,' quite forgetting how much they already had, and how many things they actually could do.",
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "You have done a great deal for your country, sir,' I said, feeling respect now, instead of pity.",
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "So they asked an old woman what spell they could use to make them happy, and she said, 'When you feel discontented, think over your blessings, and be grateful.'",
+        },
 
-    {
-        "character" : "Veteran Father",
-        "dialogue" : "Not a mite more than I ought, ma'am. I'd go myself, if I was any use. As I ain't, I give my boys, and give 'em free.",
-    },
+        {
+            "character" : "Narrator",
+            "dialogue" : "Here [name] looked up quickly, as if about to speak, but changed your mind, seeing that the story was not done yet.",
+            "skip_dialogue" : true,
+        },
 
-    {
-        "character" : "Mrs. March",
-        "location" : "fireplace2",
-        "dialogue" : "He spoke so cheerfully, looked so sincere, and seemed so glad to give his all, that I was ashamed of myself. I'd given one man and thought it too much, while he gave four without grudging them.",
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Being sensible girls, they decided to try her advice, and soon were surprised to see how well off they were. One discovered that money couldn't keep shame and sorrow out of rich people's houses,",
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "I had all my girls to comfort me at home, and his last son was waiting, miles away, to say good-by to him, perhaps! I felt so rich, so happy thinking of my blessings,",
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "another that, though she was poor, she was a great deal happier, with her youth, health, and good spirits, than a certain fretful, feeble old lady who couldn't enjoy her comforts,",
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "that I made him a nice bundle, gave him some money, and thanked him heartily for the lesson he had taught me.",
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "a third that, disagreeable as it was to help get dinner, it was harder still to go begging for it and the fourth, that even carnelian rings were not so valuable as good behavior.",
+        },
 
-    {
-        "character" : "You",
-        "dialogue" : "Tell another story, Mother, one with a moral to it, like this. I like to think about them afterward, if they are real and not too preachy,",
-        "dialogue_remark" : "You said, after a minute's silence.",
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "So they agreed to stop complaining, to enjoy the blessings already possessed, and try to deserve them,",
+        },
 
-    {
-        "character" : "Narrator",
-        "dialogue" : "Mrs. March smiled and began at once, for she had told stories to this little audience for many years, and knew how to please them.",
-        "skip_dialogue" : true,
-    },
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "lest they should be taken away entirely, instead of increased, and I believe they were never disappointed or sorry that they took the old woman's advice.",
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "Once upon a time, there were four girls, who had enough to eat and drink and wear, a good many comforts and pleasures, kind friends and parents who loved them dearly, and yet they were not contented.",
-    },
+        {
+            "character" : "Meg",
+            "expression" : "Frown_blush",
+            "dialogue" : "Now, Marmee, that is very cunning of you to turn our own stories against us, and give us a sermon instead of a romance!",
+            "dialogue_remark" : "Meg cried.",
+        },
 
-    {
-        "character" : "Narrator",
-        "dialogue" : "Here the listeners stole sly looks at one another, and began to sew diligently.",
-        "skip_dialogue" : true,
-    },
+        {
+            "character" : "Beth",
+            "dialogue" : "I like that kind of sermon. It's the sort Father used to tell us,",
+            "dialogue_remark" : "Beth said thoughtfully, putting the needles straight on [name]'s cushion.",
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "These girls were anxious to be good and made many excellent resolutions, but they did not keep them very well, and were constantly saying,",
-    },
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "I don't complain near as much as the others do, and I shall be more careful than ever now, for I've had warning from Susie's downfall,",
+            "dialogue_remark" : "Amy said morally.",
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "'If only we had this,' or 'If we could only do that,' quite forgetting how much they already had, and how many things they actually could do.",
-    },
+        {
+            "character" : "You",
+            "dialogue" : "We needed that lesson, and we won't forget it. If we do so, you just say to us, as old Chloe did in Uncle Tom,"
+        },
 
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "So they asked an old woman what spell they could use to make them happy, and she said, 'When you feel discontented, think over your blessings, and be grateful.'",
-    },
-
-    {
-        "character" : "Narrator",
-        "dialogue" : "Here [name] looked up quickly, as if about to speak, but changed your mind, seeing that the story was not done yet.",
-        "skip_dialogue" : true,
-    },
-
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "Being sensible girls, they decided to try her advice, and soon were surprised to see how well off they were. One discovered that money couldn't keep shame and sorrow out of rich people's houses,",
-    },
-
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "another that, though she was poor, she was a great deal happier, with her youth, health, and good spirits, than a certain fretful, feeble old lady who couldn't enjoy her comforts,",
-    },
-
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "a third that, disagreeable as it was to help get dinner, it was harder still to go begging for it and the fourth, that even carnelian rings were not so valuable as good behavior.",
-    },
-
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "So they agreed to stop complaining, to enjoy the blessings already possessed, and try to deserve them,",
-    },
-
-    {
-        "character" : "Mrs. March",
-        "dialogue" : "lest they should be taken away entirely, instead of increased, and I believe they were never disappointed or sorry that they took the old woman's advice.",
-    },
-
-    {
-        "character" : "Meg",
-        "expression" : "Frown_blush",
-        "dialogue" : "Now, Marmee, that is very cunning of you to turn our own stories against us, and give us a sermon instead of a romance!",
-        "dialogue_remark" : "Meg cried.",
-    },
-
-    {
-        "character" : "Beth",
-        "dialogue" : "I like that kind of sermon. It's the sort Father used to tell us,",
-        "dialogue_remark" : "Beth said thoughtfully, putting the needles straight on [name]'s cushion.",
-    },
-
-    {
-        "character" : "Amy",
-        "expression" : "Frown",
-        "dialogue" : "I don't complain near as much as the others do, and I shall be more careful than ever now, for I've had warning from Susie's downfall,",
-        "dialogue_remark" : "Amy said morally.",
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "We needed that lesson, and we won't forget it. If we do so, you just say to us, as old Chloe did in Uncle Tom,"
-    },
-
-    {
-        "character" : "You",
-        "dialogue" : "'Tink ob yer marcies, chillen!' 'Tink ob yer marcies!'",
-        "dialogue_remark" : "You added, who could not, for the life of her, help getting a morsel of fun out of the little sermon, though she took it to heart as much as any of them.",
-    },
+        {
+            "character" : "You",
+            "dialogue" : "'Tink ob yer marcies, chillen!' 'Tink ob yer marcies!'",
+            "dialogue_remark" : "You added, who could not, for the life of her, help getting a morsel of fun out of the little sermon, though she took it to heart as much as any of them.",
+        },
     ],
 }
