@@ -2,9 +2,15 @@
     "Chapter 6 Alt 1" : [
         {
             "character" : "Narrator",
-            "location" : "Piano_Room",
+            "location" : "Laurence_Home",
             "transition" : "DiamondTilesCover",
-            "dialogue" : "Beth was so excited to play the piano but [name] rush to the piano before Beth could sit down.",
+            "dialogue" : "you got excited after getting permission and rushed to the piano",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "before Beth could sit down.",
             "skip_dialogue" : true,
         },
 

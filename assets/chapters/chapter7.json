@@ -2,9 +2,10 @@
     "Chapter 7" : [
 		{
 			"character" : "Amy",
-			"location" : "Living_Room",
+			"location" : "Home_Fireplace1",
             "transition" : "SpiralSquare",
-            "expression" : "Frown",
+            "outfit" : "Casual",
+            "expression" : "Open",
             "position" : "LEFT",
 			"dialogue" : "That boy is a perfect cyclops, isn't he?",
             "dialogue_remark" : "Amy said one day, as Laurie clattered by on horseback, with a flourish of his whip as he passed.",
@@ -17,7 +18,7 @@
 
         {
             "character" : "Amy",
-            "expression" : "Frown_blush",
+            "expression" : "Frown",
             "dialogue" : "I didn't say anything about his eyes, and I don't see why you need fire up when I admire his riding.",
         },
 
@@ -43,6 +44,7 @@
 
         {
 			"character" : "Meg",
+            "outfit" : "Casual",
             "expression" : "Open",
             "position" : "MIDDLE",
 			"dialogue" : "Why do you say so?",
@@ -121,7 +123,7 @@
             "character" : "Amy",
             "expression" : "Smile",
             "dialogue" : "Oh, thank you! It must be so nice to have pocket money! I'll have a grand feast, for I haven't tasted a lime this week. I felt delicate about taking any, as I couldn't return them, and I'm actually suffering for one.",
-            "hide_character" : ["Amy", "Meg"],
+            "hide_character" : ["Meg"],
         },
 
         {
@@ -622,7 +624,7 @@
 
         {
             "character" : "Narrator",
-            "location" : "Living_Room",
+            "location" : "Home_Fireplace1",
             "transition" : "SpiralSquare",
             "dialogue" : "She was in a sad state when she got home, and when the older girls arrived, some time later, an indignation meeting was held at once.",
             "show_more_characters" : [
@@ -645,6 +647,7 @@
         {
             "character" : "Narrator",
             "dialogue" : "Meg bathed the insulted hand with glycerine and tears, Beth felt that even her beloved kittens would fail as a balm for griefs like this,",
+            "show_character" : ["Meg"],
             "show_more_characters" : [
                 {
                     "character" : "Meg",
@@ -695,7 +698,7 @@
 
         {
             "character" : "Mrs. March",
-            "location" : "Living_Room",
+            "location" : "Home_Fireplace1",
             "transition" : "SpiralSquare",
             "dialogue" : "Yes, you can have a vacation from school, but I want you to study a little every day with Beth,",
             "dialogue_remark" : "Mrs. March said that evening.",
@@ -754,14 +757,10 @@
 
         {
 			"character" : "Laurie",
-            "show_more_characters" : [
-                {
-                    "character" : "Laurie",
-                    "outfit" : "Casual",
-                    "expression" : "Frown",
-                    "position" : "LEFT",
-                },
-            ],
+            "outfit" : "Casual",
+            "expression" : "Frown",
+            "position" : "LEFT",
+
 			"dialogue" : "So it is!",
             "dialogue_remark" : "Laurie cried, who was playing chess in a corner with [name].",
 		},
@@ -779,12 +778,13 @@
 
         {
 			"character" : "Beth",
+            "show_character" : ["Beth"],
             "show_more_characters" : [
                 {
                     "character" : "Beth",
                     "outfit" : "Casual",
                     "expression" : "Open",
-                    "position" : "MIDDLE",
+                    "position" : "RIGHT",
                 },
             ],
 			"dialogue" : "I wish I'd known that nice girl. Maybe she would have helped me, I'm so stupid,",
@@ -804,7 +804,7 @@
                     "character" : "Beth",
                     "outfit" : "Casual",
                     "expression" : "Open_blush",
-                    "position" : "MIDDLE",
+                    "position" : "RIGHT",
                 },
             ],
             "skip_dialogue" : true,
@@ -831,12 +831,13 @@
 
         {
 			"character" : "Amy",
+            "show_character" : ["Amy"],
             "show_more_characters" : [
                 {
-                    "character" : "Beth",
+                    "character" : "Amy",
                     "outfit" : "Casual",
                     "expression" : "Open",
-                    "position" : "LEFT",
+                    "position" : "MIDDLE",
                 },
             ],
 			"dialogue" : "Is Laurie an accomplished boy?",
