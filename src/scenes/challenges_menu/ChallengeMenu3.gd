@@ -57,7 +57,7 @@ func _ready():
 	create_tiles()
 
 func _process(delta : float) -> void:
-	timer_label.text = "Time Left: " + String(game_timer.time_left).pad_decimals(2)
+	timer_label.text = String(game_timer.time_left).pad_decimals(2)
 	#Progress bars
 	if powerups.green:
 		green_bar.max_value = POWERUP_TIMERS.green
@@ -74,7 +74,7 @@ func init():
 	update_ui()
 
 func update_ui():
-	score_label.text = "Score: " + String(score)
+	score_label.text = String(score)
 
 func add_score(text_length : int):
 	var comp = text_length * KEY_SCORE

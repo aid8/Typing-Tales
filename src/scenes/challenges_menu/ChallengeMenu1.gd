@@ -29,7 +29,7 @@ var fall_speed_time_diff : float = 10
 var spawn_timer : float = 2.0
 var subtract_spawn_time : float = 0.1
 var spawn_time_diff : float = 10
-var heart_uis : Array = []
+#var heart_uis : Array = []
 var cur_enlargement : int = 0
 
 #==========Onready Variables==========#
@@ -41,13 +41,13 @@ onready var spawn_speed_timer : Timer = $SpawnSpeedTimer
 onready var gameover_menu : CanvasLayer = $GameOverMenu
 onready var game_ui : CanvasLayer = $GameUI
 onready var lives_label : Label = $LivesLabel
-onready var heart_ui_position : Position2D = $GameUI/HeartUIPosition
+onready var health_bar : Node2D = $GameUI/HealthBar
 onready var pause_menu : Node2D = $GameUI/PauseMenu
+onready var score_label : Label = $GameUI/ScoreLabel
 
 #==========Preload Variables==========#
 onready var falling_object = preload("res://src/objects/challengemenu1/FallingObject.tscn")
 onready var score_animation = preload("res://src/objects/ScoreAnimation.tscn")
-onready var heart_ui = preload("res://src/objects/challengemenu1/HeartUI.tscn")
 
 #==========Functions==========#
 func _ready():
@@ -63,12 +63,7 @@ func _ready():
 	
 	#Initialize ui
 	lives_label.text = "Lives: " + String(lives)
-	for i in range(0, lives):
-		var h = heart_ui.instance()
-		heart_uis.append(h)
-		h.position = heart_ui_position.position
-		h.position.x += i * 45
-		game_ui.add_child(h)
+	health_bar.init(lives)
 
 func _process(delta : float) -> void:
 	if tracing_wpm:
@@ -180,12 +175,12 @@ func show_gameover_menu() -> void:
 		total_accuracy = (accuracy[1] / float(accuracy[0])) * 100
 	if wpm[1] > 0:
 		total_wpm = (wpm[0]/float(wpm[1]))
-	gameover_menu.get_node("StatsLabel").text = "SCORE: " + String(total_score) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1))
+	gameover_menu.init("SCORE: " + String(total_score) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
 	gameover_menu.show()
 
 func subtract_lives()-> void:
-	heart_uis[lives-1].frame = 1
-	lives -= 1
+	health_bar.subtract_life()
+	lives = health_bar.get_lives()
 	lives_label.text = "Lives: " + String(lives)
 	resize_player(false)
 	if lives <= 0:
@@ -206,6 +201,9 @@ func resize_player(enlarge : bool) -> void:
 		cur_enlargement -= 1
 		player.scale /= ENLARGEMENT_ADDITION
 
+func update_ui() -> void:
+	score_label.text = String(total_score)
+
 #==========Connected Functions==========#
 func _on_Player_body_entered(body):
 	if body.type == "FallingObject":
@@ -215,6 +213,7 @@ func _on_Player_body_entered(body):
 		edited_pos.y -= 50
 		add_score_animation(edited_pos, cur_score)
 		total_score += cur_score
+		update_ui()
 		body.queue_free()
 		resize_player(true)
 
@@ -225,15 +224,6 @@ func _on_FallingSpeedTimer_timeout():
 func _on_SpawnSpeedTimer_timeout():
 	if spawn_timer > 0.5:
 		spawn_timer -= subtract_spawn_time
-
-func _on_RestartButton_pressed():
-	get_tree().paused = false
-	SceneTransition.switch_scene(String(get_tree().current_scene.filename), "Curtain")
-
-func _on_MainMenuButton_pressed():
-	get_tree().paused = false
-	#TODO: Add current session time here
-	Global.switch_scene("MainMenu")
 
 #Testing
 func _on_TestButton_pressed():

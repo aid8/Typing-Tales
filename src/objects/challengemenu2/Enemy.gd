@@ -2,7 +2,7 @@ extends KinematicBody2D
 #==========Variables==========#
 var ACCELERATION = 100
 var FRICTION = 200
-var MAX_SPEED = 30 #10
+var MAX_SPEED = 80 #30
 
 export (Color) var blue : Color = Color("#ADD8E6")
 export (Color) var green : Color = Color("#90EE90")
@@ -18,12 +18,14 @@ var type : String = "Enemy"
 
 #==========Onready Variables==========#
 onready var text_label : RichTextLabel = $TextLabel
+onready var anim : AnimatedSprite = $Anim
 
 #==========Functions==========#
 func _ready():
 	enemy_old_pos = global_position
 	text = WordList.get_prompt(Global.current_menu.get_enemy_starting_letters())
 	set_next_character(-1)
+	randomize_animation()
 
 func _physics_process(delta):
 	handle_movement(delta)
@@ -46,6 +48,10 @@ func get_prompt() -> String:
 
 func damage() -> void:
 	self.queue_free()
+
+func randomize_animation() -> void:
+	var animations = anim.frames.get_animation_names()
+	anim.animation = animations[randi() % animations.size()]
 
 func set_next_character(next_character_index: int) -> void:
 	if next_character_index == -1:
