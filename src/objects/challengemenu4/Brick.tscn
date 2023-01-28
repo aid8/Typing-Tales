@@ -1,31 +1,56 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://src/objects/challengemenu4/Brick.gd" type="Script" id=1]
+[ext_resource path="res://assets/challenges_menu/challenge4/tetris0004.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/BarlowCondensed-SemiBold.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/challenges_menu/challenge4/tetris0003.png" type="Texture" id=4]
+[ext_resource path="res://assets/challenges_menu/challenge4/tetris0001.png" type="Texture" id=5]
+[ext_resource path="res://assets/challenges_menu/challenge4/tetris0002.png" type="Texture" id=6]
+[ext_resource path="res://assets/challenges_menu/challenge4/tetris0005.png" type="Texture" id=7]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 75, 20.5 )
+extents = Vector2( 112, 27.75 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 26
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 3 )
 
 [node name="Brick" type="KinematicBody2D"]
 script = ExtResource( 1 )
 disabled_color = Color( 0.611765, 0.12549, 0.12549, 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_left = -73.0
-margin_right = 75.0
-margin_bottom = 40.0
-color = Color( 0, 0, 0, 1 )
+[node name="Anim" type="AnimatedSprite" parent="."]
+position = Vector2( -112, 0 )
+scale = Vector2( 7, 7 )
+frames = SubResource( 2 )
+centered = false
 
 [node name="Collision" type="CollisionShape2D" parent="."]
-position = Vector2( 1, 19.5 )
+position = Vector2( 0, 28.25 )
 shape = SubResource( 1 )
 
 [node name="TextLabel" type="RichTextLabel" parent="."]
-margin_left = -73.0
-margin_right = 74.0
-margin_bottom = 40.0
+margin_left = -104.0
+margin_top = 11.0
+margin_right = 104.0
+margin_bottom = 44.0
+size_flags_vertical = 4
+custom_fonts/normal_font = SubResource( 3 )
 text = "12345678910111213"
+fit_content_height = true
 
 [node name="BrickArea" type="Area2D" parent="."]
+visible = false
 
 [node name="Collision" type="CollisionShape2D" parent="BrickArea"]
 position = Vector2( 1, 19.5 )

@@ -23,6 +23,7 @@ onready var score_label = $UI/ScoreLabel
 
 #==========Preload Variables==========#
 onready var coins = preload("res://src/objects/challengemenu5/Coins.tscn")
+onready var score_animation = preload("res://src/objects/ScoreAnimation.tscn")
 
 #==========Functions==========#
 func _ready():
@@ -41,11 +42,17 @@ func _process(delta : float) -> void:
 	update_ui()
 
 func update_ui() -> void:
-	timer_label.text = "Time: " + String(stage_timer.time_left)
-	score_label.text = "Score: " + String(score)
+	timer_label.text = String(stage_timer.time_left).pad_decimals(2)
+	score_label.text = String(score)
 
 func add_score(n : int) -> void:
 	score += n
+
+func add_score_animation(position : Vector2, score : int) -> void:
+	var s = score_animation.instance()
+	s.position = position
+	add_child(s)
+	s.set_score(String(score))
 
 func generate_coins(n : int) -> void:
 	for _i in range(n):

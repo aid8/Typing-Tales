@@ -7,7 +7,7 @@ extends Node2D
 
 #==========Variables==========#
 var BRICK_SPAWN_TIME = 2
-var BRICK_LIMIT = 5
+var BRICK_LIMIT = 9
 var SCORE_MULT : float = 1.25
 
 var bricks_stacked = 0
@@ -36,7 +36,7 @@ func init():
 	update_ui()
 
 func update_ui():
-	score_label.text = "Score: " + String(score)
+	score_label.text = String(score)
 
 func add_score(n : int) -> void:
 	score += n

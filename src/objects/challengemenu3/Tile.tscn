@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/objects/challengemenu3/Tile.gd" type="Script" id=1]
+[ext_resource path="res://assets/challenges_menu/challenge3/red.png" type="Texture" id=2]
+[ext_resource path="res://assets/challenges_menu/challenge3/green.png" type="Texture" id=3]
+[ext_resource path="res://assets/challenges_menu/challenge3/blue.png" type="Texture" id=4]
+[ext_resource path="res://assets/fonts/BarlowCondensed-SemiBold.ttf" type="DynamicFontData" id=5]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 3 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="DynamicFont" id=2]
+size = 19
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 5 )
 
 [node name="Tile" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,20 +34,33 @@ margin_right = 125.0
 margin_bottom = 125.0
 color = Color( 0.105882, 0.4, 0.611765, 1 )
 
+[node name="Anim" type="AnimatedSprite" parent="."]
+scale = Vector2( 2.66667, 2.66667 )
+frames = SubResource( 1 )
+centered = false
+
 [node name="Highlight" type="ColorRect" parent="."]
 visible = false
-margin_right = 125.0
-margin_bottom = 125.0
+margin_right = 128.0
+margin_bottom = 128.0
 color = Color( 1, 1, 1, 0.431373 )
-
-[node name="TileText" type="RichTextLabel" parent="."]
-margin_left = 1.0
-margin_top = 56.0
-margin_right = 126.0
-margin_bottom = 74.0
-text = "123456789012345"
 
 [node name="RefreshTileTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="TextContainer" type="MarginContainer" parent="."]
+margin_left = 10.0
+margin_top = 8.0
+margin_right = 119.0
+margin_bottom = 115.0
+
+[node name="TileText" type="RichTextLabel" parent="TextContainer"]
+margin_top = 41.0
+margin_right = 109.0
+margin_bottom = 65.0
+size_flags_vertical = 4
+custom_fonts/normal_font = SubResource( 2 )
+text = "1234567890123"
+fit_content_height = true
 
 [connection signal="timeout" from="RefreshTileTimer" to="." method="_on_Timer_timeout"]

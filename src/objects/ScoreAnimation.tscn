@@ -4,7 +4,7 @@
 [ext_resource path="res://src/objects/ScoreAnimation.gd" type="Script" id=2]
 
 [sub_resource type="DynamicFont" id=1]
-size = 20
+size = 30
 outline_size = 2
 outline_color = Color( 0.152941, 0.317647, 0.129412, 1 )
 font_data = ExtResource( 1 )
@@ -92,8 +92,8 @@ tracks/2/keys = {
 script = ExtResource( 2 )
 
 [node name="ScoreLabel" type="Label" parent="."]
-margin_left = -41.0
-margin_right = 40.0
+margin_left = -56.0
+margin_right = 48.0
 margin_bottom = 28.0
 custom_colors/font_color = Color( 0.458824, 0.792157, 0.403922, 1 )
 custom_fonts/font = SubResource( 1 )

@@ -13,13 +13,15 @@ var motion : Vector2 = Vector2()
 var falling : bool = true
 
 #==========Onready Variables==========#
-onready var text_label = $TextLabel
+onready var text_label : RichTextLabel = $TextLabel
+onready var anim : AnimatedSprite = $Anim
 #==========Preload Variables==========#
 
 #==========Functions==========#
 func _ready():
 	text = WordList.get_prompt()
 	set_next_character(-1)
+	randomize_brick()
 
 func _physics_process(delta):
 	if falling:
@@ -28,6 +30,9 @@ func _physics_process(delta):
 
 func get_prompt() -> String:
 	return text
+
+func randomize_brick() -> void:
+	anim.frame = randi() % anim.frames.get_frame_count("default")
 
 func disable_brick() -> void:
 	falling = false
