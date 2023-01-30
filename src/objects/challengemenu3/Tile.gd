@@ -11,14 +11,17 @@ export (Color) var tile_green : Color =  Color("#90EE90")
 export (Color) var tile_gray : Color
 export (Color) var tile_start_highlight : Color
 export (Color) var tile_end_highlight : Color
+export (Color) var tile_canceled : Color = Color("#585858")
 
 var text : String = ""
+var current_color : Color
 
 #==========Onready Variables==========#
 onready var color_rect = $ColorRect
-onready var tile_text = $TileText
+onready var tile_text = $TextContainer/TileText
 onready var highlight = $Highlight
 onready var refresh_time_timer = $RefreshTileTimer
+onready var anim = $Anim
 
 #==========Functions==========#
 func _ready():
@@ -29,6 +32,7 @@ func delayed_refresh_tile(time : int):
 	text = ""
 	set_next_character(-1)
 	color_rect.color = tile_gray
+	anim.self_modulate = tile_canceled
 	refresh_time_timer.wait_time = time
 	refresh_time_timer.start()
 
@@ -36,13 +40,16 @@ func refresh_tile():
 	text = WordList.get_prompt(Global.current_menu.get_tiles_starting_letters())
 	set_next_character(-1)
 	set_random_color()
+	anim.self_modulate = white
 
 func toggle_highlight(b : bool, type : String = "none") -> void:
 	if type != "none":
 		if type == "start":
 			highlight.color = tile_start_highlight
+			#anim.self_modulate = tile_start_highlight
 		elif type == "end":
 			highlight.color = tile_end_highlight
+			#anim.self_modulate = tile_end_highlight
 	if b:
 		highlight.show()
 	else:
@@ -53,15 +60,15 @@ func cancel_tile():
 	toggle_highlight(false)
 
 func get_current_color():
-	return color_rect.color
+	return current_color
 
 func get_prompt():
 	return text
 
 func set_random_color():
 	var colors = [tile_blue, tile_green, tile_red]
-	var rand = randi() % 3
-	color_rect.color = colors[rand]
+	anim.frame = randi() % anim.frames.get_frame_count("default")
+	current_color = colors[anim.frame]
 
 func set_next_character(next_character_index: int) -> void:
 	if next_character_index == -1:

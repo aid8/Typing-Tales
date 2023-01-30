@@ -3,6 +3,13 @@ extends KinematicBody2D
 #==========TODO==========#
 
 #==========Variables==========#
+const DIRECTION_ANGLES = {
+	"Up" : -90,
+	"Down" : 90,
+	"Left" : 180,
+	"Right" : 0,
+}
+
 export (Color) var blue : Color = Color("#ADD8E6")
 export (Color) var green : Color = Color("#90EE90")
 export (Color) var white : Color = Color("#FFFFFF")
@@ -21,7 +28,8 @@ var proceed_direction = false
 var type = "player"
 
 #==========Onready Variables==========#
-onready var labels = [$UpLabel, $DownLabel, $RightLabel, $LeftLabel]
+onready var labels : Array = [$UpLabel, $DownLabel, $RightLabel, $LeftLabel]
+onready var anim : AnimatedSprite = $Anim
 
 #==========Preload Variables==========#
 
@@ -68,9 +76,17 @@ func select_direction(word):
 			selected_direction = directions[i]
 			break
 
-func change_direction():
+func change_direction() -> void:
+	hide_label(selected_direction)
 	direction = selected_direction
+	anim.rotation_degrees = DIRECTION_ANGLES[direction]
 	proceed_direction = true
+
+func hide_label(direction : String) -> void:
+	var dir_index = {"Up" : 0, "Down" : 1, "Right" : 2, "Left" : 3}
+	for i in range(0, 4):
+		labels[i].show()
+	labels[dir_index[direction]].hide()
 
 func reset_direction(word):
 	for i in range(4):

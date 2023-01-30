@@ -143,10 +143,10 @@ func _ready() -> void:
 	#Setup tracing of data for research (only for 1st, 6th and 7th day)
 	#TESTING
 	current_date = Time.get_date_string_from_system(true)
-	if !Global.user_data["SavedDataResearch"].has(current_date):
-		Global.setup_pretest_variables(current_date)
-		var cur_size = Global.user_data["SavedDataResearch"].size() 
-		if cur_size == 1 || cur_size == 6 || cur_size == 7:
+	if !Global.user_data["SavedDataResearch"]["StoryMode"].has(current_date):
+		Global.setup_research_variables("StoryMode", current_date)
+		var cur_size = Global.user_data["SavedDataResearch"]["StoryMode"].size() 
+		if cur_size == 1:
 			is_pre_test = true
 			#testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
 			#testing_timer.one_shot = true
@@ -897,6 +897,12 @@ func navigate_tutorial_menu(next : bool = true) -> void:
 	tutorial_images.frame = cur_frame
 	tutorial_title_label.text = "TUTORIAL (" + String(cur_frame + 1) + "/" + String(max_frame) + ")" 
 
+func register_stats() -> void:
+	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
+	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
+	#Save this locally
+	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
+
 #==========Connected Functions==========#
 func _on_save_or_load_progress(index):
 	if salm_title_label.text == "SAVE MENU":
@@ -952,7 +958,7 @@ func _on_NameChangeButton_pressed():
 
 func _on_TestButton2_pressed():
 	if !is_pre_test:
-		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+		Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")
 
@@ -972,7 +978,7 @@ func _on_TestingTimer_timeout():
 	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
 	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
 	#Save this locally
-	Global.save_pretest_variables(current_date, wpm_res, accuracy_res, 600)
+	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, 600)
 	#Send to google forms
 	Global.send_data("PRE_TEST", Global.user_data.Name, current_date, wpm_res, accuracy_res)
 	#var http = HTTPClient.new()
@@ -999,6 +1005,7 @@ func _on_PauseResumeBtn_pressed():
 func _on_MainMenuBtn_pressed():
 	get_tree().paused = false
 	if !is_pre_test:
-		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+		#Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
+		register_stats()
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")

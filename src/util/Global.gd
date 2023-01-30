@@ -92,8 +92,23 @@ func set_default_user_data() -> void:
 		"Items" : [],
 		"SavedProgress" : [{}, {}, {}, {}, {}, {}, {}, {}],
 		"FinishedScenes" : {},
-		"SavedDataResearch" : {}, #1st-7th day data collection
+		"SavedDataResearch" : {
+			"StoryMode" : {},
+			"Challenge1" : {},
+			"Challenge2" : {},
+			"Challenge3" : {},
+			"Challenge4" : {},
+			"Challenge5" : {},
+		}, #1st-7th day data collection of story and challenge modes
 		"TotalTimeSpent" : [0, 0], #[Story mode, Challenge mode]
+		"SeenTutorials" : [false, false, false, false, false], #IF tutorials are already shown for challanges 1-5
+		"ChallengeStats" : [
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,}, 
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+		],
 	}
 
 func change_name(name : String) -> void:
@@ -204,16 +219,23 @@ func get_user_stats() -> Dictionary:
 	#ADD INDIVIDUAL LETTER STATS
 	return dict
 
-func setup_pretest_variables(date : String) -> void:
-	user_data["SavedDataResearch"][date] = {}
-	user_data["SavedDataResearch"][date]["WPM"] = 0.0
-	user_data["SavedDataResearch"][date]["Accuracy"] = 0.0
-	user_data["SavedDataResearch"][date]["time"] = 0.0
+func setup_research_variables(mode : String, date : String) -> void:
+	if !user_data["SavedDataResearch"][mode].has(date):
+		user_data["SavedDataResearch"][mode][date] = {}
+		user_data["SavedDataResearch"][mode][date]["WPM"] = 0.0
+		user_data["SavedDataResearch"][mode][date]["Accuracy"] = 0.0
+		user_data["SavedDataResearch"][mode][date]["time"] = 0.0
+		user_data["SavedDataResearch"][mode][date]["play_count"] = 0
 
-func save_pretest_variables(date : String, wpm : float, accuracy : float, time : float) -> void:
-	user_data["SavedDataResearch"][date]["WPM"] = wpm
-	user_data["SavedDataResearch"][date]["Accuracy"] = accuracy
-	user_data["SavedDataResearch"][date]["time"] = time
+func save_research_variables(mode : String, date : String, wpm : float, accuracy : float, time : float) -> void:
+	if !user_data["SavedDataResearch"][mode].has(date):
+		print("Current date is invalid!")
+		return
+	user_data["SavedDataResearch"][mode][date]["WPM"] += wpm
+	user_data["SavedDataResearch"][mode][date]["Accuracy"] += accuracy
+	user_data["SavedDataResearch"][mode][date]["time"] += time
+	user_data["SavedDataResearch"][mode][date]["play_count"] += 1
+	#print(user_data)
 
 func send_data(type : String, name : String, date : String, wpm : float, accuracy : float) -> void:
 	var http = HTTPClient.new()
@@ -231,6 +253,16 @@ func send_data(type : String, name : String, date : String, wpm : float, accurac
 	elif type == "POST_TEST":
 		#Add post test here
 		pass
+
+func set_seen_tutorial(challenge_num : int) -> void:
+	Global.user_data["SeenTutorials"][challenge_num] = true
+
+func register_challenge_stats(challenge_num : int, wpm : float, accuracy : float, time : float, score : float) -> void:
+	Global.user_data["ChallengeStats"][challenge_num]["wpm"] += wpm
+	Global.user_data["ChallengeStats"][challenge_num]["accuracy"] += accuracy
+	Global.user_data["ChallengeStats"][challenge_num]["time"] += time
+	Global.user_data["ChallengeStats"][challenge_num]["play_count"] += 1
+	Global.user_data["ChallengeStats"][challenge_num]["highest_score"] = max(score, Global.user_data["ChallengeStats"][challenge_num]["highest_score"])
 
 func check_first_time() -> bool:
 	var file = File.new()
