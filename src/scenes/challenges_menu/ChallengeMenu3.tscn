@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/scenes/challenges_menu/ChallengeMenu3.gd" type="Script" id=1]
+[ext_resource path="res://src/ui/TutorialMenu.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/challenges_menu/challenge3/bg.png" type="Texture" id=3]
 [ext_resource path="res://assets/challenges_menu/score_icon.png" type="Texture" id=4]
 [ext_resource path="res://assets/fonts/BarlowCondensed-BlackItalic.ttf" type="DynamicFontData" id=5]
@@ -10,6 +11,9 @@
 [ext_resource path="res://assets/challenges_menu/challenge3/border.png" type="Texture" id=9]
 [ext_resource path="res://assets/challenges_menu/challenge3/bluebar.png" type="Texture" id=10]
 [ext_resource path="res://assets/challenges_menu/challenge3/greybar.png" type="Texture" id=11]
+[ext_resource path="res://src/ui/CountdownMenu.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/ui/PauseMenu.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/ui/GameOverMenu.tscn" type="PackedScene" id=14]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -114,6 +118,17 @@ valign = 1
 position = Vector2( 52, 51 )
 scale = Vector2( 0.593752, 0.593752 )
 texture = ExtResource( 6 )
+
+[node name="PauseMenu" parent="UI" instance=ExtResource( 13 )]
+visible = false
+
+[node name="CountdownMenu" parent="UI" instance=ExtResource( 12 )]
+visible = false
+
+[node name="TutorialMenu" parent="UI" instance=ExtResource( 2 )]
+visible = false
+
+[node name="GameOverMenu" parent="." instance=ExtResource( 14 )]
 
 [node name="StartingTilePosition" type="Position2D" parent="."]
 position = Vector2( 374, 114 )

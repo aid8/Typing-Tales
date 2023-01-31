@@ -912,6 +912,13 @@ A LITTLE NITEMARE"
 align = 1
 valign = 1
 
+[node name="TimeMenu" type="AcceptDialog" parent="UI"]
+margin_left = 520.0
+margin_top = 320.0
+margin_right = 760.0
+margin_bottom = 424.0
+dialog_autowrap = true
+
 [node name="TestBox" type="ConfirmationDialog" parent="."]
 margin_left = 495.0
 margin_top = 316.0

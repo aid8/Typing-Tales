@@ -1,9 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://src/scenes/challenges_menu/ChallengeMenu4.gd" type="Script" id=1]
 [ext_resource path="res://assets/challenges_menu/challenge4/bg.png" type="Texture" id=2]
 [ext_resource path="res://assets/challenges_menu/score_icon.png" type="Texture" id=3]
 [ext_resource path="res://assets/fonts/BarlowCondensed-BlackItalic.ttf" type="DynamicFontData" id=4]
+[ext_resource path="res://src/ui/PauseMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/ui/GameOverMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/ui/TutorialMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/ui/CountdownMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="Shader" id=15]
 code = "shader_type canvas_item;
@@ -61,6 +65,18 @@ margin_bottom = 68.0
 custom_fonts/font = SubResource( 3 )
 text = "0"
 valign = 1
+
+[node name="PauseMenu" parent="UI" instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 0, 8 )
+
+[node name="CountdownMenu" parent="UI" instance=ExtResource( 8 )]
+visible = false
+
+[node name="TutorialMenu" parent="UI" instance=ExtResource( 7 )]
+visible = false
+
+[node name="GameOverMenu" parent="." instance=ExtResource( 6 )]
 
 [node name="Stage" type="Node2D" parent="."]
 position = Vector2( 632, 216 )

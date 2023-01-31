@@ -85,5 +85,17 @@ ACCURACY: 0"
 align = 1
 valign = 1
 
+[node name="NoteLabel" type="Label" parent="."]
+visible = false
+margin_top = 584.0
+margin_right = 1280.0
+margin_bottom = 701.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "10 MINS requirement is done. You can already submit the data or continue playing."
+align = 1
+valign = 1
+uppercase = true
+
 [connection signal="pressed" from="RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="pressed" from="MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

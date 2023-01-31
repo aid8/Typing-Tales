@@ -69,14 +69,17 @@ var chapter_play_time : float = 0
 var save_slot_index : int = 0
 var tutorial_index : int = 0
 var current_date : String = ""
-var current_session_time : int = 0
+var current_session_time : float = 0
+var post_test_session_time : float = 0
 var is_pre_test : bool = false
+var is_post_test : bool = false
 
 #Scene animation variables
 var shake_strength : float = 0.0
 var shake_decay : float = 0.0
 var history_text_storage : String = ""
 #var new_progress : bool = true#if false, this will load the saved progress instead of a new one
+var user_time_informed : bool = false
 
 #==========Onready Variables==========#
 onready var rand = RandomNumberGenerator.new()
@@ -118,6 +121,7 @@ onready var tutorial_images : AnimatedSprite = $UI/TutorialMenu/TutorialImages
 onready var tutorial_title_label : Label = $UI/TutorialMenu/TitleLabel
 onready var pause_menu : Node2D = $UI/PauseMenu
 onready var http_request : HTTPRequest = $HTTPRequest
+onready var time_menu : AcceptDialog = $UI/TimeMenu
 
 #==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
@@ -143,14 +147,18 @@ func _ready() -> void:
 	#Setup tracing of data for research (only for 1st, 6th and 7th day)
 	#TESTING
 	current_date = Time.get_date_string_from_system(true)
-	if !Global.user_data["SavedDataResearch"].has(current_date):
-		Global.setup_pretest_variables(current_date)
-		var cur_size = Global.user_data["SavedDataResearch"].size() 
-		if cur_size == 1 || cur_size == 6 || cur_size == 7:
+	if !Global.user_data["SavedDataResearch"]["StoryMode"].has(current_date) or !Global.user_data["DataSent"][0]:
+		Global.setup_research_variables("StoryMode", current_date)
+		var cur_size = Global.get_total_day_and_session_time(current_date).day
+		if cur_size == 1:
 			is_pre_test = true
 			#testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
 			#testing_timer.one_shot = true
 			#testing_timer.start()
+			idle_timer.wait_time = Data.IDLE_TIME
+			idle_timer.start()
+		elif cur_size == 6 or cur_size == 7:
+			is_post_test = true
 			idle_timer.wait_time = Data.IDLE_TIME
 			idle_timer.start()
 		
@@ -187,6 +195,8 @@ func handle_scene_animation(delta : float) -> void:
 			shake_strength = 0
 
 func handle_variable_tracing(delta : float) -> void:
+	if !idle_timer.is_stopped() and is_post_test:
+		post_test_session_time += delta
 	current_session_time += delta
 
 #Loads necessary characters, location and scene
@@ -495,6 +505,17 @@ func set_next_dialogue() -> void:
 		return
 	get_current_dialogue()
 	update_typebox("reset")
+	
+	if is_post_test and !user_time_informed:
+		var cur_date : String = Time.get_date_string_from_system(true)
+		var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
+		print(total_day_and_time.time + post_test_session_time, "??", total_day_and_time.day)
+		if (total_day_and_time.time + post_test_session_time) >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.day == 6 or total_day_and_time.day == 7):
+			time_menu.dialog_text = "10 mins requirement is done. You can already submit the data or continue playing."
+			time_menu.popup()
+			user_time_informed = true
+			is_post_test = false
+			idle_timer.stop()
 
 #Shows current wpm, adds it to overall wpm, then resets info for new wpm
 func register_wpm() -> void:
@@ -632,7 +653,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		#Reset idle timer and continue testing timer
-		if is_pre_test:
+		if is_pre_test or is_post_test:
 			idle_timer.stop()
 			idle_timer.start(Data.IDLE_TIME)
 			testing_timer.paused = false
@@ -897,6 +918,12 @@ func navigate_tutorial_menu(next : bool = true) -> void:
 	tutorial_images.frame = cur_frame
 	tutorial_title_label.text = "TUTORIAL (" + String(cur_frame + 1) + "/" + String(max_frame) + ")" 
 
+func register_stats() -> void:
+	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
+	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
+	#Save this locally
+	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
+
 #==========Connected Functions==========#
 func _on_save_or_load_progress(index):
 	if salm_title_label.text == "SAVE MENU":
@@ -952,7 +979,7 @@ func _on_NameChangeButton_pressed():
 
 func _on_TestButton2_pressed():
 	if !is_pre_test:
-		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+		Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")
 
@@ -972,9 +999,10 @@ func _on_TestingTimer_timeout():
 	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
 	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
 	#Save this locally
-	Global.save_pretest_variables(current_date, wpm_res, accuracy_res, 600)
+	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
 	#Send to google forms
 	Global.send_data("PRE_TEST", Global.user_data.Name, current_date, wpm_res, accuracy_res)
+	
 	#var http = HTTPClient.new()
 	#var data = {
 	#	"entry.1677198908" : Global.user_data.Name, 
@@ -985,7 +1013,13 @@ func _on_TestingTimer_timeout():
 	#var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
 	#data = http.query_string_from_dict(data)
 	#var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
-	print("10 mins minimum is sent to server")
+	
+	#Save data
+	Global.save_user_data()
+	#Create popup here
+	time_menu.dialog_text = "10 mins requirement is done. Pre-test data has been automatically sent to us. You can still continue playing."
+	idle_timer.stop()
+	testing_timer.stop()
 
 func _on_IdleTimer_timeout():
 	testing_timer.paused = true
@@ -999,6 +1033,7 @@ func _on_PauseResumeBtn_pressed():
 func _on_MainMenuBtn_pressed():
 	get_tree().paused = false
 	if !is_pre_test:
-		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+		#Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
+		register_stats()
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")

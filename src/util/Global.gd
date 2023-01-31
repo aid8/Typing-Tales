@@ -92,8 +92,24 @@ func set_default_user_data() -> void:
 		"Items" : [],
 		"SavedProgress" : [{}, {}, {}, {}, {}, {}, {}, {}],
 		"FinishedScenes" : {},
-		"SavedDataResearch" : {}, #1st-7th day data collection
+		"SavedDataResearch" : {
+			"StoryMode"  : {},#{"1":{"time":0},"2":{"time":0},"3":{"time":0},"4":{"time":0},"5":{"time":0},"6":{"time":0}},
+			"Challenge1" : {},
+			"Challenge2" : {},
+			"Challenge3" : {},
+			"Challenge4" : {},
+			"Challenge5" : {},
+		}, #1st-7th day data collection of story and challenge modes
+		"DataSent" : [false, false, false], #1st, 6th, and 7th day
 		"TotalTimeSpent" : [0, 0], #[Story mode, Challenge mode]
+		"SeenTutorials" : [false, false, false, false, false], #IF tutorials are already shown for challanges 1-5
+		"ChallengeStats" : [
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,}, 
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,},
+		],
 	}
 
 func change_name(name : String) -> void:
@@ -204,21 +220,28 @@ func get_user_stats() -> Dictionary:
 	#ADD INDIVIDUAL LETTER STATS
 	return dict
 
-func setup_pretest_variables(date : String) -> void:
-	user_data["SavedDataResearch"][date] = {}
-	user_data["SavedDataResearch"][date]["WPM"] = 0.0
-	user_data["SavedDataResearch"][date]["Accuracy"] = 0.0
-	user_data["SavedDataResearch"][date]["time"] = 0.0
+func setup_research_variables(mode : String, date : String) -> void:
+	if !user_data["SavedDataResearch"][mode].has(date):
+		user_data["SavedDataResearch"][mode][date] = {}
+		user_data["SavedDataResearch"][mode][date]["WPM"] = 0.0
+		user_data["SavedDataResearch"][mode][date]["Accuracy"] = 0.0
+		user_data["SavedDataResearch"][mode][date]["time"] = 0.0
+		user_data["SavedDataResearch"][mode][date]["play_count"] = 0
 
-func save_pretest_variables(date : String, wpm : float, accuracy : float, time : float) -> void:
-	user_data["SavedDataResearch"][date]["WPM"] = wpm
-	user_data["SavedDataResearch"][date]["Accuracy"] = accuracy
-	user_data["SavedDataResearch"][date]["time"] = time
+func save_research_variables(mode : String, date : String, wpm : float, accuracy : float, time : float) -> void:
+	if !user_data["SavedDataResearch"][mode].has(date):
+		print("Current date is invalid!")
+		return
+	user_data["SavedDataResearch"][mode][date]["WPM"] += wpm
+	user_data["SavedDataResearch"][mode][date]["Accuracy"] += accuracy
+	user_data["SavedDataResearch"][mode][date]["time"] += time
+	user_data["SavedDataResearch"][mode][date]["play_count"] += 1
+	#print(user_data)
 
 func send_data(type : String, name : String, date : String, wpm : float, accuracy : float) -> void:
 	var http = HTTPClient.new()
 	
-	if type == "PRE_TEST":
+	if type == "PRE_TEST" and !user_data["DataSent"][0]: #1st day
 		var data = {
 			Data.PRE_TEST_ENTRY_CODES["name"] : name, 
 			Data.PRE_TEST_ENTRY_CODES["date"] : date,
@@ -228,9 +251,71 @@ func send_data(type : String, name : String, date : String, wpm : float, accurac
 		var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
 		data = http.query_string_from_dict(data)
 		var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
-	elif type == "POST_TEST":
+		user_data["DataSent"][0] = true
+	elif type == "TEST" and !user_data["DataSent"][1]: #6th day
+		user_data["DataSent"][1] = true
+	elif type == "POST_TEST" and !user_data["DataSent"][2]:
 		#Add post test here
-		pass
+		user_data["DataSent"][2] = true
+
+func set_seen_tutorial(challenge_num : int) -> void:
+	user_data["SeenTutorials"][challenge_num] = true
+
+func register_challenge_stats(challenge_num : int, wpm : float, accuracy : float, time : float, score : float) -> void:
+	user_data["ChallengeStats"][challenge_num]["wpm"] += wpm
+	user_data["ChallengeStats"][challenge_num]["accuracy"] += accuracy
+	user_data["ChallengeStats"][challenge_num]["time"] += time
+	user_data["ChallengeStats"][challenge_num]["play_count"] += 1
+	user_data["ChallengeStats"][challenge_num]["highest_score"] = max(score, Global.user_data["ChallengeStats"][challenge_num]["highest_score"])
+	user_data["TotalTimeSpent"][1] += time
+
+func get_total_day_and_session_time(date : String) -> Dictionary:
+	var total : float = 0
+	var day : int = 0
+	for mode in user_data["SavedDataResearch"]:
+		day = max(day, user_data["SavedDataResearch"][mode].size())
+		if user_data["SavedDataResearch"][mode].has(date):
+			total += user_data["SavedDataResearch"][mode][date].time
+	return {"day" : day, "time" : total}
+
+func get_stats() -> Dictionary:
+	var stats : Dictionary = {}
+	stats["OverallWPM"] = 0
+	stats["OverallAccuracy"] = 0
+	if user_data["WPM"].count > 0:
+		stats["StoryWPM"] = user_data["WPM"].total_wpm / user_data["WPM"].count
+		stats["OverallWPM"] = stats["StoryWPM"]
+	else:
+		stats["StoryWPM"] = 0
+	if user_data["Accuracy"].correct_count + user_data["Accuracy"].wrong_count > 0:
+		stats["StoryAccuracy"] = user_data["Accuracy"].correct_count / float(user_data["Accuracy"].correct_count + user_data["Accuracy"].wrong_count)
+		stats["OverallAccuracy"] = stats["StoryAccuracy"]
+	else:
+		stats["StoryAccuracy"] = 0
+	stats["PlayTime"] = user_data["TotalTimeSpent"][0] + user_data["TotalTimeSpent"][1]
+	
+	var total_challenge_wpm : float = 0
+	var total_challenge_accuracy : float = 0
+	var count : int = 0
+	for i in range (0, 5):
+		var a = user_data["ChallengeStats"][i]
+		stats["ChallengeStats" + String(i+1)] = [0, 0, a.play_count]
+		if a.play_count > 0:
+			stats["ChallengeStats" + String(i+1)][0] = a.wpm / float(a.play_count)
+			stats["ChallengeStats" + String(i+1)][1] = a.accuracy / float(a.play_count)
+			total_challenge_wpm += stats["ChallengeStats" + String(i+1)][0]
+			total_challenge_accuracy += stats["ChallengeStats" + String(i+1)][1]
+			count += 1
+			
+	if count > 0:
+		stats["OverallWPM"] += total_challenge_wpm / count
+		stats["OverallAccuracy"] += total_challenge_accuracy / count
+	
+	if stats["StoryWPM"] != 0 and stats["StoryAccuracy"] != 0:
+		stats["OverallWPM"] /= 2
+		stats["OverallAccuracy"] /= 2
+	
+	return stats
 
 func check_first_time() -> bool:
 	var file = File.new()
