@@ -5,6 +5,8 @@ extends Node2D
 #ADD GAMEOVER
 
 #==========Variables==========#
+const CHALLENGE_NUM : int = 1
+
 var wpm : Array = [0, 0] #[overall, count]
 var accuracy : Array = [0, 0] #[total_letters, correct_count]
 var cur_accuracy : Array = []
@@ -17,8 +19,9 @@ var current_character_index : int = -1
 var health : int = 5
 var speed_addition : float = 10
 var enemy_speed : float = 0
-var score : int = 0
+var score : float = 0
 var gameover : bool = false
+var current_session_time : float = 0
 
 #==========Onready Variables==========#
 onready var base : Area2D = $Base
@@ -29,6 +32,9 @@ onready var score_label : Label = $UI/ScoreLabel
 onready var gameover_menu : CanvasLayer = $GameOverMenu
 onready var enemy_spawn_timer : Timer = $EnemySpawnTimer
 onready var difficulty_timer : Timer = $DifficultyTimer
+onready var pause_menu : Node2D = $UI/PauseMenu
+onready var tutorial_menu : Node2D = $UI/TutorialMenu
+onready var countdown_menu : Node2D = $UI/CountdownMenu
 
 #==========Preload Variables==========#
 onready var enemy = preload("res://src/objects/challengemenu2/Enemy.tscn")
@@ -38,11 +44,24 @@ onready var score_animation = preload("res://src/objects/ScoreAnimation.tscn")
 func _ready():
 	Global.current_menu = self
 	randomize()
+	
 	spawn_enemy()
 	update_ui()
 	health_bar.init(health)
-
+	
+	#Initialize countdown
+	if Global.user_data["SeenTutorials"][CHALLENGE_NUM]:
+		countdown_menu.start()
+		
+	#Initialize tutorial menu
+	tutorial_menu.start(CHALLENGE_NUM)
+	Global.set_seen_tutorial(CHALLENGE_NUM)
+	
+	#Initialize for testing
+	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
+	
 func _process(delta : float) -> void:
+	current_session_time += delta
 	if tracing_wpm:
 		total_time += delta
 
@@ -88,9 +107,12 @@ func show_gameover_menu() -> void:
 		total_accuracy = (accuracy[1] / float(accuracy[0])) * 100
 	if wpm[1] > 0:
 		total_wpm = (wpm[0]/float(wpm[1]))
-	gameover_menu.init("SCORE: " + String(score) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
+	#Register Stats
+	Global.register_challenge_stats(CHALLENGE_NUM, total_wpm, total_accuracy, current_session_time, score)
+	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true), total_wpm, total_accuracy, current_session_time) 
+	gameover_menu.init("SCORE: " + String(score) + "\nH-SCORE: " + String(Global.user_data["ChallengeStats"][CHALLENGE_NUM]["highest_score"]) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
 	gameover_menu.show()
-
+	
 func add_score_animation(position : Vector2, score : int) -> void:
 	var s = score_animation.instance()
 	s.position = position
@@ -115,6 +137,9 @@ func find_new_active_enemy(typed_character : String):
 			return
 			
 func _unhandled_input(event : InputEvent) -> void:
+	if Input.is_action_pressed("ui_cancel"):
+		pause_menu.pause()
+		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
@@ -159,6 +184,7 @@ func _on_Base_body_entered(body):
 		health_bar.subtract_life()
 		health = health_bar.get_lives()
 		update_ui()
+		tracing_wpm = false
 		if health <= 0:
 			enemy_spawn_timer.stop()
 			difficulty_timer.stop()

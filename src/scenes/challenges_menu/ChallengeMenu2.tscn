@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://src/scenes/challenges_menu/ChallengeMenu2.gd" type="Script" id=1]
 [ext_resource path="res://assets/challenges_menu/challenge2/background.png" type="Texture" id=2]
@@ -11,6 +11,9 @@
 [ext_resource path="res://assets/challenges_menu/challenge2/BaseCrystal/tile000.png" type="Texture" id=9]
 [ext_resource path="res://assets/challenges_menu/challenge2/BaseCrystal/tile003.png" type="Texture" id=10]
 [ext_resource path="res://assets/challenges_menu/challenge2/BaseCrystal/tile002.png" type="Texture" id=11]
+[ext_resource path="res://src/ui/PauseMenu.tscn" type="PackedScene" id=12]
+[ext_resource path="res://src/ui/TutorialMenu.tscn" type="PackedScene" id=13]
+[ext_resource path="res://src/ui/CountdownMenu.tscn" type="PackedScene" id=14]
 
 [sub_resource type="DynamicFont" id=16]
 size = 30
@@ -72,6 +75,15 @@ position = Vector2( 1125, 52 )
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 7 )
 
+[node name="PauseMenu" parent="UI" instance=ExtResource( 12 )]
+visible = false
+
+[node name="CountdownMenu" parent="UI" instance=ExtResource( 14 )]
+visible = false
+
+[node name="TutorialMenu" parent="UI" instance=ExtResource( 13 )]
+visible = false
+
 [node name="GameOverMenu" parent="." instance=ExtResource( 4 )]
 
 [node name="Base" type="Area2D" parent="."]
@@ -89,7 +101,7 @@ texture = ExtResource( 3 )
 position = Vector2( -6.10352e-05, -40 )
 scale = Vector2( 1.66666, 1.66666 )
 frames = SubResource( 3 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="EnemyContainer" type="YSort" parent="."]
