@@ -5,6 +5,7 @@
 			"location" : "Home_Fireplace1",
 			"dialogue" : "Christmas won't be Christmas without any presents,",
             "dialogue_remark" : "you grumbled, lying on the rug.",
+			"bgm" : "Day_1",
 		},
 
         {

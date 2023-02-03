@@ -16,8 +16,56 @@ const PRE_TEST_ENTRY_CODES = {
 	"accuracy" : "entry.2103345753", 
 }
 
-const TOTAL_COLLECTION_TIME = 600
+const TOTAL_COLLECTION_TIME = 20#600
 const IDLE_TIME = 8
+
+const TUTORIAL_TEXT = [
+	#Challenge 1
+	[
+		"FRUITS WILL FALL ON EACH PLATFORM", 
+		"TYPE THE WORDS ON THE PLATFORM TO SWITCH THE CHARACTER", 
+		"GET THE FRUITS TO SCORE. FAILING TO DO SO WILL LOSE LIVES", 
+		"THE GOAL IS TO COLLECT FRUITS AND SCORE AS MUCH AS POSSIBLE",
+	],
+	
+	#Challenge 2
+	[
+		"SLIMES WILL APPROACH YOUR BASE",
+		"TYPE THE WORDS ABOVE THE SLIME TO KILL THEM",
+		"ONCE THE SLIMES REACH THE BASE, YOU WILL LOSE LIVES",
+		"SCORE AND SURVIVE AS LONG AS POSSIBLE",
+	],
+	
+	#Challenge 3
+	[
+		"MATCH TILES BY TYPING THE WORD ON THE TILE WITH SAME COLORS",
+		"EACH COLOR OF THE TILES WILL HAVE DIFFERENT POWERUPS",
+		"GREEN TILES INCREASES SCORE MULTIPLIER",
+		"BLUE TILES FREEZES TIME TIMER AND RED TILES SPEEDS UP TILE RESPAWN",
+		"A TIMER BAR WILL BE SHOWN ABOVE INDICATING TIME LEFT FOR EACH POWERUPS",
+		"MATCH TILES AS MANY AS POSSIBLE FOR 1 MINUTE",
+		"USE THE POWERUPS FOR YOUR ADVANTAGE TO FURTHER INCREASE YOUR SCORE",
+	],
+	
+	#Challenge 4
+	[
+		"BRICKS WILL FALL DOWN ON THE STAGE",
+		"TYPE THE WORDS ON THE BRICK TO DESTROY IT",
+		"ONCE THE BRICK HAS REACHED BELOW THE STAGE, IT WILL BE DISABLED",
+		"BRICKS STACKED WITH EACH OTHER WILL ALSO BE DISABLED",
+		"THE WORDS ON THE DISABLED BRICKS WILL TURN RED AND WILL NOT BE TYPABLE",
+		"SCORE AND DESTROY BRICKS AS MANY AS POSSIBLE",
+	],
+	
+	#Challenge 5
+	[
+		"BALLS WILL BE SCATTERED AROUND THE MAP",
+		"TYPE THE WORD ON THE DIRECTION OF THE TEXT TO MOVE IN THAT DIRECTION",
+		"GET THE BALLS TO SCORE",
+		"COLLECT BALLS AS MANY AS POSSIBLE FOR 1 MINUTE",
+	],
+	
+]
 
 var characters = {
 	#Character 1
@@ -226,6 +274,25 @@ var backgrounds = {
 		"Frame" : 13,
 		"Location" : "Outdoor Terrace",
 	},
+}
+
+var bgms : Dictionary = {
+	"Main_Menu" : "res://assets/bgms/1_Menu_Master.ogg",
+	"Day_1" : "res://assets/bgms/2_Day_1_Master.ogg",
+	"Night_1" : "res://assets/bgms/3_Night_1_Master.ogg",
+	"Dramatic_1" : "res://assets/bgms/4_Dramatic_1_Master.ogg",
+	"Dramatic_2" : "res://assets/bgms/4_Dramatic_2_Master.ogg",
+}
+
+var sfxs : Dictionary = {
+	"Confirm" : "res://assets/sfxs/UI Simple Confirm.wav",
+	"Select" : "res://assets/sfxs/UI Simple Select.wav",
+	"Cancel" : "res://assets/sfxs/UI Simple Cancel.wav",
+	"Bright" : "res://assets/sfxs/UI Bright.wav",
+	"Bell_1" : "res://assets/sfxs/UI Bell 1.wav",
+	"Bell_2" : "res://assets/sfxs/UI Bell 2.wav",
+	"ChapterDone" : "res://assets/sfxs/6_Stinger_Victory_1_Master.ogg",
+	"BadEnd" : "res://assets/sfxs/7_Stinger_Defeat_1_Master.ogg",
 }
 
 var expressions = {
