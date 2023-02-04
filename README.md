@@ -70,3 +70,19 @@ A senior thesis project to help users enhance their typing skills
 ### Character Animations:
 - UpDown
 - Shake
+
+### Background Musics:
+- Main_Menu
+- Day_1
+- Night_1
+- Dramatic_1
+- Dramatic_2
+- For_Everyone
+- Guitar_on_the_Water
+- In_Legends
+- Jazzy_Shop
+- Lurking
+- Magical
+- Poppy_Shop
+- Quircky_Shop"
+- Time_for_Rest
