@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Poppy Shop.ogg-68698ee2ba9f46d5fb417d9f6b3921b8.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/Poppy Shop.ogg"
+dest_files=[ "res://.import/Poppy Shop.ogg-68698ee2ba9f46d5fb417d9f6b3921b8.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

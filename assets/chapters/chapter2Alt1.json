@@ -98,5 +98,10 @@
 			"dialogue" : "crashing sounds were heard just on the other corner. When the family arrived, people already began crowding the accident and a mixture of shock and loud cries echoed.",
 			"skip_dialogue" : true,
 		},
+
+		{
+			"bad_end" : true,
+            "goto_chapter" : ["Chapter 2", -1],
+        },
 	],
 }

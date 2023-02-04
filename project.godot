@@ -20,6 +20,7 @@ Data="*res://src/util/Data.gd"
 Global="*res://src/util/Global.gd"
 SceneTransition="*res://src/ui/SceneTransition.tscn"
 WordList="*res://src/util/WordList.gd"
+BackgroundMusic="*res://src/util/BackgroundMusic.tscn"
 
 [display]
 

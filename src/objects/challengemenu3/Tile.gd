@@ -16,7 +16,12 @@ export (Color) var tile_canceled : Color = Color("#585858")
 var text : String = ""
 var current_color : Color
 
+var shake_strength : float = 0
+var shake_decay : float = 0
+var cur_text_position : Vector2
+
 #==========Onready Variables==========#
+onready var rand = RandomNumberGenerator.new()
 onready var color_rect = $ColorRect
 onready var tile_text = $TextContainer/TileText
 onready var highlight = $Highlight
@@ -27,6 +32,26 @@ onready var anim = $Anim
 func _ready():
 	randomize()
 	refresh_tile()
+
+func _process(delta):
+	handle_text_shake_anim(delta)
+	
+func handle_text_shake_anim(delta):
+	#shake anim
+	if shake_strength > 0:
+		shake_strength = lerp(shake_strength, 0, shake_decay * delta)
+		var rand_off = rand.randf_range(-shake_strength, shake_strength)
+		tile_text.rect_position = cur_text_position + Vector2(rand_off, 0)
+		if floor(shake_strength) == 0:
+			tile_text.rect_position = cur_text_position
+			shake_strength = 0
+
+func apply_text_shake(ss : float, sd : float) -> void:
+	if shake_strength > 0:
+		return
+	shake_strength = ss
+	shake_decay = sd
+	cur_text_position = tile_text.rect_position
 
 func delayed_refresh_tile(time : int):
 	text = ""

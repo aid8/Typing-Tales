@@ -4,8 +4,8 @@ const MAX_CHAPTERS = 8
 const ALTERNATIVE_CHAPTERS = [0, 1, 1, 1, 1, 1, 0, 0]
 const LETTER_MASTERY_ACCURACY_BOUND = 0.90
 #Words that have (word_mastery_accuracy_bound) 94% mastery that is typed more than or equal to (word_mastery_cound_bound) 100 times will be ignored in story mode
-const WORD_MASTERY_ACCURACY_BOUND = 0.80 #0.94
-const WORD_MASTERY_COUNT_BOUND = 1 #100
+const WORD_MASTERY_ACCURACY_BOUND = 0.94 #0.94
+const WORD_MASTERY_COUNT_BOUND = 100 #100
 
 const HTTP_HEADERS = ["Content-Type: application/x-www-form-urlencoded"]
 const PRE_TEST_URLFORM = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd1lLAvOQfVKT2sXNDv0maaK9TGTXrLehlv1hLRMzq0yG0TIA/formResponse"
@@ -18,6 +18,54 @@ const PRE_TEST_ENTRY_CODES = {
 
 const TOTAL_COLLECTION_TIME = 600
 const IDLE_TIME = 8
+
+const TUTORIAL_TEXT = [
+	#Challenge 1
+	[
+		"FRUITS WILL FALL ON EACH PLATFORM", 
+		"TYPE THE WORDS ON THE PLATFORM TO SWITCH THE CHARACTER", 
+		"GET THE FRUITS TO SCORE. FAILING TO DO SO WILL LOSE LIVES", 
+		"THE GOAL IS TO COLLECT FRUITS AND SCORE AS MUCH AS POSSIBLE",
+	],
+	
+	#Challenge 2
+	[
+		"SLIMES WILL APPROACH YOUR BASE",
+		"TYPE THE WORDS ABOVE THE SLIME TO KILL THEM",
+		"ONCE THE SLIMES REACH THE BASE, YOU WILL LOSE LIVES",
+		"SCORE AND SURVIVE AS LONG AS POSSIBLE",
+	],
+	
+	#Challenge 3
+	[
+		"MATCH TILES BY TYPING THE WORD ON THE TILE WITH SAME COLORS",
+		"EACH COLOR OF THE TILES WILL HAVE DIFFERENT POWERUPS",
+		"GREEN TILES INCREASES SCORE MULTIPLIER",
+		"BLUE TILES FREEZES TIME TIMER AND RED TILES SPEEDS UP TILE RESPAWN",
+		"A TIMER BAR WILL BE SHOWN ABOVE INDICATING TIME LEFT FOR EACH POWERUPS",
+		"MATCH TILES AS MANY AS POSSIBLE FOR 1 MINUTE",
+		"USE THE POWERUPS FOR YOUR ADVANTAGE TO FURTHER INCREASE YOUR SCORE",
+	],
+	
+	#Challenge 4
+	[
+		"BRICKS WILL FALL DOWN ON THE STAGE",
+		"TYPE THE WORDS ON THE BRICK TO DESTROY IT",
+		"ONCE THE BRICK HAS REACHED BELOW THE STAGE, IT WILL BE DISABLED",
+		"BRICKS STACKED WITH EACH OTHER WILL ALSO BE DISABLED",
+		"THE WORDS ON THE DISABLED BRICKS WILL TURN RED AND WILL NOT BE TYPABLE",
+		"SCORE AND DESTROY BRICKS AS MANY AS POSSIBLE",
+	],
+	
+	#Challenge 5
+	[
+		"BALLS WILL BE SCATTERED AROUND THE MAP",
+		"TYPE THE WORD ON THE DIRECTION OF THE TEXT TO MOVE IN THAT DIRECTION",
+		"GET THE BALLS TO SCORE",
+		"COLLECT BALLS AS MANY AS POSSIBLE FOR 1 MINUTE",
+	],
+	
+]
 
 var characters = {
 	#Character 1
@@ -228,6 +276,41 @@ var backgrounds = {
 	},
 }
 
+var bgms : Dictionary = {
+	"Main_Menu" : "res://assets/bgms/1_Menu_Master.ogg",
+	"Day_1" : "res://assets/bgms/2_Day_1_Master.ogg",
+	"Night_1" : "res://assets/bgms/3_Night_1_Master.ogg",
+	"Dramatic_1" : "res://assets/bgms/4_Dramatic_1_Master.ogg",
+	"Dramatic_2" : "res://assets/bgms/4_Dramatic_2_Master.ogg",
+	"For_Everyone" : "res://assets/bgms/For Everyone Main.ogg",
+	"Guitar_on_the_Water" : "res://assets/bgms/Guitar on the Water.ogg",
+	"In_Legends" : "res://assets/bgms/In Legends.ogg",
+	"Jazzy_Shop" : "res://assets/bgms/Jazzy Shop.ogg",
+	"Lurking" : "res://assets/bgms/Lurking.ogg",
+	"Magical" : "res://assets/bgms/Magical Full.ogg",
+	"Poppy_Shop" : "res://assets/bgms/Poppy Shop.ogg",
+	"Quircky_Shop" : "res://assets/bgms/Quircky Shop.ogg",
+	"Time_for_Rest" : "res://assets/bgms/Time for Rest.ogg",
+}
+
+var sfxs : Dictionary = {
+	"Confirm" : "res://assets/sfxs/UI Simple Confirm.wav",
+	"Select" : "res://assets/sfxs/UI Simple Select.wav",
+	"Cancel" : "res://assets/sfxs/UI Simple Cancel.wav",
+	"Bright" : "res://assets/sfxs/UI Bright.wav",
+	"Bell_1" : "res://assets/sfxs/UI Bell 1.wav",
+	"Bell_2" : "res://assets/sfxs/UI Bell 2.wav",
+	"ChapterDone" : "res://assets/sfxs/6_Stinger_Victory_1_Master.ogg",
+	"BadEnd" : "res://assets/sfxs/7_Stinger_Defeat_1_Master.ogg",
+	"Key1" : "res://assets/sfxs/keyboard_clicks/Key1.wav",
+	"Key2" : "res://assets/sfxs/keyboard_clicks/Key2.wav",
+	"Key3" : "res://assets/sfxs/keyboard_clicks/Key3.wav",
+	"Key4" : "res://assets/sfxs/keyboard_clicks/Key4.wav",
+	"Key5" : "res://assets/sfxs/keyboard_clicks/Key5.wav",
+	"Key6" : "res://assets/sfxs/keyboard_clicks/Key6.wav",
+	"ErrorKey" : "res://assets/sfxs/keyboard_clicks/ErrorKey.wav",
+}
+
 var expressions = {
 	"Frown" : 0,
 	"Frown_blush" : 1,
@@ -258,10 +341,36 @@ var chapter_details = {
 		"Title" : "Chapter 3: \n",
 		"Subtitle" : "The Laurence Boy",
 	},
+	
+	"Chapter 4" : {
+		"Title" : "Chapter 4: \n",
+		"Subtitle" : "The Laurence Boy",
+	},
+	
+	"Chapter 5" : {
+		"Title" : "Chapter 5: \n",
+		"Subtitle" : "The Laurence Boy",
+	},
+	
+	"Chapter 6" : {
+		"Title" : "Chapter 6: \n",
+		"Subtitle" : "The Laurence Boy",
+	},
+	
+	"Chapter 7" : {
+		"Title" : "Chapter 7: \n",
+		"Subtitle" : "The Laurence Boy",
+	},
+	
+	"Chapter 8" : {
+		"Title" : "Chapter 8: \n",
+		"Subtitle" : "The Laurence Boy",
+	},
 }
 
 #Add more if there are characters that should not be included
 var unnecessary_characters =  [".",",",":","?"," ","-"]
+var ignored_keyboard_click_sfx_scancodes = [16777237, 16777241, 16777217]
 
 #Transitions: Fade, Shards, Curtain, SpiralSquare, DiamondTilesCover, SpinningRectangle, Shade, Zip, HorizontalBars
 #Character_Animations: UpDown, Shake

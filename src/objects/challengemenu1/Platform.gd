@@ -10,12 +10,37 @@ export (Color) var white : Color = Color("#FFFFFF")
 var text : String = ""
 var available : bool = true
 
+var shake_strength : float = 0
+var shake_decay : float = 0
+var cur_text_position : Vector2
+
 #==========Onready Variables==========#
+onready var rand = RandomNumberGenerator.new()
 onready var text_label : RichTextLabel = $TextLabel
 
 #==========Functions==========#
 func _ready():
 	pass
+
+func _process(delta):
+	handle_text_shake_anim(delta)
+	
+func handle_text_shake_anim(delta):
+	#shake anim
+	if shake_strength > 0:
+		shake_strength = lerp(shake_strength, 0, shake_decay * delta)
+		var rand_off = rand.randf_range(-shake_strength, shake_strength)
+		text_label.rect_position = cur_text_position + Vector2(rand_off, 0)
+		if floor(shake_strength) == 0:
+			text_label.rect_position = cur_text_position
+			shake_strength = 0
+
+func apply_text_shake(ss : float, sd : float) -> void:
+	if shake_strength > 0:
+		return
+	shake_strength = ss
+	shake_decay = sd
+	cur_text_position = text_label.rect_position
 
 func set_random_word() -> void:
 	var platform_words = Global.current_menu.get_platform_words()

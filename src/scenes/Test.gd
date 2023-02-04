@@ -69,14 +69,18 @@ var chapter_play_time : float = 0
 var save_slot_index : int = 0
 var tutorial_index : int = 0
 var current_date : String = ""
-var current_session_time : int = 0
+var current_session_time : float = 0
+var post_test_session_time : float = 0
 var is_pre_test : bool = false
+var is_post_test : bool = false
 
 #Scene animation variables
 var shake_strength : float = 0.0
 var shake_decay : float = 0.0
 var history_text_storage : String = ""
 #var new_progress : bool = true#if false, this will load the saved progress instead of a new one
+var user_time_informed : bool = false
+var last_choice_index : int = 0
 
 #==========Onready Variables==========#
 onready var rand = RandomNumberGenerator.new()
@@ -118,6 +122,8 @@ onready var tutorial_images : AnimatedSprite = $UI/TutorialMenu/TutorialImages
 onready var tutorial_title_label : Label = $UI/TutorialMenu/TitleLabel
 onready var pause_menu : Node2D = $UI/PauseMenu
 onready var http_request : HTTPRequest = $HTTPRequest
+onready var time_menu : AcceptDialog = $UI/TimeMenu
+onready var bad_end_menu : Node2D = $UI/BadEndMenu
 
 #==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
@@ -136,25 +142,36 @@ func _ready() -> void:
 	#	return
 	
 	#TESTING
-	if Global.check_first_time():
+	if !Global.user_data["SeenTutorials"][5]:
 		name_menu.show() #get name for the first time
 		tutorial_menu.show()
+		Global.user_data["SeenTutorials"][5] = true
+		Global.save_user_data()
 	
 	#Setup tracing of data for research (only for 1st, 6th and 7th day)
 	#TESTING
 	current_date = Time.get_date_string_from_system(true)
-	if !Global.user_data["SavedDataResearch"].has(current_date):
-		Global.setup_pretest_variables(current_date)
-		var cur_size = Global.user_data["SavedDataResearch"].size() 
-		if cur_size == 1 || cur_size == 6 || cur_size == 7:
+	if !Global.user_data["SavedDataResearch"]["StoryMode"].has(current_date) or !Global.user_data["DataSent"][0]:
+		Global.setup_research_variables("StoryMode", current_date)
+		var cur_size = Global.get_total_day_and_session_time(current_date).day
+		if cur_size == 1:
 			is_pre_test = true
-			#testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
-			#testing_timer.one_shot = true
-			#testing_timer.start()
+			if !debug_mode:
+				testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
+				testing_timer.one_shot = true
+				testing_timer.start()
 			idle_timer.wait_time = Data.IDLE_TIME
 			idle_timer.start()
-		
-	get_current_dialogue()
+		elif cur_size == 6 or cur_size == 7:
+			is_post_test = true
+			idle_timer.wait_time = Data.IDLE_TIME
+			idle_timer.start()
+	
+	if Global.load_slot_index_selected != -1:
+		load_saved_progress(Global.load_slot_index_selected, false)
+		Global.load_slot_index_selected = -1
+	else:
+		get_current_dialogue()
 	history_text.set_scroll_follow(true)
 	SceneTransition.connect("transition_finished", self, "on_scene_transition_finished")
 	
@@ -187,12 +204,15 @@ func handle_scene_animation(delta : float) -> void:
 			shake_strength = 0
 
 func handle_variable_tracing(delta : float) -> void:
+	if !idle_timer.is_stopped() and is_post_test:
+		post_test_session_time += delta
 	current_session_time += delta
 
 #Loads necessary characters, location and scene
-func load_saved_progress(index):
-	SceneTransition.add_transition("DiamondTilesCover")
-	yield(SceneTransition, "transition_finished")
+func load_saved_progress(index, has_transition : bool = true):
+	if has_transition:
+		SceneTransition.add_transition("DiamondTilesCover")
+		yield(SceneTransition, "transition_finished")
 	
 	var data = Global.user_data["SavedProgress"][index]
 	set_next_scene(data.scene, data.scene_index, false)
@@ -203,6 +223,8 @@ func load_saved_progress(index):
 	current_location = data.location
 	change_background(current_location, data.location_tint)
 	get_current_dialogue(false)
+	if data.has("bgm"):
+		BackgroundMusic.play_music(data.bgm)
 	save_and_load_menu.hide()
 
 #Creates a character array and puts all info about the characters present
@@ -217,7 +239,7 @@ func save_progress(index : int):
 		char_info["position"] = c.current_position
 		char_info["is_hidden"] = c.is_hidden
 		char_array.append(char_info)
-	Global.add_user_data_story_progress(current_scene, current_scene_index, char_array, current_location, "#" + backgrounds.self_modulate.to_html(false), Time.get_datetime_string_from_system(), backgrounds.frames.get_frame(backgrounds.animation, backgrounds.frame).resource_path, index)
+	Global.add_user_data_story_progress(current_scene, current_scene_index, char_array, current_location, "#" + backgrounds.self_modulate.to_html(false), Time.get_datetime_string_from_system(), backgrounds.frames.get_frame(backgrounds.animation, backgrounds.frame).resource_path, BackgroundMusic.current_music, index)
 	Global.save_user_data()
 	print("Progress is saved!")
 	show_save_and_load_menu("save")
@@ -267,6 +289,7 @@ func apply_scene_animation(values : Dictionary) -> void:
 func show_selection(selections : Array) -> void:
 	choosing_selection = true
 	skip_dialogue = false
+	last_choice_index = current_scene_index
 	for i in range (0, selections.size()):
 		var cs = choice_selection.instance()
 		cs.next_scene_name = selections[i][1]
@@ -370,35 +393,43 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 		yield(SceneTransition, "transition_finished")
 		ignore_typing = false
 	
-	#Show intro menu in start of new chapter
-	if current_scene_index == 0:
-		show_intro_menu(1)
-	
 	#If dialouge has goto_chapter, do this and return
 	if dialogue_data.has("goto_chapter"):
 		var chap_data = dialogue_data.goto_chapter
-		set_next_scene(chap_data[0], chap_data[1])
+		if chap_data[1] == -1:
+			chap_data[1] = last_choice_index
+		set_next_scene(chap_data[0], chap_data[1], true, true)
 		return
-		
+	
+	#Show intro menu in start of new chapter
+	if current_scene_index == 0 and Global.load_slot_index_selected == -1:
+		show_intro_menu(1)
+	else:
+		print("OK1")
+		if dialogue_data.has("bgm"):
+			print("OK2")
+			BackgroundMusic.play_music(dialogue_data.bgm)
+	
 	#Iterate through the dialogue and get all mastered words with index and length
-	var word : String = ""
-	var tmp : String = dialogue_data.dialogue + " "
-	var starting_tmp : int = 0
-	for i in range(0, tmp.length()):
-		if tmp[i] != " ":
-			word += tmp[i]
-		else:
-			#Check if word is mastered
-			var formatted_word = Global.format_word(word)
-			var mastery = Global.get_word_mastery(formatted_word)
-			print(formatted_word, mastery)
-			if mastery.size() > 0:
-				if mastery.accuracy >= Data.WORD_MASTERY_ACCURACY_BOUND and mastery.count >= Data.WORD_MASTERY_COUNT_BOUND:
-					mastered_word_indices[starting_tmp] = word.length()
-					mastered_words[formatted_word] = true
-					skipped_characters_length += word.length()
-			word = ""
-			starting_tmp = i
+	if !dialogue_data.has("skip_dialogue"):
+		var word : String = ""
+		var tmp : String = dialogue_data.dialogue + " "
+		var starting_tmp : int = 0
+		for i in range(0, tmp.length()):
+			if tmp[i] != " ":
+				word += tmp[i]
+			else:
+				#Check if word is mastered
+				var formatted_word = Global.format_word(word)
+				var mastery = Global.get_word_mastery(formatted_word)
+				print(formatted_word, mastery)
+				if mastery.size() > 0:
+					if mastery.accuracy >= Data.WORD_MASTERY_ACCURACY_BOUND and mastery.count >= Data.WORD_MASTERY_COUNT_BOUND:
+						mastered_word_indices[starting_tmp] = word.length()
+						mastered_words[formatted_word] = true
+						skipped_characters_length += word.length()
+				word = ""
+				starting_tmp = i
 	
 	#Remove character
 	if dialogue_data.has("remove_character"):
@@ -490,15 +521,34 @@ func set_next_dialogue() -> void:
 	mastered_word_indices.clear()
 	mastered_words.clear()
 	if(current_scene_index >= Data.dialogues[current_scene].size() - 1):
-		show_stats_menu()
+		var dialogue_data = Data.dialogues[current_scene][current_scene_index]
+		print(dialogue_data)
+		if dialogue_data.has("bad_end"):
+			Global.play_sfx("BadEnd")
+			bad_end_menu.show()
+		else:
+			show_stats_menu()
 		Global.add_finished_scenes(current_scene)
 		return
 	get_current_dialogue()
 	update_typebox("reset")
+	
+	if is_post_test and !user_time_informed:
+		var cur_date : String = Time.get_date_string_from_system(true)
+		var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
+		print(total_day_and_time.time + post_test_session_time, "??", total_day_and_time.day)
+		if (total_day_and_time.time + post_test_session_time) >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.day == 6 or total_day_and_time.day == 7):
+			Global.create_popup("10 mins requirement is done. You can already submit the data or continue playing.", self)
+			#time_menu.dialog_text = "10 mins requirement is done. You can already submit the data or continue playing."
+			#time_menu.popup()
+			user_time_informed = true
+			is_post_test = false
+			idle_timer.stop()
 
 #Shows current wpm, adds it to overall wpm, then resets info for new wpm
 func register_wpm() -> void:
 	if total_time > 0:
+		print(current_dialogue.length(), "-", skipped_characters_length, "-", total_time)
 		current_wpm = (current_dialogue.length() - skipped_characters_length) * 60 / (5 * total_time)
 		total_wpm[0] += current_wpm
 		total_wpm[1] += 1
@@ -529,7 +579,7 @@ func add_history_text(type : String, name : String, dialogue : String, remark : 
 	history_text.parse_bbcode(history_text_storage)
 
 #Sets neccesary variables to be ready for the next scene
-func set_next_scene(scene_name : String, scene_index : int = 0, ready_dialogue : bool = true) -> void:
+func set_next_scene(scene_name : String, scene_index : int = 0, ready_dialogue : bool = true, retain_characters : bool = false) -> void:
 	current_scene = scene_name
 	current_scene_index = scene_index
 	current_letter_index = 0
@@ -550,8 +600,9 @@ func set_next_scene(scene_name : String, scene_index : int = 0, ready_dialogue :
 	has_choice_timer = false
 	chosen_selection = null
 	choosing_selection = false
-	remove_characters(false)
-	character_dict.clear()
+	if !retain_characters:
+		remove_characters(false)
+		character_dict.clear()
 	update_typebox("reset")
 	if ready_dialogue:
 		get_current_dialogue(true)
@@ -624,21 +675,29 @@ func add_strikethrough_and_color(word : String, color : Color) -> String:
 
 func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
-		get_tree().paused = true
-		pause_menu.show()
+		if !pause_menu.visible and !stats_menu.visible and !bad_end_menu.visible and !history_menu.visible and !intro_menu.visible and !save_and_load_menu.visible and !tutorial_menu.visible:
+			Global.play_sfx("Cancel")
+			get_tree().paused = true
+			pause_menu.get_node("BGMSlide").value = Global.user_data["Music"]
+			pause_menu.get_node("SFXSlide").value = Global.user_data["Sfx"]
+			pause_menu.show()
 	
 	if ignore_typing:
 		return
 	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		#Reset idle timer and continue testing timer
-		if is_pre_test:
+		if is_pre_test or is_post_test:
 			idle_timer.stop()
 			idle_timer.start(Data.IDLE_TIME)
 			testing_timer.paused = false
 		
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
+		
+		#Add sfx
+		if !Data.ignored_keyboard_click_sfx_scancodes.has(typed_event.scancode):
+			Global.play_keyboard_sfx()
 		
 		#start tracing wpm (RECHECK)
 		if typed_event.unicode != 0:
@@ -649,6 +708,14 @@ func _unhandled_input(event : InputEvent) -> void:
 				get_current_dialogue()
 				update_typebox("reset")
 				stats_menu.hide()
+			return
+		elif bad_end_menu.visible:
+			if typed_event.scancode == 32:
+				SceneTransition.add_transition("DiamondTilesCover")
+				yield(SceneTransition, "transition_finished")
+				get_current_dialogue()
+				update_typebox("reset")
+				bad_end_menu.hide()
 			return
 			
 		#Focus on finding the choice selection if choosing selection is true
@@ -761,7 +828,7 @@ func _unhandled_input(event : InputEvent) -> void:
 					if has_choice_timer:
 						set_selection_timer("stop")
 					add_history_text(typing_target, character_name.text, current_dialogue)
-					Global.add_finished_scenes(current_scene)
+					#Global.add_finished_scenes(current_scene)
 					
 					#If same scene, do not reset, change index only and run ncessessary functions
 					if chosen_selection.next_scene_name == current_scene:
@@ -830,11 +897,13 @@ func show_stats_menu():
 			if i < diff_letters.size() - 2:
 				letter_diff_label.text += ", "
 	print(Global.user_data)
+	
+	Global.play_sfx("ChapterDone")
 	stats_menu.show()
 
 func show_intro_menu(starting_delay:float = 0):
-	#TESTING
-	return
+	if !Data.chapter_details.has(current_scene):
+		return
 	intro_menu.modulate.a = 1
 	intro_menu.show()
 	var tween = intro_menu.get_node("Tween")
@@ -852,6 +921,11 @@ func show_intro_menu(starting_delay:float = 0):
 	tween.start()
 	yield(tween,"tween_completed")
 	intro_menu.hide()
+	
+	#Play bgm if there is one
+	var dialogue_data = Data.dialogues[current_scene][current_scene_index]
+	if dialogue_data.has("bgm"):
+		BackgroundMusic.play_music(dialogue_data.bgm)
 
 func show_save_and_load_menu(type : String) -> void:
 	if type == "save":
@@ -897,6 +971,16 @@ func navigate_tutorial_menu(next : bool = true) -> void:
 	tutorial_images.frame = cur_frame
 	tutorial_title_label.text = "TUTORIAL (" + String(cur_frame + 1) + "/" + String(max_frame) + ")" 
 
+func register_stats() -> void:
+	var wpm_res = 0
+	var accuracy_res = 0
+	if total_wpm[1] > 0:
+		wpm_res = (total_wpm[0] / float(total_wpm[1]))
+	if total_accuracy[0] + total_accuracy[1] > 0:
+		accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
+	#Save this locally
+	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
+
 #==========Connected Functions==========#
 func _on_save_or_load_progress(index):
 	if salm_title_label.text == "SAVE MENU":
@@ -906,8 +990,9 @@ func _on_save_or_load_progress(index):
 			return
 		save_progress(index)
 	else:
-		load_saved_progress(index)
-		get_current_dialogue()
+		if Global.user_data["SavedProgress"][index].size() > 0:
+			load_saved_progress(index)
+		#get_current_dialogue()
 
 func _on_SaveButton_pressed():
 	show_save_and_load_menu("save")
@@ -916,7 +1001,8 @@ func _on_LoadButton_pressed():
 	show_save_and_load_menu("load")
 
 func _on_ChoiceTimer_timeout():
-	timer_pop_up.show()
+	#timer_pop_up.show()
+	Global.create_popup("Time is up! You can practice typing by playing Challenges!", self, "_on_TimerPopUp_confirmed")
 	ignore_typing = true
 	set_selection_timer("stop")
 	
@@ -952,7 +1038,7 @@ func _on_NameChangeButton_pressed():
 
 func _on_TestButton2_pressed():
 	if !is_pre_test:
-		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+		Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")
 
@@ -972,9 +1058,10 @@ func _on_TestingTimer_timeout():
 	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
 	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
 	#Save this locally
-	Global.save_pretest_variables(current_date, wpm_res, accuracy_res, 600)
+	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
 	#Send to google forms
 	Global.send_data("PRE_TEST", Global.user_data.Name, current_date, wpm_res, accuracy_res)
+	
 	#var http = HTTPClient.new()
 	#var data = {
 	#	"entry.1677198908" : Global.user_data.Name, 
@@ -985,7 +1072,13 @@ func _on_TestingTimer_timeout():
 	#var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
 	#data = http.query_string_from_dict(data)
 	#var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
-	print("10 mins minimum is sent to server")
+	
+	#Save data
+	Global.save_user_data()
+	#Create popup here
+	time_menu.dialog_text = "10 mins requirement is done. Pre-test data has been automatically sent to us. You can still continue playing."
+	idle_timer.stop()
+	testing_timer.stop()
 
 func _on_IdleTimer_timeout():
 	testing_timer.paused = true
@@ -995,10 +1088,22 @@ func _on_IdleTimer_timeout():
 func _on_PauseResumeBtn_pressed():
 	pause_menu.hide()
 	get_tree().paused = false
+	Global.play_sfx("Select")
 
 func _on_MainMenuBtn_pressed():
 	get_tree().paused = false
 	if !is_pre_test:
-		Global.user_data["SavedDataResearch"][current_date]["time"] += current_session_time
+		#Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
+		register_stats()
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
+	Global.save_user_data()
 	Global.switch_scene("MainMenu")
+	Global.play_sfx("Select")
+
+func _on_SFXSlide_drag_ended(value_changed):
+	Global.user_data["Sfx"] = pause_menu.get_node("SFXSlide").value
+	Global.play_sfx("Confirm")
+
+func _on_BGMSlide_value_changed(value):
+	BackgroundMusic.volume_db = value
+	Global.user_data["Music"] = value

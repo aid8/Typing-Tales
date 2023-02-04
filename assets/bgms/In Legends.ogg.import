@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/In Legends.ogg-8f6cac009a8709870feae95236025fe1.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/In Legends.ogg"
+dest_files=[ "res://.import/In Legends.ogg-8f6cac009a8709870feae95236025fe1.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

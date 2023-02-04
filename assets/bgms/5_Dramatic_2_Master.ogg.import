@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/5_Dramatic_2_Master.ogg-76c969eea1b3e55aa410b78304cd1ecc.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/5_Dramatic_2_Master.ogg"
+dest_files=[ "res://.import/5_Dramatic_2_Master.ogg-76c969eea1b3e55aa410b78304cd1ecc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

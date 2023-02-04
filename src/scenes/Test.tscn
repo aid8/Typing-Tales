@@ -154,7 +154,8 @@ size = 30
 font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=6]
-size = 30
+size = 35
+outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 6 )
 
@@ -431,9 +432,8 @@ align = 1
 autowrap = true
 
 [node name="InfoLabel" type="Label" parent="UI/StatsMenu"]
-margin_left = 512.0
 margin_top = 568.0
-margin_right = 756.0
+margin_right = 1280.0
 margin_bottom = 645.0
 custom_fonts/font = SubResource( 15 )
 text = "Press space to continue..."
@@ -484,8 +484,10 @@ visible = false
 position = Vector2( 2, 125 )
 
 [node name="Background" type="ColorRect" parent="UI/TimerNode"]
+margin_left = -2.0
+margin_top = 3.0
 margin_right = 1278.0
-margin_bottom = 51.0
+margin_bottom = 54.0
 color = Color( 0, 0, 0, 0.541176 )
 
 [node name="TimerLabel" type="Label" parent="UI/TimerNode"]
@@ -864,6 +866,8 @@ margin_top = 264.0
 margin_right = 885.0
 margin_bottom = 280.0
 rect_scale = Vector2( 1.25, 1.25 )
+min_value = -80.0
+max_value = 0.0
 ticks_on_borders = true
 
 [node name="SFXLabel" type="Label" parent="UI/PauseMenu"]
@@ -882,6 +886,8 @@ margin_top = 320.0
 margin_right = 885.0
 margin_bottom = 336.0
 rect_scale = Vector2( 1.25, 1.25 )
+min_value = -80.0
+max_value = 0.0
 ticks_on_borders = true
 
 [node name="IntroMenu" type="Node2D" parent="UI"]
@@ -911,6 +917,48 @@ text = "CHAPTER 1:
 A LITTLE NITEMARE"
 align = 1
 valign = 1
+uppercase = true
+
+[node name="BadEndMenu" type="Node2D" parent="UI"]
+visible = false
+
+[node name="Background" type="ColorRect" parent="UI/BadEndMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.560784 )
+
+[node name="bg" type="Sprite" parent="UI/BadEndMenu"]
+position = Vector2( 632, 360 )
+rotation = -1.56934
+scale = Vector2( 8.06092, 8.06092 )
+texture = ExtResource( 49 )
+
+[node name="IntroLabel" type="Label" parent="UI/BadEndMenu"]
+margin_top = 288.0
+margin_right = 1278.0
+margin_bottom = 437.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 18 )
+text = "BAD END"
+align = 1
+valign = 1
+
+[node name="InfoLabel2" type="Label" parent="UI/BadEndMenu"]
+margin_top = 568.0
+margin_right = 1280.0
+margin_bottom = 645.0
+custom_fonts/font = SubResource( 15 )
+text = "press space to continue..."
+align = 1
+valign = 1
+uppercase = true
+
+[node name="TimeMenu" type="AcceptDialog" parent="UI"]
+margin_left = 520.0
+margin_top = 320.0
+margin_right = 760.0
+margin_bottom = 424.0
+dialog_autowrap = true
 
 [node name="TestBox" type="ConfirmationDialog" parent="."]
 margin_left = 495.0
@@ -943,6 +991,8 @@ dialog_autowrap = true
 [connection signal="pressed" from="UI/TutorialMenu/TutorialPrevBtn" to="." method="_on_TutorialPrevBtn_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/PauseResumeBtn" to="." method="_on_PauseResumeBtn_pressed"]
 [connection signal="pressed" from="UI/PauseMenu/MainMenuBtn" to="." method="_on_MainMenuBtn_pressed"]
+[connection signal="value_changed" from="UI/PauseMenu/BGMSlide" to="." method="_on_BGMSlide_value_changed"]
+[connection signal="drag_ended" from="UI/PauseMenu/SFXSlide" to="." method="_on_SFXSlide_drag_ended"]
 [connection signal="confirmed" from="TestBox" to="." method="_on_TestBox_confirmed"]
 [connection signal="timeout" from="ChoiceTimer" to="." method="_on_ChoiceTimer_timeout"]
 [connection signal="timeout" from="TestingTimer" to="." method="_on_TestingTimer_timeout"]

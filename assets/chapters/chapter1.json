@@ -5,6 +5,7 @@
 			"location" : "Home_Fireplace1",
 			"dialogue" : "Christmas won't be Christmas without any presents,",
             "dialogue_remark" : "you grumbled, lying on the rug.",
+			"bgm" : "Day_1",
 		},
 
         {
@@ -24,6 +25,7 @@
 			"expression" : "Open",
 			"dialogue" : "I don't think it's fair for some girls to have plenty of pretty things, and other girls nothing at all!",
             "dialogue_remark" : "added little Amy, with an injured sniff.",
+			"bgm" : "In_Legends",
 		},
 
         {
@@ -85,7 +87,7 @@
 
         {
 			"character" : "You",
-			"dialogue" : "but I do want to buy Undine and Sintran for myself. I've wanted it so long.",
+			"dialogue" : "but I do want to buy Undine and Sintran for myself. I've wanted it so long.",
             "dialogue_remark" : "you said, who was a bookworm.",
 		},
 

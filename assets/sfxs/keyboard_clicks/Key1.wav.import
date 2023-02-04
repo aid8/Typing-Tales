@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Key1.wav-f2a2c16ba607a93dc93f312a76543b95.sample"
+
+[deps]
+
+source_file="res://assets/sfxs/keyboard_clicks/Key1.wav"
+dest_files=[ "res://.import/Key1.wav-f2a2c16ba607a93dc93f312a76543b95.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
