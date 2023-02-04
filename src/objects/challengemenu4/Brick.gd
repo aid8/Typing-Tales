@@ -12,9 +12,15 @@ var text : String = ""
 var motion : Vector2 = Vector2()
 var falling : bool = true
 
+var shake_strength : float = 0
+var shake_decay : float = 0
+var cur_text_position : Vector2
+
 #==========Onready Variables==========#
+onready var rand = RandomNumberGenerator.new()
 onready var text_label : RichTextLabel = $TextLabel
 onready var anim : AnimatedSprite = $Anim
+
 #==========Preload Variables==========#
 
 #==========Functions==========#
@@ -28,6 +34,26 @@ func _physics_process(delta):
 		motion.y = SPEED * delta
 		translate(motion)
 
+func _process(delta):
+	handle_text_shake_anim(delta)
+	
+func handle_text_shake_anim(delta):
+	#shake anim
+	if shake_strength > 0:
+		shake_strength = lerp(shake_strength, 0, shake_decay * delta)
+		var rand_off = rand.randf_range(-shake_strength, shake_strength)
+		text_label.rect_position = cur_text_position + Vector2(rand_off, 0)
+		if floor(shake_strength) == 0:
+			text_label.rect_position = cur_text_position
+			shake_strength = 0
+
+func apply_text_shake(ss : float, sd : float) -> void:
+	if shake_strength > 0:
+		return
+	shake_strength = ss
+	shake_decay = sd
+	cur_text_position = text_label.rect_position
+	
 func get_prompt() -> String:
 	return text
 
@@ -61,8 +87,10 @@ func get_bbcode_end_color_tag() -> String:
 
 func die():
 	queue_free()
+	
 #==========Connected Functions==========#
 func _on_BrickArea_body_entered(body):
 	if body.get("type") == "Brick" and body != self:
 		disable_brick()
 		Global.current_menu.reset_brick()
+		Global.current_menu.add_stack(0.5)

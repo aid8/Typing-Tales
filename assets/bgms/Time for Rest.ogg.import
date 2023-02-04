@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Time for Rest.ogg-65efc6e53f87de8a7f511e7bf174d6f7.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/Time for Rest.ogg"
+dest_files=[ "res://.import/Time for Rest.ogg-65efc6e53f87de8a7f511e7bf174d6f7.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

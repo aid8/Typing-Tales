@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/For Everyone Main.ogg-4ffcde6ce6139e1994ad7f7bdf821495.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/For Everyone Main.ogg"
+dest_files=[ "res://.import/For Everyone Main.ogg-4ffcde6ce6139e1994ad7f7bdf821495.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

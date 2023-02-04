@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Jazzy Shop.ogg-3640fafc5b5bb1f9733d24db5c69060e.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/Jazzy Shop.ogg"
+dest_files=[ "res://.import/Jazzy Shop.ogg-3640fafc5b5bb1f9733d24db5c69060e.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

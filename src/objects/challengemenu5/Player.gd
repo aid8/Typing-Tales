@@ -27,7 +27,12 @@ var directions = ["Up", "Down", "Right", "Left"]
 var proceed_direction = false
 var type = "player"
 
+var shake_strength : float = 0
+var shake_decay : float = 0
+var cur_text_position : Vector2
+
 #==========Onready Variables==========#
+onready var rand = RandomNumberGenerator.new()
 onready var labels : Array = [$UpLabel, $DownLabel, $RightLabel, $LeftLabel]
 onready var anim : AnimatedSprite = $Anim
 
@@ -55,6 +60,26 @@ func _physics_process(delta):
 	translate(motion)
 	screen_wrap()
 
+func _process(delta):
+	handle_text_shake_anim(delta)
+	
+func handle_text_shake_anim(delta):
+	#shake anim
+	if shake_strength > 0:
+		shake_strength = lerp(shake_strength, 0, shake_decay * delta)
+		var rand_off = rand.randf_range(-shake_strength, shake_strength)
+		text_label.rect_position = cur_text_position + Vector2(rand_off, 0)
+		if floor(shake_strength) == 0:
+			text_label.rect_position = cur_text_position
+			shake_strength = 0
+
+func apply_text_shake(ss : float, sd : float) -> void:
+	if shake_strength > 0:
+		return
+	shake_strength = ss
+	shake_decay = sd
+	cur_text_position = text_label.rect_position
+	
 func screen_wrap():
 	var screen_size = get_viewport_rect().size
 	position.x = wrapf(position.x, -OFFSET.x, screen_size.x + OFFSET.x)

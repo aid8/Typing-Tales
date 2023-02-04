@@ -7,6 +7,7 @@
 			"transition" : "Curtain",
 			"dialogue" : "[name] was the first to wake in the gray dawn of Christmas morning.",
 			"skip_dialogue" : true,
+			"bgm" : "In_Legends",
 		},
 
 		{

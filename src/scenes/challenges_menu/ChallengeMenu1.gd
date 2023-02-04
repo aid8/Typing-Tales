@@ -4,17 +4,19 @@ extends Node2D
 #POLISH
 
 #==========Variables==========#
+const CHALLENGE_NUM : int = 0
 const MAX_ENLARGEMENT : int = 5
 const ENLARGEMENT_ADDITION : float = 1.2
 
+var current_session_time : float = 0
 var platform_index : int
 var target_platform : Area2D = null
 var current_letter_index : int = -1
 var current_player_platform_index : int = -1
 var next_target_platform_index : int = -1
 var gameover : bool = false
-var total_score : int = 0
-var cur_score : int = 0
+var total_score : float = 0
+var cur_score : float = 0
 var lives : int = 5 #new
 
 var wpm : Array = [0, 0] #[overall, count]
@@ -44,6 +46,8 @@ onready var lives_label : Label = $LivesLabel
 onready var health_bar : Node2D = $GameUI/HealthBar
 onready var pause_menu : Node2D = $GameUI/PauseMenu
 onready var score_label : Label = $GameUI/ScoreLabel
+onready var tutorial_menu : Node2D = $GameUI/TutorialMenu
+onready var countdown_menu : Node2D = $GameUI/CountdownMenu
 
 #==========Preload Variables==========#
 onready var falling_object = preload("res://src/objects/challengemenu1/FallingObject.tscn")
@@ -64,8 +68,20 @@ func _ready():
 	#Initialize ui
 	lives_label.text = "Lives: " + String(lives)
 	health_bar.init(lives)
+	
+	#Initialize countdown
+	if Global.user_data["SeenTutorials"][CHALLENGE_NUM]:
+		countdown_menu.start()
+	
+	#Initialize tutorial menu
+	tutorial_menu.start(CHALLENGE_NUM)
+	Global.set_seen_tutorial(CHALLENGE_NUM)
+	
+	#Initialize for testing
+	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
 
 func _process(delta : float) -> void:
+	current_session_time += delta
 	if tracing_wpm:
 		total_time += delta
 
@@ -103,8 +119,8 @@ func get_platform_words() -> Array:
 
 func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
-		get_tree().paused = true
-		pause_menu.show()
+		if !pause_menu.visible and !gameover_menu.visible and !tutorial_menu.visible:
+			pause_menu.pause()
 		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
@@ -122,6 +138,7 @@ func _unhandled_input(event : InputEvent) -> void:
 					target_platform.set_next_character(current_letter_index)
 					next_target_platform_index = i
 					tracing_wpm = true
+					Global.play_keyboard_sfx()
 					break
 		else:
 			var prompt = target_platform.text
@@ -148,8 +165,11 @@ func _unhandled_input(event : InputEvent) -> void:
 					current_letter_index = -1
 					switch_player_platform(next_target_platform_index)
 					target_platform = null
+					Global.play_keyboard_sfx()
 			else:
 				cur_accuracy[current_letter_index-1] = false
+				target_platform.apply_text_shake(10, 10)
+				Global.play_sfx("ErrorKey")
 				#cur_score -= 2
 				#if cur_score <= 0:
 				#	cur_score = 0
@@ -168,6 +188,7 @@ func add_score_animation(position : Vector2, score : int) -> void:
 	add_child(s)
 	s.set_score(String(score))
 
+#func save_research_variables(mode : String, date : String, wpm : float, accuracy : float, time : float) -> void:
 func show_gameover_menu() -> void:
 	var total_accuracy : float = 0
 	var total_wpm : float = 0
@@ -175,7 +196,11 @@ func show_gameover_menu() -> void:
 		total_accuracy = (accuracy[1] / float(accuracy[0])) * 100
 	if wpm[1] > 0:
 		total_wpm = (wpm[0]/float(wpm[1]))
-	gameover_menu.init("SCORE: " + String(total_score) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
+	#Register Stats
+	Global.register_challenge_stats(CHALLENGE_NUM, total_wpm, total_accuracy, current_session_time, total_score)
+	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true), total_wpm, total_accuracy, current_session_time) 
+	Global.save_user_data()
+	gameover_menu.init("SCORE: " + String(total_score) + "\nH-SCORE: " + String(Global.user_data["ChallengeStats"][CHALLENGE_NUM]["highest_score"]) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
 	gameover_menu.show()
 
 func subtract_lives()-> void:
@@ -227,13 +252,4 @@ func _on_SpawnSpeedTimer_timeout():
 
 #Testing
 func _on_TestButton_pressed():
-	Global.switch_scene("MainMenu")
-
-func _on_PauseResumeBtn_pressed():
-	pause_menu.hide()
-	get_tree().paused = false
-
-func _on_MainMenuBtn_pressed():
-	get_tree().paused = false
-	#TODO: Add current session time here
 	Global.switch_scene("MainMenu")

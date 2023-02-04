@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=49 format=2]
 
 [ext_resource path="res://src/scenes/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/BubbleRainbow-VGdn0.ttf" type="DynamicFontData" id=2]
@@ -29,6 +29,15 @@
 [ext_resource path="res://assets/backgrounds/Menu/title (16).png" type="Texture" id=27]
 [ext_resource path="res://assets/backgrounds/Menu/title (12).png" type="Texture" id=28]
 [ext_resource path="res://assets/ui/MainMenu/title.png" type="Texture" id=29]
+[ext_resource path="res://assets/fonts/BarlowCondensed-BlackItalic.ttf" type="DynamicFontData" id=30]
+[ext_resource path="res://assets/ui/TitleBanner.png" type="Texture" id=31]
+[ext_resource path="res://assets/ui/statsmenubg2.png" type="Texture" id=32]
+[ext_resource path="res://assets/ui/statsmenubg.png" type="Texture" id=33]
+[ext_resource path="res://assets/ui/MainMenu/creditsicon.png" type="Texture" id=34]
+[ext_resource path="res://assets/ui/MainMenu/notifyIcon.png" type="Texture" id=35]
+[ext_resource path="res://src/ui/UiTextButtonLabel.tres" type="DynamicFont" id=36]
+[ext_resource path="res://assets/fonts/BarlowCondensed-SemiBoldItalic.ttf" type="DynamicFontData" id=37]
+[ext_resource path="res://assets/fonts/BarlowCondensed-SemiBold.ttf" type="DynamicFontData" id=38]
 
 [sub_resource type="SpriteFrames" id=2]
 animations = [ {
@@ -44,16 +53,66 @@ outline_size = 2
 outline_color = Color( 0.780392, 0.607843, 0.294118, 1 )
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=11]
+size = 45
+outline_color = Color( 0.243137, 0.27451, 0.313726, 1 )
+font_data = ExtResource( 30 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 25
+outline_size = 3
+outline_color = Color( 0.188235, 0.219608, 0.262745, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=12]
+size = 24
+outline_size = 3
+outline_color = Color( 0.188235, 0.219608, 0.262745, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=14]
+size = 20
+outline_size = 3
+outline_color = Color( 0.188235, 0.219608, 0.262745, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=15]
+size = 20
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=21]
+size = 45
+outline_color = Color( 0.243137, 0.27451, 0.313726, 1 )
+font_data = ExtResource( 30 )
+
+[sub_resource type="DynamicFont" id=19]
+size = 30
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 38 )
+
+[sub_resource type="DynamicFont" id=20]
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 37 )
+
 [node name="MainMenu" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Background" type="AnimatedSprite" parent="."]
 scale = Vector2( 2.13333, 2.13018 )
 frames = SubResource( 2 )
+frame = 15
 playing = true
 centered = false
 
-[node name="Novel" type="RichTextLabel" parent="."]
+[node name="Title" type="Sprite" parent="."]
+position = Vector2( 652, 165 )
+texture = ExtResource( 29 )
+
+[node name="NovelLabel" type="RichTextLabel" parent="."]
 margin_left = 766.0
 margin_top = 205.0
 margin_right = 914.0
@@ -61,10 +120,6 @@ margin_bottom = 250.0
 custom_colors/default_color = Color( 0.827451, 0.784314, 0.105882, 1 )
 custom_fonts/normal_font = SubResource( 3 )
 text = " Little Women"
-
-[node name="Title" type="Sprite" parent="."]
-position = Vector2( 652, 165 )
-texture = ExtResource( 29 )
 
 [node name="Main" type="Node2D" parent="."]
 
@@ -83,12 +138,13 @@ custom_fonts/font = ExtResource( 3 )
 text = "Story"
 align = 1
 valign = 1
+uppercase = true
 
 [node name="ChallengeModeButton" type="TextureButton" parent="Main"]
-margin_left = 575.0
-margin_top = 373.0
-margin_right = 745.0
-margin_bottom = 433.0
+margin_left = 576.0
+margin_top = 376.0
+margin_right = 746.0
+margin_bottom = 436.0
 
 [node name="Label" type="Label" parent="Main/ChallengeModeButton"]
 margin_right = 170.0
@@ -97,6 +153,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Challenges"
 align = 1
 valign = 1
+uppercase = true
 
 [node name="StatisticsMenuButton" type="TextureButton" parent="Main"]
 margin_left = 583.0
@@ -111,6 +168,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Statistics"
 align = 1
 valign = 1
+uppercase = true
 
 [node name="SettingsMenuButton" type="TextureButton" parent="Main"]
 margin_left = 589.0
@@ -125,6 +183,7 @@ custom_fonts/font = ExtResource( 3 )
 text = "Settings"
 align = 1
 valign = 1
+uppercase = true
 
 [node name="QuitButton" type="TextureButton" parent="Main"]
 margin_left = 616.0
@@ -139,15 +198,32 @@ custom_fonts/font = ExtResource( 3 )
 text = "Quit"
 align = 1
 valign = 1
+uppercase = true
+
+[node name="CreditsButton" type="TextureButton" parent="Main"]
+margin_left = 40.0
+margin_top = 648.0
+margin_right = 88.0
+margin_bottom = 696.0
+texture_normal = ExtResource( 34 )
+expand = true
+
+[node name="SendDataButton" type="TextureButton" parent="Main"]
+margin_left = 1208.0
+margin_top = 656.0
+margin_right = 1248.0
+margin_bottom = 696.0
+texture_normal = ExtResource( 35 )
+expand = true
 
 [node name="Challenges" type="Node2D" parent="."]
 visible = false
 
 [node name="Challenge1Button" type="TextureButton" parent="Challenges"]
-margin_left = 588.0
-margin_top = 313.0
-margin_right = 769.0
-margin_bottom = 370.0
+margin_left = 568.0
+margin_top = 320.0
+margin_right = 749.0
+margin_bottom = 377.0
 
 [node name="Label" type="Label" parent="Challenges/Challenge1Button"]
 margin_right = 149.0
@@ -156,62 +232,67 @@ custom_fonts/font = ExtResource( 3 )
 text = "Challenge 1"
 align = 1
 valign = 1
+uppercase = true
 
-[node name="Challenge1Button2" type="TextureButton" parent="Challenges"]
-margin_left = 589.0
-margin_top = 362.0
-margin_right = 740.0
-margin_bottom = 419.0
+[node name="Challenge2Button" type="TextureButton" parent="Challenges"]
+margin_left = 568.0
+margin_top = 376.0
+margin_right = 719.0
+margin_bottom = 433.0
 
-[node name="Label" type="Label" parent="Challenges/Challenge1Button2"]
+[node name="Label" type="Label" parent="Challenges/Challenge2Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
 text = "Challenge 2"
 align = 1
 valign = 1
+uppercase = true
 
-[node name="Challenge1Button3" type="TextureButton" parent="Challenges"]
-margin_left = 589.0
-margin_top = 412.0
-margin_right = 740.0
-margin_bottom = 469.0
+[node name="Challenge3Button" type="TextureButton" parent="Challenges"]
+margin_left = 568.0
+margin_top = 432.0
+margin_right = 719.0
+margin_bottom = 489.0
 
-[node name="Label" type="Label" parent="Challenges/Challenge1Button3"]
+[node name="Label" type="Label" parent="Challenges/Challenge3Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
 text = "Challenge 3"
 align = 1
 valign = 1
+uppercase = true
 
-[node name="Challenge1Button4" type="TextureButton" parent="Challenges"]
-margin_left = 589.0
-margin_top = 461.0
-margin_right = 740.0
-margin_bottom = 518.0
+[node name="Challenge4Button" type="TextureButton" parent="Challenges"]
+margin_left = 568.0
+margin_top = 488.0
+margin_right = 719.0
+margin_bottom = 545.0
 
-[node name="Label" type="Label" parent="Challenges/Challenge1Button4"]
+[node name="Label" type="Label" parent="Challenges/Challenge4Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
 text = "Challenge 4"
 align = 1
 valign = 1
+uppercase = true
 
-[node name="Challenge1Button5" type="TextureButton" parent="Challenges"]
-margin_left = 591.0
-margin_top = 513.0
-margin_right = 742.0
-margin_bottom = 570.0
+[node name="Challenge5Button" type="TextureButton" parent="Challenges"]
+margin_left = 568.0
+margin_top = 544.0
+margin_right = 719.0
+margin_bottom = 601.0
 
-[node name="Label" type="Label" parent="Challenges/Challenge1Button5"]
+[node name="Label" type="Label" parent="Challenges/Challenge5Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
 text = "Challenge 5"
 align = 1
 valign = 1
+uppercase = true
 
 [node name="BackButton" type="TextureButton" parent="Challenges"]
 margin_left = 49.0
@@ -228,15 +309,525 @@ custom_fonts/font = ExtResource( 3 )
 text = "Back"
 align = 1
 valign = 1
+uppercase = true
+
+[node name="Statistics" type="Node2D" parent="."]
+visible = false
+
+[node name="TitleBanner" type="Sprite" parent="Statistics"]
+position = Vector2( 640, 152 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 31 )
+
+[node name="TitleLabel" type="Label" parent="Statistics"]
+margin_top = 120.0
+margin_right = 1278.0
+margin_bottom = 174.0
+custom_colors/font_color = Color( 0.243137, 0.27451, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "STATISTICS"
+align = 1
+valign = 1
+
+[node name="BG" type="Sprite" parent="Statistics"]
+position = Vector2( 640, 412 )
+scale = Vector2( 7.66667, 7.66667 )
+texture = ExtResource( 32 )
+
+[node name="StatsLabelLeft" type="Label" parent="Statistics"]
+margin_left = 296.0
+margin_top = 268.0
+margin_right = 576.0
+margin_bottom = 548.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "OVERALL WPM:
+OVERALL ACCURACY:
+
+STORY WPM:
+STORY ACCURACY:
+
+TOTAL TIME:"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="StatsLabelRight" type="Label" parent="Statistics"]
+margin_left = 704.0
+margin_top = 248.0
+margin_right = 984.0
+margin_bottom = 568.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_fonts/font = SubResource( 5 )
+text = "CHALLENGE STATS
+(#, WPM, ACC, COUNT)
+1 - 999, 100%, 999
+2 - 999, 100%. 999
+3 - 999, 100%. 999
+4 - 999, 100%. 999
+5 - 999, 100%. 999"
+align = 1
+valign = 1
+autowrap = true
+
+[node name="BackButton" type="TextureButton" parent="Statistics"]
+margin_left = 49.0
+margin_top = 629.0
+margin_right = 200.0
+margin_bottom = 686.0
+
+[node name="Label" type="Label" parent="Statistics/BackButton"]
+margin_left = -9.0
+margin_top = -4.0
+margin_right = 140.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 3 )
+text = "Back"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Settings" type="Node2D" parent="."]
+visible = false
+
+[node name="TitleBanner" type="Sprite" parent="Settings"]
+position = Vector2( 640, 176 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 31 )
+
+[node name="Statsmenubg" type="Sprite" parent="Settings"]
+position = Vector2( 640, 418 )
+scale = Vector2( 6.66667, 6.66667 )
+texture = ExtResource( 32 )
+
+[node name="TitleLabel" type="Label" parent="Settings"]
+margin_top = 144.0
+margin_right = 1278.0
+margin_bottom = 198.0
+custom_colors/font_color = Color( 0.243137, 0.27451, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "SETTINGS"
+align = 1
+valign = 1
+
+[node name="BGMLabel" type="Label" parent="Settings"]
+margin_left = 368.0
+margin_top = 298.0
+margin_right = 565.0
+margin_bottom = 338.0
+custom_fonts/font = SubResource( 12 )
+text = "BACKGROUND MUSIC:"
+align = 2
+valign = 1
+
+[node name="BGMSlide" type="HSlider" parent="Settings"]
+margin_left = 712.0
+margin_top = 306.0
+margin_right = 885.0
+margin_bottom = 322.0
+rect_scale = Vector2( 1.25, 1.25 )
+min_value = -80.0
+max_value = 0.0
+ticks_on_borders = true
+
+[node name="SFXLabel" type="Label" parent="Settings"]
+margin_left = 376.75
+margin_top = 354.0
+margin_right = 563.75
+margin_bottom = 394.0
+custom_fonts/font = SubResource( 12 )
+text = "SOUND EFFECTS:"
+align = 2
+valign = 1
+
+[node name="SFXSlide" type="HSlider" parent="Settings"]
+margin_left = 712.0
+margin_top = 362.0
+margin_right = 885.0
+margin_bottom = 378.0
+rect_scale = Vector2( 1.25, 1.25 )
+min_value = -80.0
+max_value = 0.0
+ticks_on_borders = true
+
+[node name="BackButton" type="TextureButton" parent="Settings"]
+margin_left = 49.0
+margin_top = 629.0
+margin_right = 200.0
+margin_bottom = 686.0
+
+[node name="Label" type="Label" parent="Settings/BackButton"]
+margin_left = -9.0
+margin_top = -4.0
+margin_right = 140.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 3 )
+text = "Back"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="ResetButton" type="TextureButton" parent="Settings"]
+margin_left = 1112.0
+margin_top = 640.0
+margin_right = 1263.0
+margin_bottom = 697.0
+
+[node name="Label" type="Label" parent="Settings/ResetButton"]
+margin_left = -9.0
+margin_top = -4.0
+margin_right = 140.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 3 )
+text = "Reset"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Credits" type="Node2D" parent="."]
+visible = false
+
+[node name="TitleBanner" type="Sprite" parent="Credits"]
+position = Vector2( 640, 152 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 31 )
+
+[node name="TitleLabel" type="Label" parent="Credits"]
+margin_top = 120.0
+margin_right = 1278.0
+margin_bottom = 174.0
+custom_colors/font_color = Color( 0.243137, 0.27451, 0.313726, 1 )
+custom_fonts/font = SubResource( 11 )
+text = "CREDITS"
+align = 1
+valign = 1
+
+[node name="Statsmenubg" type="Sprite" parent="Credits"]
+position = Vector2( 636, 424 )
+rotation = -0.00690305
+scale = Vector2( 8.56982, 8.56982 )
+texture = ExtResource( 33 )
+
+[node name="CreditLabel1" type="Label" parent="Credits"]
+margin_left = 268.0
+margin_top = 224.0
+margin_right = 572.0
+margin_bottom = 600.0
+custom_fonts/font = SubResource( 14 )
+text = "= barbara fan club
+  - CHRISTIAN DIA
+  - SAMUEL MARK DY REYES
+  - JOSEF PAPILLERA
+
+- LITTLE WOMEN BY Louisa May Alcott
+"
+valign = 1
+autowrap = true
+uppercase = true
+
+[node name="CreditLabel2" type="Label" parent="Credits"]
+margin_left = 716.0
+margin_top = 248.0
+margin_right = 1020.0
+margin_bottom = 592.0
+custom_fonts/font = SubResource( 14 )
+text = "
+- NORANEKO
+- exuin
+- FSHIFT
+- ANSIMUZ
+- ANALOG STUDIOS
+- KENNEY
+- FINALBLUEBOSS
+- STA.TOASTY
+- https://4you.bz/rule"
+autowrap = true
+uppercase = true
+
+[node name="CreditLabel3" type="Label" parent="Credits"]
+margin_left = 884.0
+margin_top = 280.0
+margin_right = 1028.0
+margin_bottom = 400.0
+custom_fonts/font = SubResource( 14 )
+text = "- TEST1
+- TEST2
+- TEST3"
+autowrap = true
+uppercase = true
+
+[node name="CreditTitle1" type="Label" parent="Credits"]
+margin_left = 244.0
+margin_top = 416.0
+margin_right = 588.0
+margin_bottom = 446.0
+custom_colors/font_color = Color( 0.988235, 0.796078, 0.431373, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "NOVEL:"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="CreditTitle2" type="Label" parent="Credits"]
+margin_left = 244.0
+margin_top = 248.0
+margin_right = 588.0
+margin_bottom = 278.0
+custom_colors/font_color = Color( 0.988235, 0.796078, 0.431373, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "PROGRAMMERS:"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="CreditTitle3" type="Label" parent="Credits"]
+margin_left = 700.0
+margin_top = 248.0
+margin_right = 868.0
+margin_bottom = 278.0
+custom_colors/font_color = Color( 0.988235, 0.796078, 0.431373, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "ART STYLES:"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="CreditTitle4" type="Label" parent="Credits"]
+margin_left = 860.0
+margin_top = 248.0
+margin_right = 1028.0
+margin_bottom = 278.0
+custom_colors/font_color = Color( 0.988235, 0.796078, 0.431373, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "MUSIC AND SFX:"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="BackButton" type="TextureButton" parent="Credits"]
+margin_left = 49.0
+margin_top = 629.0
+margin_right = 200.0
+margin_bottom = 686.0
+
+[node name="Label" type="Label" parent="Credits/BackButton"]
+margin_left = -9.0
+margin_top = -4.0
+margin_right = 140.0
+margin_bottom = 54.0
+custom_fonts/font = ExtResource( 3 )
+text = "Back"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="LoadMenu" type="Node2D" parent="."]
+visible = false
+
+[node name="Background" type="ColorRect" parent="LoadMenu"]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 0.6 )
+
+[node name="TitleBanner" type="Sprite" parent="LoadMenu"]
+position = Vector2( 640, 104 )
+scale = Vector2( 5, 5 )
+texture = ExtResource( 31 )
+
+[node name="TitleLabel" type="Label" parent="LoadMenu"]
+margin_top = 72.0
+margin_right = 1280.0
+margin_bottom = 126.0
+custom_colors/font_color = Color( 0.298039, 0.270588, 0.282353, 1 )
+custom_fonts/font = SubResource( 21 )
+text = "LOAD MENU"
+align = 1
+valign = 1
+
+[node name="Slot1" type="Button" parent="LoadMenu"]
+margin_left = 160.0
+margin_top = 173.0
+margin_right = 366.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "Test"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot1"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot2" type="Button" parent="LoadMenu"]
+margin_left = 416.0
+margin_top = 173.0
+margin_right = 622.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot2"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot3" type="Button" parent="LoadMenu"]
+margin_left = 672.0
+margin_top = 173.0
+margin_right = 878.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot3"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot4" type="Button" parent="LoadMenu"]
+margin_left = 928.0
+margin_top = 173.0
+margin_right = 1134.0
+margin_bottom = 367.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot4"]
+margin_top = 147.0
+margin_right = 206.0
+margin_bottom = 195.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot5" type="Button" parent="LoadMenu"]
+margin_left = 160.0
+margin_top = 408.0
+margin_right = 366.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot5"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot6" type="Button" parent="LoadMenu"]
+margin_left = 416.0
+margin_top = 408.0
+margin_right = 622.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot6"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot7" type="Button" parent="LoadMenu"]
+margin_left = 672.0
+margin_top = 408.0
+margin_right = 878.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot7"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="Slot8" type="Button" parent="LoadMenu"]
+margin_left = 928.0
+margin_top = 408.0
+margin_right = 1134.0
+margin_bottom = 602.0
+custom_fonts/font = SubResource( 19 )
+text = "SLOT 1"
+expand_icon = true
+
+[node name="Text" type="Label" parent="LoadMenu/Slot8"]
+margin_top = 144.0
+margin_right = 206.0
+margin_bottom = 192.0
+custom_fonts/font = SubResource( 20 )
+text = "Chapter 1: 11/9/22, 11:11:11
+12345"
+align = 1
+valign = 1
+
+[node name="HideSalmMenu" type="TextureButton" parent="LoadMenu"]
+margin_left = 1080.0
+margin_top = 672.0
+margin_right = 1134.0
+margin_bottom = 705.0
+
+[node name="Label" type="Label" parent="LoadMenu/HideSalmMenu"]
+margin_left = 4.0
+margin_right = 57.0
+margin_bottom = 32.0
+custom_fonts/font = ExtResource( 36 )
+text = "EXIT"
+align = 1
+valign = 1
 
 [connection signal="pressed" from="Main/StoryModeButton" to="." method="_on_StoryModeButton_pressed"]
 [connection signal="pressed" from="Main/ChallengeModeButton" to="." method="_on_ChallengeModeButton_pressed"]
 [connection signal="pressed" from="Main/StatisticsMenuButton" to="." method="_on_StatisticsMenuButton_pressed"]
 [connection signal="pressed" from="Main/SettingsMenuButton" to="." method="_on_SettingsMenuButton_pressed"]
 [connection signal="pressed" from="Main/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="Main/CreditsButton" to="." method="_on_CreditsButton_pressed"]
+[connection signal="pressed" from="Main/SendDataButton" to="." method="_on_SendDataButton_pressed"]
 [connection signal="pressed" from="Challenges/Challenge1Button" to="." method="_on_Challenge1Button_pressed"]
-[connection signal="pressed" from="Challenges/Challenge1Button2" to="." method="_on_Challenge1Button2_pressed"]
-[connection signal="pressed" from="Challenges/Challenge1Button3" to="." method="_on_Challenge1Button3_pressed"]
-[connection signal="pressed" from="Challenges/Challenge1Button4" to="." method="_on_Challenge1Button4_pressed"]
-[connection signal="pressed" from="Challenges/Challenge1Button5" to="." method="_on_Challenge1Button5_pressed"]
+[connection signal="pressed" from="Challenges/Challenge2Button" to="." method="_on_Challenge1Button2_pressed"]
+[connection signal="pressed" from="Challenges/Challenge3Button" to="." method="_on_Challenge1Button3_pressed"]
+[connection signal="pressed" from="Challenges/Challenge4Button" to="." method="_on_Challenge1Button4_pressed"]
+[connection signal="pressed" from="Challenges/Challenge5Button" to="." method="_on_Challenge1Button5_pressed"]
 [connection signal="pressed" from="Challenges/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Statistics/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="value_changed" from="Settings/BGMSlide" to="." method="_on_BGMSlide_value_changed"]
+[connection signal="drag_ended" from="Settings/SFXSlide" to="." method="_on_SFXSlide_drag_ended"]
+[connection signal="pressed" from="Settings/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Settings/ResetButton" to="." method="_on_ResetButton_pressed"]
+[connection signal="pressed" from="Credits/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="LoadMenu/HideSalmMenu" to="." method="_on_HideSalmMenu_pressed"]

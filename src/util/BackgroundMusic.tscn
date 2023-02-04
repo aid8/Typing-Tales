@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/util/BackgroundMusic.gd" type="Script" id=1]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="TweenOut" type="Tween" parent="."]
+
+[node name="TweenIn" type="Tween" parent="."]
+
+[connection signal="tween_completed" from="TweenOut" to="." method="_on_TweenOut_tween_completed"]
+[connection signal="tween_completed" from="TweenIn" to="." method="_on_TweenIn_tween_completed"]

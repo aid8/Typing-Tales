@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Magical Full.ogg-49cf80741d30987efc25ada16ec1831f.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/Magical Full.ogg"
+dest_files=[ "res://.import/Magical Full.ogg-49cf80741d30987efc25ada16ec1831f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
