@@ -79,6 +79,9 @@ func _ready():
 	
 	#Initialize for testing
 	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
+	
+	#Change BGM
+	BackgroundMusic.play_music("Challenge1BGM")
 
 func _process(delta : float) -> void:
 	current_session_time += delta
@@ -121,6 +124,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		if !pause_menu.visible and !gameover_menu.visible and !tutorial_menu.visible:
 			pause_menu.pause()
+			Global.play_sfx("Cancel")
 		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
@@ -165,7 +169,8 @@ func _unhandled_input(event : InputEvent) -> void:
 					current_letter_index = -1
 					switch_player_platform(next_target_platform_index)
 					target_platform = null
-					Global.play_keyboard_sfx()
+					Global.play_sfx("Correct_3")
+				Global.play_keyboard_sfx()
 			else:
 				cur_accuracy[current_letter_index-1] = false
 				target_platform.apply_text_shake(10, 10)
@@ -208,6 +213,8 @@ func subtract_lives()-> void:
 	lives = health_bar.get_lives()
 	lives_label.text = "Lives: " + String(lives)
 	resize_player(false)
+	#SFX
+	Global.play_sfx("Lose")
 	if lives <= 0:
 		get_tree().paused = true
 		gameover = true
@@ -241,6 +248,7 @@ func _on_Player_body_entered(body):
 		update_ui()
 		body.queue_free()
 		resize_player(true)
+		Global.play_sfx("Correct_1")
 
 func _on_FallingSpeedTimer_timeout():
 	fall_speed += additional_fall_speed

@@ -94,3 +94,5 @@ func _on_BrickArea_body_entered(body):
 		disable_brick()
 		Global.current_menu.reset_brick()
 		Global.current_menu.add_stack(0.5)
+		#SFX
+		Global.play_sfx("Lose")

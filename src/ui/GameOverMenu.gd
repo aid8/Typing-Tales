@@ -22,8 +22,10 @@ func check_time() -> void:
 
 func _on_RestartButton_pressed():
 	get_tree().paused = false
+	Global.play_sfx("Select")
 	SceneTransition.switch_scene(String(get_tree().current_scene.filename), "Curtain")
 
 func _on_MainMenuButton_pressed():
 	get_tree().paused = false
+	Global.play_sfx("Select")
 	Global.switch_scene("MainMenu")

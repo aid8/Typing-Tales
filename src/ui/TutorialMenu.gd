@@ -31,6 +31,7 @@ func move_slide(next : int) -> void:
 		cur_page += 2
 		if cur_page >= max_pages:
 			close_menu()
+			Global.play_sfx("Confirm")
 			return
 		prev_btn.show()
 	
@@ -48,6 +49,7 @@ func move_slide(next : int) -> void:
 		right_label.text = "END OF TUTORIAL"
 	if cur_page + 2 >= max_pages:
 		next_btn.get_node("Label").text = "FINISH"
+	Global.play_sfx("Select")
 
 func close_menu() -> void:
 	get_tree().paused = false

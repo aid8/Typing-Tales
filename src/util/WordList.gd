@@ -21,10 +21,11 @@ func _ready() -> void:
 
 func reload_difficulty_letters(percentage : float) -> void:
 	###TESTING
-	#difficulty_letters = Global.get_difficulty_letters(percentage)
+	difficulty_letters = Global.get_difficulty_letters(percentage)
 	#difficulty_letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-	difficulty_letters = ["a","c","e","h","i","b","r"]
+	#difficulty_letters = ["a","c","e","h","i","b","r"]
 	#difficulty_letters = []
+	print("Difficult Letters: ", difficulty_letters)
 
 func Combination(a : Array, reqLen : int, start : int, currLen : int, check : Array, length : int, resultArr : Array = []) -> Array:
 	if currLen > reqLen:

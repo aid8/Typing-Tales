@@ -393,6 +393,11 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 		yield(SceneTransition, "transition_finished")
 		ignore_typing = false
 	
+	#If dialogue is final end, goto credits
+	if dialogue_data.has("game_end"):
+		Global.switch_scene("Credits")
+		return
+	
 	#If dialouge has goto_chapter, do this and return
 	if dialogue_data.has("goto_chapter"):
 		var chap_data = dialogue_data.goto_chapter
@@ -405,9 +410,7 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 	if current_scene_index == 0 and Global.load_slot_index_selected == -1:
 		show_intro_menu(1)
 	else:
-		print("OK1")
 		if dialogue_data.has("bgm"):
-			print("OK2")
 			BackgroundMusic.play_music(dialogue_data.bgm)
 	
 	#Iterate through the dialogue and get all mastered words with index and length
@@ -529,6 +532,7 @@ func set_next_dialogue() -> void:
 		else:
 			show_stats_menu()
 		Global.add_finished_scenes(current_scene)
+		print("YES_SIR")
 		return
 	get_current_dialogue()
 	update_typebox("reset")
@@ -970,6 +974,7 @@ func navigate_tutorial_menu(next : bool = true) -> void:
 		
 	tutorial_images.frame = cur_frame
 	tutorial_title_label.text = "TUTORIAL (" + String(cur_frame + 1) + "/" + String(max_frame) + ")" 
+	Global.play_sfx("Select")
 
 func register_stats() -> void:
 	var wpm_res = 0
@@ -992,6 +997,7 @@ func _on_save_or_load_progress(index):
 	else:
 		if Global.user_data["SavedProgress"][index].size() > 0:
 			load_saved_progress(index)
+	Global.play_sfx("Confirm")
 		#get_current_dialogue()
 
 func _on_SaveButton_pressed():
@@ -1028,12 +1034,15 @@ func on_scene_transition_finished():
 
 func _on_HistoryButton_pressed():
 	history_menu.show()
+	Global.play_sfx("Cancel")
 
 func _on_HideHistoryButton_pressed():
 	history_menu.hide()
+	Global.play_sfx("Confirm")
 
 func _on_NameChangeButton_pressed():
 	Global.change_name(name_edit.text)
+	Global.play_sfx("Confirm")
 	name_menu.hide()
 
 func _on_TestButton2_pressed():
@@ -1044,6 +1053,7 @@ func _on_TestButton2_pressed():
 
 func _on_HideSalmMenu_pressed():
 	save_and_load_menu.hide()
+	Global.play_sfx("Select")
 
 func _on_SaveConfirmationPopUp_confirmed():
 	save_progress(save_slot_index)

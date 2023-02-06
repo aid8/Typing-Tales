@@ -47,6 +47,8 @@ func switch_scene(scene) -> void:
 			scene_path = "challenges_menu/ChallengeMenu4"
 		"Challenge5":
 			scene_path = "challenges_menu/ChallengeMenu5"
+		"Credits":
+			scene_path = "CreditsScene"
 	SceneTransition.switch_scene("res://src/scenes/" + scene_path + ".tscn");
 	BackgroundMusic.stop_music()
 

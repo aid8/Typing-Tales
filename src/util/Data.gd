@@ -67,6 +67,66 @@ const TUTORIAL_TEXT = [
 	
 ]
 
+const CREDITS = [
+	[
+		"Typing Tales by Barbara Fan Club"
+	],
+	[
+		"Programming",
+		
+		"Christian Dia",
+		"Samuel Mark Dy Reyes",
+		"Josef Papillera",
+	],
+	[
+		"Art Styles",
+		
+		"NORANEKO",
+		"exuin",
+		"FSHIFT",
+		"ANSIMUZ",
+		"ANALOG STUDIOS",
+		"KENNEY",
+		"FINALBLUEBOSS",
+		"STA.TOASTY",
+		"https://4you.bz/rule",
+	],
+	[
+		"Novel",
+		
+		"LITTLE WOMEN BY Louisa May Alcott",
+	],
+	[
+		"Music",
+		
+		"Tim Reichert",
+		"Saurabh Chaudary",
+	],
+	[
+		"Sound Effects",
+		
+		"https://www.fesliyanstudios.com",
+		"https://www.bfxr.net/",
+	],
+	#[
+	#	"Testers",
+	#	
+	#	"Joshua Bartolome",
+	#	"Mark Joseph Guerrero",
+	#	"Deanne Angelo Royo",
+	#],
+	[
+		"Tools used",
+		
+		"Developed with Godot Engine",
+	],
+	[
+		"Special thanks",
+		
+		"Adrian Leo Pajarillo",
+	]
+]
+
 var characters = {
 	#Character 1
 	"Amy" : {
@@ -291,6 +351,11 @@ var bgms : Dictionary = {
 	"Poppy_Shop" : "res://assets/bgms/Poppy Shop.ogg",
 	"Quircky_Shop" : "res://assets/bgms/Quircky Shop.ogg",
 	"Time_for_Rest" : "res://assets/bgms/Time for Rest.ogg",
+	"Challenge1BGM" : "res://assets/bgms/challenge_bgms/Challenge1BGM.ogg",
+	"Challenge2BGM" : "res://assets/bgms/challenge_bgms/Challenge2BGM.ogg",
+	"Challenge3BGM" : "res://assets/bgms/challenge_bgms/Challenge3BGM.ogg",
+	"Challenge4BGM" : "res://assets/bgms/challenge_bgms/Challenge4BGM.ogg",
+	"Challenge5BGM" : "res://assets/bgms/challenge_bgms/Challenge5BGM.ogg",
 }
 
 var sfxs : Dictionary = {
@@ -300,8 +365,8 @@ var sfxs : Dictionary = {
 	"Bright" : "res://assets/sfxs/UI Bright.wav",
 	"Bell_1" : "res://assets/sfxs/UI Bell 1.wav",
 	"Bell_2" : "res://assets/sfxs/UI Bell 2.wav",
-	"ChapterDone" : "res://assets/sfxs/6_Stinger_Victory_1_Master.ogg",
-	"BadEnd" : "res://assets/sfxs/7_Stinger_Defeat_1_Master.ogg",
+	"ChapterDone" : "res://assets/sfxs/6_Stinger_Victory_1_Master.wav",
+	"BadEnd" : "res://assets/sfxs/7_Stinger_Defeat_1_Master.wav",
 	"Key1" : "res://assets/sfxs/keyboard_clicks/Key1.wav",
 	"Key2" : "res://assets/sfxs/keyboard_clicks/Key2.wav",
 	"Key3" : "res://assets/sfxs/keyboard_clicks/Key3.wav",
@@ -309,6 +374,11 @@ var sfxs : Dictionary = {
 	"Key5" : "res://assets/sfxs/keyboard_clicks/Key5.wav",
 	"Key6" : "res://assets/sfxs/keyboard_clicks/Key6.wav",
 	"ErrorKey" : "res://assets/sfxs/keyboard_clicks/ErrorKey.wav",
+	"Correct_1" : "res://assets/sfxs/correct.wav",
+	"Correct_2" : "res://assets/sfxs/correct2.wav",
+	"Correct_3" : "res://assets/sfxs/correct3.wav",
+	"Lose" : "res://assets/sfxs/lose.wav",
+	"Powerup" : "res://assets/sfxs/powerup.wav",
 }
 
 var expressions = {

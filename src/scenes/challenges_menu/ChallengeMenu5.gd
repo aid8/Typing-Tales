@@ -61,7 +61,10 @@ func init():
 	
 	#Initialize for testing
 	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
-
+	
+	#Change BGM
+	BackgroundMusic.play_music("Challenge5BGM")
+	
 func _process(delta : float) -> void:
 	update_ui()
 	#Trace session time
@@ -118,6 +121,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		if !pause_menu.visible and !gameover_menu.visible and !tutorial_menu.visible:
 			pause_menu.pause()
+			Global.play_sfx("Cancel")
 		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
@@ -140,6 +144,9 @@ func _unhandled_input(event : InputEvent) -> void:
 						accuracy[0] += 1
 					#Get Wpm
 					register_wpm()
+					
+					#SFX
+					Global.play_sfx("Correct_3")
 					
 					player.change_direction()
 					player.reset_direction(current_label)

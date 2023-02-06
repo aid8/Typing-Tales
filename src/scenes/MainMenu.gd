@@ -70,9 +70,8 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 		settings.get_node("SFXSlide").value = Global.user_data["Sfx"]
 		settings.show()
 	elif tab == "Credits":
-		title.hide()
-		novel_label.hide()
-		credits.show()
+		main.show()
+		Global.switch_scene("Credits")
 	elif tab == "LoadMenu":
 		title.hide()
 		novel_label.hide()

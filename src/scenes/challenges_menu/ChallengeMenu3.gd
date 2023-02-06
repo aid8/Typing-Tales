@@ -102,6 +102,9 @@ func init() -> void:
 	#Initialize for testing
 	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
 
+	#Change BGM
+	BackgroundMusic.play_music("Challenge3BGM")
+
 func update_ui() -> void:
 	score_label.text = String(score)
 
@@ -166,6 +169,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		if !pause_menu.visible and !gameover_menu.visible and !tutorial_menu.visible:
 			pause_menu.pause()
+			Global.play_sfx("Cancel")
 		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
@@ -193,6 +197,9 @@ func _unhandled_input(event : InputEvent) -> void:
 					#Get Wpm
 					register_wpm()
 					
+					#SFX
+					Global.play_sfx("Correct_3")
+					
 					if first_tile == null:
 						first_tile = active_tile
 						first_tile.toggle_highlight(true, "end")
@@ -218,6 +225,9 @@ func _unhandled_input(event : InputEvent) -> void:
 							else:
 								first_tile.refresh_tile()
 								active_tile.refresh_tile()
+							
+							#SFX
+							Global.play_sfx("Powerup")
 						else:
 							first_tile.cancel_tile()
 							active_tile.cancel_tile()
