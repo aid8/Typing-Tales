@@ -6,7 +6,7 @@ extends Node2D
 #==========Variables==========#
 const CHALLENGE_NUM : int = 4
 
-var TIME : float = 20#60
+var TIME : float = 60
 var COIN_TIME : float = 3
 
 var current_label : String = ""
@@ -60,8 +60,14 @@ func init():
 	Global.set_seen_tutorial(CHALLENGE_NUM)
 	
 	#Initialize for testing
-	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
-
+	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system())
+	
+	#Shuffle Word Bank
+	WordList.init()
+	
+	#Change BGM
+	BackgroundMusic.play_music("Challenge5BGM")
+	
 func _process(delta : float) -> void:
 	update_ui()
 	#Trace session time
@@ -118,6 +124,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		if !pause_menu.visible and !gameover_menu.visible and !tutorial_menu.visible:
 			pause_menu.pause()
+			Global.play_sfx("Cancel")
 		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
@@ -133,13 +140,19 @@ func _unhandled_input(event : InputEvent) -> void:
 				current_character_index += 1
 				player.set_next_character(current_character_index)
 				if current_character_index == prompt.length():
-					#Get Accuracy
-					for b in cur_accuracy:
-						if b:
+					#Get accuracy and add letter mastery
+					for i in range(0, cur_accuracy.size()):
+						if cur_accuracy[i]:
 							accuracy[1] += 1
 						accuracy[0] += 1
+						Global.add_letter_mastery(prompt[i], cur_accuracy[i], false)
+					#Add word mastery
+					Global.add_word_mastery(prompt, cur_accuracy.count(true) / float(cur_accuracy.size()))
 					#Get Wpm
 					register_wpm()
+					
+					#SFX
+					Global.play_sfx("Correct_3")
 					
 					player.change_direction()
 					player.reset_direction(current_label)
@@ -161,7 +174,7 @@ func show_gameover_menu() -> void:
 		total_wpm = (wpm[0]/float(wpm[1]))
 	#Register Stats
 	Global.register_challenge_stats(CHALLENGE_NUM, total_wpm, total_accuracy, current_session_time, score)
-	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true), total_wpm, total_accuracy, current_session_time)
+	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(), total_wpm, total_accuracy, current_session_time)
 	Global.save_user_data()
 	gameover_menu.init("SCORE: " + String(score) + "\nH-SCORE: " + String(Global.user_data["ChallengeStats"][CHALLENGE_NUM]["highest_score"]) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
 	gameover_menu.show()

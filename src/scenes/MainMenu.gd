@@ -1,12 +1,14 @@
 extends Node2D
 #==========TODO==========#
-# Statistics menu add mastered words and difficult letters
 
 #==========Variables==========#
 const white : Color = Color(1, 1, 1)
 const purple : Color = Color(0.850507, 0.550386, 0.933105)
 
 var current_tab : String = "Main"
+var cur_day : int
+var cur_date : String
+var statistics_tab : int = 0
 
 #==========Onready Variables==========#
 onready var main : Node2D = $Main
@@ -18,7 +20,10 @@ onready var load_menu : Node2D = $LoadMenu
 onready var title : Sprite = $Title
 onready var novel_label : RichTextLabel = $NovelLabel
 onready var main_buttons : Array = [$Main/StoryModeButton, $Main/ChallengeModeButton, $Main/StatisticsMenuButton, $Main/SettingsMenuButton, $Main/QuitButton]
+onready var challenge_buttons : Array = [$Challenges/Challenge1Button, $Challenges/Challenge2Button, $Challenges/Challenge3Button, $Challenges/Challenge4Button, $Challenges/Challenge5Button]
+onready var other_buttons : Array = [$Challenges/BackButton, $Settings/BackButton, $Statistics/BackButton, $Settings/ResetButton]
 onready var salm_slots : Array = [$LoadMenu/Slot1, $LoadMenu/Slot2, $LoadMenu/Slot3, $LoadMenu/Slot4, $LoadMenu/Slot5, $LoadMenu/Slot6, $LoadMenu/Slot7, $LoadMenu/Slot8]
+onready var day_label : Label = $DayLabel
 
 #==========Functions==========#
 func _ready() -> void:
@@ -26,6 +31,12 @@ func _ready() -> void:
 	for i in range(0, 5):
 		main_buttons[i].connect("mouse_entered", self, "change_button_label_color", [main_buttons[i], purple])
 		main_buttons[i].connect("mouse_exited", self, "change_button_label_color", [main_buttons[i], white])
+		challenge_buttons[i].connect("mouse_entered", self, "change_button_label_color", [challenge_buttons[i], purple])
+		challenge_buttons[i].connect("mouse_exited", self, "change_button_label_color", [challenge_buttons[i], white])
+	for i in range(0, other_buttons.size()):
+		other_buttons[i].connect("mouse_entered", self, "change_button_label_color", [other_buttons[i], purple])
+		other_buttons[i].connect("mouse_exited", self, "change_button_label_color", [other_buttons[i], white])
+	
 	#Connect buttons load menu
 	for i in range(0, 8):
 		salm_slots[i].connect("pressed", self, "_on_load_progress", [i])
@@ -40,12 +51,16 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 	load_menu.hide()
 	title.show()
 	novel_label.show()
+	day_label.show()
 	current_tab = tab
 	
 	if sfx:
 		Global.play_sfx("Select")
 	
 	if tab == "Main":
+		cur_date = Time.get_date_string_from_system()
+		cur_day = Global.get_total_day_and_session_time().cur_day
+		day_label.text = cur_date.replace("-", "/") + ", DAY " + String(cur_day)
 		main.show()
 	elif tab == "Challenges":
 		if !Global.user_data.FinishedScenes.has("Chapter 1"):
@@ -56,26 +71,56 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 	elif tab == "Statistics":
 		title.hide()
 		novel_label.hide()
+		day_label.hide()
+		
+		var data_left = ""
+		var data_right = ""
 		var stats = Global.get_stats()
-		statistics.get_node("StatsLabelLeft").text = "OVERALL WPM: " + String(round(stats.OverallWPM)) + "\nOVERALL ACCURACY: " + String(round(stats.OverallAccuracy * 100)) + "\n\nSTORY WPM: " + String(round(stats.StoryWPM)) + "\nSTORY ACCURACY: " + String(round(stats.StoryAccuracy * 100)) + "\n\nTOTAL TIME: " + String(stats.PlayTime / 60).pad_decimals(1) + " MINS"
-		statistics.get_node("StatsLabelRight").text = "CHALLENGE STATS\n(#, WPM, ACC, COUNT)\n"
-		for i in range(0, 5):
-			var x = stats["ChallengeStats" + String(i+1)]
-			statistics.get_node("StatsLabelRight").text += String(i+1) + " - " + String(round(x[0])) + ", " + String(round(x[1])) + "%, " + String(x[2]) + "\n"
+		
+		if statistics_tab == 0:
+			data_left = "OVERALL WPM: " + String(round(stats.OverallWPM)) + "\nOVERALL ACCURACY: " + String(round(stats.OverallAccuracy * 100)) + "\n\nSTORY WPM: " + String(round(stats.StoryWPM)) + "\nSTORY ACCURACY: " + String(round(stats.StoryAccuracy * 100)) + "\n\nTOTAL TIME: " + String(stats.PlayTime / 60).pad_decimals(1) + " MINS"
+			data_right = "CHALLENGE STATS\n(#, WPM, ACC, COUNT)\n"
+			for i in range(0, 5):
+				var x = stats["ChallengeStats" + String(i+1)]
+				data_right += String(i+1) + " - " + String(round(x[0])) + ", " + String(round(x[1])) + "%, " + String(x[2])
+				if i < 4:
+					data_right += "\n"
+		elif statistics_tab == 1:
+			var diff_letters = Global.get_difficulty_letters()
+			data_left = "DIFFICULT LETTERS:\n"
+			if diff_letters.size() > 0:
+				for i in range(0, diff_letters.size()):
+					data_left += diff_letters[i].to_upper() + ", "
+				data_left.erase(data_left.length() - 2, 2)
+			else:
+				data_left += "NONE"
+			
+			var mastered_words = Global.get_mastered_words()
+			data_right = "MASTERED WORDS:\n"
+			if mastered_words.size() > 0:
+				for i in range(0, mastered_words.size()):
+					data_right += mastered_words[i] + ", "
+				data_right.erase(data_right.length() - 2, 2)
+			else:
+				data_right += "NONE"
+		
+		statistics.get_node("StatsLabelLeft").parse_bbcode("[center]" + data_left + "[/center]")
+		statistics.get_node("StatsLabelRight").parse_bbcode("[center]" + data_right + "[/center]")
 		statistics.show()
 	elif tab == "Settings":
 		title.hide()
 		novel_label.hide()
+		day_label.hide()
 		settings.get_node("BGMSlide").value = Global.user_data["Music"]
 		settings.get_node("SFXSlide").value = Global.user_data["Sfx"]
 		settings.show()
 	elif tab == "Credits":
-		title.hide()
-		novel_label.hide()
-		credits.show()
+		main.show()
+		Global.switch_scene("Credits")
 	elif tab == "LoadMenu":
 		title.hide()
 		novel_label.hide()
+		day_label.hide()
 		for i in range(0, 8):
 			if Global.user_data["SavedProgress"][i].size() <= 0:
 				salm_slots[i].text = "EMPTY"
@@ -117,6 +162,18 @@ func _on_ChallengeModeButton_pressed():
 func _on_StatisticsMenuButton_pressed():
 	switch_tab("Statistics")
 
+func _on_NextBtn_pressed():
+	statistics_tab = 1
+	switch_tab("Statistics")
+	statistics.get_node("NextBtn").hide()
+	statistics.get_node("PrevBtn").show()
+
+func _on_PrevBtn_pressed():
+	statistics_tab = 0
+	switch_tab("Statistics")
+	statistics.get_node("NextBtn").show()
+	statistics.get_node("PrevBtn").hide()
+
 func _on_SettingsMenuButton_pressed():
 	switch_tab("Settings")
 
@@ -133,16 +190,40 @@ func _on_ResetButton_pressed():
 	Global.play_sfx("Bright")
 
 func _on_reset_data():
-	settings.get_node("SFXSlide").value = 0
-	settings.get_node("BGMSlide").value = 0
-	BackgroundMusic.volume_db = 0
+	settings.get_node("SFXSlide").value = -20
+	settings.get_node("BGMSlide").value = -25
+	BackgroundMusic.volume_db = -25
 	Global.delete_user_data()
+	BackgroundMusic.stop_music(true)
+	Global.switch_scene("IDInput")
 
 func _on_CreditsButton_pressed():
 	switch_tab("Credits")
-
+	
 func _on_SendDataButton_pressed():
-	pass
+	if cur_day == 6:
+		if !Global.user_data["DataSent"][1]:
+			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_test_data")
+		else:
+			Global.create_popup("Data has already been sent for this day", self)
+	elif cur_day == 7:
+		if !Global.user_data["DataSent"][2]:
+			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_post_test_data")
+		else:
+			Global.create_popup("Data has already been sent for this day", self)
+	else:
+		Global.create_popup("There is no need to send data for this day", self)
+	Global.play_sfx("Bright")
+
+func _send_test_data() -> void:
+	var data = Global.get_stats()
+	Global.send_data("TEST", Global.user_data.SchoolID, cur_date, float(data.OverallWPM), float(data.OverallAccuracy), JSON.print(Global.user_data, "\t"))
+	Global.save_user_data()
+
+func _send_post_test_data() -> void:
+	var data = Global.get_stats()
+	Global.send_data("POST_TEST", Global.user_data.SchoolID, cur_date, float(data.OverallWPM), float(data.OverallAccuracy), JSON.print(Global.user_data, "\t"))
+	Global.save_user_data()
 
 func _on_load_progress(index : int):
 	if Global.user_data["SavedProgress"][index].size() <= 0:
@@ -152,8 +233,12 @@ func _on_load_progress(index : int):
 	Global.play_sfx("Confirm")
 
 func _on_QuitButton_pressed():
+	Global.create_yes_no_popup("Are you sure you want to quit?", self, "_quit_game")
+	Global.play_sfx("Bright")
+	
+func _quit_game() -> void:
 	get_tree().quit()
-
+	
 #=====Challenges Functions=====#
 func _on_Challenge1Button_pressed():
 	Global.switch_scene("Challenge1")

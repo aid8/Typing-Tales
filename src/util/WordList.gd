@@ -13,18 +13,22 @@ onready var rand : RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
 	rand.randomize()
 	load_words()
+	init()
+
+func init() -> void:
 	###TESTING (Gets difficult letters with 50% accuracy)
-	WordList.reload_difficulty_letters(0.5)
+	WordList.reload_difficulty_letters()
 	###20% chance of getting nonsense words
-	WordList.fill_random_words_with_difficult_letters(80, 20, 13)
+	WordList.fill_random_words_with_difficult_letters(180, 20, 13)#(80, 20, 13)
 	print(random_words)
 
-func reload_difficulty_letters(percentage : float) -> void:
+func reload_difficulty_letters() -> void:
 	###TESTING
-	#difficulty_letters = Global.get_difficulty_letters(percentage)
+	difficulty_letters = Global.get_difficulty_letters()
 	#difficulty_letters = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-	difficulty_letters = ["a","c","e","h","i","b","r"]
+	#difficulty_letters = ["a","c","e","h","i","b","r"]
 	#difficulty_letters = []
+	print("Difficult Letters: ", difficulty_letters)
 
 func Combination(a : Array, reqLen : int, start : int, currLen : int, check : Array, length : int, resultArr : Array = []) -> Array:
 	if currLen > reqLen:

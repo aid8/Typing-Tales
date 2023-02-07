@@ -8,15 +8,17 @@ const WORD_MASTERY_ACCURACY_BOUND = 0.94 #0.94
 const WORD_MASTERY_COUNT_BOUND = 100 #100
 
 const HTTP_HEADERS = ["Content-Type: application/x-www-form-urlencoded"]
-const PRE_TEST_URLFORM = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd1lLAvOQfVKT2sXNDv0maaK9TGTXrLehlv1hLRMzq0yG0TIA/formResponse"
-const PRE_TEST_ENTRY_CODES = {
+const URLFORM = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd1lLAvOQfVKT2sXNDv0maaK9TGTXrLehlv1hLRMzq0yG0TIA/formResponse"
+const FORM_ENTRY_CODES = {
+	"test_type" : "entry.1937603671",
 	"name" : "entry.1677198908" ,
 	"date" : "entry.1636518983",
 	"wpm" : "entry.783576330",
 	"accuracy" : "entry.2103345753", 
+	"other_info" : "entry.308180882",
 }
 
-const TOTAL_COLLECTION_TIME = 600
+const TOTAL_COLLECTION_TIME = 30#600
 const IDLE_TIME = 8
 
 const TUTORIAL_TEXT = [
@@ -66,6 +68,73 @@ const TUTORIAL_TEXT = [
 	],
 	
 ]
+
+const CREDITS = [
+	[
+		"Typing Tales by Barbara Fan Club"
+	],
+	[
+		"Programming and Researchers",
+		
+		"Christian Dia",
+		"Samuel Mark Dy Reyes",
+		"Josef Papillera",
+	],
+	[
+		"Art Styles",
+		
+		"NORANEKO",
+		"EXUIN",
+		"FSHIFT",
+		"ANSIMUZ",
+		"ANALOG STUDIOS",
+		"KENNEY",
+		"FINALBLUEBOSS",
+		"STA.TOASTY",
+		"https://4you.bz/rule",
+	],
+	[
+		"Novel",
+		
+		"LITTLE WOMEN BY Louisa May Alcott",
+	],
+	[
+		"Music",
+		
+		"Tim Reichert",
+		"Saurabh Chaudary",
+	],
+	[
+		"Sound Effects",
+		
+		"https://www.fesliyanstudios.com",
+		"https://www.bfxr.net/",
+	],
+	#[
+	#	"Testers",
+	#	
+	#	"Joshua Bartolome",
+	#	"Mark Joseph Guerrero",
+	#	"Deanne Angelo Royo",
+	#],
+	[
+		"Tools used",
+		
+		"Developed with Godot Engine",
+	],
+	[
+		"Special thanks",
+		
+		"Adrian Leo Pajarillo",
+	],
+	[
+		"Version",
+		
+		"1.0.0"
+	]
+]
+
+const DISCLAIMER_TEXT = "THE CURRENT BUILD OF THIS VERSION IS FOR RESEARCH PURPOSES. GAME DATA SUCH AS WPM AND ACCURACY WILL BE SENT TO THE RESEARCHERS. THANK YOU FOR YOUR PARTICIPATION."
 
 var characters = {
 	#Character 1
@@ -291,6 +360,11 @@ var bgms : Dictionary = {
 	"Poppy_Shop" : "res://assets/bgms/Poppy Shop.ogg",
 	"Quircky_Shop" : "res://assets/bgms/Quircky Shop.ogg",
 	"Time_for_Rest" : "res://assets/bgms/Time for Rest.ogg",
+	"Challenge1BGM" : "res://assets/bgms/challenge_bgms/Challenge1BGM.ogg",
+	"Challenge2BGM" : "res://assets/bgms/challenge_bgms/Challenge2BGM.ogg",
+	"Challenge3BGM" : "res://assets/bgms/challenge_bgms/Challenge3BGM.ogg",
+	"Challenge4BGM" : "res://assets/bgms/challenge_bgms/Challenge4BGM.ogg",
+	"Challenge5BGM" : "res://assets/bgms/challenge_bgms/Challenge5BGM.ogg",
 }
 
 var sfxs : Dictionary = {
@@ -300,8 +374,8 @@ var sfxs : Dictionary = {
 	"Bright" : "res://assets/sfxs/UI Bright.wav",
 	"Bell_1" : "res://assets/sfxs/UI Bell 1.wav",
 	"Bell_2" : "res://assets/sfxs/UI Bell 2.wav",
-	"ChapterDone" : "res://assets/sfxs/6_Stinger_Victory_1_Master.ogg",
-	"BadEnd" : "res://assets/sfxs/7_Stinger_Defeat_1_Master.ogg",
+	"ChapterDone" : "res://assets/sfxs/6_Stinger_Victory_1_Master.wav",
+	"BadEnd" : "res://assets/sfxs/7_Stinger_Defeat_1_Master.wav",
 	"Key1" : "res://assets/sfxs/keyboard_clicks/Key1.wav",
 	"Key2" : "res://assets/sfxs/keyboard_clicks/Key2.wav",
 	"Key3" : "res://assets/sfxs/keyboard_clicks/Key3.wav",
@@ -309,6 +383,11 @@ var sfxs : Dictionary = {
 	"Key5" : "res://assets/sfxs/keyboard_clicks/Key5.wav",
 	"Key6" : "res://assets/sfxs/keyboard_clicks/Key6.wav",
 	"ErrorKey" : "res://assets/sfxs/keyboard_clicks/ErrorKey.wav",
+	"Correct_1" : "res://assets/sfxs/correct.wav",
+	"Correct_2" : "res://assets/sfxs/correct2.wav",
+	"Correct_3" : "res://assets/sfxs/correct3.wav",
+	"Lose" : "res://assets/sfxs/lose.wav",
+	"Powerup" : "res://assets/sfxs/powerup.wav",
 }
 
 var expressions = {
@@ -344,27 +423,27 @@ var chapter_details = {
 	
 	"Chapter 4" : {
 		"Title" : "Chapter 4: \n",
-		"Subtitle" : "The Laurence Boy",
+		"Subtitle" : "Burdens",
 	},
 	
 	"Chapter 5" : {
 		"Title" : "Chapter 5: \n",
-		"Subtitle" : "The Laurence Boy",
+		"Subtitle" : "Being Neighborly",
 	},
 	
 	"Chapter 6" : {
 		"Title" : "Chapter 6: \n",
-		"Subtitle" : "The Laurence Boy",
+		"Subtitle" : "Beth Finds the Palace Beautiful",
 	},
 	
 	"Chapter 7" : {
 		"Title" : "Chapter 7: \n",
-		"Subtitle" : "The Laurence Boy",
+		"Subtitle" : "Amy's Valley of Humiliation",
 	},
 	
 	"Chapter 8" : {
 		"Title" : "Chapter 8: \n",
-		"Subtitle" : "The Laurence Boy",
+		"Subtitle" : "You meet Apollyon",
 	},
 }
 

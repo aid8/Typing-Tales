@@ -7,6 +7,7 @@ export (Color) var white : Color = Color("#FFFFFF")
 export (Color) var disabled_color : Color
 
 var SPEED : float = 100
+var SPEED_DECREASE : float = 10
 var type : String = "Brick"
 var text : String = ""
 var motion : Vector2 = Vector2()
@@ -26,6 +27,7 @@ onready var anim : AnimatedSprite = $Anim
 #==========Functions==========#
 func _ready():
 	text = WordList.get_prompt()
+	SPEED -= text.length() * SPEED_DECREASE
 	set_next_character(-1)
 	randomize_brick()
 
@@ -94,3 +96,5 @@ func _on_BrickArea_body_entered(body):
 		disable_brick()
 		Global.current_menu.reset_brick()
 		Global.current_menu.add_stack(0.5)
+		#SFX
+		Global.play_sfx("Lose")

@@ -31,6 +31,7 @@ func move_slide(next : int) -> void:
 		cur_page += 2
 		if cur_page >= max_pages:
 			close_menu()
+			Global.play_sfx("Confirm")
 			return
 		prev_btn.show()
 	
@@ -57,6 +58,8 @@ func close_menu() -> void:
 #==========Connected Functions==========#
 func _on_NextBtn_pressed():
 	move_slide(1)
+	Global.play_sfx("Select")
 
 func _on_PrevBtn_pressed():
 	move_slide(-1)
+	Global.play_sfx("Select")

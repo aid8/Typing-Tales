@@ -9,6 +9,7 @@ const save_path : String = "user://save.dat"
 var user_data : Dictionary = {}
 var current_menu : Node2D
 var load_slot_index_selected : int = -1
+var is_testing : bool = true
 
 onready var http_request : HTTPRequest
 
@@ -28,6 +29,8 @@ func _ready():
 		set_default_user_data()
 	else:
 		load_user_data()
+	
+	print(Global.user_data.LetterMastery)
 
 #Insert here the scenes you want to add and to switch
 func switch_scene(scene) -> void:
@@ -47,6 +50,12 @@ func switch_scene(scene) -> void:
 			scene_path = "challenges_menu/ChallengeMenu4"
 		"Challenge5":
 			scene_path = "challenges_menu/ChallengeMenu5"
+		"Credits":
+			scene_path = "CreditsScene"
+		"Disclaimer":
+			scene_path = "DisclaimerMenu"
+		"IDInput":
+			scene_path = "IDInputMenu"
 	SceneTransition.switch_scene("res://src/scenes/" + scene_path + ".tscn");
 	BackgroundMusic.stop_music()
 
@@ -82,8 +91,9 @@ func delete_user_data() -> void:
 func set_default_user_data() -> void:
 	user_data = {
 		"Name" : "Uta",
-		"Music" : 0,
-		"Sfx" : 0,
+		"SchoolID" : "",
+		"Music" : -25,
+		"Sfx" : -20,
 		"Coins" : 0,
 		"WPM" : {"total_wpm": 0.0, "count" : 0},
 		"Accuracy" : {"correct_count": 0.0, "wrong_count" : 0},
@@ -100,6 +110,7 @@ func set_default_user_data() -> void:
 		"SavedProgress" : [{}, {}, {}, {}, {}, {}, {}, {}],
 		"FinishedScenes" : {},
 		"SavedDataResearch" : {
+			#Dates are stored here
 			"StoryMode"  : {},#{"1":{"time":0},"2":{"time":0},"3":{"time":0},"4":{"time":0},"5":{"time":0},"6":{"time":0}},
 			"Challenge1" : {},
 			"Challenge2" : {},
@@ -158,17 +169,27 @@ func get_word_mastery(word : String) -> Dictionary:
 		dict["accuracy"] = word_mastery[word]["total_accuracy"] / float(count)
 	return dict
 
-#returns a string of letters which the user has difficulty with percentage parameter
-func get_difficulty_letters(percentage : float) -> Array:
+func get_mastered_words() -> Array:
+	var result = []
+	var word_mastery = user_data["WordMastery"]
+	for word in word_mastery:
+		if (word_mastery[word].total_accuracy / float(word_mastery[word].count)) >= Data.WORD_MASTERY_ACCURACY_BOUND and word_mastery[word].count >= Data.WORD_MASTERY_COUNT_BOUND:
+			result.append(word.to_upper())
+	print(word_mastery)
+	result.sort()
+	return result
+
+#returns an array of letters which the user has difficulty with percentage parameter
+func get_difficulty_letters(percentage : float = Data.LETTER_MASTERY_ACCURACY_BOUND) -> Array:
 	var letters = []
 	var letter_mastery = user_data["LetterMastery"]
 	for i in letter_mastery:
 		var l = letter_mastery[i]
-		if (l.wrong_count / float(l.wrong_count + l.correct_count)) > percentage:
+		if (l.correct_count / float(l.wrong_count + l.correct_count)) < percentage:
 			letters.append(i)
 	return letters
 
-func add_letter_mastery(letter : String, correct : bool) -> void:
+func add_letter_mastery(letter : String, correct : bool, story : bool = true) -> void:
 	#Dont include unnecessary letters
 	if Data.unnecessary_characters.has(letter):
 		return
@@ -178,10 +199,12 @@ func add_letter_mastery(letter : String, correct : bool) -> void:
 	
 	if correct:
 		user_data["LetterMastery"][letter].correct_count += 1
-		user_data["Accuracy"].correct_count += 1
+		if story:
+			user_data["Accuracy"].correct_count += 1
 	else:
 		user_data["LetterMastery"][letter].wrong_count += 1
-		user_data["Accuracy"].wrong_count += 1
+		if story:
+			user_data["Accuracy"].wrong_count += 1
 	#print(user_data["LetterMastery"])
 
 func add_overall_wpm(wpm : float):
@@ -246,24 +269,26 @@ func save_research_variables(mode : String, date : String, wpm : float, accuracy
 	user_data["SavedDataResearch"][mode][date]["play_count"] += 1
 	#print(user_data)
 
-func send_data(type : String, name : String, date : String, wpm : float, accuracy : float) -> void:
+func send_data(type : String, name : String, date : String, wpm : float, accuracy : float, other_info : String = "") -> void:
 	var http = HTTPClient.new()
 	
+	var data = {
+		Data.FORM_ENTRY_CODES["test_type"] : type,
+		Data.FORM_ENTRY_CODES["name"] : name, 
+		Data.FORM_ENTRY_CODES["date"] : date,
+		Data.FORM_ENTRY_CODES["wpm"] : wpm,
+		Data.FORM_ENTRY_CODES["accuracy"] : accuracy, 
+		Data.FORM_ENTRY_CODES["other_info"] : other_info,
+	}
+	var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
+	data = http.query_string_from_dict(data)
+	var result = http_request.request(Data.URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
+	
 	if type == "PRE_TEST" and !user_data["DataSent"][0]: #1st day
-		var data = {
-			Data.PRE_TEST_ENTRY_CODES["name"] : name, 
-			Data.PRE_TEST_ENTRY_CODES["date"] : date,
-			Data.PRE_TEST_ENTRY_CODES["wpm"] : wpm,
-			Data.PRE_TEST_ENTRY_CODES["accuracy"] : accuracy, 
-		}
-		var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
-		data = http.query_string_from_dict(data)
-		var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
 		user_data["DataSent"][0] = true
 	elif type == "TEST" and !user_data["DataSent"][1]: #6th day
 		user_data["DataSent"][1] = true
-	elif type == "POST_TEST" and !user_data["DataSent"][2]:
-		#Add post test here
+	elif type == "POST_TEST" and !user_data["DataSent"][2]: #7th day
 		user_data["DataSent"][2] = true
 
 func set_seen_tutorial(challenge_num : int) -> void:
@@ -277,14 +302,26 @@ func register_challenge_stats(challenge_num : int, wpm : float, accuracy : float
 	user_data["ChallengeStats"][challenge_num]["highest_score"] = max(score, Global.user_data["ChallengeStats"][challenge_num]["highest_score"])
 	user_data["TotalTimeSpent"][1] += time
 
-func get_total_day_and_session_time(date : String) -> Dictionary:
+#if date is empty, this will get the overall time
+func get_total_day_and_session_time(date : String = "") -> Dictionary:
 	var total : float = 0
-	var day : int = 0
+	var day : int = 1
+	var cur_day : int = 1
+	var dates : Array = []
 	for mode in user_data["SavedDataResearch"]:
-		day = max(day, user_data["SavedDataResearch"][mode].size())
+		for d in user_data["SavedDataResearch"][mode]:
+			if date == "":
+				total += user_data["SavedDataResearch"][mode][d].time
+			if !dates.has(d):
+				dates.push_back(d)
+		if date == "":
+			continue
 		if user_data["SavedDataResearch"][mode].has(date):
 			total += user_data["SavedDataResearch"][mode][date].time
-	return {"day" : day, "time" : total}
+	if dates.size() > 0:
+		day = Global.get_num_of_days_between_two_dates(dates[0], dates[dates.size()-1]) 
+		cur_day = Global.get_num_of_days_between_two_dates(dates[0], Time.get_date_string_from_system()) + 1
+	return {"day" : day, "time" : total, "cur_day" : cur_day}
 
 func get_stats() -> Dictionary:
 	var stats : Dictionary = {}
@@ -357,6 +394,14 @@ func play_keyboard_sfx() -> void:
 	var x = rand.randi() % 4
 	s.load_sfx("Key" + String(x+1))
 	BackgroundMusic.add_child(s)
+
+#YYYY-MM-DD
+func get_num_of_days_between_two_dates(date1 : String, date2 : String) -> int:
+	var d1_arr = date1.split("-", true)
+	var d2_arr = date2.split("-", true)
+	var t1 = OS.get_unix_time_from_datetime ( { "year": int(d1_arr[0]), "month": int(d1_arr[1]), "day":int(d1_arr[2]), "hour": 0, "minute": 0} )
+	var t2 = OS.get_unix_time_from_datetime ( { "year": int(d2_arr[0]), "month": int(d2_arr[1]), "day":int(d2_arr[2]), "hour": 0, "minute": 0} )
+	return int(round(abs(t1-t2) / 86400))
 
 func check_first_time() -> bool:
 	var file = File.new()

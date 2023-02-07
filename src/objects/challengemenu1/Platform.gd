@@ -49,7 +49,6 @@ func set_random_word() -> void:
 		if word == text:
 			continue
 		forbidden_letters.append(word[0])
-	print(platform_words, "=", forbidden_letters)
 	text = WordList.get_prompt(forbidden_letters)
 	set_next_character(-1)
 

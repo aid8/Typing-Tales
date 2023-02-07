@@ -36,7 +36,7 @@ animations = [ {
 script = ExtResource( 1 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 641, 360.5 )
+position = Vector2( 640, 360 )
 scale = Vector2( 2.6625, 2.49653 )
 texture = ExtResource( 2 )
 
@@ -101,18 +101,16 @@ texture = ExtResource( 3 )
 position = Vector2( -6.10352e-05, -40 )
 scale = Vector2( 1.66666, 1.66666 )
 frames = SubResource( 3 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="EnemyContainer" type="YSort" parent="."]
 
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
 
 [node name="DifficultyTimer" type="Timer" parent="."]
 wait_time = 10.0
-autostart = true
 
 [connection signal="pressed" from="UI/TestButton" to="." method="_on_TestButton_pressed"]
 [connection signal="body_entered" from="Base" to="." method="_on_Base_body_entered"]

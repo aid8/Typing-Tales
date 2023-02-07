@@ -71,6 +71,9 @@ func apply_text_shake(ss : float, sd : float) -> void:
 func get_prompt() -> String:
 	return text
 
+func knockback_enemy(knockback_power : float = -1.5, knockback_pos : Vector2 = velocity) -> void:
+	knockback = knockback_pos * knockback_power
+
 func damage() -> void:
 	self.queue_free()
 
