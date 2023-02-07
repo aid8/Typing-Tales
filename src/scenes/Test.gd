@@ -150,11 +150,12 @@ func _ready() -> void:
 	
 	#Setup tracing of data for research (only for 1st, 6th and 7th day)
 	#TESTING
-	current_date = Time.get_date_string_from_system(true)
+	current_date = Time.get_date_string_from_system()
 	if !Global.user_data["SavedDataResearch"]["StoryMode"].has(current_date) or !Global.user_data["DataSent"][0]:
 		Global.setup_research_variables("StoryMode", current_date)
-		var cur_size = Global.get_total_day_and_session_time(current_date).day
+		var cur_size = Global.get_total_day_and_session_time(current_date).cur_day
 		if cur_size == 1:
+			print("Starting Pretest")
 			is_pre_test = true
 			if !debug_mode:
 				testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
@@ -393,6 +394,11 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 		yield(SceneTransition, "transition_finished")
 		ignore_typing = false
 	
+	#If dialogue is final end, goto credits
+	if dialogue_data.has("game_end"):
+		Global.switch_scene("Credits")
+		return
+	
 	#If dialouge has goto_chapter, do this and return
 	if dialogue_data.has("goto_chapter"):
 		var chap_data = dialogue_data.goto_chapter
@@ -405,10 +411,11 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 	if current_scene_index == 0 and Global.load_slot_index_selected == -1:
 		show_intro_menu(1)
 	else:
-		print("OK1")
 		if dialogue_data.has("bgm"):
-			print("OK2")
-			BackgroundMusic.play_music(dialogue_data.bgm)
+			if dialogue_data.bgm == "STOP":
+				BackgroundMusic.stop_music(false)
+			else:
+				BackgroundMusic.play_music(dialogue_data.bgm)
 	
 	#Iterate through the dialogue and get all mastered words with index and length
 	if !dialogue_data.has("skip_dialogue"):
@@ -529,16 +536,17 @@ func set_next_dialogue() -> void:
 		else:
 			show_stats_menu()
 		Global.add_finished_scenes(current_scene)
+		print("YES_SIR")
 		return
 	get_current_dialogue()
 	update_typebox("reset")
 	
 	if is_post_test and !user_time_informed:
-		var cur_date : String = Time.get_date_string_from_system(true)
+		var cur_date : String = Time.get_date_string_from_system()
 		var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
 		print(total_day_and_time.time + post_test_session_time, "??", total_day_and_time.day)
-		if (total_day_and_time.time + post_test_session_time) >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.day == 6 or total_day_and_time.day == 7):
-			Global.create_popup("10 mins requirement is done. You can already submit the data or continue playing.", self)
+		if (total_day_and_time.time + post_test_session_time) >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.cur_day == 6 or total_day_and_time.cur_day == 7):
+			Global.create_popup("10 mins requirement is done. You can already submit the data or continue playing", self)
 			#time_menu.dialog_text = "10 mins requirement is done. You can already submit the data or continue playing."
 			#time_menu.popup()
 			user_time_informed = true
@@ -682,7 +690,7 @@ func _unhandled_input(event : InputEvent) -> void:
 			pause_menu.get_node("SFXSlide").value = Global.user_data["Sfx"]
 			pause_menu.show()
 	
-	if ignore_typing:
+	if ignore_typing or tutorial_menu.visible or name_menu.visible or intro_menu.visible:
 		return
 	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
@@ -944,6 +952,7 @@ func show_save_and_load_menu(type : String) -> void:
 			salm_slots[i].text = ""
 			salm_slots[i].get_node("Text").text = Global.user_data["SavedProgress"][i]["scene"] + ": " + Global.user_data["SavedProgress"][i]["save_date"]
 	save_and_load_menu.show()
+	Global.play_sfx("Cancel")
 
 func navigate_tutorial_menu(next : bool = true) -> void:
 	var cur_frame = tutorial_images.frame
@@ -970,6 +979,7 @@ func navigate_tutorial_menu(next : bool = true) -> void:
 		
 	tutorial_images.frame = cur_frame
 	tutorial_title_label.text = "TUTORIAL (" + String(cur_frame + 1) + "/" + String(max_frame) + ")" 
+	Global.play_sfx("Select")
 
 func register_stats() -> void:
 	var wpm_res = 0
@@ -992,6 +1002,7 @@ func _on_save_or_load_progress(index):
 	else:
 		if Global.user_data["SavedProgress"][index].size() > 0:
 			load_saved_progress(index)
+	Global.play_sfx("Confirm")
 		#get_current_dialogue()
 
 func _on_SaveButton_pressed():
@@ -1028,12 +1039,17 @@ func on_scene_transition_finished():
 
 func _on_HistoryButton_pressed():
 	history_menu.show()
+	get_tree().paused = true
+	Global.play_sfx("Cancel")
 
 func _on_HideHistoryButton_pressed():
 	history_menu.hide()
+	get_tree().paused = false
+	Global.play_sfx("Confirm")
 
 func _on_NameChangeButton_pressed():
 	Global.change_name(name_edit.text)
+	Global.play_sfx("Confirm")
 	name_menu.hide()
 
 func _on_TestButton2_pressed():
@@ -1044,6 +1060,7 @@ func _on_TestButton2_pressed():
 
 func _on_HideSalmMenu_pressed():
 	save_and_load_menu.hide()
+	Global.play_sfx("Select")
 
 func _on_SaveConfirmationPopUp_confirmed():
 	save_progress(save_slot_index)
@@ -1060,7 +1077,7 @@ func _on_TestingTimer_timeout():
 	#Save this locally
 	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
 	#Send to google forms
-	Global.send_data("PRE_TEST", Global.user_data.Name, current_date, wpm_res, accuracy_res)
+	Global.send_data("PRE_TEST", Global.user_data.SchoolID, current_date, wpm_res, accuracy_res)
 	
 	#var http = HTTPClient.new()
 	#var data = {
@@ -1075,8 +1092,7 @@ func _on_TestingTimer_timeout():
 	
 	#Save data
 	Global.save_user_data()
-	#Create popup here
-	time_menu.dialog_text = "10 mins requirement is done. Pre-test data has been automatically sent to us. You can still continue playing."
+	Global.create_popup("10 mins requirement is done. Pre-test data has been automatically sent to us. You can still continue playing", self)
 	idle_timer.stop()
 	testing_timer.stop()
 

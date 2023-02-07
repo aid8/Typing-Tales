@@ -25,8 +25,8 @@ margin_bottom = 420.0
 color = Color( 0, 0, 0, 0.690196 )
 
 [node name="InformLabel" type="Label" parent="."]
-margin_left = 328.0
-margin_right = 960.0
+margin_left = 128.0
+margin_right = 1152.0
 margin_bottom = 720.0
 custom_fonts/font = SubResource( 16 )
 text = "CHALLENGES ARE LOCKED: PLEASE FINISH CHAPTER 1 FIRST"
@@ -36,9 +36,9 @@ autowrap = true
 uppercase = true
 
 [node name="OkButton" type="TextureButton" parent="."]
-margin_left = 592.0
+margin_left = 600.0
 margin_top = 440.0
-margin_right = 712.0
+margin_right = 720.0
 margin_bottom = 473.0
 
 [node name="Label" type="Label" parent="OkButton"]

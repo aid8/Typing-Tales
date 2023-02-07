@@ -15,15 +15,17 @@ func init(stats : String) -> void:
 	check_time()
 
 func check_time() -> void:
-	var cur_date : String = Time.get_date_string_from_system(true)
+	var cur_date : String = Time.get_date_string_from_system()
 	var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
-	if total_day_and_time.time >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.day == 6 or total_day_and_time.day == 7):
+	if total_day_and_time.time >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.cur_day == 6 or total_day_and_time.cur_day == 7):
 		note_label.show()
 
 func _on_RestartButton_pressed():
 	get_tree().paused = false
+	Global.play_sfx("Select")
 	SceneTransition.switch_scene(String(get_tree().current_scene.filename), "Curtain")
 
 func _on_MainMenuButton_pressed():
 	get_tree().paused = false
+	Global.play_sfx("Select")
 	Global.switch_scene("MainMenu")

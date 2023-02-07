@@ -6,6 +6,7 @@ extends Node2D
 
 #==========Variables==========#
 const CHALLENGE_NUM : int = 1
+var DIFFICULTY_TIME : int = 10
 
 var wpm : Array = [0, 0] #[overall, count]
 var accuracy : Array = [0, 0] #[total_letters, correct_count]
@@ -22,6 +23,8 @@ var enemy_speed : float = 0
 var score : float = 0
 var gameover : bool = false
 var current_session_time : float = 0
+var spawn_timer_decrease : float = 0.5
+var slime_spawn_count : float = 1
 
 #==========Onready Variables==========#
 onready var base : Area2D = $Base
@@ -52,13 +55,22 @@ func _ready():
 	#Initialize countdown
 	if Global.user_data["SeenTutorials"][CHALLENGE_NUM]:
 		countdown_menu.start()
-		
+	difficulty_timer.wait_time = DIFFICULTY_TIME
+	difficulty_timer.start()
+	enemy_spawn_timer.start()
+	
 	#Initialize tutorial menu
 	tutorial_menu.start(CHALLENGE_NUM)
 	Global.set_seen_tutorial(CHALLENGE_NUM)
 	
 	#Initialize for testing
-	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
+	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system())
+	
+	#Shuffle Word Bank
+	WordList.init()
+	
+	#Change BGM
+	BackgroundMusic.play_music("Challenge2BGM")
 	
 func _process(delta : float) -> void:
 	current_session_time += delta
@@ -79,6 +91,7 @@ func spawn_enemy() -> void:
 	var posY = [-15, 735]
 	var XY = randi() % 2
 	s.MAX_SPEED += enemy_speed
+	s.ACCELERATION += (enemy_speed/2)
 	if XY == 0:
 		s.position = Vector2(posX[randi() % 2], rand_range(-15,735))
 	elif XY == 1:
@@ -109,7 +122,7 @@ func show_gameover_menu() -> void:
 		total_wpm = (wpm[0]/float(wpm[1]))
 	#Register Stats
 	Global.register_challenge_stats(CHALLENGE_NUM, total_wpm, total_accuracy, current_session_time, score)
-	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true), total_wpm, total_accuracy, current_session_time) 
+	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(), total_wpm, total_accuracy, current_session_time) 
 	Global.save_user_data()
 	gameover_menu.init("SCORE: " + String(score) + "\nH-SCORE: " + String(Global.user_data["ChallengeStats"][CHALLENGE_NUM]["highest_score"]) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
 	gameover_menu.show()
@@ -130,6 +143,7 @@ func find_new_active_enemy(typed_character : String):
 			active_enemy = enemy
 			current_character_index = 1
 			active_enemy.set_next_character(current_character_index)
+			active_enemy.knockback_enemy()
 			
 			cur_accuracy = []
 			for j in range(0, active_enemy.get_prompt().length()):
@@ -142,6 +156,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		if !pause_menu.visible and !gameover_menu.visible and !tutorial_menu.visible:
 			pause_menu.pause()
+			Global.play_sfx("Cancel")
 		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
@@ -155,6 +170,7 @@ func _unhandled_input(event : InputEvent) -> void:
 			if key_typed == next_character and typed_event.unicode != 0:
 				current_character_index += 1
 				active_enemy.set_next_character(current_character_index)
+				active_enemy.knockback_enemy()
 				#If all is typed
 				if current_character_index == prompt.length():
 					current_character_index = -1
@@ -162,13 +178,18 @@ func _unhandled_input(event : InputEvent) -> void:
 					var cur_score = prompt.length() * SCORING
 					add_score_animation(active_enemy.position, cur_score)
 					add_score(cur_score)
-					#Get accuracy
-					for b in cur_accuracy:
-						if b:
+					#Get accuracy and add letter mastery
+					for i in range(0, cur_accuracy.size()):
+						if cur_accuracy[i]:
 							accuracy[1] += 1
 						accuracy[0] += 1
+						Global.add_letter_mastery(prompt[i], cur_accuracy[i], false)
+					#Add word mastery
+					Global.add_word_mastery(prompt, cur_accuracy.count(true) / float(cur_accuracy.size()))
 					#Get wpm
 					register_wpm()
+					#SFX
+					Global.play_sfx("Correct_3")
 					#Damage enemy
 					active_enemy.damage()
 					active_enemy = null
@@ -191,6 +212,8 @@ func _on_Base_body_entered(body):
 		health = health_bar.get_lives()
 		update_ui()
 		tracing_wpm = false
+		#SFX
+		Global.play_sfx("Lose")
 		if health <= 0:
 			enemy_spawn_timer.stop()
 			difficulty_timer.stop()
@@ -200,11 +223,16 @@ func _on_Base_body_entered(body):
 			print("Game Over")
 
 func _on_EnemySpawnTimer_timeout():
-	spawn_enemy()
+	for i in range(slime_spawn_count):
+		spawn_enemy()
+		yield(get_tree().create_timer(rand_range(0, 3), false), "timeout")
 
 func _on_DifficultyTimer_timeout():
 	enemy_speed += speed_addition
 	SCORING += 5
+	if slime_spawn_count < 2:
+		slime_spawn_count += 1
+	print("DIFFICULTY INCREASED")
 
 #Testing
 func _on_TestButton_pressed():

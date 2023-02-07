@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Challenge3BGM.ogg-3b2ee8907d89917edf0397952e705317.oggstr"
+
+[deps]
+
+source_file="res://assets/bgms/challenge_bgms/Challenge3BGM.ogg"
+dest_files=[ "res://.import/Challenge3BGM.ogg-3b2ee8907d89917edf0397952e705317.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

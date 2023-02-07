@@ -26,6 +26,7 @@ func randomize_frame() -> void:
 func die():
 	Global.current_menu.add_score(SCORES[cur_score_index])
 	Global.current_menu.add_score_animation(position, SCORES[cur_score_index])
+	Global.play_sfx("Correct_1")
 	queue_free()
 
 #==========Connected Functions==========#

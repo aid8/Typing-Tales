@@ -138,6 +138,9 @@ position = Vector2( 16, -72 )
 
 [node name="SpawnTimer" type="Timer" parent="."]
 
+[node name="DifficultyTimer" type="Timer" parent="."]
+
 [connection signal="pressed" from="UI/TestButton" to="." method="_on_TestButton_pressed"]
 [connection signal="body_entered" from="Stage/StageBottom" to="." method="_on_StageBottom_body_entered"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_SpawnTimer_timeout"]
+[connection signal="timeout" from="DifficultyTimer" to="." method="_on_DifficultyTimer_timeout"]

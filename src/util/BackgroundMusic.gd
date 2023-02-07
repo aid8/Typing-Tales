@@ -16,8 +16,6 @@ func _ready():
 
 func play_music(music : String, fade_in : bool = false) -> void:
 	#fade if music is not the smae
-	
-	print(current_music, " vs", music)
 	if !Data.bgms.has(music):
 		return
 	elif current_music == music and !self.playing:

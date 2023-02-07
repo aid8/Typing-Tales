@@ -18,4 +18,5 @@ func init(info : String) -> void:
 #==========Connected Functions==========#
 func _on_OkButton_pressed():
 	emit_signal("popup_confirmed")
+	Global.play_sfx("Select")
 	queue_free()

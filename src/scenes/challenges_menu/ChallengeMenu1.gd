@@ -25,11 +25,11 @@ var cur_accuracy : Array = []
 var tracing_wpm : bool = false
 var total_time : float = 0
 
-var fall_speed : float = 100
-var additional_fall_speed : float = 25
+var fall_speed : float = 80
+var additional_fall_speed : float = 15
 var fall_speed_time_diff : float = 10
-var spawn_timer : float = 2.0
-var subtract_spawn_time : float = 0.1
+var spawn_timer : float = 4.0
+var subtract_spawn_time : float = 0.3
 var spawn_time_diff : float = 10
 #var heart_uis : Array = []
 var cur_enlargement : int = 0
@@ -78,7 +78,13 @@ func _ready():
 	Global.set_seen_tutorial(CHALLENGE_NUM)
 	
 	#Initialize for testing
-	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true))
+	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system())
+	
+	#Shuffle Word Bank
+	WordList.init()
+	
+	#Change BGM
+	BackgroundMusic.play_music("Challenge1BGM")
 
 func _process(delta : float) -> void:
 	current_session_time += delta
@@ -121,6 +127,7 @@ func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
 		if !pause_menu.visible and !gameover_menu.visible and !tutorial_menu.visible:
 			pause_menu.pause()
+			Global.play_sfx("Cancel")
 		
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		var typed_event = event as InputEventKey
@@ -154,18 +161,24 @@ func _unhandled_input(event : InputEvent) -> void:
 					#total_score += cur_score
 					#cur_score = 0
 					
-					#get accuracy
-					for b in cur_accuracy:
-						if b:
+					#get accuracy and add letter mastery
+					for i in range(0, cur_accuracy.size()):
+						if cur_accuracy[i]:
 							accuracy[1] += 1
 						accuracy[0] += 1
+						Global.add_letter_mastery(prompt[i], cur_accuracy[i], false)
+					#Add word mastery
+					Global.add_word_mastery(prompt, cur_accuracy.count(true) / float(cur_accuracy.size()))
+					
 					#get wpm
 					register_wpm()
+					
 					target_platform.set_random_word()
 					current_letter_index = -1
 					switch_player_platform(next_target_platform_index)
 					target_platform = null
-					Global.play_keyboard_sfx()
+					Global.play_sfx("Correct_3")
+				Global.play_keyboard_sfx()
 			else:
 				cur_accuracy[current_letter_index-1] = false
 				target_platform.apply_text_shake(10, 10)
@@ -198,7 +211,7 @@ func show_gameover_menu() -> void:
 		total_wpm = (wpm[0]/float(wpm[1]))
 	#Register Stats
 	Global.register_challenge_stats(CHALLENGE_NUM, total_wpm, total_accuracy, current_session_time, total_score)
-	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(true), total_wpm, total_accuracy, current_session_time) 
+	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(), total_wpm, total_accuracy, current_session_time) 
 	Global.save_user_data()
 	gameover_menu.init("SCORE: " + String(total_score) + "\nH-SCORE: " + String(Global.user_data["ChallengeStats"][CHALLENGE_NUM]["highest_score"]) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
 	gameover_menu.show()
@@ -208,6 +221,8 @@ func subtract_lives()-> void:
 	lives = health_bar.get_lives()
 	lives_label.text = "Lives: " + String(lives)
 	resize_player(false)
+	#SFX
+	Global.play_sfx("Lose")
 	if lives <= 0:
 		get_tree().paused = true
 		gameover = true
@@ -241,6 +256,7 @@ func _on_Player_body_entered(body):
 		update_ui()
 		body.queue_free()
 		resize_player(true)
+		Global.play_sfx("Correct_1")
 
 func _on_FallingSpeedTimer_timeout():
 	fall_speed += additional_fall_speed

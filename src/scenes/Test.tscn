@@ -441,6 +441,7 @@ align = 1
 valign = 1
 
 [node name="HistoryMenu" type="Node2D" parent="UI"]
+pause_mode = 2
 visible = false
 
 [node name="Background" type="ColorRect" parent="UI/HistoryMenu"]
