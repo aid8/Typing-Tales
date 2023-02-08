@@ -54,6 +54,8 @@ font_data = ExtResource( 4 )
 size = 30
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 5 )
 
 [node name="ChallengeMenu1" type="Node2D"]
@@ -107,7 +109,7 @@ shape = SubResource( 13 )
 position = Vector2( 0, -30 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
-frame = 6
+frame = 7
 playing = true
 
 [node name="LivesLabel" type="Label" parent="."]

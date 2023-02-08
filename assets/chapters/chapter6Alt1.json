@@ -3,8 +3,7 @@
         {
             "character" : "Narrator",
             "location" : "Laurence_Home",
-            "transition" : "DiamondTilesCover",
-            "dialogue" : "you got excited after getting permission and rushed to the piano",
+            "dialogue" : "You got excited after getting permission and rushed to the piano",
             "skip_dialogue" : true,
             "bgm" : "Night_1",
         },
@@ -156,6 +155,11 @@
         {
             "character" : "You",
             "dialogue" : "I... I'm sorry, I didn't mean to.",
+        },
+
+        {
+			"bad_end" : true,
+            "goto_chapter" : ["Chapter 6", -1],
         },
     ],
 }

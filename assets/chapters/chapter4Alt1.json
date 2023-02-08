@@ -2,10 +2,10 @@
     "Chapter 4 Alt 1" : [
         {
             "character" : "You",
-            "location" : "Home_Fireplace1",
-            "transition" : "HorizontalBars",
+            "location" : "Street_Day",
             "dialogue" : "Your crushed airs is contagious and depressing, ",
             "bgm" : "Dramatic_2",
+            "skip_dialogue" : true,
         },
 
         {
@@ -114,6 +114,11 @@
             "dialogue" : "Beth would follow Meg outside to talk and calm her down while [name] comfort Amy.",
             "hide_character" : ["Beth"],
             "skip_dialogue" : true,
+        },
+
+        {
+			"bad_end" : true,
+            "goto_chapter" : ["Chapter 4", -1],
         },
     ],
 }

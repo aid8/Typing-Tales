@@ -18,6 +18,8 @@ animations = [ {
 size = 20
 outline_size = 2
 outline_color = Color( 0.423529, 0.392157, 0.819608, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 3 )
 
 [node name="ChoiceSelection" type="Node2D"]

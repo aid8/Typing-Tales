@@ -695,6 +695,7 @@
 			"character" : "You",
 			"dialogue" : "I'm sure now that I shouldn't be afraid of him,",
             "bgm" : "Dramatic_1",
+            "skip_dialogue" : true,
 		},
 
         {
@@ -1217,6 +1218,10 @@
         "character" : "You",
         "dialogue" : "We have got to get by the lions first,",
         "dialogue_remark" : "you said, as if you rather liked the prospect.",
+       },
+
+       {
+        "goto_chapter" : ["Chapter 6", 0],
        },
     ],
 }

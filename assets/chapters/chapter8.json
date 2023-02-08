@@ -1,0 +1,1167 @@
+{
+    "Chapter 8" : [
+		{
+			"character" : "Amy",
+			"location" : "Home_Outside",
+            "transition" : "Shards",
+            "outfit" : "Casual",
+            "expression" : "Frown",
+            "position" : "LEFT",
+			"dialogue" : "Girls, where are you going?",
+            "dialogue_remark" : "asked Amy, coming into their room one Saturday afternoon,",
+		},
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and finding them getting ready to go out with an air of secrecy which excited her curiosity.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Never mind. Little girls shouldn't ask questions,",
+            "dialogue_remark" : "you returned sharply.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Now if there is anything mortifying to our feelings when we are young, it is to be told that, and to be bidden to \"run away, dear\" is still more trying to us.",
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy bridled up at this insult, and determined to find out the secret, if she teased for an hour. Turning to Meg, who never refused her anything very long, she said coaxingly.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown_blush",
+            "dialogue" : "Do tell me! I should think you might let me go, too, for Beth is fussing over her piano, and I haven't got anything to do, and am so lonely.",
+        },
+
+        {
+            "character" : "Meg",
+            "expression" : "Frown",
+            "dialogue" : "I can't, dear, because you aren't invited,",
+            "dialogue_remark" : "Meg began, but [name] broke in impatiently,",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Now, Meg, be quiet or you will spoil it all. You can't go, Amy, so don't be a baby and whine about it.",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "You are going somewhere with Laurie, I know you are. You were whispering and laughing together on the sofa last night, and you stopped when I came in. Aren't you going with him?",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Yes, we are. Now do be still, and stop bothering.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy held her tongue, but used her eyes, and saw Meg slip a fan into her pocket.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown_blush",
+            "dialogue" : "I know! I know! You're going to the theater to see the Seven Castles!",
+            "dialogue_remark" : "she cried, adding resolutely,",
+        },
+
+        {
+            "character" : "Meg",
+            "expression" : "Open",
+            "dialogue" : "Just listen to me a minute, and be a good child,",
+            "dialogue_remark" : "Meg said soothingly.",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "Mother doesn't wish you to go this week, because your eyes are not well enough yet to bear the light of this fairy piece. Next week you can go with Beth and Hannah, and have a nice time.",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "I don't like that half as well as going with you and Laurie. Please let me. I've been sick with this cold so long, and shut up, I'm dying for some fun. Do, Meg! I'll be ever so good,",
+            "dialogue_remark" : "Amy pleaded.",
+        },
+
+        {
+            "character" : "Meg",
+            "expression" : "Smile",
+            "dialogue" : "Suppose we take her. I don't believe Mother would mind, if we bundle her up well,",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "If she goes I shan't, and if I don't, Laurie won't like it, and it will be very rude, after he invited only us, to go and drag in Amy.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I should think she'd hate to poke herself where she isn't wanted,",
+            "dialogue_remark" : "you said crossly, for you disliked the trouble of overseeing a fidgety child when you wanted to enjoy yourself.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Her tone and manner angered Amy, who began to put her boots on, saying, in her most aggravating way,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown_blush",
+            "dialogue" : "I shall go. Meg says I may, and if I pay for myself, Laurie hasn't anything to do with it.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "You can't sit with us, for our seats are reserved, and you mustn't sit alone, so Laurie will give you his place, and that will spoil our pleasure.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Or he'll get another seat for you, and that isn't proper when you weren't asked. You shan't stir a step, so you may just stay where you are,",
+            "dialogue_remark" : "you scolded, crosser than ever, having just pricked her finger in her hurry.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Sitting on the floor with one boot on, Amy began to cry and Meg to reason with her, when Laurie called from below, and the two girls hurried down,",
+            "hide_character" : ["Meg", "Amy"], 
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "leaving their sister wailing. For now and then she forgot her grown-up ways and acted like a spoiled child. Just as the party was setting out, Amy called over the banisters in a threatening tone,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "You'll be sorry for this, [name] March, see if you ain't.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Fiddlesticks Amy, fiddlesticks!",
+            "dialogue_remark" : "you returned, slamming the door.",
+            "hide_character" : ["Amy"],
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Theme_Park_Day",
+            "transition" : "Shards",
+            "dialogue" : "They had a charming time, for The Seven Castles Of The Diamond Lake was as brilliant and wonderful as heart could wish.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "But in spite of the comical red imps, sparkling elves, and the gorgeous princes and princesses, [name]'s pleasure had a drop of bitterness in it.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The fairy queen's yellow curls reminded her of Amy, and between the acts you amused yourself with wondering what your sister would do to make you 'sorry for it'.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "You and Amy had had many lively skirmishes in the course of your lives, for both had quick tempers and were apt to be violent when fairly roused.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy teased you, and you irritated Amy, and semioccasional explosions occurred, of which both were much ashamed afterward. Although the oldest,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] had the least self-control, and had hard times trying to curb the fiery spirit which was continually getting her into trouble.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Your anger never lasted long, and having humbly confessed your fault, you sincerely repented and tried to do better. Your sisters used to say that they rather liked to get you into a fury because you were such an angel afterward.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Poor [name] tried desperately to be good, but her bosom enemy was always ready to flame up and defeat her, and it took years of patient effort to subdue it.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Outside",
+            "transition" : "Shards",
+            "dialogue" : "When they got home, they found Amy reading in the parlor. She assumed an injured air as they came in, never lifted her eyes from her book, or asked a single question.",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "LEFT",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "Shards",
+            "dialogue" : "Perhaps curiosity might have conquered resentment, if Beth had not been there to inquire and receive a glowing description of the play.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Bedroom",
+            "transition" : "Shards",
+            "dialogue" : "On going up to put away her best hat, your first look was toward the bureau, for in their last quarrel Amy had soothed your feelings by turning your top drawer upside down on the floor.",
+            "hide_character" : ["Amy"],
+            "hide_character" : ["Meg"],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Everything was in its place, however, and after a hasty glance into your various closets, bags, and boxes, you decided that Amy had forgiven and forgotten your wrongs.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "There [name] was mistaken, for next day you made a discovery which produced a tempest. Meg, Beth, and Amy were sitting together, late in the afternoon, when you burst into the room, looking excited and demanding breathlessly,",
+            "show_character" : ["Amy", "Meg"],
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "LEFT",
+                },
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "RIGHT",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "location" : "Home_Fireplace",
+            "transition" : "Shards",
+            "dialogue" : "Has anyone taken my book?",
+        },
+
+        {
+            "character" : "Meg and Beth",
+            "dialogue" : "No, I haven't",
+            "dialogue_remark" : "they replied at once, and looked surprised.",
+            "hide_character" : ["Amy"],
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy poked the fire and said nothing. [name] saw her color rise and was down upon her in a minute.",
+            "hide_character" :["Meg", "Beth"],
+            "show_character" :["Amy"],
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Open_blush",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Amy, you've got it!",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Open",
+            "dialogue" : "No, I haven't.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "You know where it is, then!",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "No, I don't.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "That's a fib!",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "taking her by the shoulders, and looking fierce enough to frighten a much braver child than Amy.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown_blush",
+            "dialogue" : "It isn't. I haven't got it, don't know where it is now, and don't care.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "You know something about it, and you'd better tell at once, or I'll make you.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "And you gave her a slight shake.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "character_animation" : [{"character" : "Amy", "anim" : "Shake"},],
+            "dialogue" : "Scold as much as you like, you'll never see your silly old book again,",
+            "dialogue_remark" : "Amy cried, getting excited in her turn.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Why not?",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Open",
+            "dialogue" : "I burned it up.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "What! My little book I was so fond of, and worked over, and meant to finish before Father got home? Have you really burned it?",
+            "dialogue_remark" : "You said, turning very pale,",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "Yes, I did! I told you I'd make you pay for being so cross yesterday, and I have, so...",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy got no farther, for [name]'s hot temper mastered her, and she shook Amy till her teeth chattered in her head, crying in a passion of grief and anger...",
+            "character_animation" : [{"character" : "Amy", "anim" : "Shake"},],
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown_blush",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "You wicked, wicked girl! I never can write it again, and I'll never forgive you as long as I live.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Meg flew to rescue Amy, and Beth to pacify [name], but [name] was quite beside herself, and with a parting box on her sister's ear, she rushed out of the room up to the old sofa in the garret, and finished her fight alone.",
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Frown_blush",
+                    "position" : "LEFT",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "Shards",
+            "dialogue" : "The storm cleared up below, for Mrs. March came home, and, having heard the story, soon brought Amy to a sense of the wrong she had done her sister.",
+            "skip_dialogue" : true,
+            "hide_character" :["Amy"],
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name]'s book was the pride of her heart, and was regarded by her family as a literary sprout of great promise. It was only half a dozen little fairy tales, but [name] had worked over them patiently,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Fireplace",
+            "transition" : "Shards",
+            "dialogue" : "putting her whole heart into her work, hoping to make something good enough to print. She had just copied them with great care, and had destroyed the old manuscript...",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "so that Amy's bonfire had consumed the loving work of several years.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "It seemed a small loss to others, but to [name] it was a dreadful calamity, and she felt that it never could be made up to her. Beth mourned as for a departed kitten, and Meg refused to defend her pet.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Mrs. March looked grave and grieved, and Amy felt that no one would love her till she had asked pardon for the act which she now regretted more than any of them.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "When the tea bell rang, [name] appeared, looking so grim and unapproachable that it took all Amy's courage to say meekly...",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "show_character" :["Amy"],
+            "character" : "Amy",
+            "expression" : "Frown_blush",
+            "dialogue" : "Please forgive me, [name]. I'm very, very sorry.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I never shall forgive you,",
+            "dialogue_remark" : "was your stern answer, and from that moment you ignored Amy entirely.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "No one spoke of the great trouble, not even Mrs. March, for all had learned by experience that when [name] was in that mood words were wasted,",
+            "hide_character":["Amy"],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and the wisest course was to wait till some little accident, or her own generous nature, softened [name]'s resentment and healed the breach.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "It was not a happy evening, for though they sewed as usual, while their mother read aloud from Bremer, Scott, or Edgeworth, something was wanting,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "Shards",
+            "dialogue" : "and the sweet home peace was disturbed. They felt this most when singing time came, for Beth could only play, [name] stood dumb as a stone, and Amy broke down, so Meg and Mother sang alone.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "But in spite of their efforts to be as cheery as larks, the flute-like voices did not seem to chord as well as usual, and all felt out of tune. ",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Mrs. March",
+            "location" : "Home_Bedroom",
+            "transition" : "Shards",
+            "dialogue" : "My dear, don't let the sun go down upon your anger. Forgive each other, help each other, and begin again tomorrow.",
+            "dialogue_remark" : "As [name] received her good-night kiss, Mrs. March whispered gently."
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "You wanted to lay your head down on that motherly bosom, and cry your grief and anger all away, but tears were an unmanly weakness,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and you felt so deeply injured that you really couldn't quite forgive yet. So she winked hard, shook her head, and said gruffly because Amy was listening,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "It was an abominable thing, and she doesn't deserve to be forgiven.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "With that she marched off to bed, and there was no merry or confidential gossip that night. Amy was much offended that her overtures of peace had been repulsed,",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown_blush",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and began to wish she had not humbled herself, to feel more injured than ever, and to plume herself on her superior virtue in a way which was particularly exasperating.",
+            "hide_character" : ["Amy", "Meg", "Beth"],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] still looked like a thunder cloud, and nothing went well all day. It was bitter cold in the morning, she dropped her precious turnover in the gutter, Aunt March had an attack of the fidgets, Meg was sensitive,",
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "LEFT",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Beth would look grieved and wistful when she got home, and Amy kept making remarks about people who were always talking about being good and yet wouldn't even try when other people set them a virtuous example.",
+            "show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "RIGHT",
+                },
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Everybody is so hateful, I'll ask Laurie to go skating. He is always kind and jolly, and will put me to rights, I know,",
+            "dialogue_remark" : "you said to yourself, and off you went.",
+            "hide_character" : ["Beth"],
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Street_Day",
+            "transition" : "Shards",
+            "dialogue" : "Amy heard the clash of skates, and looked out with an impatient exclamation.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "show_character":["Amy"],
+            "character" : "Amy",
+            "expression" : "Frown_blush",
+            "dialogue" : "There! She promised I should go next time, for this is the last ice we shall have. But it's no use to ask such a crosspatch to take me.",
+        },
+
+        {
+            "show_character":["Meg"],
+            "character" : "Meg",
+            "expression" : "Open",
+            "dialogue" : "Don't say that. You were very naughty, and it is hard to forgive the loss of her precious little book, but I think she might do it now, and I guess she will, if you try her at the right minute, Go after them.",
+        },
+
+        {
+            "character" : "Meg",
+            "dialogue" : "Don't say anything till [name] has got good-natured with Laurie, than take a quiet minute and just kiss her, or do some kind thing, and I'm sure she'll be friends again with all her heart.",
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Open",
+            "dialogue" : "I will try",
+            "dialogue_remark" : "Amy said, for the advice suited her, and after a flurry to get ready, she ran after the friends, who were just disappearing over the hill",
+            "hide_character" : ["Meg", "Amy"],
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Frozen_Lake",
+            "transition" : "Shards",
+            "dialogue" : "It was not far to the river, but both were ready before Amy reached them. [name] saw her coming, and turned her back. Laurie did not see,",
+            "show_character":["Amy"],
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "for he was carefully skating along the shore, sounding the ice, for a warm spell had preceded the cold snap",
+            "hide_character":["Amy"],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Laurie",
+            "outfit" : "Casual",
+            "position" : "RIGHT",
+            "expression" : "Open",
+            "dialogue" : "I'll go on to the first bend, and see if it's all right before we begin to race,",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy heard him say, as he shot away, looking like a young Russian in his fur-trimmed coat and cap. [name] heard Amy panting after her run, stamping her feet and blowing on her fingers as she tried to put her skates on,",
+            "show_character":["Amy"],
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "hide_character":["Laurie"],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "but [name] never turned and went slowly zigzagging down the river, taking a bitter, unhappy sort of satisfaction in her sister's troubles.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "She had cherished her anger till it grew strong and took possession of her, as evil thoughts and feelings always do unless cast out at once. As Laurie turned the bend, he shouted back...",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "show_character":["Laurie"],
+            "character" : "Laurie",
+            "expression" : "Frown",
+            "dialogue" : "Keep near the shore. It isn't safe in the middle.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] heard, but Amy was struggling to her feet and did not catch a word. [name] glanced over her shoulder, and the little demon she was harboring said in her ear... \"No matter whether she heard or not, let her take care of herself.\"",
+            "skip_dialogue" : true,
+            "hide_character":["Amy", "Laurie"],
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Laurie had vanished round the bend, [name] was just at the turn, and Amy, far behind, striking out toward the smoother ice in the middle of the river.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "For a minute [name] stood still with a strange feeling in her heart, then she resolved to go on, but something held and turned her round,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "just in time to see Amy throw up her hands and go down, with a sudden crash of rotten ice, the splash of water, and a cry that made [name]'s heart stand still with fear. She tried to call Laurie, but her voice was gone.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "She tried to rush forward, but her feet seemed to have no strength in them, and for a second, she could only stand motionless, staring with a terror-stricken face at the little blue hood above the black water.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Something rushed swiftly by her, and Laurie's voice cried out...",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "RIGHT",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "show_character":["Laurie"],
+            "character" : "Laurie",
+            "expression" : "Frown",
+            "dialogue" : "Bring a rail. Quick, quick!",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "How she did it, she never knew, but for the next few minutes she worked as if possessed, blindly obeying Laurie, who was quite self-possessed, and lying flat,",
+            "hide_character" : ["Laurie", "Amy"],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "held Amy up by his arm and hockey stick till [name] dragged a rail from the fence, and together they got the child out, more frightened than hurt.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Laurie",
+            "expression" : "Frown",
+            "dialogue" : "Now then, we must walk her home as fast as we can. Pile our things on her, while I get off these confounded skates,",
+            "dialogue_remark" : "Laurie cried,",
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Outside",
+            "transition" : "Shards",
+            "dialogue" : "wrapping his coat round Amy, and tugging away at the straps which never seemed so intricate before. Shivering, dripping, and crying, they got Amy home,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Home_Fireplace",
+            "transition" : "Shards",
+            "dialogue" : "and after an exciting time of it, she fell asleep, rolled in blankets before a hot fire.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "During the bustle [name] had scarcely spoken but flown about, looking pale and wild, with her things half off, her dress torn, and her hands cut and bruised by ice and rails and refractory buckles.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "When Amy was comfortably asleep, the house quiet, and Mrs. March sitting by the bed, she called [name] to her and began to bind up the hurt hands.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Are you sure she is safe?",
+            "dialogue_remark" : "You whispered,",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "looking remorsefully at the golden head, which might have been swept away from her sight forever under the treacherous ice.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Quite safe, dear. She is not hurt, and won't even take cold, I think, you were so sensible in covering and getting her home quickly,",
+            "dialogue_remark" : "your mother replied cheerfully.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Laurie did it all. I only let her go. Mother, if she should die, it would be my fault.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "And [name] dropped down beside the bed in a passion of penitent tears, telling all that had happened, bitterly condemning her hardness of heart,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and sobbing out her gratitude for being spared the heavy punishment which might have come upon her.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "It's my dreadful temper! I try to cure it, I think I have, and then it breaks out worse than ever. Oh, Mother, what shall I do? What shall I do?",
+            "dialogue_remark" : "you cried in despair.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Watch and pray, dear, never get tired of trying, and never think it is impossible to conquer your fault,",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "drawing the blowzy head to her shoulder and kissing the wet cheek so tenderly that [name] cried even harder.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "You don't know, you can't guess how bad it is! It seems as if I could do anything when I'm in a passion. I get so savage, I could hurt anyone and enjoy it.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I'm afraid I shall do something dreadful some day, and spoil my life, and make everybody hate me. Oh, Mother, help me, do help me!",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "I will, my child, I will. Don't cry so bitterly, but remember this day, and resolve with all your soul that you will never know another like it. [name], dear, we all have our temptations,",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : " some far greater than yours, and it often takes us all our lives to conquer them. You think your temper is the worst in the world, but mine used to be just like it.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Yours, Mother? Why, you are never angry!",
+            "dialogue_remark" : "And for the moment you forgot remorse in surprise.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "I've been trying to cure it for forty years, and have only succeeded in controlling it. I am angry nearly every day of my life, [name],",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "but I have learned not to show it, and I still hope to learn not to feel it, though it may take me another forty years to do so.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The patience and the humility of the face she loved so well was a better lesson to [name] than the wisest lecture, the sharpest reproof. She felt comforted at once by the sympathy and confidence given her.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The knowledge that her mother had a fault like hers, and tried to mend it, made her own easier to bear and strengthened her resolution to cure it,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "though forty years seemed rather a long time to watch and pray to a girl of fifteen.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Mother, are you angry when you fold your lips tight together and go out of the room sometimes, when Aunt March scolds or people worry you?",
+            "dialogue_remark" : "You asked, feeling nearer and dearer to your mother than ever before.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Yes, I've learned to check the hasty words that rise to my lips, and when I feel that they mean to break out against my will, I just go away for a minute,",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "and give myself a little shake for being so weak and wicked,",
+            "dialogue_remark" : "Mrs. March answered with a sigh and a smile, as she smoothed and fastened up [name]'s disheveled hair.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "How did you learn to keep still? That is what troubles me, for the sharp words fly out before I know what I'm about, and the more I say the worse I get, ",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "till it's a pleasure to hurt people's feelings and say dreadful things. Tell me how you do it, Marmee dear.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "My good mother used to help me...",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "As you do us...",
+            "dialogue_remark" : "You interrupted, with a grateful kiss.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "But I lost her when I was a little older than you are, and for years had to struggle on alone, for I was too proud to confess my weakness to anyone else.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "I had a hard time, [name], and shed a good many bitter tears over my failures, for in spite of my efforts I never seemed to get on.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Then your father came, and I was so happy that I found it easy to be good. But by-and-by, when I had four little daughters round me and we were poor,",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "then the old trouble began again, for I am not patient by nature, and it tried me very much to see my children wanting anything.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Poor Mother! What helped you then?",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Your father, [name]. He never loses patience, never doubts or complains, but always hopes, and works and waits so cheerfully that one is ashamed to do otherwise before him.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "He helped and comforted me, and showed me that I must try to practice all the virtues I would have my little girls possess, for I was their example.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "It was easier to try for your sakes than for my own. A startled or surprised look from one of you when I spoke sharply rebuked me more than any words could have done,",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "and the love, respect, and confidence of my children was the sweetest reward I could receive for my efforts to be the woman I would have them copy.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Oh, Mother, if I'm ever half as good as you, I shall be satisfied,",
+            "dialogue_remark" : "You cried, as you were deeply touched.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "I hope you will be a great deal better, dear, but you must keep watch over your 'bosom enemy', as father calls it, or it may sadden, if not spoil your life.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "You have had a warning. Remember it, and try with heart and soul to master this quick temper, before it brings you greater sorrow and regret than you have known today.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I will try, Mother, I truly will. But you must help me, remind me, and keep me from flying out. I used to see Father sometimes put his finger on his lips, and look at you with a very kind but sober face,",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "and you always folded your lips tight and went away. Was he reminding you then?",
+            "dialogue_remark" : "You asked softly.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Yes. I asked him to help me so, and he never forgot it, but saved me from many a sharp word by that little gesture and kind look.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name] saw that her mother's eyes filled and her lips trembled as she spoke, and fearing that she had said too much, she whispered anxiously,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Was it wrong to watch you and to speak of it? I didn't mean to be rude, but it's so comfortable to say all I think to you, and feel so safe and happy here.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "My [name], you may say anything to your mother, for it is my greatest happiness and pride to feel that my girls confide in me and know how much I love them.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I thought I'd grieved you.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "No, dear, but speaking of Father reminded me how much I miss him, how much I owe him, and how faithfully I should watch and work to keep his little daughters safe and good for him.",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "Yet you told him to go, Mother, and didn't cry when he went, and never complain now, or seem as if you needed any help,",
+            "dialogue_remark" : "You said, wondering.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "I gave my best to the country I love, and kept my tears till he was gone. Why should I complain, when we both have merely done our duty and will surely be the happier for it in the end?",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "If I don't seem to need help, it is because I have a better friend, even than Father, to comfort and sustain me.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "My child, the troubles and temptations of your life are beginning and may be many, but you can overcome and outlive them all if you learn to feel the strength and tenderness of your Heavenly Father as you do that of your earthly one.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "The more you love and trust Him, the nearer you will feel to Him, and the less you will depend on human power and wisdom.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "His love and care never tire or change, can never be taken from you, but may become the source of lifelong peace, happiness, and strength.",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "Believe this heartily, and go to God with all your little cares, and hopes, and sins, and sorrows, as freely and confidingly as you come to your mother.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "[name]'s only answer was to hold her mother close, and in the silence which followed the sincerest prayer she had ever prayed left her heart without words.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "For in that sad yet happy hour, she had learned not only the bitterness of remorse and despair,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "but the sweetness of self-denial and self-control, and led by her mother's hand, she had drawn nearer to the Friend who always welcomes every child with a love stronger than that of any father, tenderer than that of any mother.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Amy stirred and sighed in her sleep, and as if eager to begin at once to mend her fault, [name] looked up with an expression on her face which it had never worn before.",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "I let the sun go down on my anger. I wouldn't forgive her, and today,",
+        },
+
+        {
+            "character" : "You",
+            "dialogue" : "if it hadn't been for Laurie, it might have been too late! How could I be so wicked?",
+            "dialogue_remark" : "You said, half aloud, as she leaned over her sister softly stroking the wet hair scattered on the pillow.",
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "As if she heard, Amy opened her eyes, and held out her arms, with a smile that went straight to [name]'s heart. Neither said a word,",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "MIDDLE",
+                },
+            ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "but they hugged one another close, in spite of the blankets, and everything was forgiven and forgotten in one hearty kiss.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "game_end" : true,
+        },
+    ],
+}

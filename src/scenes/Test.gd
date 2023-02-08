@@ -1,9 +1,5 @@
 extends Node2D
 #==========TODO==========#
-#Store Challenge menu stats
-#Stats Menu fade
-#Add to Global current stats after finishing chapter
-#Recheck add_finished_scenes (after branching)
 
 #==========NOTES==========#
 #Codes that have #TESTING should be rechecked when testing is done (ready to deploy)
@@ -73,6 +69,7 @@ var current_session_time : float = 0
 var post_test_session_time : float = 0
 var is_pre_test : bool = false
 var is_post_test : bool = false
+var pre_test_done : bool = false
 
 #Scene animation variables
 var shake_strength : float = 0.0
@@ -81,6 +78,7 @@ var history_text_storage : String = ""
 #var new_progress : bool = true#if false, this will load the saved progress instead of a new one
 var user_time_informed : bool = false
 var last_choice_index : int = 0
+var saved_info_for_branching : Dictionary
 
 #==========Onready Variables==========#
 onready var rand = RandomNumberGenerator.new()
@@ -157,6 +155,7 @@ func _ready() -> void:
 		if cur_size == 1:
 			print("Starting Pretest")
 			is_pre_test = true
+			pre_test_done = false
 			if !debug_mode:
 				testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
 				testing_timer.one_shot = true
@@ -261,7 +260,8 @@ func remove_characters(has_fade : bool = true):
 
 #Shows/Hides the character depending on passed boolean (hidden)
 func toggle_character(name : String, hidden : bool, instant : bool = false):
-	character_dict[name].toggle_character(hidden, false, instant)
+	if character_dict.has(name):
+		character_dict[name].toggle_character(hidden, false, instant)
 
 #Changes the outfit/expression of the character, if parameter is blank, it will be ignored
 func modify_character(name : String, outfit : String = "", expression : String = "", char_position : String = ""):
@@ -291,6 +291,23 @@ func show_selection(selections : Array) -> void:
 	choosing_selection = true
 	skip_dialogue = false
 	last_choice_index = current_scene_index
+	
+	#Quick save
+	var char_array : Array = []
+	for c in character_dict.values():
+		var char_info : Dictionary = {}
+		char_info["name"] = c.character_name
+		char_info["outfit"] = c.current_outfit
+		char_info["expression"] = c.current_expression
+		char_info["position"] = c.current_position
+		char_info["is_hidden"] = c.is_hidden
+		char_array.append(char_info)
+	saved_info_for_branching["characters"] = char_array
+	saved_info_for_branching["bgm"] = BackgroundMusic.current_music
+	#saved_info_for_branching["background"] = backgrounds.frames.get_frame(backgrounds.animation, backgrounds.frame).resource_path
+	saved_info_for_branching["tint"] = "#" + backgrounds.self_modulate.to_html(false)
+	saved_info_for_branching["location"] = current_location
+	
 	for i in range (0, selections.size()):
 		var cs = choice_selection.instance()
 		cs.next_scene_name = selections[i][1]
@@ -404,7 +421,9 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 		var chap_data = dialogue_data.goto_chapter
 		if chap_data[1] == -1:
 			chap_data[1] = last_choice_index
-		set_next_scene(chap_data[0], chap_data[1], true, true)
+			set_next_scene(chap_data[0], chap_data[1], true, false)
+		else:
+			set_next_scene(chap_data[0], chap_data[1], true, false)
 		return
 	
 	#Show intro menu in start of new chapter
@@ -532,11 +551,11 @@ func set_next_dialogue() -> void:
 		print(dialogue_data)
 		if dialogue_data.has("bad_end"):
 			Global.play_sfx("BadEnd")
+			BackgroundMusic.stop_music()
 			bad_end_menu.show()
 		else:
 			show_stats_menu()
 		Global.add_finished_scenes(current_scene)
-		print("YES_SIR")
 		return
 	get_current_dialogue()
 	update_typebox("reset")
@@ -552,6 +571,11 @@ func set_next_dialogue() -> void:
 			user_time_informed = true
 			is_post_test = false
 			idle_timer.stop()
+	
+	if is_pre_test and pre_test_done:
+		send_pretest_data()
+		pre_test_done = false
+		is_pre_test = false
 
 #Shows current wpm, adds it to overall wpm, then resets info for new wpm
 func register_wpm() -> void:
@@ -683,7 +707,7 @@ func add_strikethrough_and_color(word : String, color : Color) -> String:
 
 func _unhandled_input(event : InputEvent) -> void:
 	if Input.is_action_pressed("ui_cancel"):
-		if !pause_menu.visible and !stats_menu.visible and !bad_end_menu.visible and !history_menu.visible and !intro_menu.visible and !save_and_load_menu.visible and !tutorial_menu.visible:
+		if !pause_menu.visible and !stats_menu.visible and !bad_end_menu.visible and !history_menu.visible and !intro_menu.visible and !save_and_load_menu.visible and !tutorial_menu.visible and !timer_node.visible and !ignore_typing:
 			Global.play_sfx("Cancel")
 			get_tree().paused = true
 			pause_menu.get_node("BGMSlide").value = Global.user_data["Music"]
@@ -722,8 +746,22 @@ func _unhandled_input(event : InputEvent) -> void:
 				SceneTransition.add_transition("DiamondTilesCover")
 				yield(SceneTransition, "transition_finished")
 				get_current_dialogue()
+				
+				#Load last branch
+				for c in saved_info_for_branching.characters:
+					if !character_dict.has(c.name):
+						add_character(c.name, c.outfit, c.expression, c.position)
+					if c.is_hidden:
+						toggle_character(c.name, true)
+				#get_current_dialogue()
+				#get_current_dialogue(false)
+				current_location = saved_info_for_branching.location
+				change_background(current_location, saved_info_for_branching.tint)
+				BackgroundMusic.play_music(saved_info_for_branching.bgm)
+				
 				update_typebox("reset")
 				bad_end_menu.hide()
+				
 			return
 			
 		#Focus on finding the choice selection if choosing selection is true
@@ -854,7 +892,7 @@ func _unhandled_input(event : InputEvent) -> void:
 						choosing_selection = false
 						
 					else:
-						set_next_scene(chosen_selection.next_scene_name, chosen_selection.next_scene_index)
+						set_next_scene(chosen_selection.next_scene_name, chosen_selection.next_scene_index) 
 						
 				elif typing_target == "dialogue":
 					add_history_text(typing_target, character_name.text, current_dialogue, current_dialogue_remark)
@@ -887,8 +925,8 @@ func show_stats_menu():
 	var overall_stats = Global.get_user_stats()
 	
 	title_label.text = current_scene + " - DONE"
-	cur_stats_label.text = "CURRENT WPM: " + String(cur_wpm) + "\nCURRENT ACCURACY: " + String(stepify(cur_accuracy * 100, 0.01))
-	overall_stats_label.text = "OVERALL WPM: " + String(overall_stats["WPM"]) + "\nOVERALL ACCURACY: " + String(stepify(overall_stats["Accuracy"] * 100, 0.01))
+	cur_stats_label.text = "CURRENT WPM: " + String(round(cur_wpm)) + "\nCURRENT ACCURACY: " + String(round(cur_accuracy * 100))
+	overall_stats_label.text = "OVERALL WPM: " + String(round(overall_stats["WPM"])) + "\nOVERALL ACCURACY: " + String(round(overall_stats["Accuracy"] * 100))
 	time_spent_label.text = "TIME SPENT: " + String(stepify(chapter_play_time / 60, 0.01)) + " MINS"
 	letter_diff_label.text = "KEYS THAT SHOULD BE PRACTICIED: "
 	
@@ -907,10 +945,15 @@ func show_stats_menu():
 	print(Global.user_data)
 	
 	Global.play_sfx("ChapterDone")
+	BackgroundMusic.stop_music()
 	stats_menu.show()
 
 func show_intro_menu(starting_delay:float = 0):
 	if !Data.chapter_details.has(current_scene):
+		#Play bgm if there is one
+		var dialogue_data = Data.dialogues[current_scene][current_scene_index]
+		if dialogue_data.has("bgm"):
+			BackgroundMusic.play_music(dialogue_data.bgm)
 		return
 	intro_menu.modulate.a = 1
 	intro_menu.show()
@@ -936,6 +979,9 @@ func show_intro_menu(starting_delay:float = 0):
 		BackgroundMusic.play_music(dialogue_data.bgm)
 
 func show_save_and_load_menu(type : String) -> void:
+	if timer_node.visible:
+		return
+		
 	if type == "save":
 		salm_title_label.text = "SAVE MENU"
 		
@@ -991,6 +1037,31 @@ func register_stats() -> void:
 	#Save this locally
 	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
 
+func send_pretest_data():
+	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
+	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
+	#Save this locally
+	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
+	#Send to google forms
+	Global.send_data("PRE_TEST", Global.user_data.SchoolID, current_date, wpm_res, accuracy_res)
+	
+	#var http = HTTPClient.new()
+	#var data = {
+	#	"entry.1677198908" : Global.user_data.Name, 
+	#	"entry.1636518983" : current_date,
+	#	"entry.783576330" : wpm_res,
+	#	"entry.2103345753" : accuracy_res, 
+	#}
+	#var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
+	#data = http.query_string_from_dict(data)
+	#var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
+	
+	#Save data
+	Global.save_user_data()
+	Global.create_popup("10 mins requirement is done. Pre-test data has been automatically sent to us. You can still continue playing", self)
+	idle_timer.stop()
+	testing_timer.stop()
+	
 #==========Connected Functions==========#
 func _on_save_or_load_progress(index):
 	if salm_title_label.text == "SAVE MENU":
@@ -1014,6 +1085,8 @@ func _on_LoadButton_pressed():
 func _on_ChoiceTimer_timeout():
 	#timer_pop_up.show()
 	Global.create_popup("Time is up! You can practice typing by playing Challenges!", self, "_on_TimerPopUp_confirmed")
+	BackgroundMusic.stop_music(false)
+	Global.play_sfx("BadEnd")
 	ignore_typing = true
 	set_selection_timer("stop")
 	
@@ -1033,11 +1106,14 @@ func _on_TimerPopUp_confirmed():
 	chosen_selection = null
 	update_typebox("reset")
 	get_current_dialogue()
+	BackgroundMusic.resume_music()
 
 func on_scene_transition_finished():
 	pass
 
 func _on_HistoryButton_pressed():
+	if timer_node.visible:
+		return
 	history_menu.show()
 	get_tree().paused = true
 	Global.play_sfx("Cancel")
@@ -1072,29 +1148,7 @@ func _on_TutorialPrevBtn_pressed():
 	navigate_tutorial_menu(false)
 
 func _on_TestingTimer_timeout():
-	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
-	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
-	#Save this locally
-	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
-	#Send to google forms
-	Global.send_data("PRE_TEST", Global.user_data.SchoolID, current_date, wpm_res, accuracy_res)
-	
-	#var http = HTTPClient.new()
-	#var data = {
-	#	"entry.1677198908" : Global.user_data.Name, 
-	#	"entry.1636518983" : current_date,
-	#	"entry.783576330" : wpm_res,
-	#	"entry.2103345753" : accuracy_res, 
-	#}
-	#var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
-	#data = http.query_string_from_dict(data)
-	#var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
-	
-	#Save data
-	Global.save_user_data()
-	Global.create_popup("10 mins requirement is done. Pre-test data has been automatically sent to us. You can still continue playing", self)
-	idle_timer.stop()
-	testing_timer.stop()
+	pre_test_done = true
 
 func _on_IdleTimer_timeout():
 	testing_timer.paused = true

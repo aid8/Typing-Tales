@@ -19,6 +19,8 @@
 size = 30
 outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 6 )
 
 [sub_resource type="RectangleShape2D" id=1]
@@ -101,7 +103,7 @@ texture = ExtResource( 3 )
 position = Vector2( -6.10352e-05, -40 )
 scale = Vector2( 1.66666, 1.66666 )
 frames = SubResource( 3 )
-frame = 3
+frame = 2
 playing = true
 
 [node name="EnemyContainer" type="YSort" parent="."]

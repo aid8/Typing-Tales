@@ -6,4 +6,6 @@
 size = 26
 outline_size = 2
 outline_color = Color( 0.49372, 0.438269, 0.927246, 1 )
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 1 )
