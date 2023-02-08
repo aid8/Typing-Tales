@@ -26,6 +26,7 @@
                 },
             ],
             "skip_dialogue" : true,
+            "bgm" : "For_Everyone",
         },
 
         {
@@ -399,6 +400,7 @@
             "character" : "Narrator",
             "dialogue" : "Beth blushed like a rose under the friendly look he wore,",
             "skip_dialogue" : true,
+            "bgm" : "Guitar_on_the_Water",
         },
 
         {
@@ -452,6 +454,7 @@
                 },
             ],
             "skip_dialogue" : true,
+            "bgm" : "Poppy_Shop",
         },
 
         {
@@ -685,6 +688,7 @@
             "transition" : "Fade",
             "dialogue" : "Beth did look, and turned pale with delight and surprise, for there stood a little cabinet piano, with a letter lying on the glossy lid, directed like a sign board to \"Miss Elizabeth March.\"",
             "skip_dialogue" : true,
+            "bgm" : "Magical",
         },
 
         {

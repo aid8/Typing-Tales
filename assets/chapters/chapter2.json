@@ -34,6 +34,7 @@
 			"character" : "Narrator",
 			"dialogue" : "You woke Meg with a ",
 			"skip_dialogue" : true,
+			"bgm" : "Poppy_Shop",
 		},
 
 		{
@@ -279,6 +280,7 @@
 			"character" : "You",
 			"dialogue" : "I'm so glad you came before we began!",
 			"skip_dialogue" : true,
+			"bgm" : "Day_1",
 		},
 
 		{
@@ -602,6 +604,7 @@
 			"dialogue" : "On Christmas night, a dozen girls piled onto the bed which was the dress circle, and sat before the blue and yellow chintz curtains in a most flattering state of expectancy.",
 			"hide_all_characters" : true,
 			"skip_dialogue" : true,
+			"bgm" : "Dramatic_1",
 		},
 
 		{
@@ -1069,6 +1072,7 @@
 		{
 			"character" : "Narrator",
 			"dialogue" : "Rodrigo and Don Pedro flew to the rescue, and all were taken out unhurt, though many were speechless with laughter.",
+			"bgm" : "Quircky_Shop",
 			"skip_dialogue" : true,
 		},
 

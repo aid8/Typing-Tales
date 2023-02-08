@@ -5,6 +5,7 @@
             "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
             "dialogue" : "Your crushed airs is contagious and depressing, ",
+            "bgm" : "Dramatic_2",
         },
 
         {

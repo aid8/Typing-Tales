@@ -6,6 +6,7 @@
             "transition" : "DiamondTilesCover",
             "dialogue" : "you got excited after getting permission and rushed to the piano",
             "skip_dialogue" : true,
+            "bgm" : "Night_1",
         },
 
         {

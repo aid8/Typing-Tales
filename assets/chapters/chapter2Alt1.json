@@ -6,6 +6,7 @@
 			"dialogue" : "But we haven't had any breakfast yet!",
 			"dialogue_remark" : "you exclaimed with a growling tummy.",
 			"skip_dialogue" : true,
+			"bgm" : "Dramatic_2",
 		},
 	   
 		{
