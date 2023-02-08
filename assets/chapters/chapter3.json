@@ -1119,5 +1119,9 @@
             "dialogue" : "one glove apiece and tight slippers that sprain our ankles when we are silly enough to wear them.",
             "dialogue_remark" : "And I think [name] was quite right.",
         },
+
+        {
+            "goto_chapter" : ["Chapter 4", 0],
+        },
     ],
 }

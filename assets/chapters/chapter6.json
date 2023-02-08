@@ -388,10 +388,12 @@
         {
 			"character" : "Beth",
             "expression" : "Smile",
+            "outfit" : "Casual",
+            "position" : "LEFT",
 			"dialogue" : "How kind you are, sir!",
             "show_selection" : [
                 ["Beth blushed like a rose under the friendly look he wore,", "Chapter 6", -1],
-                ["you got excited after getting permission and rushed to the piano", "Chapter 6 Alt 1", 0],
+                ["You got excited after getting permission and rushed to the piano", "Chapter 6 Alt 1", 0],
             ],
             "show_selection_timer" : 15,
 		},
@@ -883,5 +885,9 @@
             "expression" : "Smile",
 			"dialogue" : "Well, I do believe the world is coming to an end.",
 		},
+
+        {
+            "goto_chapter" : ["Chapter 7", 0],
+        },
     ],
 }

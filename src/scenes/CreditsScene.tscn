@@ -5,6 +5,8 @@
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 2 )
 
 [node name="CreditsScene" type="Node2D"]

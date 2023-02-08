@@ -18,7 +18,7 @@ const FORM_ENTRY_CODES = {
 	"other_info" : "entry.308180882",
 }
 
-const TOTAL_COLLECTION_TIME = 30#600
+const TOTAL_COLLECTION_TIME = 600 #30 is testing
 const IDLE_TIME = 8
 
 const TUTORIAL_TEXT = [
@@ -350,7 +350,7 @@ var bgms : Dictionary = {
 	"Day_1" : "res://assets/bgms/2_Day_1_Master.ogg",
 	"Night_1" : "res://assets/bgms/3_Night_1_Master.ogg",
 	"Dramatic_1" : "res://assets/bgms/4_Dramatic_1_Master.ogg",
-	"Dramatic_2" : "res://assets/bgms/4_Dramatic_2_Master.ogg",
+	"Dramatic_2" : "res://assets/bgms/5_Dramatic_2_Master.ogg",
 	"For_Everyone" : "res://assets/bgms/For Everyone Main.ogg",
 	"Guitar_on_the_Water" : "res://assets/bgms/Guitar on the Water.ogg",
 	"In_Legends" : "res://assets/bgms/In Legends.ogg",

@@ -882,5 +882,9 @@
             "dialogue" : "Any more than it's proper to wear all your bonnets and gowns and ribbons at once, that folks may know you've got them",
             "dialogue_remark" : "you added, and the lecture ended in a laugh.",
         },
+
+        {
+            "goto_chapter" : ["Chapter 8", 0],
+        },
     ],
 }

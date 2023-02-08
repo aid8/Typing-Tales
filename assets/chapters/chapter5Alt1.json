@@ -2,9 +2,10 @@
 	"Chapter 5 Alt 1" : [
 		{
 			"character" : "You",
-			"location" : "Laurence_Home_Living_Room",
+			"location" : "Laurence_Home_Study_Room",
 			"dialogue" : "Scary, Laurie's grandpops looks intimidating",
 			"bgm" : "Dramatic_2",
+			"skip_dialogue" : true,
 		},
 
 		{
@@ -116,5 +117,10 @@
 			"hide_character" : ["Laurie"],
 			"skip_dialogue" : true,
 		},
+
+		{
+			"bad_end" : true,
+            "goto_chapter" : ["Chapter 5", -1],
+        },
 	],
 }

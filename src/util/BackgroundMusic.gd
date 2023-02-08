@@ -52,8 +52,13 @@ func fade_in():
 	tween_in.interpolate_property(self, "volume_db", -80, Global.user_data["Music"], transition_duration, transition_type, Tween.EASE_IN, 0)
 	tween_in.start()
 
+func resume_music() -> void:
+	if current_music != "":
+		fade_in()
+
 func stop_music(reset_music : bool = true) -> void:
 	fade_out(reset_music)
+	has_fade_in = false
 
 func _on_TweenOut_tween_completed(object, key):
 	object.stop()

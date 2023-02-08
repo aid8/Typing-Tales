@@ -1,18 +1,18 @@
 {
 	"Chapter 3 Alt 1" : [
 		{
-			"character" : "Laurie",
+			"character" : "You",
 			"location" : "Ball",
-			"transition" : "Curtain",
-			"outfit" : "Winter",
-			"expression" : "Open",
-			"position" : "MIDDLE",
 			"dialogue" : "Yes, you shan't disturb me,",
 			"bgm" : "Dramatic_2",
+			"skip_dialogue" : true,
 		},
 
 		{
+			"forced_name" : "You",
 			"character" : "Laurie",
+			"outfit" : "Winter",
+			"position" : "MIDDLE",
 			"expression" : "Frown_blush",
 			"dialogue" : "as I'm not in the mood for company at the moment.",
 		},
@@ -217,5 +217,10 @@
 			"character" : "You",
 			"dialogue" : "That settles it.",
 		},
+
+		{
+			"bad_end" : true,
+            "goto_chapter" : ["Chapter 3", -1],
+        },
 	],
 }

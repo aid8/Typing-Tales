@@ -199,15 +199,26 @@ func _on_reset_data():
 
 func _on_CreditsButton_pressed():
 	switch_tab("Credits")
-	
+
+func check_if_possible_to_send_data() -> bool:
+	var cur_date : String = Time.get_date_string_from_system()
+	var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
+	if total_day_and_time.time >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.cur_day == 6 or total_day_and_time.cur_day == 7):
+		return true
+	return false
+		
 func _on_SendDataButton_pressed():
 	if cur_day == 6:
-		if !Global.user_data["DataSent"][1]:
+		if !check_if_possible_to_send_data():
+			Global.create_popup("10 min requirement is still not yet finished", self)
+		elif !Global.user_data["DataSent"][1]:
 			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_test_data")
 		else:
 			Global.create_popup("Data has already been sent for this day", self)
 	elif cur_day == 7:
-		if !Global.user_data["DataSent"][2]:
+		if !check_if_possible_to_send_data():
+			Global.create_popup("10 min requirement is still not yet finished", self)
+		elif !Global.user_data["DataSent"][2]:
 			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_post_test_data")
 		else:
 			Global.create_popup("Data has already been sent for this day", self)

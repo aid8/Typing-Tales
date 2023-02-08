@@ -261,6 +261,8 @@
             "character" : "Meg",
             "expression" : "Smile",
             "dialogue" : "How ridiculous you are, [name]!",
+            "outfit" : "Casual",
+            "position" : "LEFT",
             "dialouge_remark" : "But Meg laughed at the nonsense and felt better in spite of herself.",
             "show_selection" : [
                 ["Lucky for you I am, for if I put on crushed airs", "Chapter 4", -1],
@@ -272,6 +274,7 @@
         {
             "character" : "You",
             "dialogue" : "Lucky for you I am, for if I put on crushed airs",
+            "skip_dialogue" : true,
         },
 
         {
@@ -1249,6 +1252,10 @@
             "character" : "You",
             "dialogue" : "'Tink ob yer marcies, chillen!' 'Tink ob yer marcies!'",
             "dialogue_remark" : "You added, who could not, for the life of her, help getting a morsel of fun out of the little sermon, though she took it to heart as much as any of them.",
+        },
+
+        {
+            "goto_chapter" : ["Chapter 5", 0],
         },
     ],
 }
