@@ -8,6 +8,7 @@
 			"expression" : "Open",
 			"position" : "MIDDLE",
 			"dialogue" : "Yes, you shan't disturb me,",
+			"bgm" : "Dramatic_2",
 		},
 
 		{
@@ -137,6 +138,7 @@
 				},
 			],
 			"skip_dialogue" : true,
+			"bgm" : "Night_1",
 		},
 
 		{

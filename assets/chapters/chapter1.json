@@ -5,7 +5,7 @@
 			"location" : "Home_Fireplace1",
 			"dialogue" : "Christmas won't be Christmas without any presents,",
             "dialogue_remark" : "you grumbled, lying on the rug.",
-			"bgm" : "Day_1",
+			"bgm" : "Dramatic_2",
 		},
 
         {
@@ -22,10 +22,9 @@
             "show_character" : ["Amy"],
             "outfit" : "Casual",
             "position" : "MIDDLE",
-			"expression" : "Open",
+			"expression" : "Frown",
 			"dialogue" : "I don't think it's fair for some girls to have plenty of pretty things, and other girls nothing at all!",
             "dialogue_remark" : "added little Amy, with an injured sniff.",
-			"bgm" : "In_Legends",
 		},
 
         {
@@ -72,6 +71,7 @@
         {
 			"character" : "Meg",
 			"dialogue" : "and she thinks we ought not to spend money for pleasure, when our men are suffering so in the army..",
+			"bgm" : "Jazzy_Shop",
 		},
 
         {
@@ -659,6 +659,7 @@
 			"dialogue" : "Glad to find you so merry, my girls,",
             "dialogue_remark" : " said a cheery voice at the door, and actors and audience turned to welcome a tall, motherly lady with a 'can I help you' look about her which was truly delightful.",
             "hide_character" : ["Amy", "Beth", "Meg"],
+			"bgm" : "Quircky_Shop",
 		},                   
         
         {
@@ -761,7 +762,7 @@
         {
  			"character" : "You",
 			"location" : "",
-			"dialogue" : "Don't I wish I could go as a drummer, a vivan—what's its name? Or a nurse, so I could be near him and help him,",
+			"dialogue" : "Don't I wish I could go as a drummer, a vivan-what's its name? Or a nurse, so I could be near him and help him,",
             "dialogue_remark" : " you exclaimed, with a groan.",
             "hide_all_characters" : true,
 		},

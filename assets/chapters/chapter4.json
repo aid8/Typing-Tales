@@ -9,6 +9,7 @@
             "position" : "LEFT",
             "dialogue" : "Oh, dear, how hard it does seem to take up our packs and go on,",
             "dialogue_remark" : "Meg sighed the morning after the party,",
+            "bgm" : "Night_1",
         },
 
         {
@@ -207,6 +208,7 @@
             ],
             "hide_character" : ["Beth", "Amy"],
             "skip_dialogue" : true,
+            "bgm" : "Day_1",
         },
 
         {
@@ -318,6 +320,7 @@
                 },
             ],
             "skip_dialogue" : true,
+            "bgm" : "Quircky_Shop",
         },
 
         {
@@ -505,6 +508,7 @@
                 },
             ],
             "skip_dialogue" : true,
+            "bgm" : "In_Legends",
         },
 
         {
@@ -691,7 +695,7 @@
                 },
             ],
             "skip_dialogue" : true,
-            
+            "bgm" : "Poppy_Shop",
         },
 
         {
@@ -818,6 +822,7 @@
                     "position" : "RIGHT",
                 },
             ],
+            "bgm" : "Jazzy_Shop",
         },
 
         {
@@ -1160,6 +1165,7 @@
         {
             "character" : "Mrs. March",
             "dialogue" : "Once upon a time, there were four girls, who had enough to eat and drink and wear, a good many comforts and pleasures, kind friends and parents who loved them dearly, and yet they were not contented.",
+            "bgm" : "Time_for_Rest",
         },
 
         {

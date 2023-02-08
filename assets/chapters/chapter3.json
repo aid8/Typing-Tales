@@ -9,6 +9,7 @@
             "position" : "LEFT",
             "dialogue" : "[name]! [name]! Where are you?",
             "dialogue_remark" : "Meg cried at the foot of the garret stairs.",
+            "bgm" : "Poppy_Shop",
         },
 
         {
@@ -340,6 +341,7 @@
             "location" : "Ball", 
             "transition" : "HorizontalBars",
             "skip_dialogue" : true,
+            "bgm" : "Magical",
         },
 
         {
@@ -939,7 +941,7 @@
 
         {
              "character" : "Narrator",
-            "dialogue" : "They had a merry time over the bonbons and mottoes, and were in the midst of a quiet game of Buzz, with two or three other young people who had strayed in, when Hannah appeared.",
+            "dialogue" : "They had a merry time over the bonbons and mottoes, and were in the midst of a quiet game of Buzz, with two or three other young people who had strayed in, when Hannah appeared.",
             "skip_dialogue" : true,
         },
 
@@ -1063,6 +1065,7 @@
             "transition" : "HorizontalBars",
             "dialogue" : "You told her adventures, and by the time she had finished they were at home. With many thanks, they said good night and crept in, hoping to disturb no one,",
             "skip_dialogue" : true,
+            "bgm" : "Time_for_Rest",
         },
 
         {

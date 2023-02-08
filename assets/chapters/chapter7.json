@@ -9,6 +9,7 @@
             "position" : "LEFT",
 			"dialogue" : "That boy is a perfect cyclops, isn't he?",
             "dialogue_remark" : "Amy said one day, as Laurie clattered by on horseback, with a flourish of his whip as he passed.",
+            "bgm" : "Day_1",
 		},
 
         {
@@ -40,6 +41,7 @@
             "expression" : "Frown",
             "dialogue" : "I just wish I had a little of the money Laurie spends on that horse,",
             "dialogue_remark" : "she added, as if to herself, yet hoping her sisters would hear.",
+            "bgm" : "Night_1",
         },
 
         {
@@ -124,6 +126,7 @@
             "expression" : "Smile",
             "dialogue" : "Oh, thank you! It must be so nice to have pocket money! I'll have a grand feast, for I haven't tasted a lime this week. I felt delicate about taking any, as I couldn't return them, and I'm actually suffering for one.",
             "hide_character" : ["Meg"],
+            "bgm" : "Day_1",
         },
 
         {
@@ -218,6 +221,7 @@
             ],
             "dialogue" : "and caused Miss March to assume the airs of a studious young peacock. But, alas, alas! Pride goes before a fall, and the revengeful Snow turned the tables with disastrous success.",
             "skip_dialogue" : true,
+            "bgm" : "Lurking",
         },
 
         {
@@ -359,6 +363,7 @@
                 },
             ],
             "skip_dialogue" : true,
+            "bgm" : "Dramatic_2",
         },
 
         {
@@ -562,6 +567,7 @@
                 },
             ],
             "skip_dialogue" : true,
+            "bgm" : "Night_1",
         },
 
         {
@@ -702,6 +708,7 @@
             "transition" : "SpiralSquare",
             "dialogue" : "Yes, you can have a vacation from school, but I want you to study a little every day with Beth,",
             "dialogue_remark" : "Mrs. March said that evening.",
+            "bgm" : "Time_for_Rest",
         },
 
         {

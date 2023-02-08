@@ -9,6 +9,7 @@
             "position" : "LEFT",
 			"dialogue" : "What in the world are you going to do now, [name]?",
             "dialogue_remark" : "Meg asked one snowy afternoon, as her sister came tramping through the hall, in rubber boots, old sack, and hood, with a broom in one hand and a shovel in the other.",
+            "bgm" : "Day_1",
 		},
 
         {
@@ -276,6 +277,7 @@
             "transition" : "Curtain",
 			"dialogue" : "All right, show her up, it's Miss [name],",
             "dialogue_remark" : "Laurie said, going to the door of his little parlor to meet [name], who appeared, looking rosy and quite at her ease, with a covered dish in one hand and Beth's three kittens in the other.",
+            "bgm" : "Quircky_Shop",
 		},
 
         {
@@ -692,6 +694,7 @@
         {
 			"character" : "You",
 			"dialogue" : "I'm sure now that I shouldn't be afraid of him,",
+            "bgm" : "Dramatic_1",
 		},
 
         {
@@ -818,6 +821,7 @@
 			"character" : "You",
 			"dialogue" : "Doing nicely, sir.",
             "dialogue_remark" : "And off went [name], talking very fast, as she told all about the Hummels, in whom her mother had interested richer friends than they were.",
+            "bgm" : "Poppy_Shop",
 		},
 
         {
@@ -1056,6 +1060,7 @@
         {
 			"character" : "You",
 			"dialogue" : "Good night, Laurie!",
+            "bgm" : "Time_for_Rest",
 		},
 
         {
