@@ -78,7 +78,7 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 		var stats = Global.get_stats()
 		
 		if statistics_tab == 0:
-			data_left = "OVERALL WPM: " + String(round(stats.OverallWPM)) + "\nOVERALL ACCURACY: " + String(round(stats.OverallAccuracy * 100)) + "\n\nSTORY WPM: " + String(round(stats.StoryWPM)) + "\nSTORY ACCURACY: " + String(round(stats.StoryAccuracy * 100)) + "\n\nTOTAL TIME: " + String(stats.PlayTime / 60).pad_decimals(1) + " MINS"
+			data_left = "OVERALL WPM: " + String(round(stats.OverallWPM)) + "\nOVERALL ACCURACY: " + String(round(stats.OverallAccuracy * 100)) + "\n\nSTORY WPM: " + String(round(stats.StoryWPM)) + "\nSTORY ACCURACY: " + String(round(stats.StoryAccuracy * 100)) + "\n\nTOTAL TIME: " + String(stats.PlayTime / 60).pad_decimals(1) + " MINS\nTYPING TIME: " + String(stats.TypingTime / 60).pad_decimals(1) + " MINS"
 			data_right = "CHALLENGE STATS\n(#, WPM, ACC, COUNT)\n"
 			for i in range(0, 5):
 				var x = stats["ChallengeStats" + String(i+1)]

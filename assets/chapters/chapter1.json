@@ -122,7 +122,7 @@
 
         {
 			"character" : "Meg",
-			"dialogue" : "I know I do—teaching those tiresome children nearly all day, when I'm longing to enjoy myself at home.",
+			"dialogue" : "I know I do-teaching those tiresome children nearly all day, when I'm longing to enjoy myself at home.",
             "dialogue_remark" : "began Meg, in the complaining tone again.",
 		},
 
@@ -166,7 +166,7 @@
 
         {
 			"character" : "Amy",
-			"dialogue" : "I know what I mean, and you needn't be statirical about it. It's proper to use good words, and improve your vocabilary",
+			"dialogue" : "I know what I mean, and you needn't be statirical about it. It's proper to use good words, and improve your vocabulary",
             "dialogue_remark" : "returned Amy, with dignity.",
 		},
 
@@ -676,7 +676,7 @@
 
 		{
  			"character" : "Mrs. March",
-			"dialogue" : "Has anyone called, Beth? How is your cold, Meg? Jo, you look tired to death. Come and kiss me, baby.",
+			"dialogue" : "Has anyone called, Beth? How is your cold, Meg? [name], you look tired to death. Come and kiss me, baby.",
 		},     
         
         {

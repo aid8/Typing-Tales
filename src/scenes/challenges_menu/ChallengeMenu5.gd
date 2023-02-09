@@ -88,6 +88,7 @@ func register_wpm() -> void:
 		wpm[0] += (current_label.length() * 60) / (5 * total_time)
 		wpm[1] += 1
 	tracing_wpm = false
+	Global.user_data["TotalTimeSpent"][2] += total_time
 	total_time = 0
 	
 func add_score_animation(position : Vector2, score : int) -> void:

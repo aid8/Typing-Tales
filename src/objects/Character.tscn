@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=2]
+[gd_scene load_steps=93 format=2]
 
 [ext_resource path="res://assets/characters/amy/Casual/Sumi_Casual_Frown.png" type="Texture" id=1]
 [ext_resource path="res://assets/characters/amy/Casual/Sumi_Casual_Open_Blush.png" type="Texture" id=2]
@@ -171,6 +171,22 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=6]
+resource_name = "QuickDownUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Anim:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -102, -531 ), Vector2( -102, -520 ), Vector2( -102, -531 ) ]
+}
+
+[sub_resource type="Animation" id=7]
 resource_name = "QuickUpDown"
 length = 0.4
 tracks/0/type = "value"
@@ -257,7 +273,8 @@ centered = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Fade = SubResource( 5 )
-anims/QuickUpDown = SubResource( 6 )
+anims/QuickDownUp = SubResource( 6 )
+anims/QuickUpDown = SubResource( 7 )
 anims/RESET = SubResource( 2 )
 anims/Shake = SubResource( 4 )
 anims/UpDown = SubResource( 3 )

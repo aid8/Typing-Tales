@@ -109,7 +109,6 @@ shape = SubResource( 13 )
 position = Vector2( 0, -30 )
 scale = Vector2( 2, 2 )
 frames = SubResource( 3 )
-frame = 7
 playing = true
 
 [node name="LivesLabel" type="Label" parent="."]
