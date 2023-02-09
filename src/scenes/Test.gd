@@ -28,7 +28,7 @@ func cancelled():
 
 #==========Variables==========#
 const white : Color = Color("#FFFFFF")
-const red : Color = Color("#FF0000")
+const red : Color = Color("#CD5C5C")#Color("#FF0000")
 const green : Color = Color("#90EE90")
 const yellow : Color = Color("#FFFF80")
 const light_blue : Color = Color("#ADD8E6")
@@ -61,7 +61,6 @@ var skipped_characters_length : int = 0 #for accurate wpm computation, skipped c
 var skip_dialogue : bool = false
 var total_wpm : Array = [0, 0] #[total_wpm, count]
 var total_accuracy : Array = [0, 0] #[correct_count, wrong_count]
-var chapter_play_time : float = 0
 var save_slot_index : int = 0
 var tutorial_index : int = 0
 var current_date : String = ""
@@ -79,6 +78,7 @@ var history_text_storage : String = ""
 var user_time_informed : bool = false
 var last_choice_index : int = 0
 var saved_info_for_branching : Dictionary
+var total_day_and_time : Dictionary
 
 #==========Onready Variables==========#
 onready var rand = RandomNumberGenerator.new()
@@ -122,6 +122,7 @@ onready var pause_menu : Node2D = $UI/PauseMenu
 onready var http_request : HTTPRequest = $HTTPRequest
 onready var time_menu : AcceptDialog = $UI/TimeMenu
 onready var bad_end_menu : Node2D = $UI/BadEndMenu
+onready var test_timer_label : Label = $UI/TestTimerLabel
 
 #==========Preload Variables==========#
 onready var choice_selection = preload("res://src/ui/ChoiceSelection.tscn")
@@ -153,19 +154,24 @@ func _ready() -> void:
 		Global.setup_research_variables("StoryMode", current_date)
 		var cur_size = Global.get_total_day_and_session_time(current_date).cur_day
 		if cur_size == 1:
-			print("Starting Pretest")
+			
 			is_pre_test = true
 			pre_test_done = false
-			if !debug_mode:
-				testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
-				testing_timer.one_shot = true
-				testing_timer.start()
+			#if !debug_mode:
+			print("Starting Pretest")
+			testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
+			testing_timer.one_shot = true
+			testing_timer.start()
+			test_timer_label.show()
+			
 			idle_timer.wait_time = Data.IDLE_TIME
 			idle_timer.start()
 		elif cur_size == 6 or cur_size == 7:
 			is_post_test = true
+			total_day_and_time = Global.get_total_day_and_session_time(current_date)
 			idle_timer.wait_time = Data.IDLE_TIME
 			idle_timer.start()
+			test_timer_label.show()
 	
 	if Global.load_slot_index_selected != -1:
 		load_saved_progress(Global.load_slot_index_selected, false)
@@ -186,13 +192,15 @@ func _process(delta : float) -> void:
 	#In charge of tracing wpm
 	if tracing_wpm:
 		total_time += delta
+	#In charge of showing test_timer_label (PRE_TEST)
+	if is_pre_test and !pre_test_done and test_timer_label.visible:
+		test_timer_label.text = Global.format_time(testing_timer.time_left)
+	#In charge of showing test_timer_label (TEST AND POST_TEST)
+	if is_post_test and test_timer_label.visible:
+		test_timer_label.text = Global.format_time(Data.TOTAL_COLLECTION_TIME - (total_day_and_time.time + post_test_session_time))
 	handle_scene_animation(delta)
 	handle_variable_tracing(delta)
 	
-	#RECHECK/TESTING
-	if not stats_menu.visible:
-		chapter_play_time += delta
-
 func handle_scene_animation(delta : float) -> void:
 	#shake anim
 	if shake_strength > 0:
@@ -485,6 +493,10 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 	if not character_dict.has(dialogue_data.character) and Data.characters.has(dialogue_data.character):
 		add_character(dialogue_data.character, dialogue_data.outfit, dialogue_data.expression, dialogue_data.position)
 	else:
+		#Add bounce anim (STOPPED HERE)
+		if Data.characters.has(dialogue_data.character) and character_dict.has(dialogue_data.character):
+			character_dict[dialogue_data.character].play_animation("QuickDownUp")
+		
 		if dialogue_data.has("outfit"):
 			modify_character(dialogue_data.character, dialogue_data.outfit)
 		if dialogue_data.has("expression"):
@@ -561,8 +573,8 @@ func set_next_dialogue() -> void:
 	update_typebox("reset")
 	
 	if is_post_test and !user_time_informed:
-		var cur_date : String = Time.get_date_string_from_system()
-		var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
+		#var cur_date : String = Time.get_date_string_from_system()
+		#var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
 		print(total_day_and_time.time + post_test_session_time, "??", total_day_and_time.day)
 		if (total_day_and_time.time + post_test_session_time) >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.cur_day == 6 or total_day_and_time.cur_day == 7):
 			Global.create_popup("10 mins requirement is done. You can already submit the data or continue playing", self)
@@ -571,11 +583,13 @@ func set_next_dialogue() -> void:
 			user_time_informed = true
 			is_post_test = false
 			idle_timer.stop()
+			test_timer_label.hide()
 	
 	if is_pre_test and pre_test_done:
 		send_pretest_data()
 		pre_test_done = false
 		is_pre_test = false
+		test_timer_label.hide()
 
 #Shows current wpm, adds it to overall wpm, then resets info for new wpm
 func register_wpm() -> void:
@@ -585,6 +599,7 @@ func register_wpm() -> void:
 		total_wpm[0] += current_wpm
 		total_wpm[1] += 1
 		Global.add_overall_wpm(current_wpm)
+		Global.add_chapter_time(current_scene, "typing_time", total_time)
 		wpm_label.text = "WPM : " + String(floor(current_wpm))
 	else:
 		wpm_label.text = "WPM : -"
@@ -902,6 +917,10 @@ func _unhandled_input(event : InputEvent) -> void:
 			if typed_event.unicode != 0 or typed_event.scancode == 32:
 				wrong_letter_length += 1
 		
+		#Make typebox red if wrong letter is greater than 0
+		if wrong_letter_length > 0:
+			type_box.parse_bbcode("[right][color=#" + red.to_html(false) + "]" + type_box.text + "[/color][/right]")
+		
 		if typing_target == "dialogue":
 			show_colored_dialogue(dialogue)
 		elif typing_target == "choice":
@@ -924,14 +943,13 @@ func show_stats_menu():
 		cur_accuracy = total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1])
 	var overall_stats = Global.get_user_stats()
 	
+	Global.add_chapter_time(current_scene, "total_time", current_session_time)
+	
 	title_label.text = current_scene + " - DONE"
 	cur_stats_label.text = "CURRENT WPM: " + String(round(cur_wpm)) + "\nCURRENT ACCURACY: " + String(round(cur_accuracy * 100))
 	overall_stats_label.text = "OVERALL WPM: " + String(round(overall_stats["WPM"])) + "\nOVERALL ACCURACY: " + String(round(overall_stats["Accuracy"] * 100))
-	time_spent_label.text = "TIME SPENT: " + String(stepify(chapter_play_time / 60, 0.01)) + " MINS"
+	time_spent_label.text = "TIME SPENT: " + String(Global.user_data["ChapterTimeSpent"][current_scene]["total_time"] / 60).pad_decimals(1) + " MINS\nTYPING TIME: " + String(Global.user_data["ChapterTimeSpent"][current_scene]["typing_time"] / 60).pad_decimals(1) + " MINS"
 	letter_diff_label.text = "KEYS THAT SHOULD BE PRACTICIED: "
-	
-	#Reset time spent/RECHECK/TESTING
-	chapter_play_time = 0
 	
 	var diff_letters = overall_stats["Difficult_Letters"]
 	print(diff_letters,"?")
@@ -955,6 +973,8 @@ func show_intro_menu(starting_delay:float = 0):
 		if dialogue_data.has("bgm"):
 			BackgroundMusic.play_music(dialogue_data.bgm)
 		return
+		
+	get_tree().paused = true
 	intro_menu.modulate.a = 1
 	intro_menu.show()
 	var tween = intro_menu.get_node("Tween")
@@ -972,6 +992,7 @@ func show_intro_menu(starting_delay:float = 0):
 	tween.start()
 	yield(tween,"tween_completed")
 	intro_menu.hide()
+	get_tree().paused = false
 	
 	#Play bgm if there is one
 	var dialogue_data = Data.dialogues[current_scene][current_scene_index]
@@ -1036,6 +1057,7 @@ func register_stats() -> void:
 		accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
 	#Save this locally
 	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
+	Global.add_chapter_time(current_scene, "total_time", current_session_time)
 
 func send_pretest_data():
 	var wpm_res = (total_wpm[0] / float(total_wpm[1]))

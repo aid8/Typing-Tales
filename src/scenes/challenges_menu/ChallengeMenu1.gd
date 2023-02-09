@@ -96,6 +96,7 @@ func register_wpm() -> void:
 		wpm[0] += (target_platform.text.length() * 60) / (5 * total_time)
 		wpm[1] += 1
 	tracing_wpm = false
+	Global.user_data["TotalTimeSpent"][2] += total_time
 	total_time = 0
 	
 func spawn_falling_object() -> void:

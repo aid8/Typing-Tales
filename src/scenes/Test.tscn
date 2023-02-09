@@ -1,4 +1,4 @@
-[gd_scene load_steps=70 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/Home/fireplace2.png" type="Texture" id=2]
@@ -103,6 +103,8 @@ font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 31
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 5 )
@@ -122,6 +124,14 @@ outline_color = Color( 0, 0, 0, 1 )
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=22]
+size = 25
+outline_size = 3
+outline_color = Color( 0, 0, 0, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 4 )
 
 [sub_resource type="DynamicFont" id=11]
 size = 45
@@ -395,6 +405,17 @@ text = "Press Space to Continue  . . ."
 align = 2
 valign = 1
 
+[node name="TestTimerLabel" type="Label" parent="UI"]
+visible = false
+margin_left = 1184.0
+margin_top = 16.0
+margin_right = 1264.0
+margin_bottom = 46.0
+custom_fonts/font = SubResource( 22 )
+align = 1
+valign = 1
+uppercase = true
+
 [node name="StatsMenu" type="Node2D" parent="UI"]
 visible = false
 
@@ -425,9 +446,9 @@ valign = 1
 
 [node name="CurrentStatsLabel" type="Label" parent="UI/StatsMenu"]
 margin_left = 336.0
-margin_top = 280.0
+margin_top = 273.0
 margin_right = 568.0
-margin_bottom = 357.0
+margin_bottom = 350.0
 custom_fonts/font = SubResource( 12 )
 text = "CURRENT WPM: 999
 CURRENT ACCURACY: 99"
@@ -435,9 +456,9 @@ valign = 1
 
 [node name="OverallStatsLabel" type="Label" parent="UI/StatsMenu"]
 margin_left = 336.0
-margin_top = 368.0
+margin_top = 355.0
 margin_right = 560.0
-margin_bottom = 445.0
+margin_bottom = 432.0
 custom_fonts/font = SubResource( 13 )
 text = "OVERALL WPM: 99
 OVERALL ACCURACY: 99"
@@ -445,11 +466,12 @@ valign = 1
 
 [node name="TimeSpentLabel" type="Label" parent="UI/StatsMenu"]
 margin_left = 336.0
-margin_top = 464.0
+margin_top = 438.0
 margin_right = 547.0
-margin_bottom = 500.0
+margin_bottom = 513.0
 custom_fonts/font = SubResource( 13 )
-text = "TIME SPENT:"
+text = "TIME SPENT: 99.00 MINS
+TYPING TIME: 99.00MINS"
 valign = 1
 
 [node name="LetterDifficultyLabel" type="Label" parent="UI/StatsMenu"]
@@ -923,6 +945,7 @@ max_value = 0.0
 ticks_on_borders = true
 
 [node name="IntroMenu" type="Node2D" parent="UI"]
+pause_mode = 2
 visible = false
 
 [node name="Tween" type="Tween" parent="UI/IntroMenu"]

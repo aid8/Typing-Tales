@@ -76,6 +76,7 @@ outline_size = 3
 outline_color = Color( 0.203922, 0.231373, 0.270588, 1 )
 use_mipmaps = true
 use_filter = true
+extra_spacing_top = -4
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=23]
@@ -132,7 +133,7 @@ script = ExtResource( 1 )
 [node name="Background" type="AnimatedSprite" parent="."]
 scale = Vector2( 2.13333, 2.13018 )
 frames = SubResource( 2 )
-frame = 12
+frame = 10
 playing = true
 centered = false
 
@@ -380,11 +381,12 @@ margin_bottom = 548.0
 custom_fonts/normal_font = SubResource( 22 )
 text = "OVERALL WPM:
 OVERALL ACCURACY:
-
+--------------------
 STORY WPM:
 STORY ACCURACY:
-
-TOTAL TIME:"
+--------------------
+TOTAL TIME:
+TYPING TIME: "
 
 [node name="StatsLabelRight" type="RichTextLabel" parent="Statistics"]
 margin_left = 720.0

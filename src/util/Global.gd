@@ -30,7 +30,7 @@ func _ready():
 	else:
 		load_user_data()
 	
-	print(Global.user_data.LetterMastery)
+	print(Global.user_data.ChapterTimeSpent)
 
 #Insert here the scenes you want to add and to switch
 func switch_scene(scene) -> void:
@@ -90,7 +90,7 @@ func delete_user_data() -> void:
 
 func set_default_user_data() -> void:
 	user_data = {
-		"Name" : "Uta",
+		"Name" : "Jo",
 		"SchoolID" : "",
 		"Music" : -25,
 		"Sfx" : -20,
@@ -119,7 +119,8 @@ func set_default_user_data() -> void:
 			"Challenge5" : {},
 		}, #1st-7th day data collection of story and challenge modes
 		"DataSent" : [false, false, false], #1st, 6th, and 7th day
-		"TotalTimeSpent" : [0, 0], #[Story mode, Challenge mode]
+		"TotalTimeSpent" : [0, 0, 0], #[Story mode, Challenge mode, Typing Time]
+		"ChapterTimeSpent" : {}, #chapter_name : {"typing_time" : x, "total_time" : x}
 		"SeenTutorials" : [false, false, false, false, false, false], #IF tutorials are already shown for challanges 1-5, 6 for story mode
 		"ChallengeStats" : [
 			{"wpm" : 0, "accuracy" : 0, "time" : 0, "play_count" : 0, "highest_score" : 0,}, 
@@ -338,6 +339,7 @@ func get_stats() -> Dictionary:
 	else:
 		stats["StoryAccuracy"] = 0
 	stats["PlayTime"] = user_data["TotalTimeSpent"][0] + user_data["TotalTimeSpent"][1]
+	stats["TypingTime"] = user_data["TotalTimeSpent"][2]
 	
 	var total_challenge_wpm : float = 0
 	var total_challenge_accuracy : float = 0
@@ -402,6 +404,26 @@ func get_num_of_days_between_two_dates(date1 : String, date2 : String) -> int:
 	var t1 = OS.get_unix_time_from_datetime ( { "year": int(d1_arr[0]), "month": int(d1_arr[1]), "day":int(d1_arr[2]), "hour": 0, "minute": 0} )
 	var t2 = OS.get_unix_time_from_datetime ( { "year": int(d2_arr[0]), "month": int(d2_arr[1]), "day":int(d2_arr[2]), "hour": 0, "minute": 0} )
 	return int(round(abs(t1-t2) / 86400))
+
+func add_chapter_time(chap_name : String, type : String, time : float) -> void:
+	if user_data["ChapterTimeSpent"].has(chap_name):
+		if user_data["ChapterTimeSpent"][chap_name].has(type):
+			user_data["ChapterTimeSpent"][chap_name][type] += time
+		else:
+			user_data["ChapterTimeSpent"][chap_name][type] = time
+	else:
+		user_data["ChapterTimeSpent"][chap_name] = {type : time}
+	if type == "typing_time":
+		user_data["TotalTimeSpent"][2] += time
+
+func format_time(time : float) -> String:
+	var mins = int(time) / 60
+	time -= mins * 60
+	var secs = int(time) 
+	var zer = ""
+	if secs < 10:
+		zer = "0"
+	return str(mins) + ":" + zer + str(secs)
 
 func check_first_time() -> bool:
 	var file = File.new()

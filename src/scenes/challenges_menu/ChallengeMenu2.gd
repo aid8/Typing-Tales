@@ -82,6 +82,7 @@ func register_wpm() -> void:
 		wpm[0] += (active_enemy.get_prompt().length() * 60) / (5 * total_time)
 		wpm[1] += 1
 	tracing_wpm = false
+	Global.user_data["TotalTimeSpent"][2] += total_time
 	total_time = 0
 	
 func spawn_enemy() -> void:
