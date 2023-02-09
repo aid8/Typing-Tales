@@ -9,6 +9,7 @@
             "position" : "LEFT",
 			"dialogue" : "Girls, where are you going?",
             "dialogue_remark" : "asked Amy, coming into their room one Saturday afternoon,",
+            "bgm" : "Day_1",
 		},
 
         {
@@ -65,6 +66,7 @@
             "character" : "Amy",
             "expression" : "Frown",
             "dialogue" : "You are going somewhere with Laurie, I know you are. You were whispering and laughing together on the sofa last night, and you stopped when I came in. Aren't you going with him?",
+            "bgm" : "Night_1",
         },
 
         {
@@ -136,6 +138,7 @@
         {
             "character" : "You",
             "dialogue" : "You can't sit with us, for our seats are reserved, and you mustn't sit alone, so Laurie will give you his place, and that will spoil our pleasure.",
+            "bgm" : "Lurking",
         },
 
         {
@@ -176,6 +179,7 @@
             "transition" : "Shards",
             "dialogue" : "They had a charming time, for The Seven Castles Of The Diamond Lake was as brilliant and wonderful as heart could wish.",
             "skip_dialogue" : true,
+            "bgm" : "Magical",
         },
 
         {
@@ -234,6 +238,7 @@
                 },
             ],
             "skip_dialogue" : true,
+            "bgm" : "Dramatic_2",
         },
 
         {
@@ -618,6 +623,7 @@
             "transition" : "Shards",
             "dialogue" : "Amy heard the clash of skates, and looked out with an impatient exclamation.",
             "skip_dialogue" : true,
+            "bgm" : "Day_1",
         },
 
         {
@@ -699,6 +705,7 @@
             "character" : "Narrator",
             "dialogue" : "but [name] never turned and went slowly zigzagging down the river, taking a bitter, unhappy sort of satisfaction in her sister's troubles.",
             "skip_dialogue" : true,
+            "bgm" : "Night_1",
         },
 
         {
@@ -719,6 +726,7 @@
             "dialogue" : "[name] heard, but Amy was struggling to her feet and did not catch a word. [name] glanced over her shoulder, and the little demon she was harboring said in her ear... \"No matter whether she heard or not, let her take care of herself.\"",
             "skip_dialogue" : true,
             "hide_character":["Amy", "Laurie"],
+            "bgm" : "Lurking",
         },
 
         {
@@ -743,6 +751,7 @@
             "character" : "Narrator",
             "dialogue" : "She tried to rush forward, but her feet seemed to have no strength in them, and for a second, she could only stand motionless, staring with a terror-stricken face at the little blue hood above the black water.",
             "skip_dialogue" : true,
+            "bgm" : "Night_1",
         },
 
         {
@@ -879,6 +888,7 @@
         {
             "character" : "Mrs. March",
             "dialogue" : "I will, my child, I will. Don't cry so bitterly, but remember this day, and resolve with all your soul that you will never know another like it. [name], dear, we all have our temptations,",
+            "bgm" : "Dramatic_2",
         },
 
         {
@@ -924,6 +934,7 @@
             "character" : "You",
             "dialogue" : "Mother, are you angry when you fold your lips tight together and go out of the room sometimes, when Aunt March scolds or people worry you?",
             "dialogue_remark" : "You asked, feeling nearer and dearer to your mother than ever before.",
+            "bgm" : "Night_1",
         },
 
         {
@@ -1113,6 +1124,7 @@
             "character" : "Narrator",
             "dialogue" : "but the sweetness of self-denial and self-control, and led by her mother's hand, she had drawn nearer to the Friend who always welcomes every child with a love stronger than that of any father, tenderer than that of any mother.",
             "skip_dialogue" : true,
+            "bgm" : "Time_for_Rest",
         },
 
         {
