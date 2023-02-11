@@ -101,7 +101,7 @@
 
 		{
 			 "character" : "Narrator",
-			"dialogue" : "Then she opened her new book and began to read. You put her arm round her and, leaning cheek to cheek, read also, with the quiet expression so seldom seen on her restless face.",
+			"dialogue" : "Then she opened her new book and began to read. You put your arm round her and, leaning cheek to cheek, read also, with the quiet expression so seldom seen on her restless face.",
 			"skip_dialogue" : true,
 		},
 
@@ -136,7 +136,6 @@
 			"character" : "Hannah",
 			"dialogue" : "clothes and firin',",
 			"dialogue_remark" : "replied Hannah, who had lived with the family since Meg was born, and was considered by them all more as a friend than a servant.",
-			"hide_character" : ["Amy"],
 		},
 
 		{
@@ -181,11 +180,18 @@
 			"character" : "Meg",
 			"dialogue" : "It's all right, dear, and a very pretty idea, quite sensible too, for no one can ever mistake now. It will please her very much, I know,",
 			"dialogue_remark" : "Meg said, with a frown for [name] and a smile for Beth.",
+			"show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "MIDDLE",
+                },
+            ],
 		},
 
 		{
-			"character" : "Beth",
-			"expression" : "Smile_blush",
+			"character" : "You",
 			"dialogue" : "There's Mother. Hide the basket, quick!",
 			"dialogue_remark" : "you cried, as a door slammed and steps sounded in the hall.",
 		},
@@ -212,19 +218,20 @@
 
 		{
 			"character" : "Amy",
+			"expression" : "Open",
 			"dialogue" : " and I gave all my money to get it, and I'm truly trying not to be selfish any more.",
 		},
 
 		{
-			 "character" : "Narrator",
+			"character" : "Narrator",
 			"dialogue" : "As she spoke, Amy showed the handsome flask which replaced the cheap one, and looked so earnest and humble in her little effort to forget herself that Meg hugged her on the spot,",
 			"skip_dialogue" : true,
 		},
 
 		{
 			"character" : "Narrator",
-		   "dialogue" : "and [name] pronounced her 'a trump', while Beth ran to the window, and picked her finest rose to ornament the stately bottle.",
-		   "skip_dialogue" : true,
+			"dialogue" : "and [name] pronounced her 'a trump', while Beth ran to the window, and picked her finest rose to ornament the stately bottle.",
+			"skip_dialogue" : true,
 	   },
 
 		{
@@ -316,7 +323,7 @@
 			"character" : "Narrator",
 			"location" : "Convenience_Store_Outside",
 			"transition" : "HorizontalBars",
-			"dialogue" : "They were soon ready, and the procession set out. Fortunately it was early, and they went through back streets, so few people saw them, and no one laughed at the queer party.",
+			"dialogue" : "They were soon ready, and the procession set out. Fortunately it was early, and they went through the back streets, so few people saw them, and no one laughed at the queer party.",
 			"skip_dialogue" : true,
 			"hide_all_characters" : true,
 		},
@@ -569,13 +576,13 @@
 
 		{
 			"character" : "Narrator",
-			"dialogue" : "The big chamber was the scene of many innocent revels. No gentleman were admitted, so [name] played male parts to her heart's content and took immense satisfaction in a pair of russet leather boots given her by a friend,",
+			"dialogue" : "The big chamber was the scene of many innocent revels. No gentleman were admitted, so [name] played male parts to her heart's content and took immense satisfaction in a pair of russet leather boots given to her by a friend,",
 			"skip_dialogue" : true,
 		},
 
 		{
 			"character" : "Narrator",
-			"dialogue" : "who knew a lady who knew an actor. These boots, an old foil, and a slashed doublet once used by an artist for some picture, were [name]'s chief treasures and appeared on all occasions.",
+			"dialogue" : "who knew a lady, who knew an actor. These boots, an old foil, and a slashed doublet once used by an artist for some picture, were [name]'s chief treasures and appeared on all occasions.",
 			"skip_dialogue" : true,
 		},
 
@@ -765,19 +772,13 @@
 		{
 			"character" : "Narrator",
 			"dialogue" : "A tower rose to the ceiling, halfway up appeared a window with a lamp burning in it, and behind the white curtain appeared Zara in a lovely blue and silver dress, waiting for Rodrigo.",
-			"show_character" : ["Amy", "Beth"],
+			"show_character" : ["Amy"],
 			"show_more_characters" : [
                 {
                     "character" : "Amy",
                     "outfit" : "Casual",
                     "expression" : "Smile_blush",
                     "position" : "LEFT",
-                },
-                {
-                    "character" : "Beth",
-                    "outfit" : "Casual",
-                    "expression" : "Smile_blush",
-                    "position" : "MIDDLE",
                 },
             ],
 			"skip_dialogue" : true,
@@ -787,6 +788,15 @@
 			"character" : "Narrator",
 			"dialogue" : "He came in gorgeous array, with plumed cap, red cloak, chestnut lovelocks, a guitar, and the boots, of course. Kneeling at the foot of the tower, he sang a serenade in melting tones.",
 			"skip_dialogue" : true,
+			"show_character" : ["Beth"],
+			"show_more_characters" : [
+                {
+					"character" : "Beth",
+					"outfit" : "Casual",
+					"expression" : "Smile_blush",
+					"position" : "MIDDLE",
+				},
+            ],
 		},
 
 		{
@@ -1085,6 +1095,8 @@
 
 		{
 			"character" : "Narrator",
+			"location" : "Home_DiningRoom", 
+            "transition" : "HorizontalBars",
 			"dialogue" : "This was a surprise even to the actors, and when they saw the table, they looked at one another in rapturous amazement.",
 			"show_all_characters" : true,
 			"show_more_characters" : [
@@ -1124,7 +1136,7 @@
 		},
 
 		{
-			 "character" : "Narrator",
+			"character" : "Narrator",
 			"dialogue" : "It quite took their breath away, and they stared first at the table and then at their mother, who looked as if she enjoyed it immensely.",
 			"skip_dialogue" : true,
 		},
@@ -1222,7 +1234,7 @@
 
 		{
 			"character" : "Mrs. March",
-			"dialogue" : "I like his manners, and he looks like a little gentleman, so I've no objection to your knowing him, if a proper opportunity comes. He brought the flowers himself,",
+			"dialogue" : "I like his manners, and he looks like a little gentleman, so I've no objection to you knowing him, if a proper opportunity comes. He brought the flowers himself,",
 		},
 
 		{
