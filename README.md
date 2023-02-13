@@ -1,6 +1,8 @@
 # Typing Tales
 A senior thesis project to help users enhance their typing skills
 
+Game Site: https://gamejolt.com/games/typing_tales/785702
+
 ### Characters:
 - Amy
 - Beth
