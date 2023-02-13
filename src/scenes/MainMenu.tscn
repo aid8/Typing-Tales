@@ -133,7 +133,7 @@ script = ExtResource( 1 )
 [node name="Background" type="AnimatedSprite" parent="."]
 scale = Vector2( 2.13333, 2.13018 )
 frames = SubResource( 2 )
-frame = 10
+frame = 7
 playing = true
 centered = false
 
@@ -259,76 +259,76 @@ expand = true
 visible = false
 
 [node name="Challenge1Button" type="TextureButton" parent="Challenges"]
-margin_left = 568.0
+margin_left = 496.0
 margin_top = 320.0
-margin_right = 749.0
+margin_right = 784.0
 margin_bottom = 377.0
 
 [node name="Label" type="Label" parent="Challenges/Challenge1Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
-text = "Challenge 1"
+text = "1 - Chicken Dinner"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Challenge2Button" type="TextureButton" parent="Challenges"]
-margin_left = 568.0
+margin_left = 496.0
 margin_top = 376.0
-margin_right = 719.0
+margin_right = 736.0
 margin_bottom = 433.0
 
 [node name="Label" type="Label" parent="Challenges/Challenge2Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
-text = "Challenge 2"
+text = "2 - CyberSlime"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Challenge3Button" type="TextureButton" parent="Challenges"]
-margin_left = 568.0
+margin_left = 496.0
 margin_top = 432.0
-margin_right = 719.0
+margin_right = 856.0
 margin_bottom = 489.0
 
 [node name="Label" type="Label" parent="Challenges/Challenge3Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
-text = "Challenge 3"
+text = "3 - Double or Nothing "
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Challenge4Button" type="TextureButton" parent="Challenges"]
-margin_left = 568.0
+margin_left = 496.0
 margin_top = 488.0
-margin_right = 719.0
+margin_right = 712.0
 margin_bottom = 545.0
 
 [node name="Label" type="Label" parent="Challenges/Challenge4Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
-text = "Challenge 4"
+text = "4 - Wordtris"
 align = 1
 valign = 1
 uppercase = true
 
 [node name="Challenge5Button" type="TextureButton" parent="Challenges"]
-margin_left = 568.0
+margin_left = 496.0
 margin_top = 544.0
-margin_right = 719.0
+margin_right = 848.0
 margin_bottom = 601.0
 
 [node name="Label" type="Label" parent="Challenges/Challenge5Button"]
 margin_right = 149.0
 margin_bottom = 58.0
 custom_fonts/font = ExtResource( 3 )
-text = "Challenge 5"
+text = "5 - Collect 'em balls"
 align = 1
 valign = 1
 uppercase = true
