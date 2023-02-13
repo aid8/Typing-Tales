@@ -28,6 +28,8 @@ onready var anim : AnimatedSprite = $Anim
 func _ready():
 	text = WordList.get_prompt()
 	SPEED -= text.length() * SPEED_DECREASE
+	if SPEED <= 0:
+		SPEED = 10
 	set_next_character(-1)
 	randomize_brick()
 
