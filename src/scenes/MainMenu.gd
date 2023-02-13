@@ -201,41 +201,42 @@ func _on_CreditsButton_pressed():
 	switch_tab("Credits")
 
 func check_if_possible_to_send_data() -> bool:
-	var cur_date : String = Time.get_date_string_from_system()
 	var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
-	if total_day_and_time.time >= Data.TOTAL_COLLECTION_TIME and (total_day_and_time.cur_day == 6 or total_day_and_time.cur_day == 7):
+	if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME and total_day_and_time.story_time >= Data.STORY_MODE_COLLECTION_TIME and total_day_and_time.cur_day == 6:
 		return true
 	return false
 		
 func _on_SendDataButton_pressed():
-	if cur_day == 6:
+	if cur_day == 1:
+		if !Global.user_data["DataSent"][0]:
+			Global.create_popup("Data will be automatically sent to us after finishing 10 mins in story mode", self)
+		else:
+			Global.create_popup("Data has already been sent for this day", self)
+	elif cur_day == 6:
 		if !check_if_possible_to_send_data():
-			Global.create_popup("10 min requirement is still not yet finished", self)
+			Global.create_popup("5 mins requirement in Story or Challenge mode are still not yet finished", self)
 		elif !Global.user_data["DataSent"][1]:
 			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_test_data")
 		else:
 			Global.create_popup("Data has already been sent for this day", self)
 	elif cur_day == 7:
-		if !check_if_possible_to_send_data():
-			Global.create_popup("10 min requirement is still not yet finished", self)
-		elif !Global.user_data["DataSent"][2]:
-			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_post_test_data")
+		if !Global.user_data["DataSent"][2]:
+			Global.create_popup("Data will be automatically sent to us after finishing 5 mins in Story and Challenge mode.", self)
+		#elif !Global.user_data["DataSent"][2]:
+			#Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_post_test_data")
 		else:
 			Global.create_popup("Data has already been sent for this day", self)
 	else:
 		Global.create_popup("There is no need to send data for this day", self)
 	Global.play_sfx("Bright")
 
+#FIX HERE (STORY AND CHALLENGE MODE), CHECK ALSO IN POST TEST
 func _send_test_data() -> void:
-	var data = Global.get_stats()
-	Global.send_data("TEST", Global.user_data.SchoolID, cur_date, float(data.OverallWPM), float(data.OverallAccuracy), JSON.print(Global.user_data, "\t"))
+	var cur_stats = Global.get_stats_on_date(cur_date)
+	#Send to google forms
+	Global.send_data("TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(Global.user_data, "\t"))
 	Global.save_user_data()
-
-func _send_post_test_data() -> void:
-	var data = Global.get_stats()
-	Global.send_data("POST_TEST", Global.user_data.SchoolID, cur_date, float(data.OverallWPM), float(data.OverallAccuracy), JSON.print(Global.user_data, "\t"))
-	Global.save_user_data()
-
+	
 func _on_load_progress(index : int):
 	if Global.user_data["SavedProgress"][index].size() <= 0:
 		return
