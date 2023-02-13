@@ -30,8 +30,9 @@ func _ready():
 	else:
 		load_user_data()
 	
-	print(Global.user_data.SavedDataResearch)
-	print(Global.get_total_day_and_session_time(Time.get_date_string_from_system()))
+	#print(Global.get_difficulty_letters())
+	#print(Global.user_data.LetterMastery.keys())
+	#print(Global.get_total_day_and_session_time(Time.get_date_string_from_system()))
 
 #Insert here the scenes you want to add and to switch
 func switch_scene(scene) -> void:
@@ -198,7 +199,7 @@ func get_difficulty_letters(percentage : float = Data.LETTER_MASTERY_ACCURACY_BO
 
 func add_letter_mastery(letter : String, correct : bool, story : bool = true) -> void:
 	#Dont include unnecessary letters
-	if Data.unnecessary_characters.has(letter):
+	if Data.unnecessary_characters.has(letter) or letter.length() != 1:
 		return
 	letter = letter.to_lower()
 	if !user_data["LetterMastery"].has(letter):

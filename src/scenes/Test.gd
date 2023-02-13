@@ -164,6 +164,8 @@ func _ready() -> void:
 		pre_test_done = false
 		
 		testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
+		if tutorial_menu.visible:
+			testing_timer.wait_time += Data.IDLE_TIME
 		testing_timer.one_shot = true
 		testing_timer.start()
 		test_timer_label.show()
@@ -593,8 +595,10 @@ func set_next_dialogue() -> void:
 					var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
 					#Save and
 					Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
+					var user_data_mod = Global.user_data.duplicate(true)
+					user_data_mod.erase("WordMastery")
 					#Send to google forms
-					Global.send_data("POST_TEST", Global.user_data.SchoolID, current_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(Global.user_data, "\t"))
+					Global.send_data("POST_TEST", Global.user_data.SchoolID, current_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
 					Global.create_popup("POST TEST requirements are done. Data has been automatically sent to us. You can still continue playing", self)
 				else:
 					Global.create_popup("5 mins requirement for story mode is done. You still need to play challenge mode.", self)

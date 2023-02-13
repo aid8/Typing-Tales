@@ -63,9 +63,9 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 		day_label.text = cur_date.replace("-", "/") + ", DAY " + String(cur_day)
 		main.show()
 	elif tab == "Challenges":
-		if !Global.user_data.FinishedScenes.has("Chapter 1"):
+		if !Global.user_data.DataSent[0]:
 			main.show()
-			Global.create_popup("CHALLENGES ARE LOCKED: PLEASE FINISH CHAPTER 1 FIRST", self)
+			Global.create_popup("CHALLENGES ARE LOCKED: PLEASE FINISH THE 10 MINS PRE-TEST FIRST", self)
 		else:
 			challenges.show()
 	elif tab == "Statistics":
@@ -234,7 +234,9 @@ func _on_SendDataButton_pressed():
 func _send_test_data() -> void:
 	var cur_stats = Global.get_stats_on_date(cur_date)
 	#Send to google forms
-	Global.send_data("TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(Global.user_data, "\t"))
+	var user_data_mod = Global.user_data.duplicate(true)
+	user_data_mod.erase("WordMastery")
+	Global.send_data("TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
 	Global.save_user_data()
 	
 func _on_load_progress(index : int):

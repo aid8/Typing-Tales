@@ -93,6 +93,7 @@ const CREDITS = [
 		"KENNEY",
 		"FINALBLUEBOSS",
 		"STA.TOASTY",
+		"HUNGRYMONKEY9",
 		"https://4you.bz/rule",
 	],
 	[
@@ -450,7 +451,7 @@ var chapter_details = {
 }
 
 #Add more if there are characters that should not be included
-var unnecessary_characters =  [".",",",":","?"," ","-"]
+var unnecessary_characters =  [".",",",":","?"," ","-",";","!"]
 var ignored_keyboard_click_sfx_scancodes = [16777237, 16777241, 16777217]
 
 #Transitions: Fade, Shards, Curtain, SpiralSquare, DiamondTilesCover, SpinningRectangle, Shade, Zip, HorizontalBars

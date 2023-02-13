@@ -25,7 +25,9 @@ func check_time() -> void:
 						return
 					#Autosend data
 					var cur_stats = Global.get_stats_on_date(cur_date)
-					Global.send_data("POST_TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(Global.user_data, "\t"))
+					var user_data_mod = Global.user_data.duplicate(true)
+					user_data_mod.erase("WordMastery")
+					Global.send_data("POST_TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
 					note_label.text = "Post test requirements are done. Data has been automatically sent to us. You can still continue playing"
 				else:
 					if Global.user_data["DataSent"][1]:
