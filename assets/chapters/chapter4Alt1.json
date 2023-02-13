@@ -3,7 +3,7 @@
         {
             "character" : "You",
             "location" : "Street_Day",
-            "dialogue" : "Your crushed airs is contagious and depressing, ",
+            "dialogue" : "That's because your crushed airs is contagious.",
             "bgm" : "Dramatic_2",
             "skip_dialogue" : true,
         },

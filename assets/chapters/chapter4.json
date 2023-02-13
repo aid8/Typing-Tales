@@ -266,7 +266,7 @@
             "dialouge_remark" : "But Meg laughed at the nonsense and felt better in spite of herself.",
             "show_selection" : [
                 ["Lucky for you I am, for if I put on crushed airs", "Chapter 4", -1],
-                ["Your crushed airs is contagious and depressing,", "Chapter 4 Alt 1", 0],
+                ["That's because your crushed airs is contagious", "Chapter 4 Alt 1", 0],
             ],
             "show_selection_timer" : 15,
         },
@@ -312,7 +312,7 @@
             "character" : "Narrator",
             "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
-            "dialogue" : "Margaret found a place as nursery governess and felt rich withher small salary. As she said, she was 'fond of luxury', and her chief trouble was poverty.",
+            "dialogue" : "Margaret found a place as nursery governess and felt rich with her small salary. As she said, she was 'fond of luxury', and her chief trouble was poverty.",
             "show_character" : ["Meg"],
             "show_more_characters" : [
                 {
@@ -400,7 +400,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "This did not suit [name] at all, but she accepted the place since nothing better appeared and, to every one's surprise, got on remarkably well with her irascible relative. ",
+            "dialogue" : "This did not suit [name] at all, but she accepted the place since nothing better appeared and, to everyone's surprise, got on remarkably well with her irascible relative. ",
             "skip_dialogue" : true,
         },
 
@@ -998,7 +998,7 @@
         {
             "character" : "Amy",
             "expression" : "Smile",
-            "dialogue" : "We were laughing over it when all of a sudden his eye was on us, and he ordered Susie to bring up her slate. She was parrylized with fright, but she went, and oh, what do you think he did?",
+            "dialogue" : "We were laughing over it when all of a sudden his eye was on us, and he ordered Susie to bring up her slate. She was paralyzed with fright, but she went, and oh, what do you think he did?",
         },
 
         {
@@ -1021,7 +1021,7 @@
 
         {
             "character" : "Amy",
-            "dialogue" : "I never, never should have got over such a agonizing mortification.",
+            "dialogue" : "I never, never should have got over such an agonizing mortification.",
         },
 
         {
@@ -1144,7 +1144,7 @@
             "character" : "Mrs. March",
             "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
-            "dialogue" : "I had all my girls to comfort me at home, and his last son was waiting, miles away, to say good-by to him, perhaps! I felt so rich, so happy thinking of my blessings,",
+            "dialogue" : "I had all my girls to comfort me at home, and his last son was waiting, miles away, to say goodbye to him, perhaps! I felt so rich, so happy thinking of my blessings,",
             "show_character" : ["Meg", "Amy", "Beth"],
         },
 

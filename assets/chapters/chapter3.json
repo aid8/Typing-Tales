@@ -125,13 +125,13 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "So Meg went away to 'accept with thanks', look over her dress, and sing blithely as she did up her one real lace frill, while [name] finished her story, her four apples, and had a game of romps with Scrabble.",
             "skip_dialogue" : true,
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "On New Year's Eve the parlor was deserted, for the two younger girls played dressing maids and the two elder were absorbed in the all-important business of 'getting ready for the party'.",
             "skip_dialogue" : true,
         },
@@ -178,7 +178,7 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "She did take off the papers, but no cloud of ringlets appeared, for the hair came with the papers, and the horrified hairdresser laid a row of little scorched bundles on the bureau before her victim.",
             "skip_dialogue" : true,
         },
@@ -221,7 +221,7 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "After various lesser mishaps, Meg was finished at last, and by the united exertions of the entire family [name]'s hair was got up and her dress on.",
             "skip_dialogue" : true,
             "hide_character" : ["Amy", "Beth"],
@@ -231,6 +231,14 @@
             "character" : "Narrator",
             "dialogue" : "They looked very well in their simple suits, Meg's in silvery drab, with a blue velvet snood, lace frills, and the pearl pin.",
            "skip_dialogue" : true,
+           "show_more_characters" : [
+            {
+                "character" : "Meg",
+                "outfit" : "Winter",
+                "expression" : "Open",
+                "position" : "LEFT",
+            },
+        ],
         },
 
         {
@@ -248,14 +256,6 @@
         {
             "character" : "Narrator",
             "dialogue" : "Meg's high-heeled slippers were very tight and hurt her, though she would not own it, and [name]'s nineteen hairpins all seemed stuck straight into her head,",
-            "show_more_characters" : [
-                {
-                    "character" : "Meg",
-                    "outfit" : "Winter",
-                    "expression" : "Open",
-                    "position" : "LEFT",
-                },
-            ],
             "skip_dialogue" : true,
         },
 
@@ -267,6 +267,8 @@
 
         {
             "character" : "Mrs. March",
+            "location" : "Home_Outside",
+            "transition" : "HorizontalBars",
             "dialogue" : "Have a good time, dearies!",
             "dialogue_remark" : "Mrs. March said, as the sisters went daintily down the walk.",
         },
@@ -279,6 +281,8 @@
 
         {
             "character" : "Mrs. March",
+            "location" : "Street_Stars",
+            "transition" : "HorizontalBars",
             "dialogue" : "Girls, girls! Have you you both got nice pocket handkerchiefs?",
         },
 
@@ -453,7 +457,7 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "The boy sat down again and looked at his pumps, till you said, trying to be polite and easy,",
             "skip_dialogue" : true,
         },
@@ -470,13 +474,13 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "And he looked up and laughed outright, for [name]'s prim manner was rather funny when he remembered how they had chatted about cricket when he brought the cat home.",
             "skip_dialogue" : true,
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "That put [name] at ease and you laughed too, as you said, in your heartiest way,",
             "skip_dialogue" : true,
         },
@@ -562,7 +566,7 @@
         {
             "character" : "Laurie",
             "expression" : "Open",
-            "dialogue" : "Sometimes. You see I've been abroad a good many years, andhaven't been into company enough yet to know how you do things here.",
+            "dialogue" : "Sometimes. You see I've been abroad a good many years, and haven't been into company enough yet to know how you do things here.",
         },
 
         {
@@ -572,7 +576,7 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "Laurie didn't seem to know where to begin, but [name]'s eager questions soon set him going, and he told her how he had been at school in Vevay,",
             "skip_dialogue" : true,
         },
@@ -635,25 +639,25 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "[name] quite glowed with pleasure at this boyish praise of your sister, and stored it up to repeat to Meg. Both peeped and critisized and chatted till they felt like old acquaintances.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-           "dialogue" : "Laurie's bashfulness soon wore off, for [name]'s gentlemanly demeanor amused and set him at his ease, and [name] was your merry self again,",
-           "skip_dialogue" : true,
+            "dialogue" : "Laurie's bashfulness soon wore off, for [name]'s gentlemanly demeanor amused and set him at his ease, and [name] was your merry self again,",
+            "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-           "dialogue" : "because your dress was forgotten and nobody lifted their eyebrows at her.",
-           "skip_dialogue" : true,
+            "dialogue" : "because your dress was forgotten and nobody lifted their eyebrows at her.",
+            "skip_dialogue" : true,
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "You liked the 'Laurence boy' better than ever and took several good looks at him, so that she might describe him to the girls, for they had no brothers,",
             "skip_dialogue" : true,
         },
@@ -670,7 +674,7 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : " It was on the tip of [name]'s tongue to ask, but she checked herself in time and, with unusual tact, tried to find out in a round-about way.",
             "skip_dialogue" : true,
         },
@@ -728,7 +732,7 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "[name] wanted very much to ask what his own way was, but his black brows looked rather threatening as he knit them, so she changed the subject by saying, as her foot kept time,",
             "skip_dialogue" : true,
         },
@@ -774,7 +778,7 @@
 
         {
             "character" : "You",
-            "dialogue" : "Well, I have a bad trick of standing before the fire, and so Iburn my frocks, and I scorched this one, and though it's nicely mended,",
+            "dialogue" : "Well, I have a bad trick of standing before the fire, and so I burn my frocks, and I scorched this one, and though it's nicely mended,",
         },
 
         {
@@ -808,7 +812,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "When the music stopped, they sat down on the stairs to get their breath, and Laurie was in the midst of an account of a students' festival at Heidelberg when Meg appeared in search of her sister.",
+            "dialogue" : "When the music stopped, they sat down on the stairs to catch their breath, and Laurie was in the midst of an account of a students' festival at Heidelberg when Meg appeared in search of her sister.",
             "hide_character" : ["Laurie"],
             "show_character" : ["Meg"],
             "skip_dialogue" : true,
@@ -830,7 +834,7 @@
         {
             "character" : "You",
             "dialogue" : "I knew you'd hurt your feet with those silly shoes. I'm sorry. But I don't see what you can do, except get a carriage, or stay here all night,",
-            "dialogue_remark" : "you answered, softly rubbing the poor ankle as she spoke.",
+            "dialogue_remark" : "you answered, softly rubbing the poor ankle as you spoke.",
         },
 
         {
@@ -846,7 +850,7 @@
         {
             "character" : "Meg",
             "expression" : "Frown_blush",
-            "dialogue" : "No, indeed! It's past nine, and dark as Egypt. I can't stophere, for the house is full. Sallie has some girls staying with her. I'll rest till Hannah comes, and then do the best I can.",
+            "dialogue" : "No, indeed! It's past nine, and dark as Egypt. I can't stop here, for the house is full. Sallie has some girls staying with her. I'll rest till Hannah comes, and then do the best I can.",
         },
 
         {
@@ -875,6 +879,7 @@
             "character" : "Narrator",
             "dialogue" : "So Meg reclined, with rubbers well hidden, and [name] went blundering away to the dining room, which she found after going into a china closet,",
             "skip_dialogue" : true,
+            "hide_character" : ["Meg"],
         },
 
         {
@@ -934,25 +939,27 @@
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "You led the way, and as if used to waiting on ladies, Laurie drew up a little table, brought a second installment of coffee and ice for you, and was so obliging that even particular Meg pronounced him a 'nice boy'. ",
             "skip_dialogue" : true,
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "They had a merry time over the bonbons and mottoes, and were in the midst of a quiet game of Buzz, with two or three other young people who had strayed in, when Hannah appeared.",
             "skip_dialogue" : true,
         },
 
         {
-             "character" : "Narrator",
+            "character" : "Narrator",
             "dialogue" : "Meg forgot her foot and rose so quickly that she was forced to catch hold of [name], with an exclamation of pain.",
             "skip_dialogue" : true,
+            "show_character" : ["Meg"],
         },
 
         {
             "character" : "Meg",
+            "position" : "MIDDLE",
             "expression" : "Frown_blush",
             "dialogue" : "Hush! Don't say anything,",
             "dialogue_remark" : "she whispered, adding aloud,",
@@ -1066,6 +1073,14 @@
             "dialogue" : "You told her adventures, and by the time she had finished they were at home. With many thanks, they said good night and crept in, hoping to disturb no one,",
             "skip_dialogue" : true,
             "bgm" : "Time_for_Rest",
+            "show_more_characters" : [
+				{
+					"character" : "Meg",
+					"outfit" : "Winter",
+					"expression" : "Open",
+					"position" : "LEFT",
+				},
+			],
         },
 
         {
@@ -1084,7 +1099,7 @@
             "character" : "Narrator",
             "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
-            "dialogue" : "With what Meg called 'a great want of manners' [name] had saved somebonbons for the little girls, and they soon subsided, after hearing the most thrilling events of the evening.",
+            "dialogue" : "With what Meg called 'a great want of manners' [name] had saved some bonbons for the little girls, and they soon subsided, after hearing the most thrilling events of the evening.",
             "show_more_characters" : [
 				{
 					"character" : "Meg",
