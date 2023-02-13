@@ -30,7 +30,8 @@ func _ready():
 	else:
 		load_user_data()
 	
-	print(Global.user_data.ChapterTimeSpent)
+	print(Global.user_data.SavedDataResearch)
+	print(Global.get_total_day_and_session_time(Time.get_date_string_from_system()))
 
 #Insert here the scenes you want to add and to switch
 func switch_scene(scene) -> void:
@@ -63,7 +64,8 @@ func save_user_data() -> void:
 	var file = File.new()
 	var error = file.open(save_path, File.WRITE)
 	if error == OK:
-		file.store_var(user_data)
+		#file.store_var(user_data)
+		file.store_line(to_json(user_data))
 		file.close()
 		print("Data Successfully Saved")
 	else:
@@ -73,11 +75,13 @@ func load_user_data() -> void:
 	var file = File.new()
 	var error = file.open(save_path, File.READ)
 	if error == OK:
-		user_data = file.get_var()
+		#user_data = file.get_var()
+		user_data = parse_json(file.get_line())
 		file.close()
 		print("Data Successfully Loaded")
 	else:
-		print("Error opening file")
+		print("Error opening file, creating a new file")
+		set_default_user_data()
 
 func delete_user_data() -> void:
 	set_default_user_data()
@@ -289,9 +293,11 @@ func send_data(type : String, name : String, date : String, wpm : float, accurac
 		user_data["DataSent"][0] = true
 	elif type == "TEST" and !user_data["DataSent"][1]: #6th day
 		user_data["DataSent"][1] = true
+		print("OK TEST")
 	elif type == "POST_TEST" and !user_data["DataSent"][2]: #7th day
 		user_data["DataSent"][2] = true
-
+	print("ALREADY SENT, ", result)
+	
 func set_seen_tutorial(challenge_num : int) -> void:
 	user_data["SeenTutorials"][challenge_num] = true
 
@@ -309,6 +315,8 @@ func get_total_day_and_session_time(date : String = "") -> Dictionary:
 	var day : int = 1
 	var cur_day : int = 1
 	var dates : Array = []
+	var story_time : float = 0
+	var challenge_time : float = 0
 	for mode in user_data["SavedDataResearch"]:
 		for d in user_data["SavedDataResearch"][mode]:
 			if date == "":
@@ -319,10 +327,15 @@ func get_total_day_and_session_time(date : String = "") -> Dictionary:
 			continue
 		if user_data["SavedDataResearch"][mode].has(date):
 			total += user_data["SavedDataResearch"][mode][date].time
+			if mode == "StoryMode":
+				story_time += user_data["SavedDataResearch"][mode][date].time
+			else:
+				challenge_time += user_data["SavedDataResearch"][mode][date].time
+	dates.sort()
 	if dates.size() > 0:
 		day = Global.get_num_of_days_between_two_dates(dates[0], dates[dates.size()-1]) 
 		cur_day = Global.get_num_of_days_between_two_dates(dates[0], Time.get_date_string_from_system()) + 1
-	return {"day" : day, "time" : total, "cur_day" : cur_day}
+	return {"day" : day, "time" : total, "cur_day" : cur_day, "story_time" : story_time, "challenge_time" : challenge_time}
 
 func get_stats() -> Dictionary:
 	var stats : Dictionary = {}
@@ -361,6 +374,43 @@ func get_stats() -> Dictionary:
 			stats["OverallWPM"] /= 2
 			stats["OverallAccuracy"] /= 2
 	
+	return stats
+
+func get_stats_on_date(date : String) -> Dictionary:
+	var stats = {
+		"StoryWPM" : 0,
+		"StoryAccuracy" : 0,
+		"ChallengeWPM" : 0,
+		"ChallengeAccuracy" : 0,
+		"OverallWPM" : 0,
+		"OverallAccuracy" : 0,
+	}
+	
+	var story_play_count = user_data["SavedDataResearch"]["StoryMode"][date]["play_count"]
+	if story_play_count > 0:
+		stats["StoryWPM"] = user_data["SavedDataResearch"]["StoryMode"][date]["WPM"] / float(story_play_count)
+		stats["StoryAccuracy"] = (user_data["SavedDataResearch"]["StoryMode"][date]["Accuracy"] / float(story_play_count)) * 100
+		
+	var challenge_play_count = 0
+	for mode in user_data["SavedDataResearch"]:
+		if mode != "StoryMode":
+			if user_data["SavedDataResearch"][mode].has(date):
+				stats["ChallengeWPM"] += user_data["SavedDataResearch"][mode][date]["WPM"]
+				stats["ChallengeAccuracy"] += user_data["SavedDataResearch"][mode][date]["Accuracy"]
+				challenge_play_count += user_data["SavedDataResearch"][mode][date]["play_count"]
+	if challenge_play_count > 0:
+		stats["ChallengeWPM"] /= float(challenge_play_count)
+		stats["ChallengeAccuracy"] /= float(challenge_play_count)
+		
+	if user_data["SavedDataResearch"]["StoryMode"][date].play_count == 0:
+		stats["OverallWPM"] = stats["ChallengeWPM"]
+		stats["OverallAccuracy"] = stats["ChallengeAccuracy"]
+	elif challenge_play_count == 0:
+		stats["OverallWPM"] = stats["StoryWPM"]
+		stats["OverallAccuracy"] = stats["StoryAccuracy"]
+	else:
+		stats["OverallWPM"] = (stats["StoryWPM"] + stats["ChallengeWPM"]) / float(2)
+		stats["OverallAccuracy"] = (stats["StoryAccuracy"] + stats["ChallengeAccuracy"]) / float(2)
 	return stats
 
 func create_popup(info : String, menu : Node2D, func_name : String = "") -> void:

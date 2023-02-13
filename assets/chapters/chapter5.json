@@ -54,7 +54,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : " A low hedge parted the two estates. On one side was an old, brown house, looking rather bare and shabby, robbed of the vines that in summer covered its walls and the flowers, which then surrounded it.",
+            "dialogue" : "A low hedge parted the two estates. On one side was an old, brown house, looking rather bare and shabby, robbed of the vines that in summer covered its walls and the flowers, which then surrounded it.",
             "skip_dialogue" : true,
         },
 
@@ -72,7 +72,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : " and few people went in and out, except the old gentleman and his grandson. To [name]'s lively fancy, this fine house seemed a kind of enchanted palace, full of splendors and delights which no one enjoyed.",
+            "dialogue" : "and few people went in and out, except the old gentleman and his grandson. To [name]'s lively fancy, this fine house seemed a kind of enchanted palace, full of splendors and delights which no one enjoyed.",
             "skip_dialogue" : true,
         },
 
@@ -478,7 +478,13 @@
         {
 			"character" : "Laurie",
             "expression" : "Frown",
-			"dialogue" : "You see, Grandpa lives among his books, and doesn't mind much what happens outside. Mr. Brooke, my tutor, doesn't stay here, you know, and I have no one to go about with me, so I just stop at home and get on as I can.",
+			"dialogue" : "You see, Grandpa lives among his books, and doesn't mind much what happens outside.",
+		},
+
+        {
+			"character" : "Laurie",
+            "expression" : "Frown",
+			"dialogue" : "Mr. Brooke, my tutor, doesn't stay here, you know, and I have no one to go about with me, so I just stop at home and get on as I can.",
 		},
 
         {
@@ -1112,7 +1118,7 @@
 
         {
 			"character" : "Mrs. March",
-			"dialogue" : "  and I dare say his grandfather fears that he may want to be a musician. At any rate, his skill reminds him of the woman he did not like, and so he 'glowered' as [name] said.",
+			"dialogue" : "and I dare say his grandfather fears that he may want to be a musician. At any rate, his skill reminds him of the woman he did not like, and so he 'glowered' as [name] said.",
 		},
 
         {
