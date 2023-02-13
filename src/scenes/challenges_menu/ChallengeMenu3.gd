@@ -154,6 +154,8 @@ func get_tiles_starting_letters() -> Array:
 func find_tile(typed_character : String) -> void:
 	#for tile in tiles.get_children():
 	for tile in tiles:
+		if first_tile != null and first_tile == tile:
+			continue
 		var prompt = tile.get_prompt()
 		var next_character = prompt.substr(0,1)
 		if next_character == typed_character:

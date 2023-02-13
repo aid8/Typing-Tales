@@ -155,6 +155,8 @@ func add_user_data_story_progress(scene : String, scene_index : int, characters 
 	user_data["SavedProgress"][index]["bgm"] = bgm
 
 func add_word_mastery(word : String, accuracy : float, check_word_if_valid : bool = false) -> void:
+	if is_nan(accuracy):
+		return
 	word = format_word(word)
 	#Check if word is in word database
 	if !user_data["WordMastery"].has(word):
@@ -213,6 +215,8 @@ func add_letter_mastery(letter : String, correct : bool, story : bool = true) ->
 	#print(user_data["LetterMastery"])
 
 func add_overall_wpm(wpm : float):
+	if is_nan(wpm):
+		return
 	user_data["WPM"].total_wpm += wpm
 	user_data["WPM"].count += 1
 
@@ -268,6 +272,8 @@ func save_research_variables(mode : String, date : String, wpm : float, accuracy
 	if !user_data["SavedDataResearch"][mode].has(date):
 		print("Current date is invalid!")
 		return
+	if is_nan(accuracy) or is_nan(wpm):
+		return
 	user_data["SavedDataResearch"][mode][date]["WPM"] += wpm
 	user_data["SavedDataResearch"][mode][date]["Accuracy"] += accuracy
 	user_data["SavedDataResearch"][mode][date]["time"] += time
@@ -302,6 +308,8 @@ func set_seen_tutorial(challenge_num : int) -> void:
 	user_data["SeenTutorials"][challenge_num] = true
 
 func register_challenge_stats(challenge_num : int, wpm : float, accuracy : float, time : float, score : float) -> void:
+	if is_nan(accuracy) or is_nan(wpm):
+		return
 	user_data["ChallengeStats"][challenge_num]["wpm"] += wpm
 	user_data["ChallengeStats"][challenge_num]["accuracy"] += accuracy
 	user_data["ChallengeStats"][challenge_num]["time"] += time
