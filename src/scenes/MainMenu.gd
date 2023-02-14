@@ -135,6 +135,8 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 	#To fix visual upon changing menus
 	for i in range(0, 5):
 		change_button_label_color(main_buttons[i], white)
+	for i in range(0, other_buttons.size()):
+		change_button_label_color(other_buttons[i], white)
 
 func change_button_label_color(button, color) -> void:
 	button.get_node("Label").set("custom_colors/font_color", color)

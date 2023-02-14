@@ -151,6 +151,17 @@ func _unhandled_input(event : InputEvent) -> void:
 		else:
 			var prompt = target_platform.text
 			var next_character = prompt.substr(current_letter_index, 1)
+			
+			#Cancel typing
+			if typed_event.scancode == 16777218:
+				target_platform.set_next_character(-1)
+				current_letter_index = -1
+				target_platform = null
+				tracing_wpm = false
+				total_time = 0
+				Global.play_sfx("Bell_2")
+				return
+				
 			#print(next_character, "-", key_typed)
 			if key_typed == next_character and typed_event.unicode != 0:
 				#cur_score += 10

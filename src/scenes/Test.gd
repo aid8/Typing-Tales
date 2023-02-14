@@ -485,8 +485,9 @@ func get_current_dialogue(include_transition : bool = true) -> void:
 	else:
 		skip_dialogue = false
 	if dialogue_data.has("location"):
-		current_location = dialogue_data.location
-		change_background(current_location)
+		if dialogue_data.location != "": 
+			current_location = dialogue_data.location
+			change_background(current_location)
 	if dialogue_data.has("location_tint"):
 		change_background("", dialogue_data.location_tint)
 	
