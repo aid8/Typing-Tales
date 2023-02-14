@@ -90,7 +90,7 @@
 
 	    {
 			"character" : "Narrator",
-			"dialogue" : "The rest were ready to follow, and the finding [name] began. It was still early, but the street was already busy. Cars and people aplenty. Not even a minute after,",
+			"dialogue" : "The rest were ready to follow, and the search for [name] began. It was still early, but the street was already busy. Cars and people aplenty. Not even a minute after,",
 			"skip_dialogue" : true,
 		},
 

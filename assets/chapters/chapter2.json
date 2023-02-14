@@ -700,7 +700,7 @@
 		},
 
 		{
-			"character" : "Meg",
+			"character" : "Narrator",
 			"dialogue" : "Hagar, in a fine dramatic melody, promised both, and proceeded to call up the spirit who would bring the love philter.",
 			"skip_dialogue" : true,
 		},
@@ -708,13 +708,11 @@
 		{
 			"character" : "Meg",
 			"dialogue" : "Hither, hither, from thy home, Airy sprite, I bid thee come! Born of roses, fed on dew, Charms and potions canst thou brew? Bring me here,",
-			"skip_dialogue" : true,
 		},
 
 		{
 			"character" : "Meg",
 			"dialogue" : "with elfin speed, The fragrant philter which I need. Make it sweet and swift and strong, Spirit, answer now my song!",
-			"skip_dialogue" : true,
 		},
 
 		{
@@ -725,7 +723,7 @@
 
 
 		{
-			"character" : "Narrator",
+			"character" : "Spirit",
 			"dialogue" : "Hither I come, From my airy home, Afar in the silver moon. Take the magic spell, And use it well, Or its power will vanish soon!",
 			"skip_dialogue" : true,
 		},
