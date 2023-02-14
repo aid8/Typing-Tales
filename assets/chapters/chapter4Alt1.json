@@ -3,7 +3,7 @@
         {
             "character" : "You",
             "location" : "Street_Day",
-            "dialogue" : "Your crushed airs is contagious and depressing, ",
+            "dialogue" : "That's because your crushed airs is contagious.",
             "bgm" : "Dramatic_2",
             "skip_dialogue" : true,
         },
@@ -62,7 +62,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "Beth and Amy woke up from all the ruckus.",
+            "dialogue" : "Beth and Amy heard the exchange and went outside to prevent the argument from escalating.",
             "show_more_characters" : [
                 {
                     "character" : "Beth",
@@ -88,7 +88,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "Amy heard Meg lashing out and suddenly cried in outburst.",
+            "dialogue" : "Amy heard Meg lashing out and suddenly cried in outburst and ran back inside the house.",
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -102,15 +102,15 @@
 
         {
             "character" : "Narrator",
-            "location" : "Home_Fireplace1",
-            "transition" : "HorizontalBars",
-            "dialogue" : "Meg, having witnessed Beth and Amy listening to her tantrum, decided to walk out of the door and leave.",
+            "dialogue" : "Meg, having witnessed Beth and Amy listening to her tantrum, decided to walk out further down the street and leave.",
             "hide_character" : ["Meg"],
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "HorizontalBars",
             "dialogue" : "Beth would follow Meg outside to talk and calm her down while [name] comfort Amy.",
             "hide_character" : ["Beth"],
             "skip_dialogue" : true,
