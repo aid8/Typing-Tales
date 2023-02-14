@@ -186,6 +186,18 @@ func _unhandled_input(event : InputEvent) -> void:
 		else:
 			var prompt = active_tile.get_prompt()
 			var next_character = prompt.substr(current_character_index, 1)
+			
+			#Cancel typing
+			if typed_event.scancode == 16777218:
+				active_tile.set_next_character(-1)
+				active_tile.toggle_highlight(false)
+				current_character_index = -1
+				active_tile = null
+				tracing_wpm = false
+				total_time = 0
+				Global.play_sfx("Bell_2")
+				return
+			
 			if key_typed == next_character and typed_event.unicode != 0:
 				#print("success: ", key_typed)
 				current_character_index += 1

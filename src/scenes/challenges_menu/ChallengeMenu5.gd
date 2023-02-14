@@ -136,6 +136,16 @@ func _unhandled_input(event : InputEvent) -> void:
 		else:
 			var prompt = current_label
 			var next_character = prompt.substr(current_character_index, 1)
+			
+			#Cancel typing
+			if typed_event.scancode == 16777218:
+				player.set_next_character(-1)
+				current_label = ""
+				tracing_wpm = false
+				total_time = 0
+				Global.play_sfx("Bell_2")
+				return
+				
 			if key_typed == next_character and typed_event.unicode != 0:
 				
 				current_character_index += 1

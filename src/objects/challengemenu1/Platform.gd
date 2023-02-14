@@ -3,7 +3,7 @@ extends Area2D
 #==========Variables==========#
 const type = "Platform"
 
-export (Color) var blue : Color = Color("#ADD8E6")
+export (Color) var blue : Color = Color("#76b6e9")
 export (Color) var green : Color = Color("#90EE90")
 export (Color) var white : Color = Color("#FFFFFF")
 
