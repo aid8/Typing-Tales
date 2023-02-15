@@ -394,25 +394,25 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "something in her comical face and blunt manners struck the old lady's fancy, and she proposed to take her for a companion.",
+            "dialogue" : "something in your comical face and blunt manners struck the old lady's fancy, and she proposed to take you for a companion.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "This did not suit [name] at all, but she accepted the place since nothing better appeared and, to everyone's surprise, got on remarkably well with her irascible relative. ",
+            "dialogue" : "This did not suit [name] at all, but you accepted the place since nothing better appeared and, to everyone's surprise, got on remarkably well with your irascible relative. ",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "There was an occasional tempest, and once [name] marched home, declaring she couldn't bear it longer, but Aunt March always cleared up quickly,",
+            "dialogue" : "There was an occasional tempest, and once [name] marched home, declaring you couldn't bear it longer, but Aunt March always cleared up quickly,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "and sent for her to come back again with such urgency that she could not refuse, for in her heart she rather liked the peppery old lady.",
+            "dialogue" : "and sent for you to come back again with such urgency that you could not refuse, for in your heart you rather liked the peppery old lady.",
             "skip_dialogue" : true,
         },
 
@@ -426,13 +426,13 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "who used to let her build railroads and bridges with his big dictionaries,",
+            "dialogue" : "who used to let you build railroads and bridges with his big dictionaries,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "tell her stories about queer pictures in his Latin books, and buy her cards of gingerbread whenever he met her in the street.",
+            "dialogue" : "tell you stories about queer pictures in his Latin books, and buy you cards of gingerbread whenever he met you in the street.",
             "skip_dialogue" : true,
         },
 
@@ -444,7 +444,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "and best of all, the wilderness of books in which she could wander where she liked, made the library a region of bliss to her.",
+            "dialogue" : "and best of all, the wilderness of books in which you could wander where you liked, made the library a region of bliss to you.",
             "skip_dialogue" : true,
         },
 
@@ -456,43 +456,43 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "and curling herself up in the easy chair, devoured poetry, romance, history, travels, and pictures like a regular bookworm.",
+            "dialogue" : "and curling yourself up in the easy chair, devoured poetry, romance, history, travels, and pictures like a regular bookworm.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "But, like all happiness, it did not last long, for as sure as she had just reached the heart of the story, the sweetest verse of a song, or the most perilous adventure of her traveler,",
+            "dialogue" : "But, like all happiness, it did not last long, for as sure as you had just reached the heart of the story, the sweetest verse of a song, or the most perilous adventure of your traveler,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "a shrill voice called, \"[name]! [name]!\" and she had to leave her paradise to wind yarn, wash the poodle, or read Belsham's Essays by the hour together.",
+            "dialogue" : "a shrill voice called, \"[name]! [name]!\" and you had to leave your paradise to wind yarn, wash the poodle, or read Belsham's Essays by the hour together.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "[name]'s ambition was to do something very splendid. What it was, she had no idea as yet, but left it for time to tell her,",
+            "dialogue" : "[name]'s ambition was to do something very splendid. What it was, you had no idea as yet, but left it for time to tell you,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "and meanwhile, found her greatest affliction in the fact that she couldn't read, run, and ride as much as she liked.",
+            "dialogue" : "and meanwhile, found your greatest affliction in the fact that she couldn't read, run, and ride as much as she liked.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "A quick temper, sharp tongue, and restless spirit were always getting her into scrapes, and her life was a series of ups and downs, which were both comic and pathetic.",
+            "dialogue" : "A quick temper, sharp tongue, and restless spirit were always getting you into scrapes, and your life was a series of ups and downs, which were both comic and pathetic.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "But the training she received at Aunt March's was just what she needed, and the thought that she was doing something to support herself made her happy in spite of the perpetual \"[name]!\"",
+            "dialogue" : "But the training you received at Aunt March's was just what you needed, and the thought that you were doing something to support yourself made you happy in spite of the perpetual \"[name]!\"",
             "skip_dialogue" : true,
         },
 
@@ -738,7 +738,7 @@
             "character" : "Narrator",
             "location" : "School_Classroom1",
             "transition" : "HorizontalBars",
-            "dialogue" : "Her teachers complained that instead of doing her sums she covered her slate with animals, the blank pages of her atlas were used to copy maps on, and caricatures of the most ludicrous description came fluttering out of all her books at unlucky moments.",
+            "dialogue" : "Her teachers complained that instead of doing her sums she covered her slate with animals, the blank pages of her atlas were used to copy maps on,",
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -752,7 +752,15 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "She got through her lessons as well as she could, and managed to escape reprimands by being a model of deportment. She was a great favorite with her mates, being good-tempered and possessing the happy art of pleasing without effort.",
+            "location" : "School_Classroom1",
+            "transition" : "HorizontalBars",
+            "dialogue" : "and caricatures of the most ludicrous description came fluttering out of all her books at unlucky moments.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "She got through her lessons as well as she could, and managed to escape reprimands by being a model of deportment.",
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -766,7 +774,13 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "Her little airs and graces were much admired, so were her accomplishments, for besides her drawing, she could play twelve tunes, crochet, and read French without mispronouncing more than two-thirds of the words. ",
+            "dialogue" : "She was a great favorite with her mates, being good-tempered and possessing the happy art of pleasing without effort.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Her little airs and graces were much admired, so were her accomplishments, for besides her drawing, she could play twelve tunes,",
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -775,6 +789,12 @@
                     "position" : "MIDDLE",
                 },
             ],
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "crochet, and read French without mispronouncing more than two-thirds of the words. ",
             "skip_dialogue" : true,
         },
 
@@ -815,7 +835,7 @@
             "character" : "Beth",
             "location" : "Home_Fireplace1",
             "transition" : "HorizontalBars",
-            "dialogue" : "My only comfort, is that Mother doesn't take tucks in my dresses whenever I'm naughty, as Maria Parks's mother does. My dear, it's really dreadful, for sometimes she is so bad her frock is up to her knees,",
+            "dialogue" : "My only comfort, is that Mother doesn't take tucks in my dresses whenever I'm naughty, as Maria Parks' mother does. My dear, it's really dreadful, for sometimes she is so bad her frock is up to her knees,",
             "show_character" : ["Beth"],
             "show_more_characters" : [
                 {
@@ -844,13 +864,25 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "Meg was Amy's confidant and monitor, and by some strange attraction of opposites [name] was gentle Beth's. To [name] alone did the shy child tell her thoughts, and over her big harum-scarum sister Beth unconsciously exercised more influence than anyone in the family.",
+            "dialogue" : "Meg was Amy's confidant and monitor, and by some strange attraction of opposites [name] was gentle Beth's. To [name] alone did the shy child tell her thoughts,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "The two older girls were a great deal to one another, but each took one of the younger sisters into her keeping and watched over her in her own way, 'playing mother' they called it, and put their sisters in the places of discarded dolls with the maternal instinct of little women.",
+            "dialogue" : "and over her big harum-scarum sister Beth unconsciously exercised more influence than anyone in the family.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "The two older girls were a great deal to one another, but each took one of the younger sisters into her keeping and watched over her in her own way, 'playing mother' they called it,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "and put their sisters in the places of discarded dolls with the maternal instinct of little women.",
             "skip_dialogue" : true,
         },
 
@@ -1084,7 +1116,7 @@
 
         {
             "character" : "Mrs. March",
-            "dialogue" : "As I sat cutting out blue flannel jackets today at the rooms, I felt very anxious about Father, and thought how lonely and helpless we should be, if anything happened to him. It was not a wise thing to do, but I kept on worrying till an old man came in with an order for some clothes.",
+            "dialogue" : "As I sat cutting out blue flannel jackets today at the rooms, I felt very anxious about Father, and thought how lonely and helpless we should be,",
             "show_more_characters" : [
                 {
                     "character" : "Beth",
@@ -1105,6 +1137,11 @@
                     "position" : "LEFT",
                 },
             ],
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "if anything happened to him. It was not a wise thing to do, but I kept on worrying till an old man came in with an order for some clothes.",
         },
 
         {

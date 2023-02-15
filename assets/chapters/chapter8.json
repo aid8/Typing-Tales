@@ -2,7 +2,7 @@
     "Chapter 8" : [
 		{
 			"character" : "Amy",
-			"location" : "Home_Outside",
+			"location" : "Home_Garret_Stairs",
             "transition" : "Shards",
             "outfit" : "Casual",
             "expression" : "Frown",
@@ -110,11 +110,33 @@
             "character" : "Meg",
             "expression" : "Smile",
             "dialogue" : "Suppose we take her. I don't believe Mother would mind, if we bundle her up well,",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "LEFT",
+                },
+            ],
         },
 
         {
             "character" : "You",
             "dialogue" : "If she goes I shan't, and if I don't, Laurie won't like it, and it will be very rude, after he invited only us, to go and drag in Amy.",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "LEFT",
+                },
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "MIDDLE",
+                },
+            ],
         },
 
         {
@@ -150,12 +172,13 @@
         {
             "character" : "Narrator",
             "dialogue" : "Sitting on the floor with one boot on, Amy began to cry and Meg to reason with her, when Laurie called from below, and the two girls hurried down,",
-            "hide_character" : ["Meg", "Amy"], 
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
+            "location" : "Home_Outside",
+            "transition" : "Shards",
             "dialogue" : "leaving their sister wailing. For now and then she forgot her grown-up ways and acted like a spoiled child. Just as the party was setting out, Amy called over the banisters in a threatening tone,",
             "skip_dialogue" : true,
         },
@@ -178,6 +201,20 @@
             "location" : "Theme_Park_Day",
             "transition" : "Shards",
             "dialogue" : "They had a charming time, for The Seven Castles Of The Diamond Lake was as brilliant and wonderful as heart could wish.",
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "MIDDLE",
+                },
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "RIGHT",
+                },
+            ],
             "skip_dialogue" : true,
             "bgm" : "Magical",
         },
@@ -196,7 +233,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "You and Amy had had many lively skirmishes in the course of your lives, for both had quick tempers and were apt to be violent when fairly roused.",
+            "dialogue" : "You and Amy have had many lively skirmishes in the course of your lives, for both had quick tempers and were apt to be violent when fairly roused.",
             "skip_dialogue" : true,
         },
 
@@ -229,6 +266,8 @@
             "location" : "Home_Outside",
             "transition" : "Shards",
             "dialogue" : "When they got home, they found Amy reading in the parlor. She assumed an injured air as they came in, never lifted her eyes from her book, or asked a single question.",
+            "show_character" : ["Amy"],
+            "hide_character" : ["Laurie"],
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -267,6 +306,8 @@
 
         {
             "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "Shards",
             "dialogue" : "There [name] was mistaken, for next day you made a discovery which produced a tempest. Meg, Beth, and Amy were sitting together, late in the afternoon, when you burst into the room, looking excited and demanding breathlessly,",
             "show_character" : ["Amy", "Meg"],
             "show_more_characters" : [
@@ -294,8 +335,6 @@
 
         {
             "character" : "You",
-            "location" : "Home_Fireplace",
-            "transition" : "Shards",
             "dialogue" : "Has anyone taken my book?",
         },
 
@@ -426,12 +465,19 @@
         {
             "character" : "Narrator",
             "dialogue" : "Meg flew to rescue Amy, and Beth to pacify [name], but [name] was quite beside herself, and with a parting box on her sister's ear, she rushed out of the room up to the old sofa in the garret, and finished her fight alone.",
+            "show_character" :["Meg", "Beth"],
             "show_more_characters" : [
                 {
                     "character" : "Meg",
                     "outfit" : "Casual",
-                    "expression" : "Frown_blush",
+                    "expression" : "Frown",
                     "position" : "LEFT",
+                },
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "RIGHT",
                 },
             ],
             "skip_dialogue" : true,
@@ -439,11 +485,19 @@
 
         {
             "character" : "Narrator",
-            "location" : "Home_Fireplace1",
+            "location" : "Home_Kitchen",
             "transition" : "Shards",
             "dialogue" : "The storm cleared up below, for Mrs. March came home, and, having heard the story, soon brought Amy to a sense of the wrong she had done her sister.",
             "skip_dialogue" : true,
-            "hide_character" :["Amy"],
+            "hide_character" :["Meg", "Beth"],
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "MIDDLE",
+                },
+            ],
         },
 
         {
@@ -454,21 +508,44 @@
 
         {
             "character" : "Narrator",
-            "location" : "Home_Fireplace",
-            "transition" : "Shards",
             "dialogue" : "putting her whole heart into her work, hoping to make something good enough to print. She had just copied them with great care, and had destroyed the old manuscript...",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "Shards",
             "dialogue" : "so that Amy's bonfire had consumed the loving work of several years.",
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Frown_blush",
+                    "position" : "MIDDLE",
+                },
+            ],
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
             "dialogue" : "It seemed a small loss to others, but to [name] it was a dreadful calamity, and she felt that it never could be made up to her. Beth mourned as for a departed kitten, and Meg refused to defend her pet.",
+            "show_character" :["Meg", "Beth"],
+            "show_more_characters" : [
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "LEFT",
+                },
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Frown",
+                    "position" : "RIGHT",
+                },
+            ],
             "skip_dialogue" : true,
         },
 
@@ -480,12 +557,13 @@
 
         {
             "character" : "Narrator",
+            "location" : "Home_DiningRoom",
+            "transition" : "Shards",
             "dialogue" : "When the tea bell rang, [name] appeared, looking so grim and unapproachable that it took all Amy's courage to say meekly...",
             "skip_dialogue" : true,
         },
 
         {
-            "show_character" :["Amy"],
             "character" : "Amy",
             "expression" : "Frown_blush",
             "dialogue" : "Please forgive me, [name]. I'm very, very sorry.",
@@ -500,7 +578,6 @@
         {
             "character" : "Narrator",
             "dialogue" : "No one spoke of the great trouble, not even Mrs. March, for all had learned by experience that when [name] was in that mood words were wasted,",
-            "hide_character":["Amy"],
             "skip_dialogue" : true,
         },
 
@@ -512,14 +589,14 @@
 
         {
             "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "Shards",
             "dialogue" : "It was not a happy evening, for though they sewed as usual, while their mother read aloud from Bremer, Scott, or Edgeworth, something was wanting,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "location" : "Home_Fireplace1",
-            "transition" : "Shards",
             "dialogue" : "and the sweet home peace was disturbed. They felt this most when singing time came, for Beth could only play, [name] stood dumb as a stone, and Amy broke down, so Meg and Mother sang alone.",
             "skip_dialogue" : true,
         },
@@ -535,7 +612,8 @@
             "location" : "Home_Bedroom",
             "transition" : "Shards",
             "dialogue" : "My dear, don't let the sun go down upon your anger. Forgive each other, help each other, and begin again tomorrow.",
-            "dialogue_remark" : "As [name] received her good-night kiss, Mrs. March whispered gently."
+            "dialogue_remark" : "As [name] received her good-night kiss, Mrs. March whispered gently.",
+            "hide_character" :["Meg", "Beth", "Amy"],
         },
 
         {
@@ -558,6 +636,7 @@
         {
             "character" : "Narrator",
             "dialogue" : "With that she marched off to bed, and there was no merry or confidential gossip that night. Amy was much offended that her overtures of peace had been repulsed,",
+            "show_character" :["Amy"],
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -572,13 +651,16 @@
         {
             "character" : "Narrator",
             "dialogue" : "and began to wish she had not humbled herself, to feel more injured than ever, and to plume herself on her superior virtue in a way which was particularly exasperating.",
-            "hide_character" : ["Amy", "Meg", "Beth"],
+            "hide_character" : ["Amy"],
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
+            "location" : "Home_Fireplace1",
+            "transition" : "Shards",
             "dialogue" : "[name] still looked like a thunder cloud, and nothing went well all day. It was bitter cold in the morning, she dropped her precious turnover in the gutter, Aunt March had an attack of the fidgets, Meg was sensitive,",
+            "show_character" :["Meg"],
             "show_more_characters" : [
                 {
                     "character" : "Meg",
@@ -593,6 +675,7 @@
         {
             "character" : "Narrator",
             "dialogue" : "Beth would look grieved and wistful when she got home, and Amy kept making remarks about people who were always talking about being good and yet wouldn't even try when other people set them a virtuous example.",
+            "show_character" :["Beth", "Amy"],
             "show_more_characters" : [
                 {
                     "character" : "Beth",
@@ -614,12 +697,12 @@
             "character" : "You",
             "dialogue" : "Everybody is so hateful, I'll ask Laurie to go skating. He is always kind and jolly, and will put me to rights, I know,",
             "dialogue_remark" : "you said to yourself, and off you went.",
-            "hide_character" : ["Beth"],
+            "hide_character" : ["Amy", "Beth", "Meg"],
         },
 
         {
             "character" : "Narrator",
-            "location" : "Street_Day",
+            "location" : "Home_Outside",
             "transition" : "Shards",
             "dialogue" : "Amy heard the clash of skates, and looked out with an impatient exclamation.",
             "skip_dialogue" : true,
@@ -650,7 +733,6 @@
             "expression" : "Open",
             "dialogue" : "I will try",
             "dialogue_remark" : "Amy said, for the advice suited her, and after a flurry to get ready, she ran after the friends, who were just disappearing over the hill",
-            "hide_character" : ["Meg", "Amy"],
         },
 
         {
@@ -658,13 +740,19 @@
             "location" : "Frozen_Lake",
             "transition" : "Shards",
             "dialogue" : "It was not far to the river, but both were ready before Amy reached them. [name] saw her coming, and turned her back. Laurie did not see,",
-            "show_character":["Amy"],
+            "hide_character" : ["Meg"],
             "show_more_characters" : [
                 {
                     "character" : "Amy",
                     "outfit" : "Casual",
                     "expression" : "Open",
-                    "position" : "MIDDLE",
+                    "position" : "LEFT",
+                },
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "RIGHT",
                 },
             ],
             "skip_dialogue" : true,
@@ -694,7 +782,7 @@
                     "character" : "Amy",
                     "outfit" : "Casual",
                     "expression" : "Smile",
-                    "position" : "MIDDLE",
+                    "position" : "LEFT",
                 },
             ],
             "hide_character":["Laurie"],
@@ -725,19 +813,28 @@
             "character" : "Narrator",
             "dialogue" : "[name] heard, but Amy was struggling to her feet and did not catch a word. [name] glanced over her shoulder, and the little demon she was harboring said in her ear... \"No matter whether she heard or not, let her take care of herself.\"",
             "skip_dialogue" : true,
-            "hide_character":["Amy", "Laurie"],
             "bgm" : "Lurking",
         },
 
         {
             "character" : "Narrator",
             "dialogue" : "Laurie had vanished round the bend, [name] was just at the turn, and Amy, far behind, striking out toward the smoother ice in the middle of the river.",
+            "hide_character":["Laurie"],
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "MIDDLE",
+                },
+            ],
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
             "dialogue" : "For a minute [name] stood still with a strange feeling in her heart, then she resolved to go on, but something held and turned her round,",
+            "hide_character":["Amy"],
             "skip_dialogue" : true,
         },
 
@@ -757,6 +854,7 @@
         {
             "character" : "Narrator",
             "dialogue" : "Something rushed swiftly by her, and Laurie's voice cried out...",
+            "show_character":["Laurie"],
             "show_more_characters" : [
                 {
                     "character" : "Laurie",
@@ -769,7 +867,6 @@
         },
 
         {
-            "show_character":["Laurie"],
             "character" : "Laurie",
             "expression" : "Frown",
             "dialogue" : "Bring a rail. Quick, quick!",
@@ -778,7 +875,6 @@
         {
             "character" : "Narrator",
             "dialogue" : "How she did it, she never knew, but for the next few minutes she worked as if possessed, blindly obeying Laurie, who was quite self-possessed, and lying flat,",
-            "hide_character" : ["Laurie", "Amy"],
             "skip_dialogue" : true,
         },
 
@@ -805,9 +901,10 @@
 
         {
             "character" : "Narrator",
-            "location" : "Home_Fireplace",
+            "location" : "Home_Fireplace1",
             "transition" : "Shards",
             "dialogue" : "and after an exciting time of it, she fell asleep, rolled in blankets before a hot fire.",
+            "hide_character":["Laurie"],
             "skip_dialogue" : true,
         },
 
@@ -914,7 +1011,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "The patience and the humility of the face she loved so well was a better lesson to [name] than the wisest lecture, the sharpest reproof. She felt comforted at once by the sympathy and confidence given her.",
+            "dialogue" : "The patience and the humility of the face she loved so well was a better lesson to [name] than the wisest lecture, the sharpest reproof. She felt comforted at once by the sympathy and confidence given to her.",
             "skip_dialogue" : true,
         },
 
@@ -965,7 +1062,7 @@
 
         {
             "character" : "You",
-            "dialogue" : "As you do us...",
+            "dialogue" : "As you do to us...",
             "dialogue_remark" : "You interrupted, with a grateful kiss.",
         },
 
@@ -1023,6 +1120,7 @@
         {
             "character" : "Mrs. March",
             "dialogue" : "I hope you will be a great deal better, dear, but you must keep watch over your 'bosom enemy', as father calls it, or it may sadden, if not spoil your life.",
+            "bgm" : "Time_for_Rest",
         },
 
         {
@@ -1090,7 +1188,12 @@
 
         {
             "character" : "Mrs. March",
-            "dialogue" : "My child, the troubles and temptations of your life are beginning and may be many, but you can overcome and outlive them all if you learn to feel the strength and tenderness of your Heavenly Father as you do that of your earthly one.",
+            "dialogue" : "My child, the troubles and temptations of your life are beginning and may be many,",
+        },
+
+        {
+            "character" : "Mrs. March",
+            "dialogue" : "but you can overcome and outlive them all if you learn to feel the strength and tenderness of your Heavenly Father as you do that of your earthly one.",
         },
 
         {
@@ -1124,12 +1227,12 @@
             "character" : "Narrator",
             "dialogue" : "but the sweetness of self-denial and self-control, and led by her mother's hand, she had drawn nearer to the Friend who always welcomes every child with a love stronger than that of any father, tenderer than that of any mother.",
             "skip_dialogue" : true,
-            "bgm" : "Time_for_Rest",
         },
 
         {
             "character" : "Narrator",
             "dialogue" : "Amy stirred and sighed in her sleep, and as if eager to begin at once to mend her fault, [name] looked up with an expression on her face which it had never worn before.",
+            "show_character":["Amy"],
             "show_more_characters" : [
                 {
                     "character" : "Amy",

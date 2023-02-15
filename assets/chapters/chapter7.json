@@ -14,7 +14,8 @@
 
         {
             "character" : "You",
-            "dialogue" : "you cried, who resented any slighting remarks about her friend.",
+            "dialogue" : "How dare you say so, when he's got both his eyes? And very handsome ones they are, too,",
+            "dialogue_remark" : "you cried, who resented any slighting remarks about her friend.",
         },
 
         {
@@ -69,7 +70,7 @@
         {
             "character" : "Amy",
             "expression" : "Frown",
-            "dialogue" : "Why, I owe at least a dozen pickled limes, and I can't pay them, you know, till I have money, for Marmee forbade my having anything charged at the shop.",
+            "dialogue" : "Why, I owe at least a dozen pickled limes, and I can't pay them, you know, till I have money, for Marmee forbade me having anything charged at the shop.",
         },
 
         {
@@ -191,8 +192,14 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "and she instantly crushed 'that Snow girl's' hopes by the withering telegram, \"You needn't be so polite all of a sudden, for you won't get any.\"",
+            "dialogue" : "and she instantly crushed 'that Snow girl's' hopes by the withering telegram,",
             "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Amy",
+            "expression" : "Frown",
+            "dialogue" : "You needn't be so polite all of a sudden, for you won't get any.",
         },
 
         {
@@ -633,6 +640,7 @@
             "location" : "Home_Fireplace1",
             "transition" : "SpiralSquare",
             "dialogue" : "She was in a sad state when she got home, and when the older girls arrived, some time later, an indignation meeting was held at once.",
+            "show_character" : ["Meg"],
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -640,21 +648,6 @@
                     "expression" : "Frown",
                     "position" : "MIDDLE",
                 },
-            ],
-            "skip_dialogue" : true,
-        },
-
-        {
-            "character" : "Narrator",
-            "dialogue" : "Mrs. March did not say much but looked disturbed, and comforted her afflicted little daughter in her tenderest manner.",
-            "skip_dialogue" : true,
-        },
-
-        {
-            "character" : "Narrator",
-            "dialogue" : "Meg bathed the insulted hand with glycerine and tears, Beth felt that even her beloved kittens would fail as a balm for griefs like this,",
-            "show_character" : ["Meg"],
-            "show_more_characters" : [
                 {
                     "character" : "Meg",
                     "outfit" : "Casual",
@@ -673,8 +666,20 @@
 
         {
             "character" : "Narrator",
+            "dialogue" : "Mrs. March did not say much but looked disturbed, and comforted her afflicted little daughter in her tenderest manner.",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "dialogue" : "Meg bathed the insulted hand with glycerine and tears, Beth felt that even her beloved kittens would fail as a balm for griefs like this,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
             "dialogue" : "[name] wrathfully proposed that Mr. Davis be arrested without delay, and Hannah shook her fist at the 'villain' and pounded potatoes for dinner as if she had him under her pestle.",
-            "hide_character" : ["Beth", "Meg"],
+            "hide_character" : ["Beth", "Meg", "Amy"],
             "skip_dialogue" : true,
         },
 
@@ -706,6 +711,15 @@
             "character" : "Mrs. March",
             "location" : "Home_Fireplace1",
             "transition" : "SpiralSquare",
+            "show_character" : ["Amy"],
+            "show_more_characters" : [
+                {
+                    "character" : "Amy",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
             "dialogue" : "Yes, you can have a vacation from school, but I want you to study a little every day with Beth,",
             "dialogue_remark" : "Mrs. March said that evening.",
             "bgm" : "Time_for_Rest",
@@ -834,6 +848,21 @@
             "dialogue" : "When he was gone, Amy, who had been pensive all evening, said suddenly, as if busy over some new idea,",
             "hide_character" : ["Laurie"],
             "skip_dialogue" : true,
+            "show_character" : ["Meg"],
+            "show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "RIGHT",
+                },
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "LEFT",
+                },
+            ],
         },
 
         {
@@ -870,6 +899,20 @@
             "expression" : "Smile",
 			"dialogue" : "I see. It's nice to have accomplishments and be elegant, but not to show off or get perked up,",
             "dialogue_remark" : "Amy said thoughtfully.",
+            "show_more_characters" : [
+                {
+                    "character" : "Beth",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "RIGHT",
+                },
+                {
+                    "character" : "Meg",
+                    "outfit" : "Casual",
+                    "expression" : "Smile",
+                    "position" : "LEFT",
+                },
+            ],
 		},
 
         {

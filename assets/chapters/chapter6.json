@@ -576,7 +576,6 @@
         {
             "character" : "Mrs. March",
             "dialogue" : "The girls will help you about them, and I will pay for the making up,",
-            "dialogue_remark" : "Mrs. March replied, who took peculiar pleasure in granting Beth's requests because she so seldom asked anything for herself.",
         },
 
         {
@@ -605,7 +604,15 @@
             "character" : "Narrator",
             "location" : "Laurence_Home_Study_Room",
             "transition" : "Fade",
-            "dialogue" : "got them smuggled onto the study table one morning before the old gentleman was up. When this excitement was over, Beth waited to see what would happen. All day passed and a part of the next before any acknowledgement arrived,",
+            "dialogue" : "got them smuggled onto the study table one morning before the old gentleman was up. When this excitement was over,",
+            "skip_dialogue" : true,
+        },
+
+        {
+            "character" : "Narrator",
+            "location" : "Laurence_Home_Study_Room",
+            "transition" : "Fade",
+            "dialogue" : "Beth waited to see what would happen. All day passed and a part of the next before any acknowledgement arrived,",
             "skip_dialogue" : true,
         },
 
@@ -733,7 +740,7 @@
 
         {
             "character" : "You",
-            "dialogue" : "I have had many pairs of slippers in my life, but I never had any that suited me so well as yours,'Heartsease is my favorite flower, and these will always remind me of the gentle giver.",
+            "dialogue" : "I have had many pairs of slippers in my life, but I never had any that suited me so well as yours,' Heartsease is my favorite flower, and these will always remind me of the gentle giver.",
             "show_more_characters" : [
                 {
                     "character" : "Amy",
@@ -751,7 +758,7 @@
 
         {
             "character" : "You",
-            "dialogue" : "With hearty thanks and best wishes, I remain 'Your grateful friend and humble servant, 'JAMES LAURENCE'.",
+            "dialogue" : "With hearty thanks and best wishes, I remain \"'Your grateful friend and humble servant, 'JAMES LAURENCE'.\"",
         },
 
         {
@@ -768,13 +775,7 @@
         {
             "character" : "Meg",
             "expression" : "Smile",
-            "dialogue" : "See the cunning brackets to hold candles, and the nice green silk, puckered up, with a gold rose in the middle,",
-        },
-
-        {
-            "character" : "Meg",
-            "expression" : "Smile",
-            "dialogue" : "and the pretty rack and stool, all complete,",
+            "dialogue" : "See the cunning brackets to hold candles, and the nice green silk, puckered up, with a gold rose in the middle, and the pretty rack and stool, all complete,",
             "dialogue_remark" : "Meg added, opening the instrument and displaying its beauties",
         },
 
@@ -815,23 +816,14 @@
             "location" : "Street_Day",
             "transition" : "Fade",
 			"dialogue" : "Yes, I mean to. I guess I'll go now, before I get frightened thinking about it.",
+            "dialogue_remark" : "And, to the utter amazement of the assembled family, Beth walked deliberately down the garden, through the hedge, and in at the Laurences' door.",
 		},
 
         {
-            "character" : "Narrator",
-            "dialogue" : "And, to the utter amazement of the assembled family, Beth walked deliberately down the garden, through the hedge, and in at the Laurences' door.",
-            "skip_dialogue" : true,
-        },
-
-        {
             "character" : "Hannah",
-            "dialogue" : "Well, I wish I may die if it ain't the queerest thing I ever see!",
-        },
-
-        {
-            "character" : "Hannah",
-            "dialogue" : "The pianny has turned her head! She'd never have gone in her right mind,",
+            "dialogue" : "Well, I wish I may die if it ain't the queerest thing I ever see! The pianny has turned her head! She'd never have gone in her right mind,",
             "dialogue_remark" : "Hannah cried, staring after her, while the girls were rendered quite speechless by the miracle.",
+            "hide_character" : ["Meg", "Amy"],
         },
 
         {
