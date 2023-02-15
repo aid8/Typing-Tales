@@ -444,6 +444,7 @@
             "character" : "Laurie",
             "expression" : "Open",
             "dialogue" : "Not a bit. I only came here",
+            "skip_dialogue" : true,
         },
 
         {

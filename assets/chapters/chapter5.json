@@ -54,7 +54,7 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "A low hedge parted the two estates. On one side was an old, brown house, looking rather bare and shabby, robbed of the vines that in summer covered its walls and the flowers, which then surrounded it.",
+            "dialogue" : " A low hedge parted the two estates. On one side was an old, brown house, looking rather bare and shabby, robbed of the vines that in summer covered its walls and the flowers, which then surrounded it.",
             "skip_dialogue" : true,
         },
 
@@ -72,19 +72,19 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "and few people went in and out, except the old gentleman and his grandson. To [name]'s lively fancy, this fine house seemed a kind of enchanted palace, full of splendors and delights which no one enjoyed.",
+            "dialogue" : " and few people went in and out, except the old gentleman and his grandson. To [name]'s lively fancy, this fine house seemed a kind of enchanted palace, full of splendors and delights which no one enjoyed.",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "She had long wanted to behold these hidden glories, and to know the Laurence boy, who looked as if he would like to be known, if he only knew how to begin. Since the party, she had been more eager than ever,",
+            "dialogue" : "You had long wanted to behold these hidden glories, and to know the Laurence boy, who looked as if he would like to be known, if he only knew how to begin. Since the party, you had been more eager than ever,",
             "skip_dialogue" : true,
         },
 
         {
             "character" : "Narrator",
-            "dialogue" : "and had planned many ways of making friends with him, but he had not been seen lately, and [name] began to think he had gone away, when she one day spied a brown face at an upper window,",
+            "dialogue" : "and had planned many ways of making friends with him, but he had not been seen lately, and [name] began to think he had gone away, when you one day spied a brown face at an upper window,",
             "skip_dialogue" : true,
         },
 
@@ -478,13 +478,7 @@
         {
 			"character" : "Laurie",
             "expression" : "Frown",
-			"dialogue" : "You see, Grandpa lives among his books, and doesn't mind much what happens outside.",
-		},
-
-        {
-			"character" : "Laurie",
-            "expression" : "Frown",
-			"dialogue" : "Mr. Brooke, my tutor, doesn't stay here, you know, and I have no one to go about with me, so I just stop at home and get on as I can.",
+			"dialogue" : "You see, Grandpa lives among his books, and doesn't mind much what happens outside. Mr. Brooke, my tutor, doesn't stay here, you know, and I have no one to go about with me, so I just stop at home and get on as I can.",
 		},
 
         {
@@ -900,6 +894,14 @@
         {
             "character" : "Narrator",
             "dialogue" : "There was color, light, and life in the boy's face now, vivacity in his manner, and genuine merriment in his laugh.",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Smile_blush",
+                    "position" : "MIDDLE",
+                },
+            ],
             "skip_dialogue" : true,
         },
 
@@ -932,6 +934,14 @@
             "location" : "Outdoor_Terrace",
             "transition" : "Curtain",
             "dialogue" : " It seemed quite fairylike to [name], as she went up and down the walks, enjoying the blooming walls on either side, the soft light, the damp sweet air,",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Open",
+                    "position" : "MIDDLE",
+                },
+            ],
             "skip_dialogue" : true,
         },
 
@@ -1005,13 +1015,21 @@
 
         {
             "character" : "Narrator",
-            "dialogue" : "for he played remarkably well and didn't put on any airs. She wished Beth could hear him, but she did not say so, only praised him till he was quite abashed, and hisgrandfather came to his rescue.",
+            "dialogue" : "for he played remarkably well and didn't put on any airs. She wished Beth could hear him, but she did not say so, only praised him till he was quite abashed, and his grandfather came to his rescue.",
             "skip_dialogue" : true,
         },
 
         {
 			"character" : "Grandpa Laurence",
 			"dialogue" : "That will do, that will do, young lady. Too many sugarplums are not good for him. His music isn't bad, but I hope he will do as well in more important things.",
+            "show_more_characters" : [
+                {
+                    "character" : "Laurie",
+                    "outfit" : "Casual",
+                    "expression" : "Frown_blush",
+                    "position" : "MIDDLE",
+                },
+            ],
 		},
 
         {

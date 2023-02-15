@@ -16,7 +16,7 @@
 		{
 			"character" : "Grandpa Laurence",
 			"dialogue" : "Am I now, young lady,",
-			"dialogue_remark" : "said by a grumpy voice behind her.",
+			"dialogue_remark" : "said by a grumpy voice behind you.",
 		},
 
 		{
@@ -43,7 +43,7 @@
 
 		{
 			"character" : "Grandpa Laurence",
-			"dialogue" : "Well this is my house, don't I have the right to wander around, don't I?",
+			"dialogue" : "Well this is my house, I have the right to wander around, don't I?",
 		},
 
 		{
@@ -74,12 +74,12 @@
 
 		{
 			"character" : "Grandpa Laurence",
-			"dialogue" : "The same could be on your depiction of me.",
+			"dialogue" : "The same could be said on your depiction of me.",
 		},
 
 		{
 			"character" : "You",
-			"dialogue" : "It was only my first impression of you sir.",
+			"dialogue" : "It was only my first impression of you sire.",
 		},
 
 		{
