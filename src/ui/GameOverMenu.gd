@@ -28,7 +28,7 @@ func check_time() -> void:
 					var user_data_mod = Global.user_data.duplicate(true)
 					user_data_mod.erase("WordMastery")
 					Global.send_data("POST_TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
-					note_label.text = "Post test requirements are done. Data has been automatically sent to us. You can still continue playing"
+					note_label.text = "Post test requirements are done. Data has been automatically sent to us. Proceed to Final WPM test"
 				else:
 					if Global.user_data["DataSent"][1]:
 						return

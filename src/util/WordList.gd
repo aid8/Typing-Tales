@@ -53,7 +53,7 @@ func Combination(a : Array, reqLen : int, start : int, currLen : int, check : Ar
 	return resultArr
 
 func fill_random_words_with_difficult_letters(size : int, non_sense_size : int = 0, max_word_length : int = -1) -> void:
-	var max_letters : int = 3
+	var max_letters : int = 2
 
 	if difficulty_letters.size() < max_letters:
 		max_letters = difficulty_letters.size()

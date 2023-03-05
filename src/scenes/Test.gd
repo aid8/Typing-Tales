@@ -600,7 +600,7 @@ func set_next_dialogue() -> void:
 					user_data_mod.erase("WordMastery")
 					#Send to google forms
 					Global.send_data("POST_TEST", Global.user_data.SchoolID, current_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
-					Global.create_popup("POST TEST requirements are done. Data has been automatically sent to us. You can still continue playing", self)
+					Global.create_popup("POST TEST requirements are done. Data has been automatically sent to us. Proceed to Final WPM test", self)
 				else:
 					Global.create_popup("5 mins requirement for story mode is done. You still need to play challenge mode.", self)
 			#time_menu.dialog_text = "10 mins requirement is done. You can already submit the data or continue playing."
