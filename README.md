@@ -2,6 +2,7 @@
 A senior thesis project to help users enhance their Words-Per-Minute (WPM) and Accuracy
 
 Game Site: https://gamejolt.com/games/typing_tales/785702
+
 Godot Version: 3.5.2
 
 ### Characters:
