@@ -66,9 +66,7 @@ var tutorial_index : int = 0
 var current_date : String = ""
 var current_session_time : float = 0
 var post_test_session_time : float = 0
-var is_pre_test : bool = false
 var is_post_test : bool = false
-var pre_test_done : bool = false
 
 #Scene animation variables
 var shake_strength : float = 0.0
@@ -97,7 +95,6 @@ onready var character_positions : Dictionary = {
 	"RIGHT" : $Characters/CharacterRightPosition,
 }
 onready var choice_timer : Timer = $ChoiceTimer
-onready var testing_timer : Timer = $TestingTimer
 onready var idle_timer : Timer = $IdleTimer
 onready var timer_pop_up : AcceptDialog = $UI/TimerPopUp
 onready var timer_node : Node2D = $UI/TimerNode
@@ -158,22 +155,9 @@ func _ready() -> void:
 	
 	var cur_size = Global.get_total_day_and_session_time(current_date).cur_day
 	total_day_and_time = Global.get_total_day_and_session_time(current_date)
-	if cur_size == 1 and !Global.user_data["DataSent"][0]:
-		print("Starting Pretest")
-		is_pre_test = true
-		pre_test_done = false
-		
-		testing_timer.wait_time = Data.TOTAL_COLLECTION_TIME
-		if tutorial_menu.visible:
-			testing_timer.wait_time += Data.IDLE_TIME
-		testing_timer.one_shot = true
-		testing_timer.start()
-		test_timer_label.show()
-		
-		idle_timer.wait_time = Data.IDLE_TIME
-		idle_timer.start()
-	elif ((cur_size == 6 and !Global.user_data["DataSent"][1]) or (cur_size == 7 and !Global.user_data["DataSent"][2])) and total_day_and_time.story_time < Data.STORY_MODE_COLLECTION_TIME:
-		print("Starting Test or Post Test")
+
+	if (cur_size <= 7 and !Global.user_data["DataSent"][cur_size-1]) and total_day_and_time.story_time < Data.STORY_MODE_COLLECTION_TIME:
+		print("Starting Collecting data")
 		is_post_test = true
 		idle_timer.wait_time = Data.IDLE_TIME
 		idle_timer.start()
@@ -198,10 +182,7 @@ func _process(delta : float) -> void:
 	#In charge of tracing wpm
 	if tracing_wpm:
 		total_time += delta
-	#In charge of showing test_timer_label (PRE_TEST)
-	if is_pre_test and !pre_test_done and test_timer_label.visible:
-		test_timer_label.text = Global.format_time(testing_timer.time_left)
-	#In charge of showing test_timer_label (TEST AND POST_TEST)
+	#In charge of showing test_timer_label
 	if is_post_test and test_timer_label.visible and (total_day_and_time.story_time + post_test_session_time) < Data.STORY_MODE_COLLECTION_TIME:
 		test_timer_label.text = Global.format_time(Data.STORY_MODE_COLLECTION_TIME - (total_day_and_time.story_time + post_test_session_time))
 	handle_scene_animation(delta)
@@ -218,7 +199,7 @@ func handle_scene_animation(delta : float) -> void:
 			shake_strength = 0
 
 func handle_variable_tracing(delta : float) -> void:
-	if !idle_timer.is_stopped() and is_post_test:
+	if !idle_timer.is_stopped() and !tutorial_menu.visible and !name_menu.visible and is_post_test:
 		post_test_session_time += delta
 	current_session_time += delta
 
@@ -583,38 +564,29 @@ func set_next_dialogue() -> void:
 		#var cur_date : String = Time.get_date_string_from_system()
 		#var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
 		print(total_day_and_time.time + post_test_session_time, "??", total_day_and_time.day)
-		if (total_day_and_time.story_time + post_test_session_time) >= Data.STORY_MODE_COLLECTION_TIME and (total_day_and_time.cur_day == 6 or total_day_and_time.cur_day == 7):
-			if total_day_and_time.cur_day == 6 :
-				if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME:
-					Global.create_popup("5 mins requirement for story mode and challenge mode are done. You can already submit the data or continue playing", self)
-				else:
-					Global.create_popup("5 mins requirement for story mode is done. You still need to play challenge mode before submitting the data.", self)
+		if (total_day_and_time.story_time + post_test_session_time) >= Data.STORY_MODE_COLLECTION_TIME and (total_day_and_time.cur_day <= 7):
+			if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME:
+				var cur_stats = Global.get_stats_on_date(current_date)
+				var wpm_res = (total_wpm[0] / float(total_wpm[1]))
+				var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
+				#Save and
+				Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
+				var user_data_mod = Global.user_data.duplicate(true)
+				user_data_mod.erase("WordMastery")
+				#Send to google forms
+				Global.send_data(total_day_and_time.cur_day, Global.user_data.SchoolID, current_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod))
+				var msg = "Requirements for this day are done. Data has been automatically sent to us."
+				if total_day_and_time.cur_day == 7:
+					msg += " Proceed to Final WPM test."
+				Global.create_popup(msg, self)
 			else:
-				if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME:
-					var cur_stats = Global.get_stats_on_date(current_date)
-					var wpm_res = (total_wpm[0] / float(total_wpm[1]))
-					var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
-					#Save and
-					Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
-					var user_data_mod = Global.user_data.duplicate(true)
-					user_data_mod.erase("WordMastery")
-					#Send to google forms
-					Global.send_data("POST_TEST", Global.user_data.SchoolID, current_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
-					Global.create_popup("POST TEST requirements are done. Data has been automatically sent to us. Proceed to Final WPM test", self)
-				else:
-					Global.create_popup("5 mins requirement for story mode is done. You still need to play challenge mode.", self)
+				Global.create_popup("5 mins requirement for story mode is done. You still need to play challenge mode.", self)
 			#time_menu.dialog_text = "10 mins requirement is done. You can already submit the data or continue playing."
 			#time_menu.popup()
 			user_time_informed = true
 			is_post_test = false
 			idle_timer.stop()
 			test_timer_label.hide()
-	
-	if is_pre_test and pre_test_done:
-		send_pretest_data()
-		pre_test_done = false
-		is_pre_test = false
-		test_timer_label.hide()
 
 #Shows current wpm, adds it to overall wpm, then resets info for new wpm
 func register_wpm() -> void:
@@ -752,6 +724,7 @@ func _unhandled_input(event : InputEvent) -> void:
 			get_tree().paused = true
 			pause_menu.get_node("BGMSlide").value = Global.user_data["Music"]
 			pause_menu.get_node("SFXSlide").value = Global.user_data["Sfx"]
+			pause_menu.get_node("FSCheckBox").pressed = Global.user_data["Fullscreen"]
 			pause_menu.show()
 	
 	if ignore_typing or tutorial_menu.visible or name_menu.visible or intro_menu.visible:
@@ -759,10 +732,9 @@ func _unhandled_input(event : InputEvent) -> void:
 	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		#Reset idle timer and continue testing timer
-		if is_pre_test or is_post_test:
+		if is_post_test:
 			idle_timer.stop()
 			idle_timer.start(Data.IDLE_TIME)
-			testing_timer.paused = false
 		
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
@@ -1084,31 +1056,6 @@ func register_stats() -> void:
 	if wpm_res > 0:
 		Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
 		Global.add_chapter_time(current_scene, "total_time", current_session_time)
-
-func send_pretest_data():
-	var wpm_res = (total_wpm[0] / float(total_wpm[1]))
-	var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
-	#Save this locally
-	Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
-	#Send to google forms
-	Global.send_data("PRE_TEST", Global.user_data.SchoolID, current_date, wpm_res, accuracy_res)
-	
-	#var http = HTTPClient.new()
-	#var data = {
-	#	"entry.1677198908" : Global.user_data.Name, 
-	#	"entry.1636518983" : current_date,
-	#	"entry.783576330" : wpm_res,
-	#	"entry.2103345753" : accuracy_res, 
-	#}
-	#var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
-	#data = http.query_string_from_dict(data)
-	#var result = http_request.request(Data.PRE_TEST_URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
-	
-	#Save data
-	Global.save_user_data()
-	Global.create_popup("10 mins requirement is done. Pre-test data has been automatically sent to us. You can still continue playing", self)
-	idle_timer.stop()
-	testing_timer.stop()
 	
 #==========Connected Functions==========#
 func _on_save_or_load_progress(index):
@@ -1177,8 +1124,7 @@ func _on_NameChangeButton_pressed():
 	name_menu.hide()
 
 func _on_TestButton2_pressed():
-	if !is_pre_test:
-		Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
+	Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")
 
@@ -1195,11 +1141,7 @@ func _on_TutorialNextBtn_pressed():
 func _on_TutorialPrevBtn_pressed():
 	navigate_tutorial_menu(false)
 
-func _on_TestingTimer_timeout():
-	pre_test_done = true
-
 func _on_IdleTimer_timeout():
-	testing_timer.paused = true
 	idle_timer.stop()
 	print("User is idle")
 
@@ -1209,16 +1151,13 @@ func _on_PauseResumeBtn_pressed():
 	Global.play_sfx("Select")
 
 func _on_MainMenuBtn_pressed():
-	if is_pre_test:
-		Global.create_yes_no_popup("Pre-Test timer will reset. Are you sure you want to go to Main Menu?", self, "_goto_mainmenu")
-		return
-	_goto_mainmenu()
+	Global.create_yes_no_popup("Unsaved data will be lost. Are you sure you want to go to Main Menu?", self, "_goto_mainmenu")
+	Global.play_sfx("Bright")
+	#_goto_mainmenu()
 
 func _goto_mainmenu() -> void:
 	get_tree().paused = false
-	if !is_pre_test:
-		#Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
-		register_stats()
+	register_stats()
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.save_user_data()
 	Global.switch_scene("MainMenu")
@@ -1231,3 +1170,8 @@ func _on_SFXSlide_drag_ended(value_changed):
 func _on_BGMSlide_value_changed(value):
 	BackgroundMusic.volume_db = value
 	Global.user_data["Music"] = value
+
+func _on_FSCheckBox_toggled(button_pressed):
+	Global.user_data["Fullscreen"] = button_pressed
+	Global.save_user_data()
+	OS.window_fullscreen = button_pressed

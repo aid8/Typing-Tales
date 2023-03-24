@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=2]
+[gd_scene load_steps=72 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/Home/fireplace2.png" type="Texture" id=2]
@@ -222,6 +222,14 @@ animations = [ {
 "name": "default",
 "speed": 5.0
 } ]
+
+[sub_resource type="DynamicFont" id=25]
+size = 24
+outline_size = 3
+outline_color = Color( 0.188235, 0.219608, 0.262745, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 27 )
 
 [sub_resource type="DynamicFont" id=18]
 size = 45
@@ -944,6 +952,28 @@ min_value = -80.0
 max_value = 0.0
 ticks_on_borders = true
 
+[node name="FSLabel" type="Label" parent="UI/PauseMenu"]
+margin_left = 379.0
+margin_top = 366.0
+margin_right = 566.0
+margin_bottom = 406.0
+custom_fonts/font = SubResource( 25 )
+text = "FULLSCREEN:"
+align = 2
+valign = 1
+
+[node name="FSCheckBox" type="CheckBox" parent="UI/PauseMenu"]
+margin_left = 710.0
+margin_top = 365.0
+margin_right = 734.0
+margin_bottom = 389.0
+rect_scale = Vector2( 1.5, 1.5 )
+focus_mode = 0
+shortcut_in_tooltip = false
+enabled_focus_mode = 0
+align = 1
+icon_align = 1
+
 [node name="IntroMenu" type="Node2D" parent="UI"]
 pause_mode = 2
 visible = false
@@ -1026,8 +1056,6 @@ dialog_autowrap = true
 
 [node name="ChoiceTimer" type="Timer" parent="."]
 
-[node name="TestingTimer" type="Timer" parent="."]
-
 [node name="IdleTimer" type="Timer" parent="."]
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
@@ -1049,7 +1077,7 @@ dialog_autowrap = true
 [connection signal="pressed" from="UI/PauseMenu/MainMenuBtn" to="." method="_on_MainMenuBtn_pressed"]
 [connection signal="value_changed" from="UI/PauseMenu/BGMSlide" to="." method="_on_BGMSlide_value_changed"]
 [connection signal="drag_ended" from="UI/PauseMenu/SFXSlide" to="." method="_on_SFXSlide_drag_ended"]
+[connection signal="toggled" from="UI/PauseMenu/FSCheckBox" to="." method="_on_FSCheckBox_toggled"]
 [connection signal="confirmed" from="TestBox" to="." method="_on_TestBox_confirmed"]
 [connection signal="timeout" from="ChoiceTimer" to="." method="_on_ChoiceTimer_timeout"]
-[connection signal="timeout" from="TestingTimer" to="." method="_on_TestingTimer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="." method="_on_IdleTimer_timeout"]

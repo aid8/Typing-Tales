@@ -7,6 +7,7 @@ onready var splash_timer = $SplashTimer
 #==========Functions==========#
 func _ready():
 	barbara.play()
+	OS.window_fullscreen = Global.user_data["Fullscreen"]
 
 func _on_SplashTimer_timeout():
 	Global.switch_scene("Disclaimer")
