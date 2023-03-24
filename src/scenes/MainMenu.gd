@@ -61,11 +61,23 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 		cur_date = Time.get_date_string_from_system()
 		cur_day = Global.get_total_day_and_session_time().cur_day
 		day_label.text = cur_date.replace("-", "/") + ", DAY " + String(cur_day)
+		if cur_day <= 7:
+			if !Global.user_data["DataSent"][cur_day-1]:
+				day_label.text += " - IN PROGRESS"
+			else:
+				day_label.text += " - DONE"
 		main.show()
 	elif tab == "Challenges":
-		if !Global.user_data.DataSent[0]:
+		if !Global.user_data["ChallengesUnlocked"]:
+			cur_date = Time.get_date_string_from_system()
+			var total_day_and_time = Global.get_total_day_and_session_time(cur_date)
+			if total_day_and_time.story_time >= Data.STORY_MODE_COLLECTION_TIME:
+				Global.user_data["ChallengesUnlocked"] = true
+				Global.save_user_data()
+		
+		if !Global.user_data["ChallengesUnlocked"]:
 			main.show()
-			Global.create_popup("CHALLENGES ARE LOCKED: PLEASE FINISH THE 10 MINS PRE-TEST FIRST", self)
+			Global.create_popup("CHALLENGES ARE LOCKED: PLEASE FINISH 5 MINS IN THE STORY MODE FIRST", self)
 		else:
 			challenges.show()
 	elif tab == "Statistics":
@@ -113,6 +125,7 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 		day_label.hide()
 		settings.get_node("BGMSlide").value = Global.user_data["Music"]
 		settings.get_node("SFXSlide").value = Global.user_data["Sfx"]
+		settings.get_node("FSCheckBox").pressed = Global.user_data["Fullscreen"]
 		settings.show()
 	elif tab == "Credits":
 		main.show()
@@ -234,12 +247,13 @@ func _on_SendDataButton_pressed():
 
 #FIX HERE (STORY AND CHALLENGE MODE), CHECK ALSO IN POST TEST
 func _send_test_data() -> void:
-	var cur_stats = Global.get_stats_on_date(cur_date)
+	#var cur_stats = Global.get_stats_on_date(cur_date)
 	#Send to google forms
-	var user_data_mod = Global.user_data.duplicate(true)
-	user_data_mod.erase("WordMastery")
-	Global.send_data("TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
-	Global.save_user_data()
+	#var user_data_mod = Global.user_data.duplicate(true)
+	#user_data_mod.erase("WordMastery")
+	#Global.send_data("TEST", Global.user_data.SchoolID, cur_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod, "\t"))
+	#Global.save_user_data()
+	return
 	
 func _on_load_progress(index : int):
 	if Global.user_data["SavedProgress"][index].size() <= 0:
@@ -282,3 +296,7 @@ func _on_BackButton_pressed():
 
 func _on_HideSalmMenu_pressed():
 	switch_tab("Main")
+
+func _on_FSCheckBox_toggled(button_pressed):
+	Global.user_data["Fullscreen"] = button_pressed
+	OS.window_fullscreen = button_pressed

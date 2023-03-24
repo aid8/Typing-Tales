@@ -1,5 +1,6 @@
 extends Node
 
+const VERSION = "1.0.1"
 const MAX_CHAPTERS = 8
 const ALTERNATIVE_CHAPTERS = [0, 1, 1, 1, 1, 1, 0, 0]
 const LETTER_MASTERY_ACCURACY_BOUND = 0.90
@@ -8,9 +9,9 @@ const WORD_MASTERY_ACCURACY_BOUND = 0.94 #0.94
 const WORD_MASTERY_COUNT_BOUND = 100 #100
 
 const HTTP_HEADERS = ["Content-Type: application/x-www-form-urlencoded"]
-const URLFORM = "https://docs.google.com/forms/u/0/d/e/1FAIpQLSd1lLAvOQfVKT2sXNDv0maaK9TGTXrLehlv1hLRMzq0yG0TIA/formResponse"
+const URLFORM = "https://docs.google.com/forms/u/1/d/e/1FAIpQLScCUJsnlPklq-3GZWOoeOUJQNjR1xzrpihZKq6c7T58jrXOsQ/formResponse"
 const FORM_ENTRY_CODES = {
-	"test_type" : "entry.1937603671",
+	"day" : "entry.1937603671",
 	"name" : "entry.1677198908" ,
 	"date" : "entry.1636518983",
 	"wpm" : "entry.783576330",
@@ -135,7 +136,7 @@ const CREDITS = [
 	[
 		"Version",
 		
-		"1.0.0"
+		VERSION
 	]
 ]
 

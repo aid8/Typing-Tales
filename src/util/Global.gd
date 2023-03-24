@@ -99,6 +99,7 @@ func set_default_user_data() -> void:
 		"SchoolID" : "",
 		"Music" : -25,
 		"Sfx" : -20,
+		"Fullscreen" : true,
 		"Coins" : 0,
 		"WPM" : {"total_wpm": 0.0, "count" : 0},
 		"Accuracy" : {"correct_count": 0.0, "wrong_count" : 0},
@@ -123,7 +124,8 @@ func set_default_user_data() -> void:
 			"Challenge4" : {},
 			"Challenge5" : {},
 		}, #1st-7th day data collection of story and challenge modes
-		"DataSent" : [false, false, false], #1st, 6th, and 7th day
+		"ChallengesUnlocked" : false,
+		"DataSent" : [false, false, false, false, false, false, false], #1st to 7th day
 		"TotalTimeSpent" : [0, 0, 0], #[Story mode, Challenge mode, Typing Time]
 		"ChapterTimeSpent" : {}, #chapter_name : {"typing_time" : x, "total_time" : x}
 		"SeenTutorials" : [false, false, false, false, false, false], #IF tutorials are already shown for challanges 1-5, 6 for story mode
@@ -281,11 +283,11 @@ func save_research_variables(mode : String, date : String, wpm : float, accuracy
 	user_data["SavedDataResearch"][mode][date]["play_count"] += 1
 	#print(user_data)
 
-func send_data(type : String, name : String, date : String, wpm : float, accuracy : float, other_info : String = "") -> void:
+func send_data(day : int, name : String, date : String, wpm : float, accuracy : float, other_info : String = "") -> void:
 	var http = HTTPClient.new()
 	
 	var data = {
-		Data.FORM_ENTRY_CODES["test_type"] : type,
+		Data.FORM_ENTRY_CODES["day"] : "DAY " + String(day),
 		Data.FORM_ENTRY_CODES["name"] : name, 
 		Data.FORM_ENTRY_CODES["date"] : date,
 		Data.FORM_ENTRY_CODES["wpm"] : wpm,
@@ -296,13 +298,7 @@ func send_data(type : String, name : String, date : String, wpm : float, accurac
 	data = http.query_string_from_dict(data)
 	var result = http_request.request(Data.URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
 	
-	if type == "PRE_TEST" and !user_data["DataSent"][0]: #1st day
-		user_data["DataSent"][0] = true
-	elif type == "TEST" and !user_data["DataSent"][1]: #6th day
-		user_data["DataSent"][1] = true
-		print("OK TEST")
-	elif type == "POST_TEST" and !user_data["DataSent"][2]: #7th day
-		user_data["DataSent"][2] = true
+	user_data["DataSent"][day-1] = true
 	print("ALREADY SENT, ", result)
 	
 func set_seen_tutorial(challenge_num : int) -> void:
