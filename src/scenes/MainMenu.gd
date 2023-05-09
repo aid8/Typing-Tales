@@ -7,7 +7,7 @@ const purple : Color = Color(0.850507, 0.550386, 0.933105)
 
 var current_tab : String = "Main"
 var cur_day : int
-var cur_date : String
+#var cur_date : String
 var statistics_tab : int = 0
 
 #==========Onready Variables==========#
@@ -23,7 +23,7 @@ onready var main_buttons : Array = [$Main/StoryModeButton, $Main/ChallengeModeBu
 onready var challenge_buttons : Array = [$Challenges/Challenge1Button, $Challenges/Challenge2Button, $Challenges/Challenge3Button, $Challenges/Challenge4Button, $Challenges/Challenge5Button]
 onready var other_buttons : Array = [$Challenges/BackButton, $Settings/BackButton, $Statistics/BackButton, $Settings/ResetButton]
 onready var salm_slots : Array = [$LoadMenu/Slot1, $LoadMenu/Slot2, $LoadMenu/Slot3, $LoadMenu/Slot4, $LoadMenu/Slot5, $LoadMenu/Slot6, $LoadMenu/Slot7, $LoadMenu/Slot8]
-onready var day_label : Label = $DayLabel
+#onready var day_label : Label = $DayLabel
 
 #==========Functions==========#
 func _ready() -> void:
@@ -51,31 +51,33 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 	load_menu.hide()
 	title.show()
 	novel_label.show()
-	day_label.show()
+	#day_label.show()
 	current_tab = tab
 	
 	if sfx:
 		Global.play_sfx("Select")
 	
 	if tab == "Main":
-		cur_date = Time.get_date_string_from_system()
-		cur_day = Global.get_total_day_and_session_time().cur_day
-		day_label.text = cur_date.replace("-", "/") + ", DAY " + String(cur_day)
-		if cur_day <= 7:
-			if !Global.user_data["DataSent"][cur_day-1]:
-				day_label.text += " - IN PROGRESS"
-			else:
-				day_label.text += " - DONE"
+		#cur_date = Time.get_date_string_from_system()
+		#cur_day = Global.get_total_day_and_session_time().cur_day
+		#day_label.text = cur_date.replace("-", "/") + ", DAY " + String(cur_day)
+		#if cur_day <= 3:
+		#	if !Global.user_data["DataSent"][cur_day-1]:
+		#		day_label.text += " - IN PROGRESS"
+		#	else:
+		#		day_label.text += " - DONE"
+		#else:
+		#	day_label.hide()
 		main.show()
 	elif tab == "Challenges":
-		if !Global.user_data["ChallengesUnlocked"]:
-			cur_date = Time.get_date_string_from_system()
-			var total_day_and_time = Global.get_total_day_and_session_time(cur_date)
-			if total_day_and_time.story_time >= Data.STORY_MODE_COLLECTION_TIME:
-				Global.user_data["ChallengesUnlocked"] = true
-				Global.save_user_data()
-		
-		if !Global.user_data["ChallengesUnlocked"]:
+		#if !Global.user_data["ChallengesUnlocked"]:	
+		#	cur_date = Time.get_date_string_from_system()
+		#	var total_day_and_time = Global.get_total_day_and_session_time(cur_date)
+		#	if total_day_and_time.story_time >= Data.STORY_MODE_COLLECTION_TIME:
+		#		Global.user_data["ChallengesUnlocked"] = true
+		#		Global.save_user_data()
+		#
+		if Global.user_data["TotalTimeSpent"][0] < 60 * 1:
 			main.show()
 			Global.create_popup("CHALLENGES ARE LOCKED: PLEASE FINISH 5 MINS IN THE STORY MODE FIRST", self)
 		else:
@@ -83,7 +85,7 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 	elif tab == "Statistics":
 		title.hide()
 		novel_label.hide()
-		day_label.hide()
+		#day_label.hide()
 		
 		var data_left = ""
 		var data_right = ""
@@ -122,7 +124,7 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 	elif tab == "Settings":
 		title.hide()
 		novel_label.hide()
-		day_label.hide()
+		#day_label.hide()
 		settings.get_node("BGMSlide").value = Global.user_data["Music"]
 		settings.get_node("SFXSlide").value = Global.user_data["Sfx"]
 		settings.get_node("FSCheckBox").pressed = Global.user_data["Fullscreen"]
@@ -133,7 +135,7 @@ func switch_tab(tab : String, sfx : bool = true) -> void:
 	elif tab == "LoadMenu":
 		title.hide()
 		novel_label.hide()
-		day_label.hide()
+		#day_label.hide()
 		for i in range(0, 8):
 			if Global.user_data["SavedProgress"][i].size() <= 0:
 				salm_slots[i].text = "EMPTY"
@@ -200,9 +202,27 @@ func _on_SFXSlide_drag_ended(value_changed : bool):
 	Global.user_data["Sfx"] = settings.get_node("SFXSlide").value
 	Global.play_sfx("Confirm")
 
+#Temporarily changed the button to fix data
 func _on_ResetButton_pressed():
 	Global.create_yes_no_popup("ARE YOU SURE YOU WANT TO RESET DATA?", self, "_on_reset_data")
+	#Global.create_yes_no_popup("ARE YOU SURE YOU WANT TO FIX THE DATA?", self, "_on_fix_data")
 	Global.play_sfx("Bright")
+
+#func _on_fix_data():
+#	Global.user_data["SavedDataResearch"] = {
+#		"StoryMode"  : {},
+#		"Challenge1" : {},
+#		"Challenge2" : {},
+#		"Challenge3" : {},
+#		"Challenge4" : {},
+#		"Challenge5" : {},
+#	}
+#	Global.user_data["ChallengesUnlocked"] = true
+#	Global.user_data["DataSent"] = [false, false, false, false, false, false, false]
+#	Global.user_data["Fullscreen"] = true
+#	Global.play_sfx("Confirm")
+#	Global.save_user_data()
+#	Global.switch_scene("SplashMenu")
 
 func _on_reset_data():
 	settings.get_node("SFXSlide").value = -20
@@ -210,40 +230,40 @@ func _on_reset_data():
 	BackgroundMusic.volume_db = -25
 	Global.delete_user_data()
 	BackgroundMusic.stop_music(true)
-	Global.switch_scene("IDInput")
+	Global.switch_scene("SplashMenu")
 
 func _on_CreditsButton_pressed():
 	switch_tab("Credits")
 
-func check_if_possible_to_send_data() -> bool:
-	var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
-	if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME and total_day_and_time.story_time >= Data.STORY_MODE_COLLECTION_TIME and total_day_and_time.cur_day == 6:
-		return true
-	return false
+#func check_if_possible_to_send_data() -> bool:
+#	var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
+#	if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME and total_day_and_time.story_time >= Data.STORY_MODE_COLLECTION_TIME and total_day_and_time.cur_day == 6:
+#		return true
+#	return false
 		
-func _on_SendDataButton_pressed():
-	if cur_day == 1:
-		if !Global.user_data["DataSent"][0]:
-			Global.create_popup("Data will be automatically sent to us after finishing 10 mins in story mode", self)
-		else:
-			Global.create_popup("Data has already been sent for this day", self)
-	elif cur_day == 6:
-		if !check_if_possible_to_send_data():
-			Global.create_popup("5 mins requirement in Story or Challenge mode are still not yet finished", self)
-		elif !Global.user_data["DataSent"][1]:
-			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_test_data")
-		else:
-			Global.create_popup("Data has already been sent for this day", self)
-	elif cur_day == 7:
-		if !Global.user_data["DataSent"][2]:
-			Global.create_popup("Data will be automatically sent to us after finishing 5 mins in Story and Challenge mode.", self)
-		#elif !Global.user_data["DataSent"][2]:
-			#Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_post_test_data")
-		else:
-			Global.create_popup("Data has already been sent for this day", self)
-	else:
-		Global.create_popup("There is no need to send data for this day", self)
-	Global.play_sfx("Bright")
+#func _on_SendDataButton_pressed():
+#	if cur_day == 1:
+#		if !Global.user_data["DataSent"][0]:
+#			Global.create_popup("Data will be automatically sent to us after finishing 10 mins in story mode", self)
+#		else:
+#			Global.create_popup("Data has already been sent for this day", self)
+#	elif cur_day == 6:
+#		if !check_if_possible_to_send_data():
+#			Global.create_popup("5 mins requirement in Story or Challenge mode are still not yet finished", self)
+#		elif !Global.user_data["DataSent"][1]:
+#			Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_test_data")
+#		else:
+#			Global.create_popup("Data has already been sent for this day", self)
+#	elif cur_day == 7:
+#		if !Global.user_data["DataSent"][2]:
+#			Global.create_popup("Data will be automatically sent to us after finishing 5 mins in Story and Challenge mode.", self)
+#		#elif !Global.user_data["DataSent"][2]:
+#			#Global.create_yes_no_popup("Are you sure you want to send your data for this day?", self, "_send_post_test_data")
+#		else:
+#			Global.create_popup("Data has already been sent for this day", self)
+#	else:
+#		Global.create_popup("There is no need to send data for this day", self)
+#	Global.play_sfx("Bright")
 
 #FIX HERE (STORY AND CHALLENGE MODE), CHECK ALSO IN POST TEST
 func _send_test_data() -> void:

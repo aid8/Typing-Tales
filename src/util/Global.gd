@@ -58,6 +58,8 @@ func switch_scene(scene) -> void:
 			scene_path = "DisclaimerMenu"
 		"IDInput":
 			scene_path = "IDInputMenu"
+		"SplashMenu":
+			scene_path = "SplashMenu"
 	SceneTransition.switch_scene("res://src/scenes/" + scene_path + ".tscn");
 	BackgroundMusic.stop_music()
 
@@ -96,7 +98,7 @@ func delete_user_data() -> void:
 func set_default_user_data() -> void:
 	user_data = {
 		"Name" : "Jo",
-		"SchoolID" : "",
+		#"SchoolID" : "",
 		"Music" : -25,
 		"Sfx" : -20,
 		"Fullscreen" : true,
@@ -115,16 +117,16 @@ func set_default_user_data() -> void:
 		"Items" : [],
 		"SavedProgress" : [{}, {}, {}, {}, {}, {}, {}, {}],
 		"FinishedScenes" : {},
-		"SavedDataResearch" : {
-			#Dates are stored here
-			"StoryMode"  : {},#{"1":{"time":0},"2":{"time":0},"3":{"time":0},"4":{"time":0},"5":{"time":0},"6":{"time":0}},
-			"Challenge1" : {},
-			"Challenge2" : {},
-			"Challenge3" : {},
-			"Challenge4" : {},
-			"Challenge5" : {},
-		}, #1st-7th day data collection of story and challenge modes
-		"ChallengesUnlocked" : false,
+		#"SavedDataResearch" : {
+		#	#Dates are stored here
+		#	"StoryMode"  : {},#{"1":{"time":0},"2":{"time":0},"3":{"time":0},"4":{"time":0},"5":{"time":0},"6":{"time":0}},
+		#	"Challenge1" : {},
+		#	"Challenge2" : {},
+		#	"Challenge3" : {},
+		#	"Challenge4" : {},
+		#	"Challenge5" : {},
+		#}, #1st-7th day data collection of story and challenge modes
+		#"ChallengesUnlocked" : false,
 		"DataSent" : [false, false, false, false, false, false, false], #1st to 7th day
 		"TotalTimeSpent" : [0, 0, 0], #[Story mode, Challenge mode, Typing Time]
 		"ChapterTimeSpent" : {}, #chapter_name : {"typing_time" : x, "total_time" : x}
@@ -263,43 +265,43 @@ func get_user_stats() -> Dictionary:
 	#ADD INDIVIDUAL LETTER STATS
 	return dict
 
-func setup_research_variables(mode : String, date : String) -> void:
-	if !user_data["SavedDataResearch"][mode].has(date):
-		user_data["SavedDataResearch"][mode][date] = {}
-		user_data["SavedDataResearch"][mode][date]["WPM"] = 0.0
-		user_data["SavedDataResearch"][mode][date]["Accuracy"] = 0.0
-		user_data["SavedDataResearch"][mode][date]["time"] = 0.0
-		user_data["SavedDataResearch"][mode][date]["play_count"] = 0
+#func setup_research_variables(mode : String, date : String) -> void:
+#	if !user_data["SavedDataResearch"][mode].has(date):
+#		user_data["SavedDataResearch"][mode][date] = {}
+#		user_data["SavedDataResearch"][mode][date]["WPM"] = 0.0
+#		user_data["SavedDataResearch"][mode][date]["Accuracy"] = 0.0
+#		user_data["SavedDataResearch"][mode][date]["time"] = 0.0
+#		user_data["SavedDataResearch"][mode][date]["play_count"] = 0
 
-func save_research_variables(mode : String, date : String, wpm : float, accuracy : float, time : float) -> void:
-	if !user_data["SavedDataResearch"][mode].has(date):
-		print("Current date is invalid!")
-		return
-	if is_nan(accuracy) or is_nan(wpm):
-		return
-	user_data["SavedDataResearch"][mode][date]["WPM"] += wpm
-	user_data["SavedDataResearch"][mode][date]["Accuracy"] += accuracy
-	user_data["SavedDataResearch"][mode][date]["time"] += time
-	user_data["SavedDataResearch"][mode][date]["play_count"] += 1
-	#print(user_data)
+#func save_research_variables(mode : String, date : String, wpm : float, accuracy : float, time : float) -> void:
+#	if !user_data["SavedDataResearch"][mode].has(date):
+#		print("Current date is invalid!")
+#		return
+#	if is_nan(accuracy) or is_nan(wpm):
+#		return
+#	user_data["SavedDataResearch"][mode][date]["WPM"] += wpm
+#	user_data["SavedDataResearch"][mode][date]["Accuracy"] += accuracy
+#	user_data["SavedDataResearch"][mode][date]["time"] += time
+#	user_data["SavedDataResearch"][mode][date]["play_count"] += 1
+#	#print(user_data)
 
-func send_data(day : int, name : String, date : String, wpm : float, accuracy : float, other_info : String = "") -> void:
-	var http = HTTPClient.new()
-	
-	var data = {
-		Data.FORM_ENTRY_CODES["day"] : "DAY " + String(day),
-		Data.FORM_ENTRY_CODES["name"] : name, 
-		Data.FORM_ENTRY_CODES["date"] : date,
-		Data.FORM_ENTRY_CODES["wpm"] : wpm,
-		Data.FORM_ENTRY_CODES["accuracy"] : accuracy, 
-		Data.FORM_ENTRY_CODES["other_info"] : other_info,
-	}
-	var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
-	data = http.query_string_from_dict(data)
-	var result = http_request.request(Data.URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
-	
-	user_data["DataSent"][day-1] = true
-	print("ALREADY SENT, ", result)
+#func send_data(day : int, name : String, date : String, wpm : float, accuracy : float, other_info : String = "") -> void:
+#	var http = HTTPClient.new()
+#	
+#	var data = {
+#		Data.FORM_ENTRY_CODES["day"] : "DAY " + String(day),
+#		Data.FORM_ENTRY_CODES["name"] : name, 
+#		Data.FORM_ENTRY_CODES["date"] : date,
+#		Data.FORM_ENTRY_CODES["wpm"] : wpm,
+#		Data.FORM_ENTRY_CODES["accuracy"] : accuracy, 
+#		Data.FORM_ENTRY_CODES["other_info"] : other_info,
+#	}
+#	var pool_headers = PoolStringArray(Data.HTTP_HEADERS)
+#	data = http.query_string_from_dict(data)
+#	var result = http_request.request(Data.URLFORM, pool_headers, false, HTTPClient.METHOD_POST, data)
+#	
+#	user_data["DataSent"][day-1] = true
+#	print("ALREADY SENT, ", result)
 	
 func set_seen_tutorial(challenge_num : int) -> void:
 	user_data["SeenTutorials"][challenge_num] = true
@@ -315,32 +317,32 @@ func register_challenge_stats(challenge_num : int, wpm : float, accuracy : float
 	user_data["TotalTimeSpent"][1] += time
 
 #if date is empty, this will get the overall time
-func get_total_day_and_session_time(date : String = "") -> Dictionary:
-	var total : float = 0
-	var day : int = 1
-	var cur_day : int = 1
-	var dates : Array = []
-	var story_time : float = 0
-	var challenge_time : float = 0
-	for mode in user_data["SavedDataResearch"]:
-		for d in user_data["SavedDataResearch"][mode]:
-			if date == "":
-				total += user_data["SavedDataResearch"][mode][d].time
-			if !dates.has(d):
-				dates.push_back(d)
-		if date == "":
-			continue
-		if user_data["SavedDataResearch"][mode].has(date):
-			total += user_data["SavedDataResearch"][mode][date].time
-			if mode == "StoryMode":
-				story_time += user_data["SavedDataResearch"][mode][date].time
-			else:
-				challenge_time += user_data["SavedDataResearch"][mode][date].time
-	dates.sort()
-	if dates.size() > 0:
-		day = Global.get_num_of_days_between_two_dates(dates[0], dates[dates.size()-1]) 
-		cur_day = Global.get_num_of_days_between_two_dates(dates[0], Time.get_date_string_from_system()) + 1
-	return {"day" : day, "time" : total, "cur_day" : cur_day, "story_time" : story_time, "challenge_time" : challenge_time}
+#func get_total_day_and_session_time(date : String = "") -> Dictionary:
+#	var total : float = 0
+#	var day : int = 1
+#	var cur_day : int = 1
+#	var dates : Array = []
+#	var story_time : float = 0
+#	var challenge_time : float = 0
+#	for mode in user_data["SavedDataResearch"]:
+#		for d in user_data["SavedDataResearch"][mode]:
+#			if date == "":
+#				total += user_data["SavedDataResearch"][mode][d].time
+#			if !dates.has(d):
+#				dates.push_back(d)
+#		if date == "":
+#			continue
+#		if user_data["SavedDataResearch"][mode].has(date):
+#			total += user_data["SavedDataResearch"][mode][date].time
+#			if mode == "StoryMode":
+#				story_time += user_data["SavedDataResearch"][mode][date].time
+#			else:
+#				challenge_time += user_data["SavedDataResearch"][mode][date].time
+#	dates.sort()
+#	if dates.size() > 0:
+#		day = Global.get_num_of_days_between_two_dates(dates[0], dates[dates.size()-1]) 
+#		cur_day = Global.get_num_of_days_between_two_dates(dates[0], Time.get_date_string_from_system()) + 1
+#	return {"day" : day, "time" : total, "cur_day" : cur_day, "story_time" : story_time, "challenge_time" : challenge_time}
 
 func get_stats() -> Dictionary:
 	var stats : Dictionary = {}
@@ -381,42 +383,42 @@ func get_stats() -> Dictionary:
 	
 	return stats
 
-func get_stats_on_date(date : String) -> Dictionary:
-	var stats = {
-		"StoryWPM" : 0,
-		"StoryAccuracy" : 0,
-		"ChallengeWPM" : 0,
-		"ChallengeAccuracy" : 0,
-		"OverallWPM" : 0,
-		"OverallAccuracy" : 0,
-	}
-	
-	var story_play_count = user_data["SavedDataResearch"]["StoryMode"][date]["play_count"]
-	if story_play_count > 0:
-		stats["StoryWPM"] = user_data["SavedDataResearch"]["StoryMode"][date]["WPM"] / float(story_play_count)
-		stats["StoryAccuracy"] = (user_data["SavedDataResearch"]["StoryMode"][date]["Accuracy"] / float(story_play_count)) * 100
-		
-	var challenge_play_count = 0
-	for mode in user_data["SavedDataResearch"]:
-		if mode != "StoryMode":
-			if user_data["SavedDataResearch"][mode].has(date):
-				stats["ChallengeWPM"] += user_data["SavedDataResearch"][mode][date]["WPM"]
-				stats["ChallengeAccuracy"] += user_data["SavedDataResearch"][mode][date]["Accuracy"]
-				challenge_play_count += user_data["SavedDataResearch"][mode][date]["play_count"]
-	if challenge_play_count > 0:
-		stats["ChallengeWPM"] /= float(challenge_play_count)
-		stats["ChallengeAccuracy"] /= float(challenge_play_count)
-		
-	if user_data["SavedDataResearch"]["StoryMode"][date].play_count == 0:
-		stats["OverallWPM"] = stats["ChallengeWPM"]
-		stats["OverallAccuracy"] = stats["ChallengeAccuracy"]
-	elif challenge_play_count == 0:
-		stats["OverallWPM"] = stats["StoryWPM"]
-		stats["OverallAccuracy"] = stats["StoryAccuracy"]
-	else:
-		stats["OverallWPM"] = (stats["StoryWPM"] + stats["ChallengeWPM"]) / float(2)
-		stats["OverallAccuracy"] = (stats["StoryAccuracy"] + stats["ChallengeAccuracy"]) / float(2)
-	return stats
+#func get_stats_on_date(date : String) -> Dictionary:
+#	var stats = {
+#		"StoryWPM" : 0,
+#		"StoryAccuracy" : 0,
+#		"ChallengeWPM" : 0,
+#		"ChallengeAccuracy" : 0,
+#		"OverallWPM" : 0,
+#		"OverallAccuracy" : 0,
+#	}
+#	
+#	var story_play_count = user_data["SavedDataResearch"]["StoryMode"][date]["play_count"]
+#	if story_play_count > 0:
+#		stats["StoryWPM"] = user_data["SavedDataResearch"]["StoryMode"][date]["WPM"] / float(story_play_count)
+#		stats["StoryAccuracy"] = (user_data["SavedDataResearch"]["StoryMode"][date]["Accuracy"] / float(story_play_count)) * 100
+#		
+#	var challenge_play_count = 0
+#	for mode in user_data["SavedDataResearch"]:
+#		if mode != "StoryMode":
+#			if user_data["SavedDataResearch"][mode].has(date):
+#				stats["ChallengeWPM"] += user_data["SavedDataResearch"][mode][date]["WPM"]
+#				stats["ChallengeAccuracy"] += user_data["SavedDataResearch"][mode][date]["Accuracy"]
+#				challenge_play_count += user_data["SavedDataResearch"][mode][date]["play_count"]
+#	if challenge_play_count > 0:
+#		stats["ChallengeWPM"] /= float(challenge_play_count)
+#		stats["ChallengeAccuracy"] /= float(challenge_play_count)
+#		
+#	if user_data["SavedDataResearch"]["StoryMode"][date].play_count == 0:
+#		stats["OverallWPM"] = stats["ChallengeWPM"]
+#		stats["OverallAccuracy"] = stats["ChallengeAccuracy"]
+#	elif challenge_play_count == 0:
+#		stats["OverallWPM"] = stats["StoryWPM"]
+#		stats["OverallAccuracy"] = stats["StoryAccuracy"]
+#	else:
+#		stats["OverallWPM"] = (stats["StoryWPM"] + stats["ChallengeWPM"]) / float(2)
+#		stats["OverallAccuracy"] = (stats["StoryAccuracy"] + stats["ChallengeAccuracy"]) / float(2)
+#	return stats
 
 func create_popup(info : String, menu : Node2D, func_name : String = "") -> void:
 	var x = inform_menu.instance()
