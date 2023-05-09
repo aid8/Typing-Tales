@@ -1,6 +1,6 @@
 extends Node
 
-const VERSION = "1.0.1"
+const VERSION = "1.0.3"
 const MAX_CHAPTERS = 8
 const ALTERNATIVE_CHAPTERS = [0, 1, 1, 1, 1, 1, 0, 0]
 const LETTER_MASTERY_ACCURACY_BOUND = 0.90
@@ -8,21 +8,21 @@ const LETTER_MASTERY_ACCURACY_BOUND = 0.90
 const WORD_MASTERY_ACCURACY_BOUND = 0.94 #0.94
 const WORD_MASTERY_COUNT_BOUND = 100 #100
 
-const HTTP_HEADERS = ["Content-Type: application/x-www-form-urlencoded"]
-const URLFORM = "https://docs.google.com/forms/u/1/d/e/1FAIpQLScCUJsnlPklq-3GZWOoeOUJQNjR1xzrpihZKq6c7T58jrXOsQ/formResponse"
-const FORM_ENTRY_CODES = {
-	"day" : "entry.1937603671",
-	"name" : "entry.1677198908" ,
-	"date" : "entry.1636518983",
-	"wpm" : "entry.783576330",
-	"accuracy" : "entry.2103345753", 
-	"other_info" : "entry.308180882",
-}
+#const HTTP_HEADERS = ["Content-Type: application/x-www-form-urlencoded"]
+#const URLFORM = "https://docs.google.com/forms/u/1/d/e/1FAIpQLScCUJsnlPklq-3GZWOoeOUJQNjR1xzrpihZKq6c7T58jrXOsQ/formResponse"
+#const FORM_ENTRY_CODES = {
+#	"day" : "entry.1937603671",
+#	"name" : "entry.1677198908" ,
+#	"date" : "entry.1636518983",
+#	"wpm" : "entry.783576330",
+#	"accuracy" : "entry.2103345753", 
+#	"other_info" : "entry.308180882",
+#}
 
-const TOTAL_COLLECTION_TIME = 600
-const STORY_MODE_COLLECTION_TIME = 300
-const CHALLENGE_MODE_COLLECTION_TIME = 300
-const IDLE_TIME = 8
+#const TOTAL_COLLECTION_TIME = 600
+#const STORY_MODE_COLLECTION_TIME = 300
+#const CHALLENGE_MODE_COLLECTION_TIME = 300
+#const IDLE_TIME = 8
 
 const TUTORIAL_TEXT = [
 	#Challenge 1
@@ -116,13 +116,6 @@ const CREDITS = [
 		"https://www.fesliyanstudios.com",
 		"https://www.bfxr.net/",
 	],
-	#[
-	#	"Testers",
-	#	
-	#	"Joshua Bartolome",
-	#	"Mark Joseph Guerrero",
-	#	"Deanne Angelo Royo",
-	#],
 	[
 		"Tools used",
 		

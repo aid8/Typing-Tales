@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://src/scenes/Test.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/Home/fireplace2.png" type="Texture" id=2]
@@ -33,7 +33,6 @@
 [ext_resource path="res://assets/tutorial/Tutorial0003.png" type="Texture" id=31]
 [ext_resource path="res://assets/tutorial/Tutorial0001.png" type="Texture" id=32]
 [ext_resource path="res://assets/tutorial/Tutorial0006.png" type="Texture" id=33]
-[ext_resource path="res://assets/tutorial/Tutorial0007.png" type="Texture" id=34]
 [ext_resource path="res://assets/backgrounds/Outside/Street/Street_Summer_Stars.png" type="Texture" id=35]
 [ext_resource path="res://assets/backgrounds/Outside/Piano_Room.jpg" type="Texture" id=36]
 [ext_resource path="res://assets/backgrounds/Outside/Street/Street_Summer_Evening.png" type="Texture" id=37]
@@ -217,7 +216,7 @@ font_data = ExtResource( 5 )
 
 [sub_resource type="SpriteFrames" id=21]
 animations = [ {
-"frames": [ ExtResource( 32 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 33 ), ExtResource( 34 ) ],
+"frames": [ ExtResource( 32 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 33 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -822,7 +821,7 @@ margin_right = 1278.0
 margin_bottom = 142.0
 custom_colors/font_color = Color( 0.188235, 0.219608, 0.262745, 1 )
 custom_fonts/font = SubResource( 11 )
-text = "TUTORIAL (1/7)"
+text = "TUTORIAL (1/6)"
 align = 1
 valign = 1
 

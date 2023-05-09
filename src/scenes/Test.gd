@@ -63,17 +63,17 @@ var total_wpm : Array = [0, 0] #[total_wpm, count]
 var total_accuracy : Array = [0, 0] #[correct_count, wrong_count]
 var save_slot_index : int = 0
 var tutorial_index : int = 0
-var current_date : String = ""
+#var current_date : String = ""
 var current_session_time : float = 0
-var post_test_session_time : float = 0
-var is_post_test : bool = false
+#var post_test_session_time : float = 0
+#var is_post_test : bool = false
 
 #Scene animation variables
 var shake_strength : float = 0.0
 var shake_decay : float = 0.0
 var history_text_storage : String = ""
 #var new_progress : bool = true#if false, this will load the saved progress instead of a new one
-var user_time_informed : bool = false
+#var user_time_informed : bool = false
 var last_choice_index : int = 0
 var saved_info_for_branching : Dictionary
 var total_day_and_time : Dictionary
@@ -117,7 +117,6 @@ onready var tutorial_images : AnimatedSprite = $UI/TutorialMenu/TutorialImages
 onready var tutorial_title_label : Label = $UI/TutorialMenu/TitleLabel
 onready var pause_menu : Node2D = $UI/PauseMenu
 onready var http_request : HTTPRequest = $HTTPRequest
-onready var time_menu : AcceptDialog = $UI/TimeMenu
 onready var bad_end_menu : Node2D = $UI/BadEndMenu
 onready var test_timer_label : Label = $UI/TestTimerLabel
 
@@ -137,8 +136,8 @@ func _ready() -> void:
 	#	testbox.popup()
 	#	return
 	
-	if Global.user_data.SchoolID == "ONEPIECEISREAL":
-		debug_mode = true
+	#if Global.user_data.SchoolID == "ONEPIECEISREAL":
+	#	debug_mode = true
 	
 	#TESTING
 	if !Global.user_data["SeenTutorials"][5]:
@@ -149,19 +148,19 @@ func _ready() -> void:
 	
 	#Setup tracing of data for research (only for 1st, 6th and 7th day)
 	#TESTING
-	current_date = Time.get_date_string_from_system()
-	if !Global.user_data["SavedDataResearch"]["StoryMode"].has(current_date):
-		Global.setup_research_variables("StoryMode", current_date)
+	#current_date = Time.get_date_string_from_system()
+	#if !Global.user_data["SavedDataResearch"]["StoryMode"].has(current_date):
+	#	Global.setup_research_variables("StoryMode", current_date)
 	
-	var cur_size = Global.get_total_day_and_session_time(current_date).cur_day
-	total_day_and_time = Global.get_total_day_and_session_time(current_date)
+	#var cur_size = Global.get_total_day_and_session_time(current_date).cur_day
+	#total_day_and_time = Global.get_total_day_and_session_time(current_date)
 
-	if (cur_size <= 7 and !Global.user_data["DataSent"][cur_size-1]) and total_day_and_time.story_time < Data.STORY_MODE_COLLECTION_TIME:
-		print("Starting Collecting data")
-		is_post_test = true
-		idle_timer.wait_time = Data.IDLE_TIME
-		idle_timer.start()
-		test_timer_label.show()
+	#if (cur_size <= 3 and !Global.user_data["DataSent"][cur_size-1]) and total_day_and_time.story_time < Data.STORY_MODE_COLLECTION_TIME:
+	#	print("Starting Collecting data")
+	#	is_post_test = true
+	#	idle_timer.wait_time = Data.IDLE_TIME
+	#	idle_timer.start()
+	#	test_timer_label.show()
 	
 	if Global.load_slot_index_selected != -1:
 		load_saved_progress(Global.load_slot_index_selected, false)
@@ -183,8 +182,8 @@ func _process(delta : float) -> void:
 	if tracing_wpm:
 		total_time += delta
 	#In charge of showing test_timer_label
-	if is_post_test and test_timer_label.visible and (total_day_and_time.story_time + post_test_session_time) < Data.STORY_MODE_COLLECTION_TIME:
-		test_timer_label.text = Global.format_time(Data.STORY_MODE_COLLECTION_TIME - (total_day_and_time.story_time + post_test_session_time))
+	#if is_post_test and test_timer_label.visible and (total_day_and_time.story_time + post_test_session_time) < Data.STORY_MODE_COLLECTION_TIME:
+	#	test_timer_label.text = Global.format_time(Data.STORY_MODE_COLLECTION_TIME - (total_day_and_time.story_time + post_test_session_time))
 	handle_scene_animation(delta)
 	handle_variable_tracing(delta)
 	
@@ -199,8 +198,8 @@ func handle_scene_animation(delta : float) -> void:
 			shake_strength = 0
 
 func handle_variable_tracing(delta : float) -> void:
-	if !idle_timer.is_stopped() and !tutorial_menu.visible and !name_menu.visible and is_post_test:
-		post_test_session_time += delta
+	#if !idle_timer.is_stopped() and !tutorial_menu.visible and !name_menu.visible and is_post_test:
+	#	post_test_session_time += delta
 	current_session_time += delta
 
 #Loads necessary characters, location and scene
@@ -560,33 +559,33 @@ func set_next_dialogue() -> void:
 	get_current_dialogue()
 	update_typebox("reset")
 	
-	if is_post_test and !user_time_informed:
+	#if is_post_test and !user_time_informed:
 		#var cur_date : String = Time.get_date_string_from_system()
 		#var total_day_and_time : Dictionary = Global.get_total_day_and_session_time(cur_date)
-		print(total_day_and_time.time + post_test_session_time, "??", total_day_and_time.day)
-		if (total_day_and_time.story_time + post_test_session_time) >= Data.STORY_MODE_COLLECTION_TIME and (total_day_and_time.cur_day <= 7):
-			if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME:
-				var cur_stats = Global.get_stats_on_date(current_date)
-				var wpm_res = (total_wpm[0] / float(total_wpm[1]))
-				var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
-				#Save and
-				Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
-				var user_data_mod = Global.user_data.duplicate(true)
-				user_data_mod.erase("WordMastery")
-				#Send to google forms
-				Global.send_data(total_day_and_time.cur_day, Global.user_data.SchoolID, current_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod))
-				var msg = "Requirements for this day are done. Data has been automatically sent to us."
-				if total_day_and_time.cur_day == 7:
-					msg += " Proceed to Final WPM test."
-				Global.create_popup(msg, self)
-			else:
-				Global.create_popup("5 mins requirement for story mode is done. You still need to play challenge mode.", self)
+	#	print(total_day_and_time.time + post_test_session_time, "??", total_day_and_time.day)
+	#	if (total_day_and_time.story_time + post_test_session_time) >= Data.STORY_MODE_COLLECTION_TIME and (total_day_and_time.cur_day <= 3):
+	#		if total_day_and_time.challenge_time >= Data.CHALLENGE_MODE_COLLECTION_TIME:
+	#			var cur_stats = Global.get_stats_on_date(current_date)
+	#			var wpm_res = (total_wpm[0] / float(total_wpm[1]))
+	#			var accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
+	#			#Save and
+	#			Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, Data.TOTAL_COLLECTION_TIME)
+	#			var user_data_mod = Global.user_data.duplicate(true)
+	#			user_data_mod.erase("WordMastery")
+	#			#Send to google forms
+	#			Global.send_data(total_day_and_time.cur_day, Global.user_data.SchoolID, current_date, cur_stats.OverallWPM, cur_stats.OverallAccuracy, JSON.print(user_data_mod))
+	#			var msg = "Requirements for this day are done. Data has been automatically sent to us."
+	#			if total_day_and_time.cur_day == 3:
+	#				msg += " Proceed to Final WPM test."
+	#			Global.create_popup(msg, self)
+	#		else:
+	#			Global.create_popup("5 mins requirement for story mode is done. You still need to play challenge mode.", self)
 			#time_menu.dialog_text = "10 mins requirement is done. You can already submit the data or continue playing."
 			#time_menu.popup()
-			user_time_informed = true
-			is_post_test = false
-			idle_timer.stop()
-			test_timer_label.hide()
+			#user_time_informed = true
+			#is_post_test = false
+			#idle_timer.stop()
+			#test_timer_label.hide()
 
 #Shows current wpm, adds it to overall wpm, then resets info for new wpm
 func register_wpm() -> void:
@@ -732,9 +731,9 @@ func _unhandled_input(event : InputEvent) -> void:
 	
 	if event is InputEventKey and event.is_pressed() and not event.is_echo():
 		#Reset idle timer and continue testing timer
-		if is_post_test:
-			idle_timer.stop()
-			idle_timer.start(Data.IDLE_TIME)
+		#if is_post_test:
+		#	idle_timer.stop()
+		#	idle_timer.start(Data.IDLE_TIME)
 		
 		var typed_event = event as InputEventKey
 		var key_typed = PoolByteArray([typed_event.unicode]).get_string_from_utf8()
@@ -1054,7 +1053,7 @@ func register_stats() -> void:
 		accuracy_res = (total_accuracy[0] / float(total_accuracy[0] + total_accuracy[1]))
 	#Save this locally
 	if wpm_res > 0:
-		Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
+		#Global.save_research_variables("StoryMode", current_date, wpm_res, accuracy_res, current_session_time)
 		Global.add_chapter_time(current_scene, "total_time", current_session_time)
 	
 #==========Connected Functions==========#
@@ -1124,7 +1123,7 @@ func _on_NameChangeButton_pressed():
 	name_menu.hide()
 
 func _on_TestButton2_pressed():
-	Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
+	#Global.user_data["SavedDataResearch"]["StoryMode"][current_date]["time"] += current_session_time
 	Global.user_data["TotalTimeSpent"][0] += current_session_time
 	Global.switch_scene("MainMenu")
 

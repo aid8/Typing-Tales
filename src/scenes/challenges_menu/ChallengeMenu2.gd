@@ -64,7 +64,7 @@ func _ready():
 	Global.set_seen_tutorial(CHALLENGE_NUM)
 	
 	#Initialize for testing
-	Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system())
+	#Global.setup_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system())
 	
 	#Shuffle Word Bank
 	WordList.init()
@@ -123,7 +123,7 @@ func show_gameover_menu() -> void:
 		total_wpm = (wpm[0]/float(wpm[1]))
 	#Register Stats
 	Global.register_challenge_stats(CHALLENGE_NUM, total_wpm, total_accuracy, current_session_time, score)
-	Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(), total_wpm, total_accuracy, current_session_time) 
+	#Global.save_research_variables("Challenge" + String(CHALLENGE_NUM + 1), Time.get_date_string_from_system(), total_wpm, total_accuracy, current_session_time) 
 	Global.save_user_data()
 	gameover_menu.init("SCORE: " + String(score) + "\nH-SCORE: " + String(Global.user_data["ChallengeStats"][CHALLENGE_NUM]["highest_score"]) + "\nACCURACY: " + String(stepify(total_accuracy,1)) + "\nWPM: " + String(stepify(total_wpm,1)))
 	gameover_menu.show()
