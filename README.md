@@ -1,5 +1,5 @@
 # Typing Tales
-A senior thesis project to help users enhance their Words-Per-Minute (WPM) and Accuracy
+A senior thesis project aimed to help users enhance their Words-Per-Minute (WPM) and Accuracy without getting them bored.
 
 Game Site: https://gamejolt.com/games/typing_tales/785702
 
